@@ -1,7 +1,10 @@
-const path = require('path');
+// deps
+import path from 'path'
+
+// variables
 const isDev = think.env === 'development';
 
-module.exports = [
+export default [
   {
     handle: 'meta',
     options: {
@@ -34,4 +37,4 @@ module.exports = [
   },
   'logic',
   'controller'
-];
+]

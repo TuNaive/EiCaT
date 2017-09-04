@@ -1,9 +1,13 @@
-const fileCache = require('think-cache-file');
-const nunjucks = require('think-view-nunjucks');
-const fileSession = require('think-session-file');
-const mysql = require('think-model-mysql');
-const path = require('path');
-const isDev = think.env === 'development';
+// deps
+import fileCache from 'think-cache-file'
+import nunjucks from 'think-view-nunjucks'
+import fileSession from 'think-session-file'
+import mysql from 'think-model-mysql'
+import path from 'path'
+
+// variables
+const isDev = think.env === 'development'
+const cachePath = path.join(think.ROOT_PATH, 'runtime/cache')
 
 /**
  * cache adapter config
@@ -16,11 +20,11 @@ exports.cache = {
   },
   file: {
     handle: fileCache,
-    cachePath: path.join(think.ROOT_PATH, 'runtime/cache'), // absoulte path is necessarily required
+    cachePath: cachePath, // absoulte path is necessarily required
     pathDepth: 1,
     gcInterval: 24 * 60 * 60 * 1000 // gc interval
   }
-};
+}
 
 /**
  * model adapter config
@@ -35,16 +39,22 @@ exports.model = {
   },
   mysql: {
     handle: mysql,
-    database: '',
-    prefix: 'think_',
+    database: 'ectaio',
+    prefix: 'ect_',
     encoding: 'utf8',
     host: '127.0.0.1',
-    port: '',
-    user: 'root',
-    password: 'root',
-    dateStrings: true
+    port: 3306,
+    connectionLimit: 10,
+    user: 'ectuser',
+    password: 'ect123',
+    cache: { // 额外的缓存配置
+      type: 'file',
+      handle: fileCache,
+      cachePath: cachePath,  // absoulte path is necessarily required
+    }
+    // dateStrings: true
   }
-};
+}
 
 /**
  * session adapter config
@@ -54,7 +64,7 @@ exports.session = {
   type: 'file',
   common: {
     cookie: {
-      name: 'thinkjs'
+      name: 'ect_genius.id'
       // keys: ['werwer', 'werwer'],
       // signed: true
     }
@@ -63,7 +73,7 @@ exports.session = {
     handle: fileSession,
     sessionPath: path.join(think.ROOT_PATH, 'runtime/session')
   }
-};
+}
 
 /**
  * view adapter config
@@ -79,4 +89,4 @@ exports.view = {
   nunjucks: {
     handle: nunjucks
   }
-};
+}
