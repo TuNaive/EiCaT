@@ -1,9 +1,8 @@
 // deps
+import path from 'path'
 import fileCache from 'think-cache-file'
-import nunjucks from 'think-view-nunjucks'
 import fileSession from 'think-session-file'
 import mysql from 'think-model-mysql'
-import path from 'path'
 
 // variables
 const isDev = think.env === 'development'
@@ -79,14 +78,4 @@ exports.session = {
  * view adapter config
  * @type {Object}
  */
-exports.view = {
-  type: 'nunjucks',
-  common: {
-    viewPath: path.join(think.ROOT_PATH, 'view'),
-    sep: '_',
-    extname: '.html'
-  },
-  nunjucks: {
-    handle: nunjucks
-  }
-}
+exports.view = require('./view').default

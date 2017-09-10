@@ -1,48 +1,207 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>New ThinkJS Application</title>
-<style>
-*{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
-a, a:visited{color:#337ab7;text-decoration: none;}
-header{padding: 70px 0 70px 0;background-color: #4A6495}
-h1{font-size: 36px;color:#fff;font-weight: normal;}
-code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
-.content{width: 1000px;margin: auto}
-.wrap{width: 1000px;margin: auto}
-.content{margin-top: 80px;}
-.list{width: 800px;}
-.list .item{position: relative;padding-left: 70px;margin-top: 50px;}
-.list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
-.list .item h2{font-size: 24px;font-weight: normal;}
-.list .item p{line-height: 30px;margin-top: 10px}
-</style>
-</head>
-<body>
-  <header>
-    <div class="wrap">
-      <h1>A New App Created By ThinkJS</h1>
-    </div>
-  </header>
-  <div class="content">
-    <div class="list">
-      <div class="item">
-        <div class="step">1</div>
-        <h2>Generate Files</h2>
-        <p>Run <code>thinkjs</code> command to create module, controler, model, service and so on. visit <a href="https://thinkjs.org/doc/thinkjs_command.html">https://thinkjs.org/doc/thinkjs_command.html</a> to view more infomation.</p>
+{% extends "./inc/base.html" %}
+{% block style %}
+<link href="/static/home/css/layout-question.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section>
+  <div class="container">
+    {{11|show_ad("code")|safe}}
+    <div class="row">
+      <div class="col-md-9">
+        <!-- REVOLUTION SLIDER -->
+        <div class="slider fullwidthbanner-container roundedcorners margin-bottom-0">
+          <div class="fullwidthbanner" data-height="550" data-shadow="" data-navigationStyle="">
+            <ul class="hide">
+              <!--  topic data="sliders", limit="10", position="2", issub="1"  TODO -->
+              {% for slider in sliders %}
+              {% if slider.model_id==4 %}
+              {% set pic=slider.pics|strToArray %}
+              {% else %}
+              {% set pic=slider.cover_id %}
+              {% endif %}
+              <!-- SLIDE  -->
+              <li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
+                <img src="/static/home/images/1x1.png" data-lazyload="{{pic|get_pic('m=2,w=848,h=400')}}" alt="" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
+
+                <div class="tp-caption lft start" data-x="0" data-y="0" data-speed="750" data-start="750"
+                    data-easing="easeOutExpo" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
+                  <img src="/static/home/images/1x1.png" alt="" data-lazyload="/static/home/images/caption_bg.png">
+                </div>
+
+                <a class="tp-caption medium_light_white lfb start" href="{{slider.name|get_url(slider.id)}}" target="_blank"
+                  data-x="left" data-hoffset="70" data-y="96" data-speed="300" data-start="1200"
+                  data-easing="easeOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1"
+                  data-endelementdelay="0.1" data-endspeed="300">
+                  {{slider.title|truncate(20, true, "")|insert_flg("<br>",10)|safe}}
+                </a>
+
+                <div class="tp-caption block_black lfl start"
+                  data-x="left" data-hoffset="70" data-y="195" data-speed="300"
+                  data-start="1500" data-easing="easeOutExpo" data-splitin="none" data-splitout="none"
+                  data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" >
+                  {{slider.create_time|moment('YYYY-MM-DD HH:mm')}}
+                </div>
+
+                <div class="tp-caption small_light_white lfl start"
+                  data-x="left" data-hoffset="70" data-y="250" data-speed="1000" data-start="1800"
+                  data-easing="easeOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1"
+                  data-endelementdelay="0.1" data-endspeed="300" >
+                  {{slider.description|truncate(90, true, "...")|insert_flg("<br>",20)|safe}}
+                </div>
+              </li>
+              {%endfor%}
+            </ul>
+            <div class="tp-bannertimer"><!-- progress bar --></div>
+          </div>
+        </div>
+        <!-- /REVOLUTION SLIDER -->
       </div>
-      <div class="item">
-        <div class="step">2</div>
-        <h2>Documentation</h2>
-        <p>ThinkJS has html and pdf documents. visit <a href="https://thinkjs.org/doc.html">https://thinkjs.org/doc.html</a></p>
+      <div class="col-md-3">
+        <div class="panel panel-default margin-bottom-0">
+          <div class="panel-heading">
+            <a class="btn btn-primary btn-xs pull-right"><i class="fa fa-fire"></i></a>
+            <h2 class="panel-title">热点</h2>
+          </div>
+          <div class="panel-body con " style="height: 354px">
+            <ol class="current">
+              <!--  model data="hotnews",table="document",order="view DESC,create_time DESC",limit="10",cache="1000"  TODO -->
+              {% for val in hotnews %}
+              <li>
+                <span {% if loop.index < 4 %}class="topRank"{% endif %}>{{loop.index}}</span><a target="_blank" href="{{val.name|get_url(val.id)}} " >{{val.title}}</a>
+              </li>
+              {%endfor%}
+              </ol>
+          </div>
+        </div>
+
       </div>
-      <div class="item">
-        <div class="step">3</div>
-        <h2>WebSocket</h2>
-        <p>ThinkJS support <code>socket.io</code> and <code>sockjs</code> WebSocket client and server node. visit <a href="https://thinkjs.org/doc/adapter_websocket.html">https://thinkjs.org/doc/adapter_websocket.html</a></p>
+      {%if 14|show_ad('code') %}
+      <!-- INFO BAR -->
+      <div class="margin-top-20 col-md-12 ">
+        {{14|show_ad('code')|safe}}
+      </div>
+      <!-- /INFO BAR -->
+      {%endif%}
+      <!-- RIGHT -->
+      <div class="col-sm-9 margin-top-20">
+
+        <ul class="nav nav-tabs nav-justified" style="position: inherit;background-color: #f1f2f7">
+          <li class="active"><a href="#new" data-toggle="tab" class="size-18">最新</a></li>
+          <li><a href="#wenda" data-toggle="tab" class="size-18">问答</a></li>
+          {#
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a></li>
+              <li><a href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a></li>
+            </ul>
+          </li>
+          #}
+        </ul>
+        <div class="panel panel-default" style="margin-top: -5px">
+          <div class="panel-body padding-10">
+          </div>
+        </div>
+      </div>
+      <!-- LEFT -->
+      <div class="col-md-3 col-sm-3 margin-top-20">
+
+        {% if controller.is_login %}
+        <div class="alert alert-info margin-bottom-20 box-shadow-4"><!-- INFO -->
+          今天，你遇到了什么问题呢？
+          <a href="/mod/question/sys/add/?cid=123" class="btn btn-primary btn-3d btn-block margin-top-10">提问</a>
+        </div>
+        {%else%}
+        <div class="alert alert-info margin-bottom-20 box-shadow-4"><!-- INFO -->
+          你好! 你还没有登录，请先登录.
+          <a class="btn btn-block btn-social btn-dropbox margin-top-10  " href="/center/public/login" data-toggle="ajaxModal">
+            <i class="fa fa-sign-in"></i> 登录{{config.setup.WEB_SITE_TITLE}}
+          </a>
+        </div>
+        {%endif%}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <a class="btn btn-primary btn-xs pull-right" href="/topic" >更多</a>
+            <h2 class="panel-title">热门话题</h2>
+          </div>
+          <div class="panel-body padding-10">
+            <!--  keywords data ="topic",type="hot",limit="5",cache="1000"  TODO -->
+            {%for k in topic%}
+            <div class="clearfix margin-bottom-10"><!-- discussion item -->
+              {%if k.pic==0%}
+              <i class="ico-light ico-60 ico-hover et-chat pull-left margin-bottom-0 margin-top-0" ></i>
+              {%else%}
+              <img class="thumbnail pull-left" src="{{k.pic|get_pic('m=1,w=100,h=100')}}}}" width="60" height="60" alt="" />
+              {%endif%}
+              <h4 class=" nomargin noborder nopadding bold"><a class="tag " href="{{k.url}}">
+                <span class="txt">{{k.keyname}}</span>
+                <span class="num"><i class="fa fa-fire"></i></span>
+              </a>
+              </h4>
+              <span class="size-13 text-muted">
+                {{k.videonum}} 个主题, {{k.focus_count}} 人关注
+              </span>
+            </div><!-- /discussion item -->
+            {%endfor%}
+          </div>
+        </div>
+
+        <!--  model data="data",
+          table="question_user",
+          order="question_count DESC",
+          alias="a",
+          limit="10",
+          join='{"member": {"join": "left","as":"b","on": ["a.uid", "b.id"]}}',
+          cache="1000"  TODO -->
+        {%if data.length>0 %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <a class="btn btn-primary btn-xs pull-right">更多</a>
+            <h2 class="panel-title">热门用户</h2>
+          </div>
+          <div class="panel-body padding-10">
+            {%for user in data%}
+            <div class="clearfix margin-bottom-10"><!-- squared item -->
+              <img class="thumbnail pull-left rounded" src="/u/avatar/{{user.uid}}" width="40" height="40" alt="" />
+              <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">{{user.username}}</a></h4>
+              <span class="size-12 text-muted">{{user.question_count}} 个问题, {{user.agree_count}} 次赞同</span>
+            </div><!-- /squared item -->
+            {%endfor%}
+          </div>
+        </div>
+        {%endif%}
+
+        {{13|show_ad('code')|safe}}
       </div>
     </div>
   </div>
-</body>
-</html>
+  <div class="container">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <a class="btn btn-primary btn-xs pull-right" href="/ext/link/index">更多&gt;&gt;</a> <a class="btn btn-info btn-xs pull-right" href="/ext/link/index/apply" style="margin-right: 15px">申请友情链接</a>
+        <h2 class="panel-title">友情链接</h2>
+      </div>
+      <div class="panel-body link padding-10">
+        <div class="owl-carousel nomargin" data-plugin-options='{"items":6, "singleItem": false, "autoPlay": true}'>
+          <!--  model data ="link",table="ext_link",where='{"passed":1}',limit="24",order="sort ASC",cache="1000"  TODO -->
+          {%for l in link%}
+          {%if l.linktype==0%}
+          <div class="linkbox alternate">
+            <a href="{{l.url}}" target="_blank" title="{{l.name}}">{{l.name}}</a>
+          </div>
+          {%else%}
+          <div class="linkbox alternate">
+            <a href="{{l.url}}" target="_blank" title="{{l.name}}">
+              <img class="img-responsive" src="{{l.logo}}" alt="{{l.name}}">
+            </a>
+          </div>
+          {%endif%}
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{%block script%}
+{%endblock%}
