@@ -68,41 +68,39 @@
 
 
       <!-- Logo -->
-      <a class="logo pull-left" href="/">
-        <img src="/static/assets/images/logo_dark.png" alt="" />
+      <a class="logo pull-left" href="/" style="font-size: 20px;">
+        <img src="/static/shared/images/logo.png" style="margin-right: 16px;" alt="" />
+        E i C a T
       </a>
 
       <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
         <nav class="nav-main">
           <ul id="topMain" class="nav nav-pills nav-main">
-            {% channel data='channel'%}
-            {% for val in channel%}
-            {%if val.status > 0%}
-            <li class="{% if val.children %}dropdown{% endif %} {% if (category.id|in_Array(val.on)) or (val.url|in_Array(controller.active)) %}active{% endif %}">
+            {% channel data='channels'%}
+            {% for channel in channels%}
+            {% if channel.status === 1 %}
+            <li class="{% if channel.children %}dropdown{% endif %} {% if (controller.active|contains(channel.url)) %}active{% endif %}">
 
-              <a {% if val.children%}class="dropdown-toggle" {% endif %} href="{{val.url}}" {%if val.target ==1%} target="_blank"{%endif%}>{{val.title}}</a> {% if val.children%}
+              <a href="{{channel.url}}" 
+                {% if channel.children %} class="dropdown-toggle" {% endif %}
+                {% if channel.target !== null %} target="{{channel.target}}" {% endif %}>
+                {{channel.title}}
+              </a>
+              {% if channel.children %}
               <ul class="dropdown-menu">
-                {% for _val in val.children%}
-                {%if _val.status > 0%}
-                <li class="{% if _val.children%}dropdown{% endif %} {% if category.id|in_Array(_val.on) %}active{% endif %}">
-                  <a {% if _val.children%}class="dropdown-toggle" {% endif %} href="{{_val.url}}" {%if _val.target ==1%} target="_blank"{%endif%}>{{_val.title}}</a> {% if _val.children%}
-                  <ul class="dropdown-menu">
-                    {% for __val in _val.children%}
-                    {%if __val.status > 0%}
-                    <li class="{% if category.id|in_Array(__val.on) %}active{% endif %}"><a href="{{__val.url}}" {%if __val.target ==1%} target="_blank"{%endif%}>{{__val.title}}</a></li>
-                    {% endif%}
-                    {% endfor %}
-                  </ul>
-                  {% endif %}
+                {% for child in channel.children %}
+                {% if child.status === 1 %}
+                <li class="active">
+                  <a href="{{child.url}}" {% if child.target !== null %} target="{{child.target}}"{% endif %}>{{_val.title}}</a>
                 </li>
-                {% endif%}
+                {% endif %}
                 {% endfor %}
               </ul>
               {% endif %}
               <span class="aline"></span>
             </li>
-            {%endif%}
-            {% endfor%}
+            {% endif %}
+            {% endfor %}
 
           </ul>
         </nav>

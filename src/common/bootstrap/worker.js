@@ -1,5 +1,5 @@
 // invoked in worker
-require('./custom/tags')
+require('./global')
 
 think.beforeStartServer(async () => {
   const settings = await think.model('setting').initSettings()

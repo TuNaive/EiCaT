@@ -2,7 +2,7 @@
 import path from 'path'
 
 // variables
-const isDev = think.env === 'development';
+const isDev = think.env === 'development'
 
 export default [
   {

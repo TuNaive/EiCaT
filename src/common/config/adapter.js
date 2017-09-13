@@ -49,7 +49,7 @@ exports.model = {
     cache: { // 额外的缓存配置
       type: 'file',
       handle: fileCache,
-      cachePath: cachePath,  // absoulte path is necessarily required
+      cachePath: cachePath  // absoulte path is necessarily required
     }
     // dateStrings: true
   }

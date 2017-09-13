@@ -1,6 +1,6 @@
-module.exports = class extends think.Model {
+export default class extends think.Model {
   async getCachedChannels () {
-      return await think.cache('channels',() => this.getChannels(), { timeout: 365 * 24 * 3600 })
+    return await think.cache('channels',() => this.getChannels(), { timeout: 365 * 24 * 3600 })
   }
 
   async getChannels () {
