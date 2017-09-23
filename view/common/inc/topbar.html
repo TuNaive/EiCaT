@@ -8,16 +8,16 @@
         <i class="fa fa-user hidden-xs"></i> 会员中心
       </a>
       <ul class="dropdown-menu pull-right">
-        <li><a tabindex="-1" href="/user/index"><i class="fa fa-bank"></i>用户中心</a></li>
-        <li><a tabindex="-1" href="/user/order"><i class="fa fa fa-reorder"></i> 我的订单</a></li>
-        <li><a tabindex="-1" href="/user/setting"><i class="fa fa-gear"></i> 个人设置</a></li>
+        <li><a tabindex="-1" href="/account/index"><i class="fa fa-bank"></i>用户中心</a></li>
+        <li><a tabindex="-1" href="/account/order"><i class="fa fa fa-reorder"></i> 我的订单</a></li>
+        <li><a tabindex="-1" href="/account/setting"><i class="fa fa-gear"></i> 个人设置</a></li>
         <li class="divider"></li>
-        <li><a tabindex="-1" href="/user/public/logout"><i class="fa fa-sign-out"></i> 退出登录</a></li>
+        <li><a tabindex="-1" href="/account/index/logout"><i class="fa fa-sign-out"></i> 退出登录</a></li>
       </ul>
     </li>
     {% else %}
-    <li><a href="/user/public/login" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> 登录</a></li>
-    <li><a href="/user/public/register"><i class="fa fa-thumbs-o-up"></i> 注册</a></li>
+    <li><a href="/account/index/login" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> 登录</a></li>
+    <li><a href="/account/index/register"><i class="fa fa-thumbs-o-up"></i> 注册</a></li>
     {% endif %}
   </ul>
 

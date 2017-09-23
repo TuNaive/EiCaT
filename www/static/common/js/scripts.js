@@ -442,7 +442,7 @@ function _ajax_post() {
           var data=$(this).serialize()
          $.ajax({ 
              type: "POST", 
-             url: "/center/public/login",
+             url: "/account/index/login",
              data: data,
              success: function(msg){
                     if(msg.errno < 0){
