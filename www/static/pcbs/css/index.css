@@ -1,0 +1,15 @@
+div.side-nav ul {
+  padding-bottom: 24px;
+}
+
+div.side-nav li.list-group-item {
+  padding-left: 7px;
+}
+
+div.side-nav ul > li:before {
+  content: none;
+}
+
+div.side-nav ul > li i {
+  margin-right: 8px;
+}

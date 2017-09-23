@@ -1,52 +1,67 @@
-{% extends "./inc/base.html" %}
+{% extends "../common/inc/base.html" %}
 {% block style %}
 <link href="/static/home/css/layout-question.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block content %}
 <section>
   <div class="container">
-    {{1|showBanner()|safe}}
+    <a class="margin-bottom-20 block thumbnail" href="/" title = "EiCaT" >
+      <img class="img-responsive" src="/static/common/images/banner.jpg" 
+        alt="EiCaT" style="height:120px;width:100%">
+    </a>
     <div class="row">
       <div class="col-md-9">
         <!-- REVOLUTION SLIDER -->
         <div class="slider fullwidthbanner-container roundedcorners margin-bottom-0">
           <div class="fullwidthbanner" data-height="550" data-shadow="" data-navigationStyle="">
             <ul class="hide">
-              <!--  topic data="sliders", limit="10", position="2", issub="1"  TODO -->
-              {% for slider in sliders %}
-              {% if slider.model_id==4 %}
-              {% set pic=slider.pics|strToArray %}
-              {% else %}
-              {% set pic=slider.cover_id %}
-              {% endif %}
-              <!-- SLIDE  -->
-              <li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
-                <img src="/static/home/images/1x1.png" data-lazyload="{{pic|get_pic('m=2,w=848,h=400')}}" alt="" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
-
-                <div class="tp-caption lft start" data-x="0" data-y="0" data-speed="750" data-start="750"
-                    data-easing="easeOutExpo" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
-                  <img src="/static/home/images/1x1.png" alt="" data-lazyload="/static/home/images/caption_bg.png">
+              {% banner data="banners", limit="5", size="2" %}
+              {% for bn in banners %}
+              <!-- SLIDE BANNER  -->
+              <li data-transition="fade" 
+                data-slotamount="7" 
+                data-masterspeed="300"  
+                data-saveperformance="off" >
+                <img src="/static/home/images/1x1.png" 
+                  data-lazyload="{{bn.picture}}" 
+                  alt="" 
+                  data-bgfit="cover" 
+                  data-bgposition="center center" 
+                  data-bgrepeat="no-repeat" />
+                <div class="tp-caption lft start" 
+                  data-x="0" 
+                  data-y="0" 
+                  data-speed="750" 
+                  data-start="750"
+                  data-easing="easeOutExpo" 
+                  data-elementdelay="0.1" 
+                  data-endelementdelay="0.1" 
+                  data-endspeed="300">
+                  <img src="/static/home/images/1x1.png" 
+                    alt="" 
+                    data-lazyload="/static/home/images/caption_bg.png">
                 </div>
 
-                <a class="tp-caption medium_light_white lfb start" href="{{slider.name|get_url(slider.id)}}" target="_blank"
+                <a class="tp-caption medium_light_white lfb start" href="/" target="_blank"
                   data-x="left" data-hoffset="70" data-y="96" data-speed="300" data-start="1200"
                   data-easing="easeOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1"
                   data-endelementdelay="0.1" data-endspeed="300">
-                  {{slider.title|truncate(20, true, "")|insert_flg("<br>",10)|safe}}
+                  {{bn.title|truncate(16, true)|insertFrag("<br>", 8)|safe}}
                 </a>
 
                 <div class="tp-caption block_black lfl start"
                   data-x="left" data-hoffset="70" data-y="195" data-speed="300"
                   data-start="1500" data-easing="easeOutExpo" data-splitin="none" data-splitout="none"
-                  data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" >
-                  {{slider.create_time|moment('YYYY-MM-DD HH:mm')}}
+                  data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" 
+                  style="padding: 1px 0">
+                  {{bn.createAt|moment('YYYY-MM-DD HH:mm')}}
                 </div>
 
                 <div class="tp-caption small_light_white lfl start"
                   data-x="left" data-hoffset="70" data-y="250" data-speed="1000" data-start="1800"
                   data-easing="easeOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1"
                   data-endelementdelay="0.1" data-endspeed="300" >
-                  {{slider.description|truncate(90, true, "...")|insert_flg("<br>",20)|safe}}
+                  {{bn.content|truncate(90, true)|insertFrag("<br>", 20)|safe}}
                 </div>
               </li>
               {%endfor%}

@@ -1,0 +1,185 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/pcbs/css/index.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section class="page-header page-header-xs " >
+  <div class="container">
+  {#
+    <h1>{{category.title}}</h1>
+  #}
+  
+    <!-- breadcrumbs -->
+    <ol class="breadcrumb breadcrumb-inverse">
+      <li><a href="/">首页</a></li>
+      <li class="active">{{controller.channel}}</li>
+    </ol>
+    <!-- /breadcrumbs -->
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <!-- LEFT -->
+      <div class="col-lg-10 col-md-10 col-sm-10 ">
+        <!-- CAROUSEL -->
+        <div class="owl-carousel buttons-autohide controlls-over margin-bottom-30 radius-4" 
+          data-plugin-options='{"singleItem": true, "autoPlay": 6000, "navigation": true, "pagination": true, "transitionStyle":"fade"}'>
+          <!-- item -->
+          <div>
+            <div class="caption-slider-default">
+              <div class="display-table">
+                <div class="display-table-cell vertical-align-middle">
+                  <div class="caption-container text-left">
+                    <h2>PCB 在线定制 <strong>省时省心</strong></h2>
+                    <p>
+                      PCB 制版
+                      <br />
+                      <a href="/pcbsvr">自助询价</a> <a href="/pcbsvr">人工报价</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img class="img-responsive radius-4" src="/static/pcbs/images/banner1.jpg" width="851" height="255" alt="">
+          </div>
+          <!-- /item -->
+
+          <!-- item -->
+          <div>
+            <div class="caption-slider-default">
+              <div class="display-table">
+                <div class="display-table-cell vertical-align-middle">
+                  <div class="caption-container text-left">
+                    <h2>PCBA 特殊设计 <strong>低损高效</strong></h2>
+                    <p>
+                      PCBA 设计
+                      <br />
+                      <a href="/pcbsvr">自助询价</a> <a href="/pcbsvr">人工报价</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img class="img-responsive radius-4" src="/static/pcbs/images/banner2.jpg" width="851" height="335" alt="">
+          </div>
+          <!-- /item -->
+        </div>
+        <!-- /CAROUSEL -->
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col-lg-2 col-md-2 col-sm-2">
+        <div class="panel panel-default side-nav">
+          <div class="panel-heading">
+            <h2 class="panel-title text-center">PCB 制版询价</h2>
+          </div>
+          <div class="panel-body" style="padding: 10px 0 0 10px">
+            <ul class="list-group list-group-bordered uppercase nomargin">
+              <li class="list-group-item">
+                <a href="/"><i class="fa fa-calculator"></i>在线自助询价</a>
+              </li>
+              <li class="list-group-item">
+                <a href="/"><i class="fa fa-group"></i>工程师人工报价</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel panel-default side-nav">
+          <div class="panel-heading text-center">
+            <h2 class="panel-title">PCBA 制版询价</h2>
+          </div>
+          <div class="panel-body" style="padding: 10px 0 0 10px">
+            <ul class="list-group list-group-bordered uppercase nomargin">
+              <li class="list-group-item">
+                <a href="/"><i class="fa fa-calculator"></i>在线自助询价</a>
+              </li>
+              <li class="list-group-item">
+                <a href="/"><i class="fa fa-group"></i>工程师人工报价</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key1.png"
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">交期保障</h4>
+          </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden">
+            PCB单双面板8小时加急 
+            <br>
+            批量72小时加急
+            <br>
+            交期保证95%以上
+          </p>
+        </div>
+      </div>
+        <div class="col-md-3">
+          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+            <div class="box-icon-title">
+              <i>
+                <img class="thumbnail rounded" 
+                  src="/static/pcbs/images/key2.png" 
+                  style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+              </i>
+              <h4 class="nomargin">品质保障</h4>
+            </div>
+            <p class="nomargin" style="height: 66px; overflow: hidden">
+              批量抽测免费
+              <br>
+              测试直通率95%以上
+              <br>
+              XXKB版A级材料
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+            <div class="box-icon-title">
+              <i>
+                <img class="thumbnail rounded" 
+                  src="/static/pcbs/images/key3.png" 
+                  style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+              </i>
+              <h4 class="nomargin">专业团队</h4>
+            </div>
+            <p class="nomargin" style="height: 66px;overflow: hidden">
+              资深工程师团队
+              <br>
+              先进工厂设备及工作环境
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+            <div class="box-icon-title">
+              <i>
+                <img class="thumbnail rounded" 
+                  src="//odhs9iog7.qnssl.com/ArbtE2EXZ_ZdkaHIDo57_oJj.jpg?imageView2/0" 
+                  style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+              </i>
+              <h4 class="nomargin">二次开发</h4>
+            </div>
+            <p class="nomargin" style="height: 66px; overflow: hidden">在二次开发，插件开发过程中遇到的问题可以在这里讨论。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{%block script%}
+
+{%endblock%}

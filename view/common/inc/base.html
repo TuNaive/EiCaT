@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><html><![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="renderer" content="webkit" />
+  <title>{{controller.meta_title}} - {{config.settings.SITE_TITLE}}</title>
+  <meta name="keywords" content="{{controller.keywords}}" />
+  <meta name="description" content="{{controller.description}}" />
+  <meta name="Author" content="TuNaive" />
+  <!--qq互联网站验证-->
+  {%if config.setup.QQ_VALIDATION%}
+  {{config.setup.QQ_VALIDATION|safe}}
+  {%endif%}
+  <!--新浪微博网站验证-->
+  {%if config.setup.SINA_VALIDATION%}
+  {{config.setup.SINA_VALIDATION|safe}}
+  {%endif%}
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <!-- mobile settings -->
+  <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+  <!-- WEB FONTS : use %7C instead of | (pipe) -->
+  <!--<link href="http://fonts.useso.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />-->
+
+  <!-- CORE CSS -->
+  <link href="/static/common/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- REVOLUTION SLIDER -->
+  <link href="/static/common/plugins/slider.revolution/css/extralayers.css" rel="stylesheet" type="text/css" />
+  <link href="/static/common/plugins/slider.revolution/css/settings.css" rel="stylesheet" type="text/css" />
+
+  <!-- THEME CSS -->
+  <link href="/static/common/css/base.css" rel="stylesheet" type="text/css" />
+  <link href="/static/common/css/layout.css" rel="stylesheet" type="text/css" />
+
+  <!-- PAGE LEVEL SCRIPTS -->
+  <link href="/static/common/css/header-1.css" rel="stylesheet" type="text/css" />
+  <link href="/static/common/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" />
+
+  <!-- 自定义样式 -->
+  {% block style %}{% endblock %}
+
+  <!--站长统计-->
+  {% if config.setup.WEB_TONGJI %}
+  {{config.setup.WEB_TONGJI|safe}}
+  {% endif %}
+</head>
+
+<body class="smoothscroll enable-animation bg-grey">
+
+  <!-- SLIDE TOP -->
+  {% include "./slidetop.html" %}
+  <!-- /SLIDE TOP -->
+
+  <!-- wrapper -->
+  <div id="wrapper" >
+
+    <!-- Top Bar -->
+    {% include "./topbar.html" %}
+    <!-- /Top Bar -->
+
+    <!--HEADER-->
+    {% include "./header.html" %}
+    <!--/HEADER-->
+    <!-- REVOLUTION SLIDER -->
+    {% block content %}{% endblock %}
+
+    <!-- FOOTER -->
+    <footer id="footer" class="footer-light footer-white" >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <address>
+              <ul class="list-unstyled">
+                <li class="footer-sprite address">
+                  公司地址
+                </li>
+                <li class="footer-sprite phone">
+                  电话: 1234567
+                </li>
+                <li class="footer-sprite email">
+                  <a href="mailto:test@outlook.com">test@outlook.com</a>
+                </li>
+              </ul>
+            </address>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <div class="container">
+          <ul class="pull-right nomargin list-inline mobile-block">
+            <li><a href="#">条款与条件</a></li>
+            <li>&bull;</li>
+            <li><a href="#">隐私</a></li>
+          </ul>
+          &copy; 2015 - <script>document.write(new Date().getFullYear())</script> xxxx  版权所有 <!--{{config.setup.WEB_SITE_TITLE}}--> <a href="http://www.miitbeian.gov.cn/" target="_blank">{{config.setup.WEB_SITE_ICP}}</a>
+          <noscript><a href="http://www.51.la/?19065555" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/19065555.asp" style="border:none" /></a></noscript>
+        </div>
+      </div>
+    </footer>
+    <!-- /FOOTER -->
+
+  </div>
+  <!-- /wrapper -->
+
+  <div id="sidepanel" class="sidepanel-light">
+    <a id="sidepanel_close" href="#">
+      <!-- close -->
+      <i class="glyphicon glyphicon-remove"></i>
+    </a>
+
+    <div class="sidepanel-content">
+      <h2 class="sidepanel-title">网站导航</h2>
+      <!-- SIDE NAV -->
+      <ul class="list-group">
+        {% channel data="channel", num="4" %}
+        {% for val in channel %}
+        <li class="list-group-item {% if val.children %}list-toggle{% endif %} {% if http.url == val.url %}active{% endif %}">
+          <a {% if val.children %} 
+            data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-{{val.id}}" class="collapsed"
+            {% else %}
+            href="{{val.url}}"
+            {% endif %}>
+            {% if val.children %}
+            <i class="ico-dd icon-angle-down"></i>
+            {% endif %}
+            <i class="ico-category et-heart"></i>
+            {{val.title}}
+          </a>
+          {% if val.children %}
+          <ul id="collapse-{{val.id}}" class="list-unstyled collapse">
+            {% for _val in val.children %}
+            <li class="{% if _val.children%}{% endif %}">
+              <a {% if _val.children %}
+                class="" 
+                {% endif %} 
+                href="{{_val.url}}">
+                <i class="fa fa-angle-right"></i>
+                {{_val.title}}
+              </a>
+              {% if _val.children%}
+              <ul class="list-unstyled">
+                {% for __val in _val.children %}
+                <span class="badge hide">New</span>
+                <li>
+                  <a href="{{__val.url}}">
+                    <i class="fa fa-angle-right"></i>
+                    {{__val.title}}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      <!-- /SIDE NAV -->
+    </div>
+  </div>
+  <!-- /SIDE PANEL -->
+
+  <!-- SCROLL TO TOP -->
+  <a href="#" id="toTop"></a>
+
+{#
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="inner">
+      <span class="loader"></span>
+    </div>
+  </div>
+  <!-- /PRELOADER -->
+#}
+
+  <!-- JAVASCRIPT FILES -->
+
+  <script type="text/javascript" src="/static/common/plugins/jquery/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript">
+    var plugin_path = '/static/common/plugins/';
+    $(function () {
+      if($("#topMain.nav-pills>li.active>a")){
+        var w = $("#topMain.nav-pills>li.active>a").width();
+        $("#topMain.nav-pills>li.active>.aline").width(w);
+      }
+
+    })
+  </script>
+  <script type="text/javascript" src="/static/common/js/scripts.js"></script>
+{#
+  <!-- STYLESWITCHER - REMOVE -->
+  <script async type="text/javascript" src="/static/common/plugins/styleswitcher/styleswitcher.js"></script>
+#}
+  <!-- REVOLUTION SLIDER -->
+  <script type="text/javascript" src="/static/common/plugins/slider.revolution/js/jquery.themepunch.tools.min.js"></script>
+  <script type="text/javascript" src="/static/common/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js"></script>
+  <script type="text/javascript" src="/static/common/js/components/revolution_slider.js"></script>
+  {% block script %}{% endblock %}
+  <!--[if lte IE 9]>
+  <script src="/static/common/plugins/jquery-fly/requestAnimationFrame.js"></script>
+  <![endif]-->
+</body>
+
+</html>
