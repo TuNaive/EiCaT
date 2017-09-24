@@ -36,3 +36,4 @@ app/
 
 # files
 package-lock.json
+database.sql
