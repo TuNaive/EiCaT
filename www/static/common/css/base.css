@@ -2741,8 +2741,9 @@ img.mfp-img {
 
 	.owl-theme .owl-controls .owl-buttons div {
 		color:#121212;
-		background:#fff; 
-		border:#fff 1px solid;
+		/*background:#fff; */
+		/*border:#fff 1px solid;*/
+		background: transparent;
 
 		opacity:1; 
 		filter: Alpha(Opacity=100);
@@ -11187,7 +11188,7 @@ div.side-nav .side-nav-head button {
 }
 @media only screen and (max-width: 767px) {
 	div.side-nav ul {
-		display:none;
+		/*display:none;*/
 		max-height:350px;
 		overflow-y:auto;
 		margin-bottom:30px;

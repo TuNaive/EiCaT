@@ -78,7 +78,7 @@
         return false;
       }
       $.ajax({
-        url: '/center/public/login',
+        url: '/account/index/login',
         type: 'POST',
         dataType: 'json',
         data: {
@@ -103,7 +103,7 @@
 
 
   $.ajax({
-    url: "/ext/geetest/index/geetest?t=" + (new Date()).getTime(), // 加随机数防止缓存
+    url: "/external/geetest/doTest?t=" + (new Date()).getTime(), // 加随机数防止缓存
     type: "get",
     dataType: "json",
     success: function (data) {
