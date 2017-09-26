@@ -12,19 +12,20 @@ class BaseTag {
 
 // 自定义标签channel
 // 用于获取网站配置的频道
-class Channel extends BaseTag {
-  constructor () {
-    super()
-    this.tags = ['channel']
-  }
+// 暂废弃
+// class Channel extends BaseTag {
+//   constructor () {
+//     super()
+//     this.tags = ['channel']
+//   }
 
-  async run (context, args, cb) {
-    let field = _.defaultTo(args.data, 'data')
-    let channels = await think.model('channel').getCachedChannels()
-    context.ctx[field] = channels
-    return cb(null, '')
-  }
-}
+//   async run (context, args, cb) {
+//     let field = _.defaultTo(args.data, 'data')
+//     let channels = await think.model('channel').getCachedChannels()
+//     context.ctx[field] = channels
+//     return cb(null, '')
+//   }
+// }
 
 // 自定义标签Banner
 // 用于获取网站配置的广告横幅
@@ -46,6 +47,6 @@ class Banner extends BaseTag {
 }
 
 export default env => {
-  env.addExtension('channel', new Channel())
+  // env.addExtension('channel', new Channel())
   env.addExtension('banner', new Banner())
 }

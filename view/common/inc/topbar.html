@@ -2,36 +2,52 @@
   <div class="container">
   <ul class="top-links list-inline pull-right">
     {% if controller.is_login %}
-    <li class="text-welcome ">您好, <strong>{{controller.user.username}}</strong></li>
+    <li class="text-welcome ">{{__.jed.dgettext('messages', 'hi')}}, <strong>{{controller.user.username}}</strong></li>
     <li>
       <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
-        <i class="fa fa-user hidden-xs"></i> 会员中心
+        <i class="fa fa-user hidden-xs"></i> {{user.name}}
       </a>
       <ul class="dropdown-menu pull-right">
-        <li><a tabindex="-1" href="/account/index"><i class="fa fa-bank"></i>用户中心</a></li>
-        <li><a tabindex="-1" href="/account/order"><i class="fa fa fa-reorder"></i> 我的订单</a></li>
-        <li><a tabindex="-1" href="/account/setting"><i class="fa fa-gear"></i> 个人设置</a></li>
+        <li><a tabindex="-1" href="/account/index"><i class="fa fa-bank"></i> {{__.jed.dgettext('common', 'center')}}</a></li>
+        <li><a tabindex="-1" href="/account/order"><i class="fa fa fa-reorder"></i> {{__.jed.dgettext('common', 'order')}}</a></li>
+        <li><a tabindex="-1" href="/account/setting"><i class="fa fa-gear"></i> {{__.jed.dgettext('common', 'profile')}}</a></li>
         <li class="divider"></li>
-        <li><a tabindex="-1" href="/account/index/logout"><i class="fa fa-sign-out"></i> 退出登录</a></li>
+        <li><a tabindex="-1" href="/account/index/logout"><i class="fa fa-sign-out"></i> {{__.jed.dgettext('common', 'logout')}}</a></li>
       </ul>
     </li>
     {% else %}
-    <li><a href="/account/index/login" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> 登录</a></li>
-    <li><a href="/account/index/register"><i class="fa fa-thumbs-o-up"></i> 注册</a></li>
+    <li><a href="/account/index/login" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> {{__.jed.dgettext('common', 'login')}}</a></li>
+    <li><a href="/account/index/register"><i class="fa fa-thumbs-o-up"></i> {{__.jed.dgettext('common', 'register')}}</a></li>
     {% endif %}
   </ul>
 
   <ul class="top-links list-inline pull-left">
-    <li class="hidden-xs"><a href="page-contact-1.html">联系我们</a></li>
+    <li class="hidden-xs"><a href="page-contact-1.html">{{__.jed.dgettext('common', 'contact')}}</a></li>
     <li>
       <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
-        <img class="flag-lang" src="/static/common/images/flags/cn.png" width="16" height="11" alt="lang" /> 简体中文</a>
+        <img class="flag-lang"
+          src="/static/common/images/flags/{% if isZh %}cn.png{% else %}us.png{% endif %}"
+          width="16" height="11" alt="lang" />
+        {% if isZh %}
+         简体中文 
+        {% else %}
+         ENGLISH
+        {% endif %}
+      </a>
         <ul class="dropdown-langs dropdown-menu">
+          {% if isZh %}
           <li>
-            <a tabindex="-1" href="#">
+            <a tabindex="-1" href="?locale=en-us">
               <img class="flag-lang" src="/static/common/images/flags/us.png" width="16" height="11" alt="lang" /> ENGLISH
             </a>
           </li>
+          {% else %}
+          <li>
+            <a tabindex="-1" href="?locale=zh-cn">
+              <img class="flag-lang" src="/static/common/images/flags/cn.png" width="16" height="11" alt="lang" /> 简体中文
+            </a>
+          </li>
+          {% endif %}
         <li class="divider"></li>
       </ul>
     </li>

@@ -1,0 +1,44 @@
+{% channel data="channel", num="4" %}
+{% for val in channel %}
+<li class="list-group-item {% if val.children %}list-toggle{% endif %} {% if http.url == val.url %}active{% endif %}">
+  <a {% if val.children %} 
+    data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-{{val.id}}" class="collapsed"
+    {% else %}
+    href="{{val.url}}"
+    {% endif %}>
+    {% if val.children %}
+    <i class="ico-dd icon-angle-down"></i>
+    {% endif %}
+    <i class="ico-category et-heart"></i>
+    {{val.title}}
+  </a>
+  {% if val.children %}
+  <ul id="collapse-{{val.id}}" class="list-unstyled collapse">
+    {% for _val in val.children %}
+    <li class="{% if _val.children%}{% endif %}">
+      <a {% if _val.children %}
+        class="" 
+        {% endif %} 
+        href="{{_val.url}}">
+        <i class="fa fa-angle-right"></i>
+        {{_val.title}}
+      </a>
+      {% if _val.children%}
+      <ul class="list-unstyled">
+        {% for __val in _val.children %}
+        <span class="badge hide">New</span>
+        <li>
+          <a href="{{__val.url}}">
+            <i class="fa fa-angle-right"></i>
+            {{__val.title}}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</li>
+{% endfor %}

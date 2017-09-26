@@ -1,0 +1,25 @@
+{% channel data='channels'%}
+{% for channel in channels%}
+{% if channel.status === 1 %}
+<li class="{% if channel.children %}dropdown{% endif %} {% if (controller.active|contains(channel.url)) %}active{% endif %}">
+
+  <a href="{{channel.url}}" 
+    {% if channel.children %} class="dropdown-toggle" {% endif %}
+    {% if channel.target !== null %} target="{{channel.target}}" {% endif %}>
+    {{channel.title}}
+  </a>
+  {% if channel.children %}
+  <ul class="dropdown-menu">
+    {% for child in channel.children %}
+    {% if child.status === 1 %}
+    <li class="active">
+      <a href="{{child.url}}" {% if child.target !== null %} target="{{child.target}}"{% endif %}>{{_val.title}}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <span class="aline"></span>
+</li>
+{% endif %}
+{% endfor %}

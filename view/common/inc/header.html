@@ -76,32 +76,30 @@
       <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
         <nav class="nav-main">
           <ul id="topMain" class="nav nav-pills nav-main">
-            {% channel data='channels'%}
-            {% for channel in channels%}
-            {% if channel.status === 1 %}
-            <li class="{% if channel.children %}dropdown{% endif %} {% if (controller.active|contains(channel.url)) %}active{% endif %}">
-
-              <a href="{{channel.url}}" 
-                {% if channel.children %} class="dropdown-toggle" {% endif %}
-                {% if channel.target !== null %} target="{{channel.target}}" {% endif %}>
-                {{channel.title}}
+            <li class="{% if (controller.active|contains('/')) %}active{% endif %}">
+              <a href="/">
+                {{__.jed.dgettext('common', 'home')}}
               </a>
-              {% if channel.children %}
-              <ul class="dropdown-menu">
-                {% for child in channel.children %}
-                {% if child.status === 1 %}
-                <li class="active">
-                  <a href="{{child.url}}" {% if child.target !== null %} target="{{child.target}}"{% endif %}>{{_val.title}}</a>
-                </li>
-                {% endif %}
-                {% endfor %}
-              </ul>
-              {% endif %}
               <span class="aline"></span>
             </li>
-            {% endif %}
-            {% endfor %}
-
+            <li class="{% if (controller.active|contains('/pcbsvr')) %}active{% endif %}">
+              <a href="/pcbsvr">
+                PCB/SMT
+              </a>
+              <span class="aline"></span>
+            </li>
+            <li class="{% if (controller.active|contains('/aboutus')) %}active{% endif %}">
+              <a href="/aboutus">
+                {{__.jed.dgettext('common', 'company')}}
+              </a>
+              <span class="aline"></span>
+            </li>
+            <li class="{% if (controller.active|contains('/sitemap')) %}active{% endif %}">
+              <a href="/sitemap">
+                {{__.jed.dgettext('common', 'map')}}
+              </a>
+              <span class="aline"></span>
+            </li>
           </ul>
         </nav>
       </div>

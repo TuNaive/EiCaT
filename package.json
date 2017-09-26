@@ -21,6 +21,7 @@
     "think-cache-file": "^1.0.8",
     "think-email": "^1.0.2",
     "think-fetch": "^1.1.0",
+    "think-i18n": "^1.2.3",
     "think-loader": "^1.0.18",
     "think-model": "^1.0.0",
     "think-model-mysql": "^1.0.0",

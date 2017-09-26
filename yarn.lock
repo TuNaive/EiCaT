@@ -662,6 +662,10 @@ convert-source-map@^1.1.0, convert-source-map@^1.5.0:
   version "1.5.0"
   resolved "http://registry.npm.taobao.org/convert-source-map/download/convert-source-map-1.5.0.tgz#9acd70851c6d5dfdd93d9282e5edf94a03ff46b5"
 
+cookie@^0.3.1:
+  version "0.3.1"
+  resolved "http://registry.npm.taobao.org/cookie/download/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
+
 cookiejar@^2.1.0:
   version "2.1.1"
   resolved "http://registry.npm.taobao.org/cookiejar/download/cookiejar-2.1.1.tgz#41ad57b1b555951ec171412a81942b1e8200d34a"
@@ -1552,6 +1556,10 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/isstream/download/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+jed@^1.1.1:
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/jed/download/jed-1.1.1.tgz#7a549bbd9ffe1585b0cd0a191e203055bee574b4"
+
 jimp@^0.2.28:
   version "0.2.28"
   resolved "http://registry.npm.taobao.org/jimp/download/jimp-0.2.28.tgz#dd529a937190f42957a7937d1acc3a7762996ea2"
@@ -1984,6 +1992,10 @@ npmlog@^4.0.2:
 number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/number-is-nan/download/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
+
+numeral@^2.0.6:
+  version "2.0.6"
+  resolved "http://registry.npm.taobao.org/numeral/download/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
 
 nunjucks@~3.0.0:
   version "3.0.1"
@@ -2790,6 +2802,16 @@ think-helper@^1.0.0, think-helper@^1.0.13, think-helper@^1.0.5, think-helper@^1.
     core-util-is "^1.0.2"
     ms "^1.0.0"
     uuid "^3.0.1"
+
+think-i18n@^1.2.3:
+  version "1.2.3"
+  resolved "http://registry.npm.taobao.org/think-i18n/download/think-i18n-1.2.3.tgz#e927ab866f3dc0c4cd0588b9a90b6185e7ea2260"
+  dependencies:
+    cookie "^0.3.1"
+    jed "^1.1.1"
+    moment "^2.18.1"
+    numeral "^2.0.6"
+    think-helper "^1.0.5"
 
 think-inspect@0.0.2:
   version "0.0.2"
