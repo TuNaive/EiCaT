@@ -41,8 +41,10 @@ module.exports = {
       register: [ 'Register' ],
       logout: [ 'logout' ],
       home: [ 'Home'],
-      company: [ 'Company Profile' ],
-      map: [ 'Site Map' ]
+      aboutus: [ 'About Us' ],
+      map: [ 'Site Map' ],
+      copyright: [ 'Copyright' ],
+      company: [ 'Company Name' ]
     },
     "messages": {
       "": {

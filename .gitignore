@@ -33,6 +33,7 @@ output.tar.gz
 
 runtime/
 app/
+obsoleted/
 
 # files
 package-lock.json
