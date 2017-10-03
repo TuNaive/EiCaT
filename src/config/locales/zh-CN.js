@@ -131,7 +131,7 @@ module.exports = {
       register: [ '注册' ],
       logout: [ '注销' ],
       home: [ '首页'],
-      about: [ '关于我们' ],
+      aboutus: [ '关于我们' ],
       map: [ '网站地图' ],
       copyright: [ '版权所有' ],
       company: [ '公司的名称' ]

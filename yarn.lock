@@ -1246,6 +1246,12 @@ growly@^1.3.0:
   version "1.3.0"
   resolved "http://registry.npm.taobao.org/growly/download/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
 
+gt3-sdk@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/gt3-sdk/download/gt3-sdk-2.0.0.tgz#0adf4e89bfd06bf373852e93e7130872187b483e"
+  dependencies:
+    request "^2.81.0"
+
 har-schema@^1.0.5:
   version "1.0.5"
   resolved "http://registry.npm.taobao.org/har-schema/download/har-schema-1.0.5.tgz#d263135f43307c02c602afc8fe95970c0151369e"
