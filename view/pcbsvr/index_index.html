@@ -124,55 +124,105 @@
           </p>
         </div>
       </div>
-        <div class="col-md-3">
-          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-            <div class="box-icon-title">
-              <i>
-                <img class="thumbnail rounded" 
-                  src="/static/pcbs/images/key2.png" 
-                  style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
-              </i>
-              <h4 class="nomargin">品质保障</h4>
-            </div>
-            <p class="nomargin" style="height: 66px; overflow: hidden">
-              批量抽测免费
-              <br>
-              测试直通率95%以上
-              <br>
-              XXKB版A级材料
-            </p>
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key2.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">品质保障</h4>
           </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden">
+            批量抽测免费
+            <br>
+            测试直通率95%以上
+            <br>
+            XXKB版A级材料
+          </p>
         </div>
+      </div>
 
-        <div class="col-md-3">
-          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-            <div class="box-icon-title">
-              <i>
-                <img class="thumbnail rounded" 
-                  src="/static/pcbs/images/key3.png" 
-                  style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
-              </i>
-              <h4 class="nomargin">专业团队</h4>
-            </div>
-            <p class="nomargin" style="height: 66px;overflow: hidden">
-              资深工程师团队
-              <br>
-              先进工厂设备及工作环境
-            </p>
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key3.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">专业团队</h4>
           </div>
+          <p class="nomargin" style="height: 66px;overflow: hidden">
+            资深工程师团队
+            <br>
+            先进工厂设备及工作环境
+          </p>
         </div>
+      </div>
 
-        <div class="col-md-3">
-          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-            <div class="box-icon-title">
-              <i>
-                <img class="thumbnail rounded" 
-                  src="/static/pcbs/images/key4.png" 
-                  style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
-              </i>
-              <h4 class="nomargin">经济实惠</h4>
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key4.png" 
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">经济实惠</h4>
+          </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row margin-top-20">
+      <ul class="nav nav-tabs nav-justified" style="position: relative;background-color: #f1f2f7">
+        <li class="active"><a href="#all" data-toggle="tab" class="size-18">全部</a></li>
+        <li><a href="#pcb" data-toggle="tab" class="size-18">PCB</a></li>
+        <li><a href="#fpc" data-toggle="tab" class="size-18">FPC</a></li>
+        <li><a href="#pcba" data-toggle="tab" class="size-18">PCBA</a></li>
+        {#
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a></li>
+            <li><a href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a></li>
+          </ul>
+        </li>
+        #}
+      </ul>
+      <div class="panel panel-default" style="margin-top: -5px">
+        <div class="tab-content panel-body padding-10">
+          <div class="tab-pane fade in active" id="all">
+            <div class="row ">
+              {% for val in list %}
+                <!-- item -->
+                  <div class="col-md-3 col-sm-3 ">
+                    <div class="item-box margin-bottom-20">
+                      <div class="panel panel-default" style="margin-bottom: 0">
+                        <div class="panel-body padding-10">
+                            <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="">
+                        </div>
+                        <div class="panel-footer padding-10 size-14 elipsis" >
+                          {{val.title|truncate(16)}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!-- /item -->
+              {%endfor%}
             </div>
-            <p class="nomargin" style="height: 66px; overflow: hidden"></p>
+          </div>
+          <div class="tab-pane fade" id="pcb">
+            22222222222222
+          </div>
+          <div class="tab-pane fade" id="fpc">
+            33333333333333
+          </div>
+          <div class="tab-pane fade" id="pcba">
+            44444444444444
           </div>
         </div>
       </div>

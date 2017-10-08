@@ -7,7 +7,7 @@ import mysql from 'think-model-mysql'
 // variables
 const isDev = think.env === 'development'
 const cachePath = path.join(think.ROOT_PATH, 'runtime/cache')
-
+const { DateFile } = require('think-logger3');
 /**
  * cache adapter config
  * @type {Object}
@@ -44,8 +44,8 @@ exports.model = {
     host: '127.0.0.1',
     port: 3306,
     connectionLimit: 5,
-    user: 'ectuser',
-    password: 'ect123',
+    user: 'root',
+    password: 'yang1019',
     cache: { // 额外的缓存配置
       type: 'file',
       handle: fileCache,
@@ -79,3 +79,19 @@ exports.session = {
  * @type {Object}
  */
 exports.view = require('./view').default
+
+/**
+ * logger adapter config
+ * @type {Object}
+ */
+exports.logger = {
+  type: 'dateFile',
+  dateFile: {
+    handle: DateFile,
+    level: 'ALL',
+    absolute: true,
+    pattern: '-yyyy-MM-dd',
+    alwaysIncludePattern: false,
+    filename: path.join(think.ROOT_PATH, 'logs/server.log')
+  }
+}
