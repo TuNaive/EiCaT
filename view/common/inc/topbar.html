@@ -12,12 +12,12 @@
         <li><a tabindex="-1" href="/account/order"><i class="fa fa fa-reorder"></i> {{__.jed.dgettext('common', 'order')}}</a></li>
         <li><a tabindex="-1" href="/account/setting"><i class="fa fa-gear"></i> {{__.jed.dgettext('common', 'profile')}}</a></li>
         <li class="divider"></li>
-        <li><a tabindex="-1" href="/account/index/logout"><i class="fa fa-sign-out"></i> {{__.jed.dgettext('common', 'logout')}}</a></li>
+        <li><a tabindex="-1" href="/account/auth/logout"><i class="fa fa-sign-out"></i> {{__.jed.dgettext('common', 'logout')}}</a></li>
       </ul>
     </li>
     {% else %}
-    <li><a href="/account/index/login" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> {{__.jed.dgettext('common', 'login')}}</a></li>
-    <li><a href="/account/index/register"><i class="fa fa-thumbs-o-up"></i> {{__.jed.dgettext('common', 'register')}}</a></li>
+    <li><a href="/account/auth/login" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> {{__.jed.dgettext('common', 'login')}}</a></li>
+    <li><a href="/account/auth/register"><i class="fa fa-thumbs-o-up"></i> {{__.jed.dgettext('common', 'register')}}</a></li>
     {% endif %}
   </ul>
 

@@ -8,7 +8,8 @@ global._ = _
 global.moment = moment
 
 global.showDebug = messages => {
-  console.log('\n\n===== Debug =====', _.toString(messages), '\n\n')
+  console.log('\n=========== Debug ===========')
+  console.log(_.toString(messages), '\n')
 }
 
 global.encryptPassword = (password, md5encoded = false) => {

@@ -1,4 +1,5 @@
 // default config
-export default {
+module.exports = {
+  port: 2333,
   workers: 1
 }

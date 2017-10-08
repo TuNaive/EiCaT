@@ -45,14 +45,14 @@
         </div>
         <div class="col-sm-5">
           <h4>还没有账号?</h4>
-          <p>你可以在<a href="/account/index/register" class="text-info">这里</a>创建一个帐户 </p>
+          <p>你可以在<a href="/account/auth/register" class="text-info">这里</a>创建一个帐户 </p>
           <p>或者</p>
           <a href="/ext/qq/index" class="btn btn-block btn-social btn-twitter margin-bottom-10">
             <i class="fa fa-qq"></i> 使用QQ账号登录
           </a>
-          <a class="btn btn-block btn-social btn-facebook margin-bottom-10">
+          <!-- <a class="btn btn-block btn-social btn-facebook margin-bottom-10">
             <i class="fa fa-weixin"></i> 使用微信账号登录
-          </a>
+          </a> -->
           <a href="/ext/weibo/index" class="btn btn-block btn-social btn-google margin-bottom-10">
             <i class="fa fa-weibo"></i> 使用新浪微博账号登录
           </a>
@@ -73,12 +73,13 @@
     });
     $('#validate-submit').click(function () {
       var result = captchaObj.getValidate();
+      console.log(result)
       if (!result) {
-        _toastr("请先完成验证!","top-right","error",false);
+        _toastr("请先进行智能验证!","top-right","error",false);
         return false;
       }
       $.ajax({
-        url: '/account/index/login',
+        url: '/account/auth/login',
         type: 'POST',
         dataType: 'json',
         data: {
@@ -103,7 +104,7 @@
 
 
   $.ajax({
-    url: "/external/geetest/doTest?t=" + (new Date()).getTime(), // 加随机数防止缓存
+    url: "/external/geetest/getCaptcha?t=" + (new Date()).getTime(), // 加随机数防止缓存
     type: "get",
     dataType: "json",
     success: function (data) {
@@ -112,7 +113,6 @@
         challenge: data.challenge,
         offline: !data.success, // 表示用户后台检测极验服务器是否宕机
         new_captcha: data.new_captcha, // 用于宕机时表示是新验证码的宕机
-
         product: "float", // 产品形式，包括：float，popup
         width: "100%"
         // 更多配置参数说明请参见：http://docs.geetest.com/install/client/web-front/

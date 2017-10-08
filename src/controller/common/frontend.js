@@ -1,9 +1,10 @@
 export default class Frontend extends think.Controller {
-  __before() {
-    this.setlocal()
+  async __before() {
+    this.setLocal()
+    this.isLoggedIn = await this.isLoggedIn()
   }
 
-  setlocal() {
+  setLocal() {
     let locale = this.get('locale')
     if (locale && !_.isEqual(this.cookie('locale'), locale)) {
       this.cookie('locale', locale)
@@ -12,7 +13,8 @@ export default class Frontend extends think.Controller {
     this.assign('isZh', !_.isEqual(this.cookie('locale'), 'en-us'))
   }
 
-  async isLogin () {
-    const user = await this.session('')
+  async isLoggedIn() {
+    const user = await this.session('webuser')
+    return think.isEmpty(user) ? false : user.uid
   }
 }
