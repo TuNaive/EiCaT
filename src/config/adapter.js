@@ -44,8 +44,8 @@ exports.model = {
     host: '127.0.0.1',
     port: 3306,
     connectionLimit: 5,
-    user: 'root',
-    password: 'yang1019',
+    user: 'ectuser',
+    password: 'ect123',
     cache: { // 额外的缓存配置
       type: 'file',
       handle: fileCache,
@@ -84,14 +84,14 @@ exports.view = require('./view').default
  * logger adapter config
  * @type {Object}
  */
-exports.logger = {
-  type: 'dateFile',
-  dateFile: {
-    handle: DateFile,
-    level: 'ALL',
-    absolute: true,
-    pattern: '-yyyy-MM-dd',
-    alwaysIncludePattern: false,
-    filename: path.join(think.ROOT_PATH, 'logs/server.log')
-  }
-}
+// exports.logger = {
+//   type: 'dateFile',
+//   dateFile: {
+//     handle: DateFile,
+//     level: 'ALL',
+//     absolute: true,
+//     pattern: '-yyyy-MM-dd',
+//     alwaysIncludePattern: false,
+//     filename: path.join(think.ROOT_PATH, 'logs/server.log')
+//   }
+// }
