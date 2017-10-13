@@ -1,6 +1,7 @@
 {% extends "../common/inc/base.html" %}
 {% block style %}
 <link href="/static/pcbs/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/static/pcbs/css/pcb_calc.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block content %}
 <section class="page-header page-header-xs " >
@@ -21,12 +22,90 @@
 <section>
   <div class="container">
 
-    <form id="example-advanced-form" action="#">
-      <h3>Account</h3>
+    <ol class="pcb_hint">
+      <li>根据您的所需，填写下面相关内容，系统会匹配出相关价格；</li>
+      <li>自助询价适用于1-8层，30平米以下的普通硬板报价，其它类型请选择人工报价；</li>
+      <li>阻抗、塞孔、厚铜、盲埋孔、高Tg，高CTI等参数不在选项范围内或有特殊工艺要求的，请选择工程师人工报价。</li>
+    </ol>
+
+    <form id="example-advanced-form" class="form-horizontal" action="#">
+      <h3>填写所需询价信息</h3>
       <fieldset>
         <legend>Account Information</legend>
 
-        <label for="userName-2">User name *</label>
+        <div class="form-group">
+          <label for="boardLength" class="col-sm-2 control-label">板子尺寸长：</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="boardLength" placeholder="请输入0-60">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="boardWidth" class="col-sm-2 control-label">板子尺寸宽：</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="boardWidth" placeholder="请输入0-40">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="boardLayers" class="col-sm-2 control-label">板子层数：</label>
+          <div class="col-sm-4">
+            <label class="radio-inline">
+              <input type="radio" name="boardLayers" id="boardLayer1" value="option1">单面
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLayers" id="boardLayer2" value="option1">双面
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLayers" id="boardLayer3" value="option1">四层
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLayers" id="boardLayer4" value="option1">六层
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLayers" id="boardLayer5" value="option1">八层
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="boardLMaterial" class="col-sm-2 control-label">板材：</label>
+          <div class="col-sm-4">
+            <label class="radio-inline">
+              <input type="radio" name="boardLMaterial" id="boardLMaterial1" value="option1">FR4
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLMaterial" id="boardLMaterial2" value="option1">CEM1
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLMaterial" id="boardLMaterial3" value="option1">FR1
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLMaterial" id="boardLMaterial4" value="option1">铝基板
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="boardThickness" class="col-sm-2 control-label">板厚：</label>
+          <div class="col-sm-4">
+            <input type="number" value="1.6mm" class="form-control" id="boardThickness">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="boardLAmount" class="col-sm-2 control-label">板子数量：</label>
+          <div class="col-sm-4">
+            <label class="radio-inline">
+              <input type="radio" name="boardLMaterial" id="boardLMaterial1" value="option1">FR4
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLMaterial" id="boardLMaterial2" value="option1">CEM1
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLMaterial" id="boardLMaterial3" value="option1">FR1
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="boardLMaterial" id="boardLMaterial4" value="option1">铝基板
+            </label>
+          </div>
+        </div>
+        <label for="userName-2"></label>
         <input id="userName-2" name="userName" type="text" class="required">
         <label for="password-2">Password *</label>
         <input id="password-2" name="password" type="text" class="required">
@@ -35,7 +114,7 @@
         <p>(*) Mandatory</p>
       </fieldset>
 
-      <h3>Profile</h3>
+      <h3>生成PCB报价单</h3>
       <fieldset>
         <legend>Profile Information</legend>
 
@@ -52,7 +131,7 @@
         <p>(*) Mandatory</p>
       </fieldset>
 
-      <h3>Warning</h3>
+      <h3>上传PCB文件，提交订单</h3>
       <fieldset>
         <legend>You are to young</legend>
 
@@ -143,8 +222,10 @@
 </section>
 {% endblock %}
 {%block script%}
-<script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
+pus<script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
 <script src="/static/common/plugins/jquery.steps-1.1.0/jquery.steps.min.js"></script>
+<script src="/static/common/plugins/require.js"></script>
+<script src="/static/pcbs/js/pcb_calc.js"></script>
 <script>
   var form = $("#example-advanced-form").show();
 
