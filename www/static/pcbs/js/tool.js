@@ -2,34 +2,50 @@
  * Created by dengyuying on 2017/10/12.
  */
 
-define(['lodash'], function (_) {
-  const tool = {}
+var labelTpl = '<label for="<%- field %>" class="col-sm-2 control-label"><%- label %>：</label>'
+var tpls = {
+  radio: labelTpl +
+    '<div class="<%- widthClass || "col-sm-10" %>">' +
+      '<% _.forEach(options, function(val, key) { %>' +
+        '<label class="radio-inline">' +
+          '<input type="radio" name="<%- field %>" id="<%- field + _.capitalize(key) %>" value="<%- val %>"><%- val %>' +
+        '</label>' +
+      '<% }); %>' +
+    '</div>',
+  select: labelTpl +
+    '<div class="<%- widthClass || "col-sm-4" %>">' +
+      '<select class="form-control" name="<%- field %>" id="<%- field %>">' +
+        '<% _.forEach(options, function(val, key) { %>' +
+          '<option><%- val %></option>' +
+        '<% }); %>' +
+      '</select>' +
+    '</div>'
+}
+
+define([], function () {
+  var tool = {}
 
   /*
    * radio dom 的生成函数
-   * @param {Array} values
+   * @param {String} type
+   * @param {Obeject|Array} options {value: label}|[label]
+   * @param {String} field
+   * @param {String} label
    * */
-  tool.generateRadioDom = function (values, field, label) {
-    if (!_.isArray(values) || _.isEmpty(values)) {
-      throw new Error('values must be an Array without empty')
+  tool.generateFormElem = function (type, options, field, label, widthClass) {
+    if (!(_.isArray(options) || _.isObject(options))  || _.isEmpty(options)) {
+      throw new Error(field, 'options must be an Array or Object without empty')
     }
 
-    const compiled = _.template(
-      '<div class="form-group">' +
-        '<label for="<%= field %>" class="col-sm-2 control-label"><%= label + ":" %></label>' +
-        '<div class="col-sm-4">' +
-          '<% _.forEach(values, function(val) { %>' +
-            '<label class="radio-inline">' +
-              '<input type="radio" name="<%= field %>" id="<%= field + 1 %>" value="option1"><%- val ' +
-            '</label>' +
-          '<% }); %>' +
-        '</div>' +
-      '</div>'
-    )
+    var tpl = tpls[type]
 
-    const tpl = compiled(values, field, label)
+    if (_.isNil(tpl)) {
+      throw new Error(field, 'finds no tpl')
+    }
 
-    return $(tpl)
+    var compiled = _.template(tpl)
+
+    return $(compiled({options, field, label, widthClass}))
   }
 
   return tool

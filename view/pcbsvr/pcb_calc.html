@@ -28,121 +28,186 @@
       <li>阻抗、塞孔、厚铜、盲埋孔、高Tg，高CTI等参数不在选项范围内或有特殊工艺要求的，请选择工程师人工报价。</li>
     </ol>
 
-    <form id="example-advanced-form" class="form-horizontal" action="#">
+    <form id="pvbStep" class="form-horizontal" action="#">
       <h3>填写所需询价信息</h3>
       <fieldset>
-        <legend>Account Information</legend>
-
-        <div class="form-group">
-          <label for="boardLength" class="col-sm-2 control-label">板子尺寸长：</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="boardLength" placeholder="请输入0-60">
+        <div id="enquiryForm">
+          <div class="form-inline form-group">
+            <div>
+              <label for="boardLength" class="col-sm-2 control-label">板子尺寸长：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required" id="boardLength" name="boardLength" placeholder="请输入0-60">
+              </div>
+            </div>
+            <div>
+              <label for="boardWidth" class="col-sm-2 control-label">板子尺寸宽：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required" id="boardWidth" name="boardWidth" placeholder="请输入0-40">
+              </div>
+            </div>
+          </div>
+          <div id="boardLayer" class="form-group"></div>
+          <div id="boardMaterial" class="form-group"></div>
+          <div id="boardThickness" class="form-group"></div>
+          <div id="boardAmount" class="form-group"></div>
+          <div class="form-inline form-group">
+            <div id="aluminumOutThickness"></div>
+            <div id="aluminumInThickness"></div>
+          </div>
+          <div class="form-inline form-group">
+            <div>
+              <label for="makeupNum" class="col-sm-2 control-label">拼版款数：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required" id="makeupNum" name="makeupNum" value="1">
+              </div>
+            </div>
+            <div id="surfacing"></div>
+          </div>
+          <div class="form-inline form-group">
+            <div id="solderMaskcolor"></div>
+            <div id="charColor"></div>
+          </div>
+          <div class="form-inline form-group">
+            <div>
+              <div id="minLineSpace"></div>
+              <div id="minAperture"></div>
+            </div>
+            <span class="col-sm-offset-2 col-sm-4">3mil、4mil可做，请改用人工报价</span>
+            <span class="col-sm-offset-2 col-sm-4">最小0.2mm，请改用人工报价</span>
+          </div>
+          <div id="holeAmount" class="form-group"></div>
+          <div id="halfHole" class="form-group"></div>
+          <div class="form-inline form-group">
+            <div id="urgent"></div>
+            <div>
+              <label for="delivery" class="col-sm-2 control-label">交期：</label>
+              <div id="delivery" name="delivery" class="col-sm-4"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="comment" class="col-sm-2 control-label">备注：</label>
+            <div class="col-sm-10">
+              <textarea id="comment" name="comment" class="form-control"></textarea>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label for="boardWidth" class="col-sm-2 control-label">板子尺寸宽：</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="boardWidth" placeholder="请输入0-40">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="boardLayers" class="col-sm-2 control-label">板子层数：</label>
-          <div class="col-sm-4">
-            <label class="radio-inline">
-              <input type="radio" name="boardLayers" id="boardLayer1" value="option1">单面
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLayers" id="boardLayer2" value="option1">双面
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLayers" id="boardLayer3" value="option1">四层
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLayers" id="boardLayer4" value="option1">六层
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLayers" id="boardLayer5" value="option1">八层
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="boardLMaterial" class="col-sm-2 control-label">板材：</label>
-          <div class="col-sm-4">
-            <label class="radio-inline">
-              <input type="radio" name="boardLMaterial" id="boardLMaterial1" value="option1">FR4
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLMaterial" id="boardLMaterial2" value="option1">CEM1
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLMaterial" id="boardLMaterial3" value="option1">FR1
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLMaterial" id="boardLMaterial4" value="option1">铝基板
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="boardThickness" class="col-sm-2 control-label">板厚：</label>
-          <div class="col-sm-4">
-            <input type="number" value="1.6mm" class="form-control" id="boardThickness">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="boardLAmount" class="col-sm-2 control-label">板子数量：</label>
-          <div class="col-sm-4">
-            <label class="radio-inline">
-              <input type="radio" name="boardLMaterial" id="boardLMaterial1" value="option1">FR4
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLMaterial" id="boardLMaterial2" value="option1">CEM1
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLMaterial" id="boardLMaterial3" value="option1">FR1
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="boardLMaterial" id="boardLMaterial4" value="option1">铝基板
-            </label>
-          </div>
-        </div>
-        <label for="userName-2"></label>
-        <input id="userName-2" name="userName" type="text" class="required">
-        <label for="password-2">Password *</label>
-        <input id="password-2" name="password" type="text" class="required">
-        <label for="confirm-2">Confirm Password *</label>
-        <input id="confirm-2" name="confirm" type="text" class="required">
-        <p>(*) Mandatory</p>
       </fieldset>
 
       <h3>生成PCB报价单</h3>
       <fieldset>
-        <legend>Profile Information</legend>
+        <h3>加工详情</h3>
+        <table id="machiningDetail" class="table table-bordered"></table>
 
-        <label for="name-2">First name *</label>
-        <input id="name-2" name="name" type="text" class="required">
-        <label for="surname-2">Last name *</label>
-        <input id="surname-2" name="surname" type="text" class="required">
-        <label for="email-2">Email *</label>
-        <input id="email-2" name="email" type="text" class="required email">
-        <label for="address-2">Address</label>
-        <input id="address-2" name="address" type="text">
-        <label for="age-2">Age (The warning step will show up if age is less than 18) *</label>
-        <input id="age-2" name="age" type="text" class="required number">
-        <p>(*) Mandatory</p>
+        <h3>价格明细（含税17%）</h3>
+        <table id="priceDetail" class="table table-bordered">
+          <tr>
+            <th>工程费</th><th>板费</th><th>拼版费</th><th>特殊板费</th><th>菲林费</th><th>表面处理费</th><th>测试费</th><th>阻焊颜色费</th><th>字体颜色费</th><th>半孔加工费</th><th>加急费</th><th>其他</th><th>总费</th>
+          </tr>
+          <tr>
+            <td>55.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>55.00</td>
+          </tr>
+        </table>
       </fieldset>
 
       <h3>上传PCB文件，提交订单</h3>
       <fieldset>
-        <legend>You are to young</legend>
+        <div id="pcbFileForm">
+          <div class="form-group">
+            <label for="pcbFile" class="col-sm-2 control-label">PCB文件：</label>
+            <div class="col-sm-4">
+              <input type="file" class="form-control required" id="pcbFile" name="pcbFile">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contact" class="col-sm-2 control-label">联系人：</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control required" id="contact" name="contact">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contact" class="col-sm-2 control-label">联系手机：</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control required" id="contact" name="contact">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contact" class="col-sm-2 control-label">联系邮箱：</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control required" id="contact" name="contact">
+            </div>
+          </div>
+        </div>
 
-        <p>Please go away ;-)</p>
-      </fieldset>
+        <div class="consignee">
+          <div class="header">
+            <h3>收货人信息</h3>
+            <div class="btn-wrap">
+              <button>新增收货地址</button>
+              <button>刷新地址</button>
+            </div>
+          </div>
 
-      <h3>Finish</h3>
-      <fieldset>
-        <legend>Terms and Conditions</legend>
+          <table id="priceDetail" class="table table-bordered">
+            <tr>
+              <td>姓名</td>
+              <th>收货地址</th>
+              <th>联系方式</th>
+            </tr>
+          </table>
 
-        <input id="acceptTerms-2" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
+          <button>显示全部地址</button>
+        </div>
+
+        <div class="express form-group">
+          <label for="express" class="col-sm-2 control-label h3">快递公司：</label>
+          <div class="col-sm-10">
+            <label class="radio-inline">
+              <input type="radio" name="express" id="express0" value="联昊通(只送广东省内,免费)">联昊通(只送广东省内,免费)
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="express" id="express1" value="单面顺丰">顺丰
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="express" id="express2" value="单面德邦物流(适用批量板)">德邦物流(适用批量板)
+            </label>
+          </div>
+        </div>
+
+        <div class="invoice">
+          <div class="header">
+            <h3>发票信息</h3>
+            <div class="btn-wrap">
+              <button>新增发票信息</button>
+              <button>刷新发票</button>
+            </div>
+          </div>
+
+          <label class="radio-inline">
+            <input type="radio" name="invoice" id="invoice0" value="需要">需要
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="invoice" id="invoice1" value="不需要">不需要
+          </label>
+
+          <button id="invoiceNotice">发票须知</button>
+
+          <table id="priceDetail" class="table table-bordered">
+            <tr>
+              <td>发票抬头</td>
+              <th>发票人</th>
+              <th>发票收货地址</th>
+              <th>操作</th>
+            </tr>
+          </table>
+
+          <button>显示全部发票</button>
+        </div>
+
+        <div class="accounts">
+          <span class="col-sm-11 text-right">货款：</span><span class="col-sm-1">￥55.00</span>
+          <span class="col-sm-11 text-right">运费：</span><span class="col-sm-1">￥0.00</span>
+          <span class="col-sm-11 text-right">总费用(含税)：</span><span class="col-sm-1">￥55.00</span>
+        </div>
       </fieldset>
     </form>
 
@@ -222,68 +287,8 @@
 </section>
 {% endblock %}
 {%block script%}
-pus<script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
+<script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
 <script src="/static/common/plugins/jquery.steps-1.1.0/jquery.steps.min.js"></script>
 <script src="/static/common/plugins/require.js"></script>
 <script src="/static/pcbs/js/pcb_calc.js"></script>
-<script>
-  var form = $("#example-advanced-form").show();
-
-  form.steps({
-    headerTag: "h3",
-    bodyTag: "fieldset",
-    transitionEffect: "slideLeft",
-    onStepChanging: function (event, currentIndex, newIndex)
-    {
-      // Allways allow previous action even if the current form is not valid!
-      if (currentIndex > newIndex)
-      {
-        return true;
-      }
-      // Forbid next action on "Warning" step if the user is to young
-      if (newIndex === 3 && Number($("#age-2").val()) < 18)
-      {
-        return false;
-      }
-      // Needed in some cases if the user went back (clean up)
-      if (currentIndex < newIndex)
-      {
-        // To remove error styles
-        form.find(".body:eq(" + newIndex + ") label.error").remove();
-        form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
-      }
-      form.validate().settings.ignore = ":disabled,:hidden";
-      return form.valid();
-    },
-    onStepChanged: function (event, currentIndex, priorIndex)
-    {
-      // Used to skip the "Warning" step if the user is old enough.
-      if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
-      {
-        form.steps("next");
-      }
-      // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-      if (currentIndex === 2 && priorIndex === 3)
-      {
-        form.steps("previous");
-      }
-    },
-    onFinishing: function (event, currentIndex)
-    {
-      form.validate().settings.ignore = ":disabled";
-      return form.valid();
-    },
-    onFinished: function (event, currentIndex)
-    {
-      alert("Submitted!");
-    }
-  }).validate({
-    errorPlacement: function errorPlacement(error, element) { element.before(error); },
-    rules: {
-      confirm: {
-        equalTo: "#password-2"
-      }
-    }
-  });
-</script>
 {%endblock%}

@@ -15,3 +15,18 @@ div.side-nav ul > li:before {
 div.side-nav ul > li i {
   margin-right: 8px;
 }
+
+/*custom bootstrap style*/
+.form-group select {
+	min-width: 165px;
+	width: auto;
+}
+.form-horizontal .radio-inline {
+	margin-left: 0;
+	margin-right: 10px;
+}
+/*custom step style*/
+.wizard > .content > .body {
+	position: static;
+	height: auto;
+}
