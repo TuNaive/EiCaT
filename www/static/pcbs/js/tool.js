@@ -8,13 +8,17 @@ var tpls = {
     '<div class="<%- widthClass || "col-sm-10" %>">' +
       '<% _.forEach(options, function(val, key) { %>' +
         '<label class="radio-inline">' +
-          '<input type="radio" name="<%- field %>" id="<%- field + _.capitalize(key) %>" value="<%- val %>"><%- val %>' +
+          '<% if (key === 0) { %>' +
+            '<input type="radio" name="<%- field %>" class="required" id="<%- field + _.capitalize(key) %>" value="<%- key %>" checked><%- val %>' +
+          '<% } else { %>' +
+            '<input type="radio" name="<%- field %>" class="required" id="<%- field + _.capitalize(key) %>" value="<%- key %>"><%- val %>' +
+          '<% } %>' +
         '</label>' +
       '<% }); %>' +
     '</div>',
   select: labelTpl +
     '<div class="<%- widthClass || "col-sm-4" %>">' +
-      '<select class="form-control" name="<%- field %>" id="<%- field %>">' +
+      '<select class="form-control required" name="<%- field %>" id="<%- field %>">' +
         '<% _.forEach(options, function(val, key) { %>' +
           '<option><%- val %></option>' +
         '<% }); %>' +
@@ -43,9 +47,11 @@ define([], function () {
       throw new Error(field, 'finds no tpl')
     }
 
+    var defaultVal = options[0] || _.keys(options)[0]
+
     var compiled = _.template(tpl)
 
-    return $(compiled({options, field, label, widthClass}))
+    return $(compiled({options, field, label, defaultVal, widthClass}))
   }
 
   return tool

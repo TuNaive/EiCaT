@@ -115,39 +115,40 @@
           <div class="form-group">
             <label for="pcbFile" class="col-sm-2 control-label">PCB文件：</label>
             <div class="col-sm-4">
+              <span class="btn btn-default">选择文件</span>
               <input type="file" class="form-control required" id="pcbFile" name="pcbFile">
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group form-inline">
             <label for="contact" class="col-sm-2 control-label">联系人：</label>
             <div class="col-sm-4">
               <input type="text" class="form-control required" id="contact" name="contact">
             </div>
           </div>
-          <div class="form-group">
-            <label for="contact" class="col-sm-2 control-label">联系手机：</label>
+          <div class="form-group form-inline">
+            <label for="contactMobile" class="col-sm-2 control-label">联系手机：</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control required" id="contact" name="contact">
+              <input type="text" class="form-control required" id="contactMobile" name="contactMobile">
             </div>
           </div>
-          <div class="form-group">
-            <label for="contact" class="col-sm-2 control-label">联系邮箱：</label>
+          <div class="form-group form-inline">
+            <label for="contactEmail" class="col-sm-2 control-label">联系邮箱：</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control required" id="contact" name="contact">
+              <input type="text" class="form-control required" id="contactEmail" name="contactEmail">
             </div>
           </div>
         </div>
 
         <div class="consignee">
-          <div class="header">
-            <h3>收货人信息</h3>
+          <div class="header clearfix">
+            <h3 class="pull-left">收货人信息</h3>
             <div class="btn-wrap">
-              <button>新增收货地址</button>
-              <button>刷新地址</button>
+              <button class="btn btn-default">新增收货地址</button>
+              <button class="btn btn-default">刷新地址</button>
             </div>
           </div>
 
-          <table id="priceDetail" class="table table-bordered">
+          <table id="consigneeList" class="table table-bordered">
             <tr>
               <td>姓名</td>
               <th>收货地址</th>
@@ -158,11 +159,11 @@
           <button>显示全部地址</button>
         </div>
 
-        <div class="express form-group">
-          <label for="express" class="col-sm-2 control-label h3">快递公司：</label>
+        <div class="express clearfix">
+          <h3 class="pull-left">快递公司：</h3>
           <div class="col-sm-10">
             <label class="radio-inline">
-              <input type="radio" name="express" id="express0" value="联昊通(只送广东省内,免费)">联昊通(只送广东省内,免费)
+              <input type="radio" name="express" id="express0" value="联昊通(只送广东省内,免费)" checked>联昊通(只送广东省内,免费)
             </label>
             <label class="radio-inline">
               <input type="radio" name="express" id="express1" value="单面顺丰">顺丰
@@ -174,11 +175,11 @@
         </div>
 
         <div class="invoice">
-          <div class="header">
-            <h3>发票信息</h3>
+          <div class="header clearfix">
+            <h3 class="pull-left">发票信息</h3>
             <div class="btn-wrap">
-              <button>新增发票信息</button>
-              <button>刷新发票</button>
+              <button class="btn btn-default">新增发票信息</button>
+              <button class="btn btn-default">刷新发票</button>
             </div>
           </div>
 
@@ -186,10 +187,10 @@
             <input type="radio" name="invoice" id="invoice0" value="需要">需要
           </label>
           <label class="radio-inline">
-            <input type="radio" name="invoice" id="invoice1" value="不需要">不需要
+            <input type="radio" name="invoice" id="invoice1" value="不需要" checked>不需要
           </label>
 
-          <button id="invoiceNotice">发票须知</button>
+          <button id="invoiceNotice" class="btn btn-link">发票须知</button>
 
           <table id="priceDetail" class="table table-bordered">
             <tr>
@@ -287,8 +288,12 @@
 </section>
 {% endblock %}
 {%block script%}
-<script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
+<script src="/static/common/plugins/jquery.fileupload/vendor/jquery.ui.widget.js"></script>
+<script src="/static/common/plugins/jquery.fileupload/jquery.fileupload.js"></script>
 <script src="/static/common/plugins/jquery.steps-1.1.0/jquery.steps.min.js"></script>
+<script src="/static/common/plugins/jquery.fileupload/jquery.fileupload.js"></script>
+<script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
+<script src="/static/common/plugins/form.validate/localization/messages_zh.min.js"></script>
 <script src="/static/common/plugins/require.js"></script>
 <script src="/static/pcbs/js/pcb_calc.js"></script>
 {%endblock%}

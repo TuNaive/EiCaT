@@ -6,7 +6,7 @@ require.config({
   paths: {}
 })
 
-var formMapConf = {
+var formKeyConf = {
   radio: {
     boardLayer: '板子层数',
     boardMaterial: '板材',
@@ -28,14 +28,12 @@ var formMapConf = {
   }
 }
 
+// var formRadioRules = _.mapValues(formKeyConf.radio, function (label, key) {
+//   return {required: true}
+// })
+
 var formValConf = {
-  boardLayer: {
-    '0': '单面',
-    '1': '双面',
-    '2': '四层',
-    '3': '六层',
-    '4': '八层'
-  },
+  boardLayer: ['单面', '双面', '四层', '六层', '八层'],
   boardMaterial: ['FR4', 'CEM1', 'FR1', '铝基板'],
   boardThickness: ['0.4', '0.6', '0.8', '1.0', '1.2', '1.6', '2.0', '2.5'],
   boardAmount: ['5', '10', '20', '30', '40', '50', '60', '75', '100', '150', '200', '250', '300', '350 400', '450', '500', '550', '600', '650', '700', '800', '900', '1000', '1500', '2000', '2500 3000', '3500', '4000', '4500', '5000', '5500', '6000', '6500', '7000', '7500', '8000', '其他'],
@@ -52,7 +50,7 @@ var formValConf = {
   urgent: ['正常交期', '加急48小时', '加急24小时', '特快加急12小时', '火箭加急8小时']
 }
 
-var formWidthConf = {
+var formClassConf = {
   // aluminumOutThickness: 'col-sm-10',
   // aluminumInThickness: 'col-sm-10',
   // surfacing: 'col-sm-10',
@@ -63,9 +61,9 @@ var formWidthConf = {
 require(['/static/pcbs/js/tool.js'], function (tool) {
   $(function ($) {
     // init form dom
-    _.forEach(formMapConf, function (obj, key) {
+    _.forEach(formKeyConf, function (obj, key) {
       _.forEach(obj, function (v, k) {
-        appendRadio(key, k, v,formWidthConf[k])
+        appendRadio(key, k, v,formClassConf[k])
       })
     })
 
@@ -77,16 +75,12 @@ require(['/static/pcbs/js/tool.js'], function (tool) {
   }
 })
 
-
-
 function bindFormEvents () {
   var form = $("#pvbStep").show()
 
-  $('#calPrice').click(function () {
-
-  })
-
   form.steps({
+    // todo: for test
+    startIndex: 2,
     headerTag: "h3",
     bodyTag: "fieldset",
     transitionEffect: "slideLeft",
@@ -100,18 +94,14 @@ function bindFormEvents () {
       if (currentIndex > newIndex) {
         return true;
       }
-      // Forbid next action on "Warning" step if the user is to young
-      if (newIndex === 3 && Number($("#age-2").val()) < 18) {
-        return false;
-      }
       // Needed in some cases if the user went back (clean up)
-      if (currentIndex < newIndex) {
+      /*if (currentIndex < newIndex) {
         // To remove error styles
         form.find(".body:eq(" + newIndex + ") label.error").remove();
         form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
       }
-      form.validate().settings.ignore = ":disabled,:hidden";
-      return form.valid() || true;
+      form.validate().settings.ignore = ":disabled,:hidden";*/
+      return form.valid();
     },
     onStepChanged: function (event, currentIndex, priorIndex) {
       // Used to skip the "Warning" step if the user is old enough.
@@ -139,11 +129,19 @@ function bindFormEvents () {
       alert("Submitted!");
     }
   }).validate({
-    errorPlacement: function errorPlacement(error, element) { element.after(error); },
-    rules: {
-      confirm: {
-        equalTo: "#password-2"
-      }
+    errorPlacement: function errorPlacement (error, element) {
+      element.parentsUntil('.form-group', '[class^="col-sm-"]').append(error)
+    }
+  })
+
+  $('#pcbFile').fileupload({
+    url: 'https://jrb2b.pingan.com/file/upload',
+    dataType: 'json',
+    done: function (e, data) {
+      console.log('-------', data)
+      $.each(data.result.files, function (index, file) {
+        $('<p/>').text(file.name).appendTo(document.body);
+      });
     }
   });
 }
