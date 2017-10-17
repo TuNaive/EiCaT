@@ -16,6 +16,11 @@ div.side-nav ul > li i {
   margin-right: 8px;
 }
 
+/*custom layout style*/
+label.error {
+  display: inline-block;
+}
+
 /*custom bootstrap style*/
 .form-group select {
   min-width: 165px;
@@ -37,7 +42,7 @@ input[type="file"] {
   position: static;
   height: auto;
 }
-.wizard > .content .form-inline input {
+.container .form-horizontal .form-inline input {
   display: inline-block;
   margin-right: 10px;
 }

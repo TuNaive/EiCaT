@@ -28,19 +28,19 @@
       <li>阻抗、塞孔、厚铜、盲埋孔、高Tg，高CTI等参数不在选项范围内或有特殊工艺要求的，请选择工程师人工报价。</li>
     </ol>
 
-    <form id="pvbStep" class="form-horizontal" action="#">
+    <div id="pcb">
       <h3>填写所需询价信息</h3>
       <fieldset>
-        <div id="enquiryForm">
+        <form id="enquiryForm" class="form-horizontal">
           <div class="form-inline form-group">
             <div>
-              <label for="boardLength" class="col-sm-2 control-label">板子尺寸长：</label>
+              <label for="boardLength" class="col-sm-2 control-label">板子尺寸长（CM）：</label>
               <div class="col-sm-4">
                 <input type="text" class="form-control required" id="boardLength" name="boardLength" placeholder="请输入0-60">
               </div>
             </div>
             <div>
-              <label for="boardWidth" class="col-sm-2 control-label">板子尺寸宽：</label>
+              <label for="boardWidth" class="col-sm-2 control-label">板子尺寸宽（CM）：</label>
               <div class="col-sm-4">
                 <input type="text" class="form-control required" id="boardWidth" name="boardWidth" placeholder="请输入0-40">
               </div>
@@ -90,7 +90,7 @@
               <textarea id="comment" name="comment" class="form-control"></textarea>
             </div>
           </div>
-        </div>
+        </form>
       </fieldset>
 
       <h3>生成PCB报价单</h3>
@@ -111,7 +111,7 @@
 
       <h3>上传PCB文件，提交订单</h3>
       <fieldset>
-        <div id="pcbFileForm">
+        <form id="pcbFileForm" class="form-horizontal">
           <div class="form-group">
             <label for="pcbFile" class="col-sm-2 control-label">PCB文件：</label>
             <div class="col-sm-4">
@@ -137,7 +137,7 @@
               <input type="text" class="form-control required" id="contactEmail" name="contactEmail">
             </div>
           </div>
-        </div>
+        </form>
 
         <div class="consignee">
           <div class="header clearfix">
@@ -192,7 +192,7 @@
 
           <button id="invoiceNotice" class="btn btn-link">发票须知</button>
 
-          <table id="priceDetail" class="table table-bordered">
+          <table id="invoiceList" class="table table-bordered">
             <tr>
               <td>发票抬头</td>
               <th>发票人</th>
@@ -210,21 +210,21 @@
           <span class="col-sm-11 text-right">总费用(含税)：</span><span class="col-sm-1">￥55.00</span>
         </div>
       </fieldset>
-    </form>
+    </div>
 
     <div class="row">
       <div class="col-md-3">
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded" 
+              <img class="thumbnail rounded"
                 src="/static/pcbs/images/key1.png"
                 style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
             <h4 class="nomargin">交期保障</h4>
           </div>
           <p class="nomargin" style="height: 66px; overflow: hidden">
-            PCB单双面板8小时加急 
+            PCB单双面板8小时加急
             <br>
             批量72小时加急
             <br>
@@ -236,8 +236,8 @@
           <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
             <div class="box-icon-title">
               <i>
-                <img class="thumbnail rounded" 
-                  src="/static/pcbs/images/key2.png" 
+                <img class="thumbnail rounded"
+                  src="/static/pcbs/images/key2.png"
                   style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
               </i>
               <h4 class="nomargin">品质保障</h4>
@@ -256,8 +256,8 @@
           <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
             <div class="box-icon-title">
               <i>
-                <img class="thumbnail rounded" 
-                  src="/static/pcbs/images/key3.png" 
+                <img class="thumbnail rounded"
+                  src="/static/pcbs/images/key3.png"
                   style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
               </i>
               <h4 class="nomargin">专业团队</h4>
@@ -274,8 +274,8 @@
           <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
             <div class="box-icon-title">
               <i>
-                <img class="thumbnail rounded" 
-                  src="/static/pcbs/images/key4.png" 
+                <img class="thumbnail rounded"
+                  src="/static/pcbs/images/key4.png"
                   style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
               </i>
               <h4 class="nomargin">经济实惠</h4>

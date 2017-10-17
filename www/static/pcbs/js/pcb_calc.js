@@ -76,11 +76,10 @@ require(['/static/pcbs/js/tool.js'], function (tool) {
 })
 
 function bindFormEvents () {
-  var form = $("#pvbStep").show()
+  var pcb = $('#pcb')
+  var enquiryForm, pcbFileForm
 
-  form.steps({
-    // todo: for test
-    startIndex: 2,
+  pcb.steps({
     headerTag: "h3",
     bodyTag: "fieldset",
     transitionEffect: "slideLeft",
@@ -89,32 +88,55 @@ function bindFormEvents () {
       next: "计算价格",
       previous: "返回",
     },
-    onStepChanging: function (event, currentIndex, newIndex) {
-      // Allways allow previous action even if the current form is not valid!
-      if (currentIndex > newIndex) {
-        return true;
-      }
-      // Needed in some cases if the user went back (clean up)
-      /*if (currentIndex < newIndex) {
-        // To remove error styles
-        form.find(".body:eq(" + newIndex + ") label.error").remove();
-        form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
-      }
-      form.validate().settings.ignore = ":disabled,:hidden";*/
-      return form.valid();
-    },
-    onStepChanged: function (event, currentIndex, priorIndex) {
-      // Used to skip the "Warning" step if the user is old enough.
-      if (currentIndex === 2 && Number($("#age-2").val()) >= 18) {
-        form.steps("next");
-      }
-      // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
-      if (currentIndex === 2 && priorIndex === 3) {
-        form.steps("previous");
+    onInit: function (event, currentIndex) {
+      enquiryForm = $("#enquiryForm")
+      pcbFileForm = $("#pcbFileForm")
+
+      var validateConf = {
+        errorPlacement: function errorPlacement (error, element) {
+          element.parentsUntil('.form-group', '[class^="col-sm-"]').append(error)
+        }
       }
 
+      enquiryForm.validate(validateConf)
+      pcbFileForm.validate(validateConf)
+    },
+    onStepChanging: function (event, currentIndex, newIndex) {
+      var target = $(event.target)
+      var validRes = enquiryForm.valid()
+
+      if (currentIndex === 0 &&
+        newIndex === 1 &&
+        validRes &&
+        target.data('needCalc') !== false
+      ) {
+        // todo: add loading
+        $.ajax({
+          url: 'calculate',
+          type: 'POST',
+          dataType: 'json',
+          data: enquiryForm.serializeArray(),
+          success: function (data) {
+            target.data('needCalc', false)
+            pcb.steps('next')
+          },
+          error: function (err) {
+            console.log('-------error', err)
+          }
+        })
+
+        return false
+      }
+
+      return validRes
+    },
+    onStepChanged: function (event, currentIndex, priorIndex) {
       if (currentIndex === 1) {
         $('a[href="#next"]').html('上传PCB文件')
+      }
+
+      if (currentIndex === 0 && priorIndex === 1) {
+        pcb.data('needCalc', true)
       }
 
       if (currentIndex === 1 && priorIndex === 0) {
@@ -122,20 +144,15 @@ function bindFormEvents () {
       }
     },
     onFinishing: function (event, currentIndex) {
-      form.validate().settings.ignore = ":disabled";
-      return form.valid();
+      return pcbFileForm.valid();
     },
     onFinished: function (event, currentIndex) {
       alert("Submitted!");
     }
-  }).validate({
-    errorPlacement: function errorPlacement (error, element) {
-      element.parentsUntil('.form-group', '[class^="col-sm-"]').append(error)
-    }
   })
 
   $('#pcbFile').fileupload({
-    url: 'https://jrb2b.pingan.com/file/upload',
+    url: 'upload',
     dataType: 'json',
     done: function (e, data) {
       console.log('-------', data)

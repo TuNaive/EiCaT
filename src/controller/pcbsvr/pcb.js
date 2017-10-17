@@ -10,4 +10,13 @@ export default class extends Base {
     this.sub_channel = 'PCB工程师人工询价'
     return this.display()
   }
+
+  calculateAction() {
+    this.body = this.post()
+  }
+
+  uploadAction() {
+    showDebug('==============')
+    this.body = 'test'
+  }
 }
