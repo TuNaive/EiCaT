@@ -20,7 +20,7 @@ var tpls = {
     '<div class="<%- widthClass || "col-sm-4" %>">' +
       '<select class="form-control required" name="<%- field %>" id="<%- field %>">' +
         '<% _.forEach(options, function(val, key) { %>' +
-          '<option><%- val %></option>' +
+          '<option value="<%- key %>"><%- val %></option>' +
         '<% }); %>' +
       '</select>' +
     '</div>'

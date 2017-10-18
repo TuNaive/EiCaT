@@ -19,10 +19,11 @@ var formKeyConf = {
   },
   select: {
     boardThickness: '板厚（mm）',
-    aluminumOutThickness: '外层（oz）',
+    aluminumOutThickness: '铜箔厚度 外层（oz）',
     aluminumInThickness: '内层（oz）',
+    makeupNum: '拼版款数',
     surfacing: '表面处理',
-    solderMaskcolor: '阻焊颜色',
+    solderMaskColor: '阻焊颜色',
     charColor: '字符颜色',
     urgent: '加急'
   }
@@ -39,8 +40,9 @@ var formValConf = {
   boardAmount: ['5', '10', '20', '30', '40', '50', '60', '75', '100', '150', '200', '250', '300', '350 400', '450', '500', '550', '600', '650', '700', '800', '900', '1000', '1500', '2000', '2500 3000', '3500', '4000', '4500', '5000', '5500', '6000', '6500', '7000', '7500', '8000', '其他'],
   aluminumOutThickness: ['1', '2'],
   aluminumInThickness: ['0.5'],
+  makeupNum: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
   surfacing: ['有铅喷锡', '无铅喷锡', '沉金', 'OSP', '光板'],
-  solderMaskcolor: ['绿色', '红色', '蓝色', '白色', '黑色', '哑光黑色', '无'],
+  solderMaskColor: ['绿色', '红色', '蓝色', '白色', '黑色', '哑光黑色', '无'],
   charColor: ['白色', '黄色', '黑色', '无'],
   minLineSpace: ['5/5mil以上'],
   minAperture: ['0.30mm以上'],
@@ -80,6 +82,7 @@ function bindFormEvents () {
   var enquiryForm, pcbFileForm
 
   pcb.steps({
+    startIndex: 2,
     headerTag: "h3",
     bodyTag: "fieldset",
     transitionEffect: "slideLeft",
@@ -118,10 +121,16 @@ function bindFormEvents () {
           data: enquiryForm.serializeArray(),
           success: function (data) {
             target.data('needCalc', false)
-            pcb.steps('next')
+            if (data.rtnCode === 0) {
+              pcb.steps('next')
+              generateDetail(data.data.customDetail)
+              generateFee(data.data.pcbFee)
+            } else {
+              console.log(data.rtnMsg)
+            }
           },
           error: function (err) {
-            console.log('-------error', err)
+            console.log(err)
           }
         })
 
@@ -140,7 +149,7 @@ function bindFormEvents () {
       }
 
       if (currentIndex === 1 && priorIndex === 0) {
-        generateOrder()
+
       }
     },
     onFinishing: function (event, currentIndex) {
@@ -154,8 +163,11 @@ function bindFormEvents () {
   $('#pcbFile').fileupload({
     url: 'upload',
     dataType: 'json',
+    change: function (e, data) {
+      var file = _.last(data.files)
+      $('#pcbFile').before('<span>' + file.name + '</span>')
+    },
     done: function (e, data) {
-      console.log('-------', data)
       $.each(data.result.files, function (index, file) {
         $('<p/>').text(file.name).appendTo(document.body);
       });
@@ -163,31 +175,35 @@ function bindFormEvents () {
   });
 }
 
-function generateOrder () {
+function generateDetail (data) {
   var tableTpl = ''
-  var $labels = $("#enquiryForm label[for]:not(.error)")
-  var tdTpl = _.template('<td><%- label %></td><td <%- tdProps %>><%- field %></td>')
+  var tdTpl = _.template('<td><%- label %></td><td <%- tdProps %>><%- value %></td>')
 
-  _.forEach($labels, function (label, idx) {
-    var $label = $(label)
-    var $field = $label.parent().find('[name]')
-
-    var complieConf = {
-      label: $label.html(),
-      field: $field.val(),
-      tdProps: $field.prop('id') === 'comment' ? 'colspan=3' : ''
-    }
+  _.forEach(data, function (obj, idx) {
+    var complieConf = _.merge({
+      tdProps: obj.field === 'comment' ? 'colspan=3' : ''
+    }, obj)
 
     if (idx % 2 === 0) {
       tableTpl += '<tr>' + tdTpl(complieConf)
     } else {
       tableTpl += tdTpl(complieConf) + '</tr>'
     }
-
-    if (idx === $labels.length) {
-      tableTpl += '</tr>'
-    }
   })
 
   $('#machiningDetail').html(tableTpl)
+}
+
+function generateFee (data) {
+  var tableTpl = ['<tr>', '<tr>']
+
+  _.forEach(data, function (obj, idx) {
+    tableTpl[0] += '<td>' + obj.label +  '</td>'
+    tableTpl[1] += '<td>' + obj.value +  '</td>'
+  })
+
+  tableTpl[0] += '</tr>'
+  tableTpl[1] += '</tr>'
+
+  $('#priceDetail').html(tableTpl.join(''))
 }
