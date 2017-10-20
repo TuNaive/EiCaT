@@ -92,11 +92,32 @@ export default class extends Base {
   constructor(ctx) {
     super(ctx)
 
+    // todo: for test
+    this.user = {
+      uid: 1
+    }
+
     this.uploadPath = think.ROOT_PATH + '/uploadFiles'
   }
 
-  calcAction() {
+  async calcAction() {
+    let data = await this.model("address").where({user_id: this.user.uid}).order("is_default DESC,id DESC").select()
+
+    if (!think.isEmpty(data.data)) {
+      for (let val of data.data) {
+        // val.province_num = val.province;
+        // val.city_num = val.city;
+        // val.county_num = val.county;
+        val.province = await this.model("area").where({id: val.province}).getField("name", true);
+        val.city = await this.model("area").where({id: val.city}).getField("name", true);
+        val.county = await this.model("area").where({id: val.county}).getField("name", true);
+      }
+    }
+
+    this.assign("list", data);
+
     this.sub_channel = 'PCB自助询价'
+
     return this.display()
   }
 
