@@ -49,7 +49,12 @@
           <div id="boardLayer" class="form-group"></div>
           <div id="boardMaterial" class="form-group"></div>
           <div id="boardThickness" class="form-group"></div>
-          <div id="boardAmount" class="form-group"></div>
+          <div class="form-group form-inline">
+            <label for="boardAmount" class="col-sm-2 control-label">数量：</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control required" id="boardAmount" name="boardAmount" placeholder="请输入0-3000">
+            </div>
+          </div>
           <div class="form-inline form-group">
             <div id="aluminumOutThickness"></div>
             <div id="aluminumInThickness"></div>
@@ -108,11 +113,12 @@
       <h3>上传PCB文件，提交订单</h3>
       <fieldset>
         <form id="pcbFileForm" class="form-horizontal">
-          <div class="form-group">
+          <div class="form-group form-inline">
             <label for="pcbFile" class="col-sm-2 control-label">PCB文件：</label>
-            <div class="col-sm-4">
+            <div class="col-sm-10">
               <span class="btn btn-default">选择文件</span>
-              <input type="file" class="form-control required" id="pcbFile" name="pcbFile">
+              <span id="pcbFileName"></span>
+              <input type="file" class="form-control" id="pcbFile" name="pcbFile">
             </div>
           </div>
           <div class="form-group form-inline">
@@ -133,78 +139,79 @@
               <input type="text" class="form-control required" id="contactEmail" name="contactEmail">
             </div>
           </div>
+
+          <div class="address">
+            <div class="header clearfix">
+              <h3 class="pull-left">收货人信息</h3>
+              <input type="hidden" class="required" id="addressId" name="addressId">
+              <div class="btn-wrap">
+                <button class="btn btn-default">新增收货地址</button>
+                <button class="btn btn-default">刷新地址</button>
+              </div>
+            </div>
+
+            <table id="addressList" class="table table-bordered">
+              <tr>
+                <td>姓名</td>
+                <th>收货地址</th>
+                <th>联系方式</th>
+              </tr>
+            </table>
+
+            <button>显示全部地址</button>
+          </div>
+
+          <div class="express clearfix">
+            <h3 class="pull-left">快递公司：</h3>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <input type="radio" name="express" id="express0" value="联昊通(只送广东省内,免费)" checked>联昊通(只送广东省内,免费)
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="express" id="express1" value="单面顺丰">顺丰
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="express" id="express2" value="单面德邦物流(适用批量板)">德邦物流(适用批量板)
+              </label>
+            </div>
+          </div>
+
+          <div class="invoice">
+            <div class="header clearfix">
+              <h3 class="pull-left">发票信息</h3>
+              <div class="btn-wrap">
+                <button class="btn btn-default">新增发票信息</button>
+                <button class="btn btn-default">刷新发票</button>
+              </div>
+            </div>
+
+            <label class="radio-inline">
+              <input type="radio" name="invoice" id="invoice0" value="需要">需要
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="invoice" id="invoice1" value="不需要" checked>不需要
+            </label>
+
+            <button id="invoiceNotice" class="btn btn-link">发票须知</button>
+
+            <table id="invoiceList" class="table table-bordered">
+              <tr>
+                <td>发票抬头</td>
+                <th>发票人</th>
+                <th>发票收货地址</th>
+                <th>操作</th>
+              </tr>
+            </table>
+
+            <button>显示全部发票</button>
+          </div>
+
+          <div class="accounts">
+            <span class="col-sm-11 text-right">货款：</span><span class="col-sm-1">￥55.00</span>
+            <span class="col-sm-11 text-right">运费：</span><span class="col-sm-1">￥0.00</span>
+            <span class="col-sm-11 text-right">总费用(含税)：</span><span class="col-sm-1">￥55.00</span>
+          </div>
         </form>
-
-        <div class="consignee">
-          <div class="header clearfix">
-            <h3 class="pull-left">收货人信息</h3>
-            <div class="btn-wrap">
-              <button class="btn btn-default">新增收货地址</button>
-              <button class="btn btn-default">刷新地址</button>
-            </div>
-          </div>
-
-          <table id="consigneeList" class="table table-bordered">
-            <tr>
-              <td>姓名</td>
-              <th>收货地址</th>
-              <th>联系方式</th>
-            </tr>
-          </table>
-
-          <button>显示全部地址</button>
-        </div>
-
-        <div class="express clearfix">
-          <h3 class="pull-left">快递公司：</h3>
-          <div class="col-sm-10">
-            <label class="radio-inline">
-              <input type="radio" name="express" id="express0" value="联昊通(只送广东省内,免费)" checked>联昊通(只送广东省内,免费)
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="express" id="express1" value="单面顺丰">顺丰
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="express" id="express2" value="单面德邦物流(适用批量板)">德邦物流(适用批量板)
-            </label>
-          </div>
-        </div>
-
-        <div class="invoice">
-          <div class="header clearfix">
-            <h3 class="pull-left">发票信息</h3>
-            <div class="btn-wrap">
-              <button class="btn btn-default">新增发票信息</button>
-              <button class="btn btn-default">刷新发票</button>
-            </div>
-          </div>
-
-          <label class="radio-inline">
-            <input type="radio" name="invoice" id="invoice0" value="需要">需要
-          </label>
-          <label class="radio-inline">
-            <input type="radio" name="invoice" id="invoice1" value="不需要" checked>不需要
-          </label>
-
-          <button id="invoiceNotice" class="btn btn-link">发票须知</button>
-
-          <table id="invoiceList" class="table table-bordered">
-            <tr>
-              <td>发票抬头</td>
-              <th>发票人</th>
-              <th>发票收货地址</th>
-              <th>操作</th>
-            </tr>
-          </table>
-
-          <button>显示全部发票</button>
-        </div>
-
-        <div class="accounts">
-          <span class="col-sm-11 text-right">货款：</span><span class="col-sm-1">￥55.00</span>
-          <span class="col-sm-11 text-right">运费：</span><span class="col-sm-1">￥0.00</span>
-          <span class="col-sm-11 text-right">总费用(含税)：</span><span class="col-sm-1">￥55.00</span>
-        </div>
       </fieldset>
     </div>
 

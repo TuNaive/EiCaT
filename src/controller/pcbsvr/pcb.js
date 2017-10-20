@@ -1,4 +1,5 @@
 import Base from './base.js'
+import fs from 'fs'
 
 const enums = {
   pcbCustomOptions: {
@@ -15,8 +16,8 @@ const enums = {
       value: ['0.4', '0.6', '0.8', '1.0', '1.2', '1.6', '2.0', '2.5']
     },
     boardAmount: {
-      label: '数量',
-      value: ['5', '10', '20', '30', '40', '50', '60', '75', '100', '150', '200', '250', '300', '350 400', '450', '500', '550', '600', '650', '700', '800', '900', '1000', '1500', '2000', '2500 3000', '3500', '4000', '4500', '5000', '5500', '6000', '6500', '7000', '7500', '8000', '其他']
+      label: '数量'
+      // value: ['5', '10', '20', '30', '40', '50', '60', '75', '100', '150', '200', '250', '300', '350', '400', '450', '500', '550', '600', '650', '700', '800', '900', '1000', '1500', '2000', '2500', '3000', '3500', '4000', '4500', '5000', '5500', '6000', '6500', '7000', '7500', '8000', '其他']
     },
     aluminumOutThickness: {
       label: '铜箔厚度 外层（oz）',
@@ -88,6 +89,12 @@ const enums = {
 }
 
 export default class extends Base {
+  constructor(ctx) {
+    super(ctx)
+
+    this.uploadPath = think.ROOT_PATH + '/uploadFiles'
+  }
+
   calcAction() {
     this.sub_channel = 'PCB自助询价'
     return this.display()
@@ -101,7 +108,7 @@ export default class extends Base {
   async calculateAction() {
     const postParams = this.post()
     const { boardLength, boardWidth, boardAmount } = postParams
-    const priceRecord = await this.model('pcb_price').getPrice(_.omit(postParams, ['boardLength', 'boardWidth', 'boardAmount', 'comment']))
+    const priceRecord = await this.model('pcb_price').getCachedPrice(_.omit(postParams, ['boardLength', 'boardWidth', 'boardAmount', 'comment']))
     const price = priceRecord.price
 
     const customDetail = _.map(_.omit(postParams, ['boardLength', 'boardWidth']), (val, key) => {
@@ -153,9 +160,37 @@ export default class extends Base {
     }
   }
 
+  async uploadAction() {
+    const pcbFile = this.file('pcbFile')
+    const {path, name} = pcbFile
+    // todo: add user info
+    const uuid = think.uuid(`userUuid_${Date.now()}_${name}`)
 
-  uploadAction() {
-    console.log('------upload', this.post(), this.file())
-    this.body = 'test'
+    think.mkdir(this.uploadPath)
+
+    fs.renameSync(path, `${this.uploadPath}/${uuid}`)
+
+    this.body = {
+      rtnCode: 0,
+      data: {
+        ..._.pick(pcbFile, ['name', 'size']),
+        uuid
+      }
+    }
+  }
+
+  async clearUploadFileAction() {
+    const orderFiles = await this.model('pcb_order').getFiles()
+
+    /*todo: 上传时间小于一天的不删除*/
+
+    const existFiles = fs.readdirSync(this.uploadPath)
+    const deleteFiles = _.difference(existFiles, orderFiles)
+
+    _.forEach(deleteFiles, (uuid, idx) => {
+      fs.unlinkSync(`${this.uploadPath}/${uuid}`)
+    })
+
+    // this.logger.info('clear upload file success')
   }
 }

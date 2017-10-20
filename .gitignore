@@ -28,6 +28,9 @@ node_modules/
 .vscode
 .DS_Store
 
+# uploadFiles
+uploadFiles/
+
 # output
 output/
 output.tar.gz

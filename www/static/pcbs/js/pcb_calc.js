@@ -10,7 +10,7 @@ var formKeyConf = {
   radio: {
     boardLayer: '板子层数',
     boardMaterial: '板材',
-    boardAmount: '数量',
+    // boardAmount: '数量',
     minLineSpace: '最小线宽线距',
     minAperture: '最小孔径',
     holeAmount: '孔数',
@@ -37,7 +37,7 @@ var formValConf = {
   boardLayer: ['单面', '双面', '四层', '六层', '八层'],
   boardMaterial: ['FR4', 'CEM1', 'FR1', '铝基板'],
   boardThickness: ['0.4', '0.6', '0.8', '1.0', '1.2', '1.6', '2.0', '2.5'],
-  boardAmount: ['5', '10', '20', '30', '40', '50', '60', '75', '100', '150', '200', '250', '300', '350 400', '450', '500', '550', '600', '650', '700', '800', '900', '1000', '1500', '2000', '2500 3000', '3500', '4000', '4500', '5000', '5500', '6000', '6500', '7000', '7500', '8000', '其他'],
+  // boardAmount: ['5', '10', '20', '30', '40', '50', '60', '75', '100', '150', '200', '250', '300', '350 400', '450', '500', '550', '600', '650', '700', '800', '900', '1000', '1500', '2000', '2500 3000', '3500', '4000', '4500', '5000', '5500', '6000', '6500', '7000', '7500', '8000', '其他'],
   aluminumOutThickness: ['1', '2'],
   aluminumInThickness: ['0.5'],
   makeupNum: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
@@ -79,7 +79,6 @@ require(['/static/pcbs/js/tool.js'], function (tool) {
 
 function bindFormEvents () {
   var pcb = $('#pcb')
-  var enquiryForm, pcbFileForm
 
   pcb.steps({
     startIndex: 2,
@@ -92,20 +91,11 @@ function bindFormEvents () {
       previous: "返回",
     },
     onInit: function (event, currentIndex) {
-      enquiryForm = $("#enquiryForm")
-      pcbFileForm = $("#pcbFileForm")
-
-      var validateConf = {
-        errorPlacement: function errorPlacement (error, element) {
-          element.parentsUntil('.form-group', '[class^="col-sm-"]').append(error)
-        }
-      }
-
-      enquiryForm.validate(validateConf)
-      pcbFileForm.validate(validateConf)
+      initFormValidates()
     },
     onStepChanging: function (event, currentIndex, newIndex) {
       var target = $(event.target)
+      var enquiryForm = $("#enquiryForm")
       var validRes = enquiryForm.valid()
 
       if (currentIndex === 0 &&
@@ -147,13 +137,9 @@ function bindFormEvents () {
       if (currentIndex === 0 && priorIndex === 1) {
         pcb.data('needCalc', true)
       }
-
-      if (currentIndex === 1 && priorIndex === 0) {
-
-      }
     },
     onFinishing: function (event, currentIndex) {
-      return pcbFileForm.valid();
+      return $("#pcbFileForm").valid();
     },
     onFinished: function (event, currentIndex) {
       alert("Submitted!");
@@ -165,14 +151,45 @@ function bindFormEvents () {
     dataType: 'json',
     change: function (e, data) {
       var file = _.last(data.files)
-      $('#pcbFile').before('<span>' + file.name + '</span>')
+      $('#pcbFileName').html(file.name)
     },
     done: function (e, data) {
-      $.each(data.result.files, function (index, file) {
-        $('<p/>').text(file.name).appendTo(document.body);
-      });
+      // $.each(data.result.files, function (index, file) {
+      //   $('<p/>').text(file.name).appendTo(document.body);
+      // });
     }
   });
+}
+
+function initFormValidates () {
+  var enquiryForm = $("#enquiryForm")
+  var pcbFileForm = $("#pcbFileForm")
+  
+  $.validator.addMethod('pcbFile', function (value, element, params) {
+    return $('#pcbFileName').html()
+  }, '请上传文件')
+
+  var validateConf = {
+    ignore: '.ignore',
+    errorPlacement: function errorPlacement (error, element) {
+      var groupParent = element.parentsUntil('.form-group', '[class^="col-sm-"]')
+
+      if (groupParent.length) {
+        groupParent.append(error)
+      } else {
+        element.after(error)
+      }
+    }
+  }
+
+  enquiryForm.validate(validateConf)
+  pcbFileForm.validate(_.merge({}, validateConf, {
+    rules: {
+      pcbFile: {
+        pcbFile: true
+      }
+    }
+  }))
 }
 
 function generateDetail (data) {

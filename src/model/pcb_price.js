@@ -1,6 +1,6 @@
 export default class extends think.Model {
   async getCachedPrice (filters) {
-    return await think.cache('pcb_pice',() => this.getPrice(filters), { timeout: 365 * 24 * 3600 })
+    return await think.cache('pcb_pice',() => this.getPrice(filters), { timeout: 1 * 3600 })
   }
 
   async getPrice (filters) {
