@@ -5,9 +5,8 @@ export default class extends Base {
     if (this.isPost) {
 
     } else if (this.is_login) {
-        this.redirect('/center/index');
-      }{
-      return this.display()
+      this.redirect('/center/index');
     }
+    return this.display()
   }
 }

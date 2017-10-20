@@ -1,5 +1,5 @@
 import Base from './base.js'
-import fs from 'fs'
+import fs from 'mz/fs'
 
 const enums = {
   pcbCustomOptions: {
@@ -168,7 +168,7 @@ export default class extends Base {
 
     think.mkdir(this.uploadPath)
 
-    fs.renameSync(path, `${this.uploadPath}/${uuid}`)
+    await fs.rename(path, `${this.uploadPath}/${uuid}`)
 
     this.body = {
       rtnCode: 0,
@@ -184,7 +184,7 @@ export default class extends Base {
 
     /*todo: 上传时间小于一天的不删除*/
 
-    const existFiles = fs.readdirSync(this.uploadPath)
+    const existFiles = await fs.readdir(this.uploadPath)
     const deleteFiles = _.difference(existFiles, orderFiles)
 
     _.forEach(deleteFiles, (uuid, idx) => {

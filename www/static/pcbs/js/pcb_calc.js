@@ -152,11 +152,16 @@ function bindFormEvents () {
     change: function (e, data) {
       var file = _.last(data.files)
       $('#pcbFileName').html(file.name)
+
     },
     done: function (e, data) {
-      // $.each(data.result.files, function (index, file) {
-      //   $('<p/>').text(file.name).appendTo(document.body);
-      // });
+      var res = data.result
+
+      if (res.rtnCode === 0) {
+        $(e.target).blur()
+      } else {
+        _toastr.error(res.rtnMsg)
+      }
     }
   });
 }
