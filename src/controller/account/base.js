@@ -1,4 +1,9 @@
 export default class extends think.Controller {
+  constructor(ctx) {
+    super(ctx)
+    this.user = think.user
+  }
+
   __before() {
     this.meta_title = '个人中心'
   }

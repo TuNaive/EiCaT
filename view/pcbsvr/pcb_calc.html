@@ -150,13 +150,13 @@
               </div>
             </div>
 
-            <table id="addressList" class="table table-bordered">
-              <tr>
-                <td>姓名</td>
-                <th>收货地址</th>
-                <th>联系方式</th>
-              </tr>
-            </table>
+            <!--<table id="addressList" class="table table-bordered">-->
+              <!--<tr>-->
+                <!--<td>姓名</td>-->
+                <!--<th>收货地址</th>-->
+                <!--<th>联系方式</th>-->
+              <!--</tr>-->
+            <!--</table>-->
 
             <table class="table table-bordered table-striped table-vertical-middle">
               <thead>
@@ -167,7 +167,6 @@
                   <th>邮编</th>
                   <th>手机</th>
                   <th></th>
-                  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
@@ -182,9 +181,13 @@
                     <td>
                       {{item.mobile}}
                     </td>
-                    <td>{%if item.is_default == 1%}<span class="label label-primary">默认地址 </span>{%else%}<a class="btn btn-default btn-xs ajax-get" href="/account/address/addrisdefault/?id={{item.id}}"><i class="fa fa-check white"></i>设为默认地址 </a>{%endif%}</td>
-                    <td><a class="btn btn-default btn-xs" data-toggle="ajaxModal" href="/account/address/editaddrmodal/?id={{item.id}}&type=1"><i class="fa fa-edit white"></i>编辑 </a>
-                      <a class="btn btn-default btn-xs confirm ajax-get" href="/account/address/deladdr/?id={{item.id}}"><i class="fa fa-times white"></i>删除 </a></td>
+                    <td>
+                      {%if item.is_default == 1%}
+                        <span class="label label-primary">默认地址 </span>
+                      {%else%}
+                        <a class="btn btn-default btn-xs ajax-get" href="/account/address/addrisdefault/?id={{item.id}}"><i class="fa fa-check white"></i>设为默认地址 </a>
+                      {%endif%}
+                    </td>
                   </tr>
                 {%endfor%}
               </tbody>

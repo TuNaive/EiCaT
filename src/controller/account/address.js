@@ -18,7 +18,7 @@ export default class extends Base {
     //判断是否登陆
     // await this.weblogin();
 
-    await this.service('account/address').assignAddressList()
+    await this.service('account/address').assignAddressList(this)
 
     this.sub_channel = '收货地址'
 

@@ -3,12 +3,16 @@
  */
 
 export default class extends think.Service {
-  async assignAddressList() {
-    console.log('=======user', this.user)
-    let data = await this.model("address").where({user_id: this.user.uid}).page(this.get('page')).order("is_default DESC,id DESC").countSelect();
-    let html = this.pagination(data);
+  constructor () {
+    super()
+    this.user = think.user
+  }
 
-    this.assign('pagination', html);
+  async assignAddressList(ctrl) {
+    let data = await this.model("address").where({user_id: this.user.uid}).page(ctrl.get('page')).order("is_default DESC,id DESC").countSelect();
+    let html = ctrl.pagination(data);
+
+    ctrl.assign('pagination', html);
 
     if (!think.isEmpty(data.data)) {
       for (let val of data.data) {
@@ -21,6 +25,6 @@ export default class extends think.Service {
       }
     }
 
-    this.assign("list", data.data);
+    ctrl.assign("list", data.data);
   }
 }
