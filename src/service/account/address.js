@@ -8,8 +8,8 @@ export default class extends think.Service {
     this.user = think.user
   }
 
-  async assignAddressList(ctrl) {
-    let data = await this.model("address").where({user_id: this.user.uid}).page(ctrl.get('page')).order("is_default DESC,id DESC").countSelect();
+  async getAddressList(ctrl, {page = ctrl.get('page'), pageSize = ctrl.get('pageSize')}) {
+    let data = await this.model("address").where({user_id: this.user.uid}).page(page, pageSize).order("is_default DESC,id DESC").countSelect();
     let html = ctrl.pagination(data);
 
     ctrl.assign('pagination', html);
@@ -25,6 +25,6 @@ export default class extends think.Service {
       }
     }
 
-    ctrl.assign("list", data.data);
+    return data
   }
 }

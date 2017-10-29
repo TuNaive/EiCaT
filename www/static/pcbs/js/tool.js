@@ -8,7 +8,7 @@ var tpls = {
     '<div class="<%- widthClass || "col-sm-10" %>">' +
       '<% _.forEach(options, function(val, key) { %>' +
         '<label class="radio-inline">' +
-          '<% if (key === 0) { %>' +
+          '<% if (key == activeIndex) { %>' +
             '<input type="radio" name="<%- field %>" class="required" id="<%- field + _.capitalize(key) %>" value="<%- key %>" checked><%- val %>' +
           '<% } else { %>' +
             '<input type="radio" name="<%- field %>" class="required" id="<%- field + _.capitalize(key) %>" value="<%- key %>"><%- val %>' +
@@ -20,7 +20,11 @@ var tpls = {
     '<div class="<%- widthClass || "col-sm-4" %>">' +
       '<select class="form-control required" name="<%- field %>" id="<%- field %>">' +
         '<% _.forEach(options, function(val, key) { %>' +
-          '<option value="<%- key %>"><%- val %></option>' +
+          '<% if (key == activeIndex) { %>' +
+            '<option value="<%- key %>" selected><%- val %></option>' +
+          '<% } else { %>' +
+            '<option value="<%- key %>"><%- val %></option>' +
+          '<% } %>' +
         '<% }); %>' +
       '</select>' +
     '</div>'
@@ -36,7 +40,7 @@ define([], function () {
    * @param {String} field
    * @param {String} label
    * */
-  tool.generateFormElem = function (type, options, field, label, widthClass) {
+  tool.generateFormElem = function (type, options, field, label, activeIndex, widthClass) {
     if (!(_.isArray(options) || _.isObject(options))  || _.isEmpty(options)) {
       throw new Error(field, 'options must be an Array or Object without empty')
     }
@@ -51,7 +55,7 @@ define([], function () {
 
     var compiled = _.template(tpl)
 
-    return $(compiled({options, field, label, defaultVal, widthClass}))
+    return compiled({options, field, label, defaultVal, activeIndex: _.defaultTo(activeIndex, 0), widthClass})
   }
 
   return tool

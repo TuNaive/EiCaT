@@ -15,10 +15,12 @@ export default class extends Base {
    * @returns {PreventPromise}
    */
   async indexAction() {
-    //判断是否登陆
+    // 判断是否登陆
     // await this.weblogin();
 
-    await this.service('account/address').assignAddressList(this)
+    const addressList = await this.service('account/address').getAddressList(this)
+
+    this.assign("list", addressList);
 
     this.sub_channel = '收货地址'
 

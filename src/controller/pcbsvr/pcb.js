@@ -101,23 +101,7 @@ export default class extends Base {
   }
 
   async calcAction() {
-    let data = await this.model("address").where({user_id: this.user.uid}).order("is_default DESC,id DESC").select()
-
-    if (!think.isEmpty(data.data)) {
-      for (let val of data.data) {
-        // val.province_num = val.province;
-        // val.city_num = val.city;
-        // val.county_num = val.county;
-        val.province = await this.model("area").where({id: val.province}).getField("name", true);
-        val.city = await this.model("area").where({id: val.city}).getField("name", true);
-        val.county = await this.model("area").where({id: val.county}).getField("name", true);
-      }
-    }
-
-    this.assign("list", data);
-
     this.sub_channel = 'PCB自助询价'
-
     return this.display()
   }
 
@@ -126,11 +110,25 @@ export default class extends Base {
     return this.display()
   }
 
+  /**
+   * 获取收货地址
+   * @returns {PreventPromise}
+   */
+  async getAddressAction() {
+    // 判断是否登陆
+    // await this.weblogin();
+
+    const addressList = await this.service('account/address').getAddressList(this, this.post())
+
+    this.body = {
+      rtnCode: 0,
+      data: addressList
+    }
+  }
+
   async calculateAction() {
     const postParams = this.post()
     const { boardLength, boardWidth, boardAmount } = postParams
-    const priceRecord = await this.model('pcb_price').getCachedPrice(_.omit(postParams, ['boardLength', 'boardWidth', 'boardAmount', 'comment']))
-    const price = priceRecord.price
 
     const customDetail = _.map(_.omit(postParams, ['boardLength', 'boardWidth']), (val, key) => {
       return {
@@ -145,21 +143,7 @@ export default class extends Base {
       value: `${postParams.boardLength} cm x ${postParams.boardWidth} cm`
     })
 
-    const fee = {
-      projectFee: 55,
-      boardFee: 11,
-      makeupFee: 22,
-      specialBoardFee: 33,
-      filmFee: 44,
-      surfaceFee: 55,
-      testFee: 66,
-      solderMaskColorFee: 77,
-      charColorFee: 88,
-      halfHoleFee: 99,
-      urgentFee: 100,
-      otherFee: 111,
-      totalFee: 222
-    }
+    const fee = await this.calculateFee(postParams)
 
     const pcbFee = _.map(fee, (val, key) => ({
       field: key,
@@ -181,6 +165,40 @@ export default class extends Base {
     }
   }
 
+  async calculateFee (params) {
+    const {boardLength, boardWidth, boardLayer, boardMaterial, boardThickness, boardAmount, aluminumOutThickness, aluminumInThickness, makeupNum, surfacing, solderMaskColor, charColor, minLineSpace, minAperture, holeAmount, halfHole, testMethod, urgent, comment} = params
+    const boardSize = boardLength * boardWidth
+    const projectPrice = await this.model('pcb_price').getPrice({boardLayer, option: 0})
+    const makeupPrice = await this.model('pcb_price').getPrice({boardLayer, option: 1})
+    const filmPrice = 5
+    const boardPrice = await this.model('pcb_price').getPrice({boardLayer, boardMaterial})
+    const surfacePrice = await this.model('pcb_price').getPrice({boardLayer: Math.min(boardLayer, 1), surfacing, boardThickness})
+    const testPrice = 0.2 // 单位/平方米
+    const urgentPrice = 100 // 100 线性递增
+    const halfHolePrice = 55 // 双数递增
+
+    const fee = {}
+
+    const boardAreaAmount = Math.ceil(boardAmount / ((102 / boardWidth + 5) * (102 / boardLength + 5)))
+    const areaAmount = boardAmount * boardWidth * boardLength / 100
+
+    fee.projectFee = projectPrice
+    fee.boardFee = boardAreaAmount * boardPrice
+    fee.makeupFee = areaAmount * makeupPrice
+    fee.specialBoardFee = 0
+    fee.filmFee = areaAmount * filmPrice
+    fee.surfaceFee = areaAmount * surfacePrice
+    fee.testFee = areaAmount * testPrice
+    fee.solderMaskColorFee = 0
+    fee.charColorFee = 0
+    fee.halfHoleFee = Math.floor(halfHole / 2) * halfHolePrice
+    fee.urgentFee =  urgent * urgentPrice
+    fee.otherFee = 0
+    fee.totalFee = _.sum(_.values(fee))
+
+    return fee
+  }
+
   async uploadAction() {
     const pcbFile = this.file('pcbFile')
     const {path, name} = pcbFile
@@ -189,7 +207,11 @@ export default class extends Base {
 
     think.mkdir(this.uploadPath)
 
-    await fs.rename(path, `${this.uploadPath}/${uuid}`)
+    var readStream = fs.createReadStream(path)
+    var writeStream = fs.createWriteStream(`${this.uploadPath}/${uuid}`)
+    readStream.pipe(writeStream)
+
+    // await fs.rename(path, `${this.uploadPath}/${uuid}`)
 
     this.body = {
       rtnCode: 0,
@@ -213,5 +235,17 @@ export default class extends Base {
     })
 
     // this.logger.info('clear upload file success')
+  }
+
+  async createOrderAction() {
+    const postParams = this.post()
+
+    const fee = await this.calculateFee(postParams)
+
+    await this.model('pcb_order').add(_.merge(postParams, fee))
+
+    this.body = {
+      rtnCode: 0
+    }
   }
 }
