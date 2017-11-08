@@ -18,7 +18,7 @@ export default class extends Base {
     // 判断是否登陆
     // await this.weblogin();
 
-    const addressList = await this.service('account/address').getAddressList(this)
+    const addressList = await this.service('account/address').getAddressList(this, this.get())
 
     this.assign("list", addressList);
 

@@ -5,6 +5,9 @@
  */
 const pagination = require('think-pagination');
 module.exports = {
+  para(param){
+    return this.get(param)||this.post(param)
+  },
   pagination(data, config = {}){
     let ops = think.extend({
       desc: true, //show description

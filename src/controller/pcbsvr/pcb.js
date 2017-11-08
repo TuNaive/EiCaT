@@ -19,6 +19,12 @@ const enums = {
       label: '数量'
       // value: ['5', '10', '20', '30', '40', '50', '60', '75', '100', '150', '200', '250', '300', '350', '400', '450', '500', '550', '600', '650', '700', '800', '900', '1000', '1500', '2000', '2500', '3000', '3500', '4000', '4500', '5000', '5500', '6000', '6500', '7000', '7500', '8000', '其他']
     },
+    boardLength: {
+      label: '板子尺寸长（CM）'
+    },
+    boardWidth: {
+      label: '板子尺寸宽（CM）'
+    },
     aluminumOutThickness: {
       label: '铜箔厚度 外层（oz）',
       value: ['1', '2']
@@ -66,6 +72,9 @@ const enums = {
     urgent: {
       label: '加急',
       value: ['正常交期', '加急48小时', '加急24小时', '特快加急12小时', '火箭加急8小时']
+    },
+    delivery: {
+      label: '交期'
     },
     comment: {
       label: '备注'
@@ -120,17 +129,25 @@ export default class extends Base {
 
     const addressList = await this.service('account/address').getAddressList(this, this.post())
 
-    this.body = {
-      rtnCode: 0,
-      data: addressList
-    }
+    return this.success(addressList)
   }
 
   async calculateAction() {
     const postParams = this.post()
     const { boardLength, boardWidth, boardAmount } = postParams
 
-    const customDetail = _.map(_.omit(postParams, ['boardLength', 'boardWidth']), (val, key) => {
+    const fee = await this.calculateFee(postParams)
+
+    const res = this.formatPcbLabel(postParams, fee)
+
+    this.assign(res)
+
+    this.success(res)
+  }
+
+  formatPcbLabel (pcbInfo, fee, omitPcbFields = []) {
+    omitPcbFields = _.concat(['boardLength', 'boardWidth'], omitPcbFields)
+    const customDetail = _.map(_.omit(pcbInfo, omitPcbFields), (val, key) => {
       return {
         field: key,
         label: enums.pcbCustomOptions[key].label,
@@ -140,10 +157,8 @@ export default class extends Base {
     customDetail.unshift({
       field: 'boardSize',
       label: '板子尺寸',
-      value: `${postParams.boardLength} cm x ${postParams.boardWidth} cm`
+      value: `${pcbInfo.boardLength} cm x ${pcbInfo.boardWidth} cm`
     })
-
-    const fee = await this.calculateFee(postParams)
 
     const pcbFee = _.map(fee, (val, key) => ({
       field: key,
@@ -151,17 +166,9 @@ export default class extends Base {
       value: val
     }))
 
-    this.assign({
+    return {
       customDetail,
       pcbFee
-    })
-
-    this.body = {
-      rtnCode: 0,
-      data: {
-        customDetail,
-        pcbFee
-      }
     }
   }
 
@@ -194,7 +201,7 @@ export default class extends Base {
     fee.halfHoleFee = Math.floor(halfHole / 2) * halfHolePrice
     fee.urgentFee =  urgent * urgentPrice
     fee.otherFee = 0
-    fee.totalFee = _.sum(_.values(fee))
+    fee.totalFee = _.round(_.sum(_.values(fee)), 2)
 
     return fee
   }
@@ -202,8 +209,15 @@ export default class extends Base {
   async uploadAction() {
     const pcbFile = this.file('pcbFile')
     const {path, name} = pcbFile
+    const suffix = _.last(_.split(name,  '.'))
+
+    if (!_.includes(['zip', 'rar'], suffix)) {
+      return this.fail(-1, '不合法的文件后缀，仅支持zip、rar格式文件')
+    }
+
     // todo: add user info
-    const uuid = think.uuid(`userUuid_${Date.now()}_${name}`)
+    let uuid = think.uuid(`userUuid_${Date.now()}`)
+    uuid = `${uuid}_${name}`
 
     think.mkdir(this.uploadPath)
 
@@ -213,12 +227,23 @@ export default class extends Base {
 
     // await fs.rename(path, `${this.uploadPath}/${uuid}`)
 
-    this.body = {
-      rtnCode: 0,
-      data: {
-        ..._.pick(pcbFile, ['name', 'size']),
-        uuid
-      }
+    return this.success({
+      ..._.pick(pcbFile, ['name', 'size']),
+      uuid
+    })
+  }
+
+  async downloadAction() {
+    const uuid = this.get('uuid')
+    const path = `${this.uploadPath}/${uuid}`
+
+    this.ctx.set('content-disposition', `attachment;filename=${encodeURIComponent(_.last(_.split(uuid, '_')))}`)
+
+    try {
+      const file = await fs.readFile(path)
+      return this.body = file
+    } catch (err) {
+      return this.body = 'no such file'
     }
   }
 
@@ -237,15 +262,42 @@ export default class extends Base {
     // this.logger.info('clear upload file success')
   }
 
-  async createOrderAction() {
+  // 创建订单
+  async createOrderAction(){
+    // await this.weblogin();
+
+    const postParams = this.post();
+    const pcbKeys = _.keys(enums.pcbCustomOptions)
+    const pcbInfo = _.pick(postParams, pcbKeys)
+    const fee = await this.calculateFee(pcbInfo)
+    const data = _.merge({}, _.omit(postParams, pcbKeys), fee)
+
+    data.type = 0
+    data.pcbInfo = JSON.stringify(pcbInfo)
+    data.fee = JSON.stringify(fee)
+    //PCB总费用
+    data.real_amount = fee.totalFee;
+
+    //运费计算
+    //TODO: 根据重量和公司进行计算
+    data.real_freight = 0;
+
+    //付款总额
+    data.order_amount = _.sum([data.real_amount, data.real_freight]);
+
+    //生成订单
+    let order_id = await this.model("order").add(data);
+
+    return this.success({name:'订单创建成功，正在跳转支付页面！',url:`/center/pay/pay?order=${order_id}&setp=3`});
+  }
+
+  async createEnquireAction() {
     const postParams = this.post()
 
-    const fee = await this.calculateFee(postParams)
+    postParams.type = 0
 
-    await this.model('pcb_order').add(_.merge(postParams, fee))
+    await this.model('enquire').add(postParams)
 
-    this.body = {
-      rtnCode: 0
-    }
+    return this.success()
   }
 }

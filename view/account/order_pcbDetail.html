@@ -1,0 +1,157 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/account/css/index.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section class="page-header page-header-xs " >
+  <div class="container">
+    {#
+    <h1>{{category.title}}</h1>
+    #}
+
+    <!-- breadcrumbs -->
+    <ol class="breadcrumb breadcrumb-inverse">
+      <li><a href="/">首页</a></li>
+      <li><a href="/account">{{controller.channel}}</a></li>
+      <li class="active">{{controller.sub_channel}}</li>
+    </ol>
+    <!-- /breadcrumbs -->
+  </div>
+</section>
+
+<section class="container-wrap">
+  <div class="container">
+    <div class="row">
+      <!-- LEFT -->
+      {% include "./inc/user_left.html" %}
+      <!-- RIGHT -->
+      <div class="col-lg-10 col-md-10 col-sm-8 order-detail">
+
+        <h4 class="page-header margin-top-0">
+          <i class="fa fa-reorder fa-lg text-default"></i>
+          {{controller.meta_title}}
+        </h4>
+
+        <div>
+          <h5 class="bg-info">订单信息</h5>
+          <div class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">订单号：</label>
+              <div class="col-sm-10 control-label text-left">{{data.order_no}}</div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">PCB文件：</label>
+              <div class="col-sm-10 control-label text-left">
+                <span>{{data.fileUuid | getFileName}}</span>
+                <a href="/pcbsvr/pcb/download?uuid={{data.fileUuid}}">点击下载</a>
+              </div>
+            </div>
+            <div class="form-group form-inline">
+              <label class="col-sm-2 control-label">板子数量（PCS）：</label>
+              <div class="col-sm-10 control-label text-left">{{data.pcbInfo.boardAmount}}</div>
+            </div>
+            <div class="form-group form-inline">
+              <label class="col-sm-2 control-label">交期（天）：</label>
+              <div class="col-sm-10 control-label text-left">{{data.pcbInfo.delivery}}</div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label not-required">备注：</label>
+              <div class="col-sm-6 control-label text-left">{{data.pcbInfo.comment}}</div>
+            </div>
+            <div class="form-group form-inline">
+              <label class="col-sm-2 control-label">联系人：</label>
+              <div class="col-sm-10 control-label text-left">{{data.contact}}</div>
+            </div>
+            <div class="form-group form-inline">
+              <label class="col-sm-2 control-label">联系手机：</label>
+              <div class="col-sm-10 control-label text-left">{{data.mobile}}</div>
+            </div>
+            <div class="form-group form-inline">
+              <label class="col-sm-2 control-label">联系邮箱：</label>
+              <div class="col-sm-10 control-label text-left">{{data.email}}</div>
+            </div>
+          </div>
+          <h5 class="bg-info">订单详情</h5>
+          {% set info = data._pcbInfo.slice(0, 7) %}
+          <table class="table table-bordered">
+            <tr>
+              {% for item in info %}
+              <td>{{item.label}}</td>
+              {% endfor %}
+            </tr>
+            <tr>
+              {% for item in info %}
+              <td>{{item.value}}</td>
+              {% endfor %}
+            </tr>
+          </table>
+          {% set info = data._pcbInfo.slice(7) %}
+          <table class="table table-bordered">
+            <tr>
+              {% for item in info %}
+              <td>{{item.label}}</td>
+              {% endfor %}
+            </tr>
+            <tr>
+              {% for item in info %}
+              <td>{{item.value}}</td>
+              {% endfor %}
+            </tr>
+          </table>
+          <p class="test-method">测试方式：{{data.pcbInfo._testMethod}}</p>
+          <h5 class="bg-info">费用信息</h5>
+          {% set fee = data._fee.slice(0, 7) %}
+          <table class="table table-bordered">
+            <tr>
+              {% for item in fee %}
+              <td>{{item.label}}</td>
+              {% endfor %}
+            </tr>
+            <tr>
+              {% for item in fee %}
+              <td>{{item.value}}</td>
+              {% endfor %}
+            </tr>
+          </table>
+          {% set fee = data._fee.slice(7) %}
+          <table class="table table-bordered">
+            <tr>
+              {% for item in fee %}
+              <td>{{item.label}}</td>
+              {% endfor %}
+            </tr>
+            <tr>
+              {% for item in fee %}
+              <td>{{item.value}}</td>
+              {% endfor %}
+            </tr>
+          </table>
+          <h5 class="bg-info">收货人信息</h5>
+          <div class="form-horizontal">
+            {% set address = data.address %}
+            <div class="form-group">
+              <label class="col-sm-2 control-label">收货人姓名：</label>
+              <div class="col-sm-10 control-label text-left">{{address.accept_name}}</div>
+            </div>
+            <div class="form-group form-inline">
+              <label class="col-sm-2 control-label">手机号：</label>
+              <div class="col-sm-10 control-label text-left">{{address.mobile}}</div>
+            </div>
+            <div class="form-group form-inline">
+              <label class="col-sm-2 control-label">收货地址：</label>
+              <div class="col-sm-10 control-label text-left">
+                {{address.province}} - {{address.city}} - {{address.county}} - {{address.addr}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block script %}
+<!--<script src="/static/account/js/address.js"></script>-->
+{% endblock %}

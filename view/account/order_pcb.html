@@ -1,0 +1,140 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/account/css/index.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section class="page-header page-header-xs " >
+  <div class="container">
+    {#
+    <h1>{{category.title}}</h1>
+    #}
+
+    <!-- breadcrumbs -->
+    <ol class="breadcrumb breadcrumb-inverse">
+      <li><a href="/">首页</a></li>
+      <li><a href="/account">{{controller.channel}}</a></li>
+      <li class="active">{{controller.sub_channel}}</li>
+    </ol>
+    <!-- /breadcrumbs -->
+  </div>
+</section>
+
+<section class="container-wrap">
+  <div class="container">
+    <div class="row">
+      <!-- LEFT -->
+      {% include "./inc/user_left.html" %}
+      <!-- RIGHT -->
+      <div class="col-lg-10 col-md-10 col-sm-8">
+
+        <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
+          {{controller.meta_title}}</h4>
+
+        <ul class="nav nav-tabs nav-top-border">
+          <li {%if status == null%}class="active"{%endif%}><a href="/account/order/pcb">全部订单</a></li>
+          <li {% if status == 0%}class="active"{%endif%}><a href="/account/order/pcb/?status=0" ><span class="badge badge-red btn-xs badge-corner">{{nopaid}}</span>待付款</a></li>
+          <li {% if status == 1%}class="active"{%endif%}><a href="/account/order/pcb/?status=1"><span class="badge badge-red btn-xs badge-corner">{{receipt}}</span>待收货</a></li>
+          <li {% if status == -1%}class="active"{%endif%}><a href="/account/order/pcb/?status=-1">已取消</a></li>
+          <!--<li><a href="#profile_3"><span class="badge badge-red btn-xs badge-corner">8</span>待评价</a></li>-->
+          <!--<li class="dropdown">-->
+            <!--<a data-toggle="dropdown" class="dropdown-toggle" href="#">近三个月 <span class="caret"></span></a>-->
+            <!--<ul class="dropdown-menu">-->
+              <!--<li><a data-toggle="tab" tabindex="-1" href="#dropdown1">@fat</a></li>-->
+              <!--<li><a data-toggle="tab" tabindex="-1" href="#dropdown2">@mdo</a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
+        </ul>
+        <div class="table-responsive">
+          <table class="table table-bordered order-tb">
+            <thead>
+            <tr>
+              <th width="242">订单号</th>
+              <th>下单时间</th>
+              <th>订单状态</th>
+              <th>订单金额</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in list %}
+            <!--<tr class="active">-->
+              <!--<td colspan="5">-->
+                <!--{%if item.status == 4 or item.status== 6%}-->
+                <!--<a href="/center/order/delorder/?id={{item.id}}" class="btn btn-default btn-xs pull-right nomargin confirm ajax-get"><i class="fa fa-trash-o nopadding"></i></a>-->
+                <!--{%endif%}-->
+                <!--{%if item.pay_status ==0 and item.status != 6%}-->
+                <!--<div class=" pull-right">-->
+                  <!--<i class="fa fa-hourglass-half"></i> 剩余 <span class="countdown countdown-inline" data-from="{{item.end_time}}" data-labels="年,月,周,天,小时,分,秒"></span>-->
+                <!--</div>-->
+                <!--{%endif%}-->
+                <!--<h5 class="margin-bottom-0">-->
+                  <!--<small>{{item.create_time|moment('Y-m-d H:i:s')}}</small>-->
+                  <!--<span class="margin-left-20">订单<a href="#" target="_blank">{{item.order_no}}</a></span></h5>-->
+                <!--</span>-->
+              <!--</td>-->
+            <!--</tr>-->
+            <tr>
+              <td>{{item.order_no}}</td>
+              <td>{{item._create_time}}</td>
+              <td style="border-bottom: none">
+                {%if item.status == 6%}
+                <span class="text-danger">已作废</span>
+                {%elif item.status == 4%}
+                <span class="text-default">已完成</span>
+                {%elif item.delivery_status == 1%}
+                <span class="text-success">等待收货</span>
+                {%elif item.pay_status == 0%}
+                <span class="text-warning">等待付款</span>
+                {%elif item.pay_status == 1 or item.status ==3%}
+                <span class="text-warning">等待发货</span>
+                {%endif%}
+              </td>
+              <td style="border-bottom: none">
+                <span class="text-danger">¥{{item.order_amount|formatCurrency}}</span>
+                <!--付款方式-->
+                <!--<span class="ftx-13">{{item.channel}}</span>-->
+              </td>
+              <td style="vertical-align: middle;border-bottom: none">
+                {%if item.is_del == 1%}
+                {%elif item.status == 4 or item.status == 6%}
+                <!--<a class="btn btn-default btn-xs" href="/pcbsvr/pcb/calc/?id={item.id}"><i class="fa fa-cart-plus white"></i>重新下单 </a>-->
+                {%elif item.delivery_status == 1%}
+                <!--<a class="btn btn-success btn-xs confirm ajax-get" href="/account/order/confirmreceipt/?id={{item.id}}"><i class="fa fa-cart-plus white"></i>确认收货 </a>-->
+                {%elif item.pay_status == 0%}
+                <a href="/account/pay/pay?order={{item.id}}">立即付款 </a>
+                <a class="confirm ajax-get" href="/account/order/delete/?id={{item.id}}">取消 </a>
+                {%elif item.pay_status == 1 or item.status ==3%}
+                <!--<a class="btn btn-warning btn-xs" href="#"><i class="fa fa-cart-plus white"></i>提醒发货 </a>-->
+                {%endif%}
+                <a href="/account/order/pcbDetail/?id={{item.id}}">详情</a>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="5">
+                <div class="alert alert-warning alert-block">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <p>暂无数据</p>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- PAGINATION -->
+        <div class="text-right">
+          <!-- Pagination Default -->
+          {{pagination | safe}}
+          <!-- /Pagination Default -->
+        </div>
+        <!-- /PAGINATION -->
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block script %}
+<!--<script src="/static/account/js/address.js"></script>-->
+{% endblock %}

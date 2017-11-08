@@ -1,3 +1,4 @@
+import accounting from 'accounting'
 const contains = (arr, str) => {
   // will implement object contains later
   if (_.isEmpty(arr) || _.isPlainObject(arr) || _.isNil(str)) {
@@ -25,9 +26,7 @@ const insertFrag = (text, fragment, len) => {
 
 export default env => {
   env.addFilter('contains', contains)
-  env.addFilter('formatCurrency', num => {
-    return 'aaa'
-  })
+  env.addFilter('formatCurrency', num => accounting.formatMoney(num, ''))
   env.addFilter('insertFrag', insertFrag)
   env.addFilter('moment', (time, formatter) => {
     if (_.isNil(formatter)) {
@@ -35,5 +34,9 @@ export default env => {
     } else {
       return moment(time).format(formatter)
     } 
+  })
+
+  env.addFilter('getFileName', (uuid) => {
+    return _.last(_.split(uuid, '_'))
   })
 }

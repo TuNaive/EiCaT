@@ -70,7 +70,6 @@ var formActiveConf = {
 require(['/static/pcbs/js/tool.js'], function (tool) {
   $(function ($) {
     TOOL = tool
-    console.log('=========', $('#solderMaskColor'))
     // init form dom
     _.forEach(formKeyConf, function (obj, key) {
       _.forEach(obj, function (v, k) {
@@ -92,7 +91,7 @@ function bindFormEvents () {
   generateAddress()
 
   pcb.steps({
-    startIndex: 2,
+    // startIndex: 2,
     headerTag: "h3",
     bodyTag: "fieldset",
     transitionEffect: "slideLeft",
@@ -130,12 +129,12 @@ function bindFormEvents () {
           data: enquiryForm.serializeArray(),
           success: function (data) {
             target.data('needCalc', false)
-            if (data.rtnCode === 0) {
+            if (data.errno === 0) {
               pcb.steps('next')
               generateDetail(data.data.customDetail)
               generateFee(data.data.pcbFee)
             } else {
-              console.log(data.rtnMsg)
+              console.log(data.errmsg)
             }
           },
           error: function (err) {
@@ -165,18 +164,24 @@ function bindFormEvents () {
       return $("#pcbFileForm").valid();
     },
     onFinished: function (event, currentIndex) {
-      var paramData = _.concat($("#enquiryForm").serializeArray(), $("#pcbFileForm").serializeArray(), [{name: 'fileUuid', value: $('#pcbFile').data('uuid')}])
+      var paramData = _.concat(
+        $("#enquiryForm").serializeArray(),
+        $("#pcbFileForm").serializeArray(),
+        [
+          {name: 'fileUuid', value: $('#pcbFile').data('uuid')}
+        ]
+      )
       $.ajax({
         url: 'createOrder',
         type: 'POST',
         dataType: 'json',
         data: paramData,
         success: function (data) {
-          if (data.rtnCode === 0) {
+          if (data.errno === 0) {
             // 跳转到我的订单
-            window.location.href = '/account'
+            window.location.href = '/account/order/pcb'
           } else {
-            console.log(data.rtnMsg)
+            console.log(data.errmsg)
           }
         },
         error: function (err) {
@@ -196,11 +201,11 @@ function bindFormEvents () {
     done: function (e, data) {
       var res = data.result
 
-      if (res.rtnCode === 0) {
+      if (res.errno === 0) {
         $(e.target).data('uuid', res.data.uuid).blur()
       } else {
         $('#pcbFileName').html('')
-        _toastr.error(res.rtnMsg)
+        _toastr.error(res.errmsg)
       }
     },
     error: function (err) {
@@ -213,13 +218,9 @@ function bindFormEvents () {
 function initFormValidates () {
   var enquiryForm = $("#enquiryForm")
   var pcbFileForm = $("#pcbFileForm")
-  
-  $.validator.addMethod('pcbFile', function (value, element, params) {
-    return $('#pcbFileName').html()
-  }, '请上传文件')
 
   var validateConf = {
-    ignore: '.ignore',
+    // ignore: '.ignore',
     errorPlacement: function errorPlacement (error, element) {
       var groupParent = element.parentsUntil('.form-group', '[class^="col-sm-"]')
 
@@ -232,13 +233,7 @@ function initFormValidates () {
   }
 
   enquiryForm.validate(validateConf)
-  pcbFileForm.validate(_.merge({}, validateConf, {
-    rules: {
-      pcbFile: {
-        pcbFile: true
-      }
-    }
-  }))
+  pcbFileForm.validate(validateConf)
 }
 
 function initPcbStateAndEvents () {
@@ -252,7 +247,8 @@ function initPcbStateAndEvents () {
       + ((amount < 100) ? 0 : 1)
       + Math.max(0, (layer - 1)) * 1
 
-    $('#delivery').html(delivery + '天左右')
+    $('#deliveryVal').html(delivery + '天左右')
+    $('#delivery').val(delivery + '天左右')
   })
 
   $('#boardLayer input').change(function () {
@@ -338,7 +334,7 @@ function generateAddress (pageSize) {
   var tdTpl = _.template(
     '<tr>' +
       '<td>' +
-        '<input type="radio" name="addressId" value="<%- item.id %>" <%- item.is_default == 1 ? " checked" : "" %>>' +
+        '<input type="radio" name="address_id" value="<%- item.id %>" <%- item.is_default == 1 ? " checked" : "" %>>' +
       '</td>' +
       '<td ><%- item.accept_name %></td>' +
       '<td><%- item.province %>,<%- item.city %>,<%- item.county %></td>' +
@@ -360,7 +356,7 @@ function generateAddress (pageSize) {
     dataType: 'json',
     data: {pageSize: pageSize},
     success: function (data) {
-      if (data.rtnCode === 0) {
+      if (data.errno === 0) {
         var addressHtml = _.map(_.get(data, 'data.data'), function (item) {
           return tdTpl({item: item})
         })
@@ -375,7 +371,7 @@ function generateAddress (pageSize) {
 
         $('#addressList tbody').html(addressHtml.join('')).data('total', total)
       } else {
-        console.log(data.rtnMsg)
+        console.log(data.errmsg)
       }
     },
     error: function (err) {

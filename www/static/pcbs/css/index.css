@@ -19,7 +19,18 @@ div.side-nav ul > li i {
 /*custom layout style*/
 label.error {
   display: inline-block;
+  color: #8a1f11;
 }
+.control-label:before {
+  content: '*';
+  display: inline;
+  margin-right: 10px;
+  color: #8a1f11;
+}
+.control-label.not-required:before {
+  content: '';
+}
+
 
 /*custom bootstrap style*/
 .form-group select {

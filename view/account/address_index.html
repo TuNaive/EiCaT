@@ -1,9 +1,9 @@
 {% extends "../common/inc/base.html" %}
 {% block style %}
-<link href="/static/account/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/static/account/css/index.css" rel="stylesheet" type="text/css"/>
 {% endblock %}
 {% block content %}
-<section class="page-header page-header-xs " >
+<section class="page-header page-header-xs ">
   <div class="container">
     {#
     <h1>{{category.title}}</h1>
@@ -27,12 +27,15 @@
       <!-- RIGHT -->
       <div class="col-lg-10 col-md-10 col-sm-8">
         <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
-          {{controller.meta_title}}<button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target=".add-addr-dialog">添加新地址</button></h4>
+          {{controller.meta_title}}
+          <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target=".add-addr-dialog">添加新地址
+          </button>
+        </h4>
         <div class="table-responsive">
           <table class="table table-bordered table-striped table-vertical-middle">
             <thead>
             <tr>
-              <th >收货人</th>
+              <th>收货人</th>
               <th>所在地区</th>
               <th>街道地址</th>
               <th>邮编</th>
@@ -44,7 +47,7 @@
             <tbody>
             {%for item in list.data %}
             <tr>
-              <td >{{item.accept_name}}</td>
+              <td>{{item.accept_name}}</td>
               <td>{{item.province}},{{item.city}},{{item.county}}</td>
               <td>{{item.addr}}</td>
               <td>
@@ -53,9 +56,23 @@
               <td>
                 {{item.mobile}}
               </td>
-              <td>{%if item.is_default == 1%}<span class="label label-primary">默认地址 </span>{%else%}<a class="btn btn-default btn-xs ajax-get" href="/account/address/addrisdefault/?id={{item.id}}"><i class="fa fa-check white"></i>设为默认地址 </a>{%endif%}</td>
-              <td><a class="btn btn-default btn-xs" data-toggle="ajaxModal" href="/account/address/editaddrmodal/?id={{item.id}}&type=1"><i class="fa fa-edit white"></i>编辑 </a>
-                <a class="btn btn-default btn-xs confirm ajax-get" href="/account/address/deladdr/?id={{item.id}}"><i class="fa fa-times white"></i>删除 </a></td>
+              <td>
+                {%if item.is_default == 1%}
+                <span class="label label-primary">默认地址 </span>
+                {%else%}
+                <a class="btn btn-default btn-xs ajax-get" href="/account/address/addrisdefault/?id={{item.id}}">
+                  <i class="fa fa-check white"></i>设为默认地址
+                </a>
+                {%endif%}
+              </td>
+              <td>
+                <a class="btn btn-default btn-xs" data-toggle="ajaxModal" href="/account/address/editaddrmodal/?id={{item.id}}&type=1">
+                  <i class="fa fa-edit white"></i>编辑
+                </a>
+                <a class="btn btn-default btn-xs confirm ajax-get" href="/account/address/deladdr/?id={{item.id}}">
+                  <i class="fa fa-times white"></i>删除
+                </a>
+              </td>
             </tr>
             {%endfor%}
 
@@ -74,19 +91,21 @@
   </div>
 </section>
 
-<div class="modal fade add-addr-dialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade add-addr-dialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
       <!-- header modal -->
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
         <h4 class="modal-title " id="myLargeModalLabel">新增收货人信息</h4>
       </div>
 
       <!-- body modal -->
       <div class="modal-body">
-        <form  method="post"  class="add-addr" >
+        <form method="post" class="add-addr">
           <fieldset>
             <!-- required [php action request] -->
             <div class="row">
@@ -118,7 +137,7 @@
               <div class="form-group">
                 <div class="col-md-12 col-sm-12">
                   <label>街道地址 *</label>
-                  <textarea class="form-control required"  name="addr" required></textarea>
+                  <textarea class="form-control required" name="addr" required></textarea>
                 </div>
               </div>
             </div>

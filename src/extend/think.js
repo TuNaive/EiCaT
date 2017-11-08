@@ -3,8 +3,10 @@
  */
 const lodash = require("lodash");
 const path = require('path');
+const moment = require('moment');
 module.exports = {
   _: lodash,
+  moment: moment,
   resource: path.join(think.ROOT_PATH, 'www'),
   // todo: for test
   user: {

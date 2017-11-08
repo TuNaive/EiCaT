@@ -23,30 +23,44 @@
       <a href="/account/index"><i class="fa fa-home"></i> 用户主页</a>
     </li>
     <li class="list-group-item list-toggle
-      {% if (ctx.originalUrl == '/account/seting' or ctx.originalUrl == '/account/address') %}active{%endif%}">
+      {% if (ctx.originalUrl == '/account/seting' or ctx.originalUrl == '/account/address') %}active{%endif%}"
+    >
       <!-- NOTE: "active" to be open on page load -->
-      <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-3">
-        <i class="fa fa-user"></i> 账户管理</a>
-      <ul id="collapse-3" class="collapse in"><!-- NOTE: "collapse in" to be open on page load -->
+      <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-1">
+        <i class="fa fa-user"></i> 账户管理
+      </a>
+      <ul id="collapse-1" class="collapse in"><!-- NOTE: "collapse in" to be open on page load -->
         <li>
           <a href="/account/seting" class="{% if ctx.originalUrl == '/account/seting' %}text-danger{%endif%}"><i
-              class="fa fa-angle-right"></i> 个人设置</a></li>
-        <li>
-          <a href="/account/address" class="{% if ctx.originalUrl == '/account/address' %}text-danger{%endif%}"><i
-              class="fa fa-angle-right"></i> 收货地址</a>
+              class="fa fa-angle-right"></i> 个人设置
+          </a>
         </li>
         <li>
-          <a href="/account/invoice" class="{% if ctx.originalUrl == '/account/invoice' %}text-danger{%endif%}"><i
-              class="fa fa-angle-right"></i> 发票信息</a>
+          <a href="/account/address" class="{% if ctx.originalUrl == '/account/address' %}text-danger{%endif%}"><i
+              class="fa fa-angle-right"></i> 收货地址
+          </a>
         </li>
         {#
         <li><a href="#"><i class="fa fa-angle-right"></i> 我的优惠券</a></li>
-        #}
         <li><a href="/account/account" class="{% if ctx.originalUrl == 'account/account' %}text-danger{%endif%}"><i
             class="fa fa-angle-right"></i> 账户金额</a></li>
-        {#
         <li><a href="#"><i class="fa fa-angle-right"></i> 我的积分</a></li>
         #}
+      </ul>
+    </li>
+    <li class="list-group-item list-toggle
+      {% if (ctx.originalUrl == '/account/pcb/order' or ctx.originalUrl == '/account/pcb/enquire') %}active{%endif%}">
+      <!-- NOTE: "active" to be open on page load -->
+      <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-2">
+        <i class="fa fa-user"></i> 订单管理</a>
+      <ul id="collapse-2" class="collapse in"><!-- NOTE: "collapse in" to be open on page load -->
+        <li>
+          <a href="/account/order/pcb" class="{% if ctx.originalUrl == '/account/order/pcb' %}text-danger{%endif%}"><i
+              class="fa fa-angle-right"></i> PCB订单</a></li>
+        <li>
+          <a href="/account/enquire/pcb" class="{% if ctx.originalUrl == '/account/enquire/pcb' %}text-danger{%endif%}"><i
+              class="fa fa-angle-right"></i> PCB询价单</a>
+        </li>
       </ul>
     </li>
     <li class="list-group-item"><a href="/account/public/logout"><i class="fa fa-sign-out"></i> 退出登录</a></li>

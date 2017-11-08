@@ -27,24 +27,25 @@
         <label for="pcbFile" class="col-sm-2 control-label">PCB文件：</label>
         <div class="col-sm-10">
           <span class="btn btn-default">选择文件</span>
-          <input type="file" class="form-control required" id="pcbFile" name="pcbFile">
+          <span id="pcbFileName"></span>
+          <input type="file" class="form-control pcbFile" id="pcbFile" name="pcbFile">
           <p>允许上传文件大小在40M以内，rar、zip格式的文件。</p>
         </div>
       </div>
       <div class="form-group form-inline">
         <label for="boardAmount" class="col-sm-2 control-label">板子数量（PCS）：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control required" id="boardAmount" name="boardAmount">
+          <input type="text" class="form-control required digits" id="boardAmount" name="boardAmount">
         </div>
       </div>
       <div class="form-group form-inline">
         <label for="delivery" class="col-sm-2 control-label">交期（天）：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control required" id="delivery" name="delivery">
+          <input type="text" class="form-control required digits" id="delivery" name="delivery">
         </div>
       </div>
       <div class="form-group">
-        <label for="comment" class="col-sm-2 control-label">备注：</label>
+        <label for="comment" class="col-sm-2 control-label not-required">备注：</label>
         <div class="col-sm-6">
           <textarea id="comment" name="comment" class="form-control"></textarea>
         </div>
@@ -56,15 +57,15 @@
         </div>
       </div>
       <div class="form-group form-inline">
-        <label for="contactMobile" class="col-sm-2 control-label">联系手机：</label>
+        <label for="mobile" class="col-sm-2 control-label">联系手机：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control required" id="contactMobile" name="contactMobile">
+          <input type="text" class="form-control required mobile" id="mobile" name="mobile">
         </div>
       </div>
       <div class="form-group form-inline">
-        <label for="contactEmail" class="col-sm-2 control-label">联系邮箱：</label>
+        <label for="email" class="col-sm-2 control-label">联系邮箱：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control required" id="contactEmail" name="contactEmail">
+          <input type="text" class="form-control required email" id="email" name="email">
         </div>
       </div>
     </form>
@@ -150,6 +151,7 @@
 <script src="/static/common/plugins/jquery.fileupload/vendor/jquery.ui.widget.js"></script>
 <script src="/static/common/plugins/jquery.fileupload/jquery.fileupload.js"></script>
 <script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
+<script src="/static/common/js/validate.js"></script>
 <script src="/static/common/plugins/form.validate/localization/messages_zh.min.js"></script>
 <script src="/static/pcbs/js/pcb_enquire.js"></script>
 {%endblock%}
