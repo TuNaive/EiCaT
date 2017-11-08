@@ -92,7 +92,7 @@ function bindFormEvents () {
   generateAddress()
 
   pcb.steps({
-    // startIndex: 2,
+    startIndex: 2,
     headerTag: "h3",
     bodyTag: "fieldset",
     transitionEffect: "slideLeft",

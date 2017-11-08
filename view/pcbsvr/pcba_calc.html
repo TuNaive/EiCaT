@@ -1,6 +1,7 @@
 {% extends "../common/inc/base.html" %}
 {% block style %}
 <link href="/static/pcbs/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/static/pcbas/css/pcba_calc.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block content %}
 <section class="page-header page-header-xs " >
@@ -20,7 +21,314 @@
 </section>
 <section>
   <div class="container">
+    <div class="offer_mode_cont">
+      <div class="introduce">
+          <ul style="border-bottom: 1px dashed #ccc; padding-left: 5px;" class="padding-bottom-10">
+              <li>1、根据您的所需，填写下面相关内容，系统会匹配出相关价格；</li>
+              <li>2、本自助询价适用于1000套以下的样板小批量的报价；量大请选择人工报价，有更多优惠哦；</li>
+              <li>3、洗板费、测试费要根据板子要求和测试难度而定，如果洗板要求特殊、测试复杂的，要酌情增加收费；</li>
+              <li>4、贴片总点数（不含DIP脚数）&gt;500点的样板，请选择人工报价。板子数量少于500pcs即为样板；</li>
+          </ul>
+      </div>
+      <div id="pcba">
+        <h3>填写所需询价信息</h3>
+        <fieldset>
+          <form id="enquiryForm" class="form-horizontal">
+            <div class="form-group">
+              <div>
+                <label for="pointCHIP" class="col-sm-2 control-label">CHIP点数：</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control required" id="pointCHIP" name="pointCHIP" placeholder="请输入">
+                  <span style="display:block;font-size:12px;width:330px;">L.C.R一个元器件算一个点；二三极管、钽电容算两个点。</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="pointIC" class="col-sm-2 control-label">IC点数：</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control required" id="pointIC" name="pointIC" placeholder="请输入">
+                  <span style="display:block;font-size:12px;">多引脚元器件4个脚算一点。</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="pointBGA" class="col-sm-2 control-label">BGA点数：</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control required" id="pointBGA" name="pointBGA" placeholder="请输入">
+                  <span style="display:block;font-size:12px;">BGA4个脚算一点。</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="pointDIP" class="col-sm-2 control-label">DIP脚数：</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control required" id="pointDIP" name="pointDIP" placeholder="请输入">
+                  <span style="display:block;font-size:12px;">插件器件一个脚算一个点。</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="plateSize" class="col-sm-2 control-label">钢网尺寸：</label>
+              <div class="col-sm-4">
+                <select name="plateSize" id="plateSize" class="form-control required">
+                  <option value="1" selected="selected">300*400mm</option>
+                  <option value="2">370*470mm</option>
+                  <option value="3" selected="selected">420*520mm</option>
+                  <option value="4">550*650mm</option>
+                  <option value="5">400*600mm</option>
+                  <option value="6">400*800mm</option>
+                  <option value="7">400*1200mm</option>
+                  <option value="8">400*1400mm</option>
+                </select>
+                <span style="display:block;font-size:12px;width:330px;">
+                  样板钢网尺寸=PCB板子长宽各加100mm以上（用于手工印刷）批量板要选大于420*520mm的钢网尺寸（用于自动印刷机）
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="boardNumber" class="col-sm-2 control-label">订单数量：</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control required" id="boardNumber" name="boardNumber" placeholder="请输入">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="deliveryDate" class="col-sm-2 control-label">交期：</label>
+                <div class="col-sm-4">
+                  <!-- <input type="text" class="form-control required" id="DeliveryDate" name="DeliveryDate" placeholder="请输入">
+                  <span id="spanDeliveryDate"> 0 天 </span> -->
+                  <span style="display:block;font-size:12px;width:330px;">
+                    样板小批量交期一般2-3天，批量贴片正常交期3天+插件正常交期3天；如需加急请提前48小时通知。
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="comment" class="col-sm-2 control-label">备注：</label>
+                <div class="col-sm-4">
+                  <textarea type="text" cols="45" rows="7" class="form-control required" id="comment" name="comment" placeholder="请输入"> </textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- <div style="position:relative"> -->
+          <ul class="margin-top-30 margin-right-50 right-wrap" style="width:450px;border:1px solid #ddd; !important;">
+            <li style="margin:0px !important;">
+              <span style="color:red;background:#dedede;display:block;padding:5px 10px;">*客户须提供资料：</span>
+              <ul style="padding:0px 10px;">
+                <li>1.详细、准确的BOM清单，如有变更须在BOM上注明（必须提供）；</li>
+                <li>2.Gerber文件（在融创芯城加工PCB无需提供此项），如需开拼版钢网，请提供拼版文件；</li>
+                <li>3.元器件位号图(Reference Designator)；</li>
+                <li>4.坐标文件(Pick Place file)；</li>
+                <li>5.PCB文件（如果坐标文件、位号图、Gerber文件客户未能导出的，也可提供PCB文件）；</li>
+                <li>6.样板（生产参照用，有条件的可提供）</li>
+              </ul>
+            </li>
+            <li>
+              <span style="color:red;background:#dedede;display:block;padding:5px 10px;">*原材料及原材料损耗：</span>
+              <ul style="padding: 0px 10px;">
+                <li>1.样品/小批量订单:单品加工批量小于等于500PCS的损耗不计(尽量按5%以上提供备品)，IC等贵重物料不包含在内,PCB尽量多给2-3pcs；  </li>
+                <li>
+                  <span style="padding: 0px">2.首次批量订单（&gt;500pcs)损耗： </span>
+                  <ul style="padding: 0px 10px;">
+                    <li>2.1.电子料：便宜的容阻件按3%-4%损耗计算;CHIP(0402)按1.5%损耗计算；CHIP0603/0805/1206以及二、三极管按1%损耗计算。    </li>
+                    <li>2.2.贵重元器件来料不良1:1更换。</li>
+                    <li>2.3.PCB以1:1更换,尽量多提供几pcs备品； </li>
+                    <li>2.4.原包装少数（双方抽点原包装为准）由贵司补数。 </li>
+                  </ul>
+                </li>
+                <li>3.稳定后批量加工物料损耗率约为0.3%-0.5%；</li>
+                <li>4.如少量物料备不齐，暂无需焊接，请列出明细；</li>
+                <li>5.有特殊要求、注意事项，请提前说明.</li>
+              </ul>
+            </li>
+          </ul>
+          <!-- </div> -->
+        </fieldset>
+        <h3>生成PCBA报价单</h3>
+        <fieldset>
+          <div class="machining">
+            <div class="machining_top"><h3>加工详情</h3></div>
+              <div>
+                <table class="table table-bordered" border="0" cellspacing="0" cellpadding="0" style="width:650px;">
+                  <tbody>
+                    <tr>
+                      <td style="text-align: right; color: #999">CHIP点数：</td>
+                      <td id="spointCHIP"></td>
+                      <td style="text-align: right; color: #999">BGA点数：</td>
+                      <td id="spointBGA"></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: right; color: #999">IC点数：</td>
+                      <td id="spointIC"></td>
+                      <td style="text-align: right; color: #999">DIP脚数：</td>
+                      <td id="spointDIP"></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: right; color: #999">钢网尺寸：</td>
+                      <td id="splateSize"></td>
+                      <td style="text-align: right; color: #999">订单数量：</td>
+                      <td id="sboardNumber"></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: right; color: #999">交期：</td>
+                      <td id="sdeliveryDate">2-3天</td>
+                      <td style="text-align:right"></td>
+                      <td id=""></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:right;color:#999">备注：</td>
+                      <td colspan="3" id="sremark" style="text-align:left"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+          <div class="price_list">
+            <div class="price_list_top"><h3>价格明细</h3></div>
+            <div>
+              <table class="table table-bordered" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <th>组装费</th>                         
+                    <th>钢网费</th>    
+                    <th>其他</th>
+                    <th>总费</th>
+                  </tr>
+                  <tr>
+                    <td id="sprojceFee"></td>              
+                    <td id="splateSizeFee"></td>                
+                    <td id="sotherFee"></td>
+                    <td id="stotalFee"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+        <h3>上传PCBA文件，提交订单</h3>
+        <fieldset>
+          <form id="pcbaFileForm" class="form-horizontal">
+            <div class="form-group form-inline">
+              <label for="pcbaFile" class="col-sm-2 control-label">PCBA文件：</label>
+              <div class="col-sm-10">
+                <span class="btn btn-default">选择文件</span>
+                <span id="pcbaFileName"></span>
+                <input type="file" class="form-control" id="pcbaFile" name="pcbaFile">
+              </div>
+            </div>
+            <div class="form-group form-inline">
+              <label for="contact" class="col-sm-2 control-label">联系人：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required" id="contact" name="contact">
+              </div>
+            </div>
+            <div class="form-group form-inline">
+              <label for="mobile" class="col-sm-2 control-label">联系手机：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required" id="mobile" name="mobile">
+              </div>
+            </div>
+            <div class="form-group form-inline">
+              <label for="email" class="col-sm-2 control-label">联系邮箱：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required" id="email" name="email">
+              </div>
+            </div>
 
+            <div class="address">
+              <div class="header clearfix">
+                <h3 class="pull-left">收货人信息</h3>
+                <!-- <input type="hidden" class="required" id="addressId" name="addressId"> -->
+                <div class="btn-wrap">
+                  <a class="btn btn-default" href="/account/address/index" target="_blank">新增收货地址</a>
+                  <a id="refreshAddress" class="btn btn-default" href="javascript:;">刷新地址</a>
+                </div>
+              </div>
+
+              <table id="addressList" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>姓名</th>
+                    <th>所在地区</th>
+                    <th>街道地址</th>
+                    <th>邮编</th>
+                    <th>手机</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+              <a id="showAllAddress" href="javascript:;">显示全部地址</a>
+            </div>
+
+            <div class="express clearfix">
+              <h3 class="pull-left">快递公司：</h3>
+                <!-- <input type="hidden" class="required" id="expressId" name="expressId"> -->
+              <div class="col-sm-10">
+                <label class="radio-inline">
+                  <input type="radio" name="expressId" id="express0" value="1" checked>联昊通(只送广东省内,免费)
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="expressId" id="express1" value="2">顺丰
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="expressId" id="express2" value="3">德邦物流(适用批量板)
+                </label>
+              </div>
+            </div>
+
+            <div class="invoice">
+              <div class="header clearfix">
+                <h3 class="pull-left">发票信息</h3>
+                <div class="btn-wrap">
+                  <a id="" href="/account/invoice/index" class="btn btn-default">新增发票信息</a>
+                  <a id="refreshInvoice" class="btn btn-default">刷新发票</a>
+                </div>
+              </div>
+
+              <label class="radio-inline">
+                <input type="radio" name="invoice" id="invoice0" value="1">需要
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="invoice" id="invoice1" value="0" checked>不需要
+              </label>
+
+              <a id="invoiceNotice" class="btn btn-link" href="/pcbsvr/pcba/invoice" data-toggle="ajaxModal">发票须知</a>
+
+              <table id="invoiceList" class="table table-bordered table-striped" style="display: none">
+                <thead>
+                  <tr>
+                    <td></td>
+                    <th>发票抬头</th>
+                    <th>发票人</th>
+                    <th>发票收货地址</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+
+              <a id="showAllInvoice" href="javascript:;" style="display: none">显示全部发票</a>
+            </div>
+
+            <div class="accounts">
+              <span class="col-sm-11 text-right">货款：</span><span id="pcbaMoney" class="col-sm-1"></span>
+              <span class="col-sm-11 text-right">运费：</span><span class="col-sm-1">￥0.00</span>
+              <span class="col-sm-11 text-right">总费用(含税)：</span><span id="pcbaAllmoney" class="col-sm-1"></span>
+            </div>
+          </form>
+        </fieldset>
+      </div>
+  </div>
     <div class="row">
       <div class="col-md-3">
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
@@ -98,5 +406,12 @@
 </section>
 {% endblock %}
 {%block script%}
-
+  <script src="/static/common/plugins/jquery.fileupload/vendor/jquery.ui.widget.js"></script>
+  <script src="/static/common/plugins/jquery.fileupload/jquery.fileupload.js"></script>
+  <script src="/static/common/plugins/jquery.steps-1.1.0/jquery.steps.min.js"></script>
+  <script src="/static/common/plugins/jquery.fileupload/jquery.fileupload.js"></script>
+  <script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
+  <script src="/static/common/plugins/form.validate/localization/messages_zh.min.js"></script>
+  <script src="/static/common/plugins/require.js"></script>
+  <script src="/static/pcbas/js/pcba_calc.js"></script>
 {%endblock%}
