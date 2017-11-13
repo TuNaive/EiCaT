@@ -93,7 +93,7 @@ const enums = {
     halfHoleFee: '半孔加工费',
     urgentFee: '加急费',
     otherFee: '其他',
-    totalFee: '总费'
+    totalFee: '总费用'
   }
 }
 
@@ -189,21 +189,25 @@ export default class extends Base {
     const boardAreaAmount = Math.ceil(boardAmount / ((102 / boardWidth + 5) * (102 / boardLength + 5)))
     const areaAmount = boardAmount * boardWidth * boardLength / 100
 
-    fee.projectFee = projectPrice
-    fee.boardFee = boardAreaAmount * boardPrice
-    fee.makeupFee = areaAmount * makeupPrice
-    fee.specialBoardFee = 0
-    fee.filmFee = areaAmount * filmPrice
-    fee.surfaceFee = areaAmount * surfacePrice
-    fee.testFee = areaAmount * testPrice
-    fee.solderMaskColorFee = 0
-    fee.charColorFee = 0
-    fee.halfHoleFee = Math.floor(halfHole / 2) * halfHolePrice
-    fee.urgentFee =  urgent * urgentPrice
-    fee.otherFee = 0
-    fee.totalFee = _.round(_.sum(_.values(fee)), 2)
+    fee.projectFee = this.round2(projectPrice)
+    fee.boardFee = this.round2(boardAreaAmount * boardPrice)
+    fee.makeupFee = this.round2(areaAmount * makeupPrice)
+    fee.specialBoardFee = this.round2(0)
+    fee.filmFee = this.round2(areaAmount * filmPrice)
+    fee.surfaceFee = this.round2(areaAmount * surfacePrice)
+    fee.testFee = this.round2(areaAmount * testPrice)
+    fee.solderMaskColorFee = this.round2(0)
+    fee.charColorFee = this.round2(0)
+    fee.halfHoleFee = this.round2(Math.floor(halfHole / 2) * halfHolePrice)
+    fee.urgentFee = this.round2( urgent * urgentPrice)
+    fee.otherFee = this.round2(0)
+    fee.totalFee = this.round2(_.sum(_.values(fee)))
 
     return fee
+  }
+
+  round2 (num) {
+    return NP.round(num, 2)
   }
 
   async uploadAction() {
@@ -280,10 +284,10 @@ export default class extends Base {
 
     //运费计算
     //TODO: 根据重量和公司进行计算
-    data.real_freight = 0;
+    data.real_freight = data.freight;
 
     //付款总额
-    data.order_amount = _.sum([data.real_amount, data.real_freight]);
+    data.order_amount = _.sum([data.real_amount, data.real_freight, data.tax]);
 
     //生成订单
     let order_id = await this.model("order").add(data);

@@ -1,11 +1,14 @@
 import _ from 'lodash'
 import moment from 'moment'
+import NP from 'number-precision'
 
 moment.locale('zh-cn')
 
 global._ = _
 
 global.moment = moment
+
+global.NP = NP
 
 global.showDebug = messages => {
   console.log('\n=========== Debug ===========')

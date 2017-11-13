@@ -98,7 +98,7 @@
               {% endfor %}
             </tr>
           </table>
-          <p class="test-method">测试方式：{{data.pcbInfo._testMethod}}</p>
+          <p class="extra-info">测试方式：{{data.pcbInfo._testMethod}}</p>
           <h5 class="bg-info">费用信息</h5>
           {% set fee = data._fee.slice(0, 7) %}
           <table class="table table-bordered">
@@ -109,7 +109,7 @@
             </tr>
             <tr>
               {% for item in fee %}
-              <td>{{item.value}}</td>
+              <td>{{item.value|formatCurrency}}</td>
               {% endfor %}
             </tr>
           </table>
@@ -122,10 +122,11 @@
             </tr>
             <tr>
               {% for item in fee %}
-              <td>{{item.value}}</td>
+              <td>{{item.value|formatCurrency}}</td>
               {% endfor %}
             </tr>
           </table>
+          <p class="extra-info">总价格：{{data.order_amount|formatCurrency}}</p>
           <h5 class="bg-info">收货人信息</h5>
           <div class="form-horizontal">
             {% set address = data.address %}

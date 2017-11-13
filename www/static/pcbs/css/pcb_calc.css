@@ -16,3 +16,7 @@
 #deliveryVal {
   padding-top: 7px;
 }
+.money:before {
+  content: '￥';
+  display: inline;
+}

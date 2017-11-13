@@ -133,6 +133,7 @@ function bindFormEvents () {
               pcb.steps('next')
               generateDetail(data.data.customDetail)
               generateFee(data.data.pcbFee)
+              calculateCost(_.find(data.data.pcbFee, {field: 'totalFee'}).value)
             } else {
               console.log(data.errmsg)
             }
@@ -168,7 +169,9 @@ function bindFormEvents () {
         $("#enquiryForm").serializeArray(),
         $("#pcbFileForm").serializeArray(),
         [
-          {name: 'fileUuid', value: $('#pcbFile').data('uuid')}
+          {name: 'fileUuid', value: $('#pcbFile').data('uuid')},
+          {name: 'freight', value: $('#freight').html()},
+          {name: 'tax', value: $('#tax').data()},
         ]
       )
       $.ajax({
@@ -330,11 +333,18 @@ function generateFee (data) {
   $('#priceDetail').html(tableTpl.join(''))
 }
 
+function calculateCost (pcbFee) {
+  $('#pcbFee').html(pcbFee)
+  const freight = _.toNumber($('#freight').html())
+  const tax = _.toNumber($('#tax').html())
+  $('#totalCost').html(_.sum([pcbFee, freight, tax]))
+}
+
 function generateAddress (pageSize) {
   var tdTpl = _.template(
     '<tr>' +
       '<td>' +
-        '<input type="radio" name="address_id" value="<%- item.id %>" <%- item.is_default == 1 ? " checked" : "" %>>' +
+        '<input type="radio" name="addressId" value="<%- item.id %>" <%- item.is_default == 1 ? " checked" : "" %>>' +
       '</td>' +
       '<td ><%- item.accept_name %></td>' +
       '<td><%- item.province %>,<%- item.city %>,<%- item.county %></td>' +

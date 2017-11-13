@@ -164,7 +164,22 @@ export default class extends Base {
     formattedData.customDetail.splice(testMethodIdx, 1)
     data._pcbInfo = formattedData.customDetail
 
+    _.remove(formattedData.pcbFee, obj => obj.field === 'totalFee')
+
     data._fee = formattedData.pcbFee
+
+    data._fee = _.concat(data._fee, [
+      {
+        label: '运费',
+        field: 'freight',
+        value: data.real_freight
+      },
+      {
+        label: '税费',
+        field: 'tax',
+        value: data.tax
+      }
+    ])
 
     data.pcbInfo._testMethod = testMethod.value
 
