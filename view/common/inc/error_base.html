@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><html><![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <meta name="renderer" content="webkit" />
+  <title>{{controller.meta_title}} - {{config.settings.SITE_TITLE}}</title>
+  <meta name="keywords" content="{{controller.keywords}}" />
+  <meta name="description" content="{{controller.description}}" />
+  <meta name="Author" content="TuNaive" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <!-- mobile settings -->
+  <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+  <!-- 自定义样式 -->
+  {% block style %}{% endblock %}
+</head>
+
+<body>
+  {% block content %}{% endblock %}
+</body>
+
+</html>
