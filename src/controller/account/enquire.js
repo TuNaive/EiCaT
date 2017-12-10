@@ -5,9 +5,11 @@ import Base from './base.js'
 
 export default class extends Base {
   __before() {
-    super.__before()
-    this.active = ['/pcb']
-    this.channel = '个人中心'
+    return super.__before().then(data => {
+      this.active = ['/pcb']
+      this.channel = '个人中心'
+      return data
+    })
   }
 
   /**

@@ -1,15 +1,15 @@
 <div id="topBar" class="">
   <div class="container">
   <ul class="top-links list-inline pull-right">
-    {% if controller.is_login %}
+    {% if controller.isLoggedIn %}
     <li class="text-welcome ">{{__.jed.dgettext('messages', 'hi')}}, <strong>{{controller.user.username}}</strong></li>
     <li>
       <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
-        <i class="fa fa-user hidden-xs"></i> {{user.name}}
+        <i class="fa fa-user hidden-xs"></i> {{controller.user.username}}
       </a>
       <ul class="dropdown-menu pull-right">
         <li><a tabindex="-1" href="/account/index"><i class="fa fa-bank"></i> {{__.jed.dgettext('common', 'center')}}</a></li>
-        <li><a tabindex="-1" href="/account/order"><i class="fa fa fa-reorder"></i> {{__.jed.dgettext('common', 'order')}}</a></li>
+        <li><a tabindex="-1" href="/account/order/pcb"><i class="fa fa fa-reorder"></i> {{__.jed.dgettext('common', 'order')}}</a></li>
         <li><a tabindex="-1" href="/account/setting"><i class="fa fa-gear"></i> {{__.jed.dgettext('common', 'profile')}}</a></li>
         <li class="divider"></li>
         <li><a tabindex="-1" href="/account/auth/logout"><i class="fa fa-sign-out"></i> {{__.jed.dgettext('common', 'logout')}}</a></li>

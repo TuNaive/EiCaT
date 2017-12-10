@@ -344,7 +344,7 @@ function generateAddress (pageSize) {
   var tdTpl = _.template(
     '<tr>' +
       '<td>' +
-        '<input type="radio" name="addressId" value="<%- item.id %>" <%- item.is_default == 1 ? " checked" : "" %>>' +
+        '<input type="radio" name="address_id" value="<%- item.id %>" <%- item.is_default == 1 ? " checked" : "" %>>' +
       '</td>' +
       '<td ><%- item.accept_name %></td>' +
       '<td><%- item.province %>,<%- item.city %>,<%- item.county %></td>' +

@@ -1,18 +1,18 @@
-export default class extends think.Controller {
+import User from '../common/user.js'
+
+export default class extends User {
   constructor(ctx) {
     super(ctx)
-    this.user = think.user
   }
 
   __before() {
     this.meta_title = '个人中心'
+    return super.__before().then(data => {
+    	return data
+    })
   }
 
   indexAction () {
     return this.display()
-  }
-
-  async isLogin () {
-    const user = await this.session('')
   }
 }

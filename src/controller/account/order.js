@@ -5,9 +5,11 @@ import Base from './base.js'
 
 export default class extends Base {
   __before() {
-    super.__before()
-    this.active = ['/pcb']
-    this.channel = '个人中心'
+    return super.__before().then(data => {
+      this.active = ['/pcb']
+      this.channel = '个人中心'
+      return data
+    })
   }
 
   /**
@@ -16,7 +18,7 @@ export default class extends Base {
    */
   async pcbAction() {
     //判断是否登陆
-    // await this.weblogin();
+    await this.weblogin();
 
     let status = this.para("status") || null;
     let map = {
@@ -230,7 +232,7 @@ export default class extends Base {
   //确认收货
   async confirmreceiptAction() {
     //判断是否登陆
-    await this.weblogin();
+    // await this.weblogin();
     let map = {
       id: this.get("id"),
       user_id: this.user.uid,

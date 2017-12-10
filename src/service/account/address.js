@@ -5,11 +5,10 @@
 export default class extends think.Service {
   constructor () {
     super()
-    this.user = think.user
   }
 
   async getAddressList(ctrl, {page, pageSize}) {
-    let data = await this.model("address").where({user_id: this.user.uid}).page(page, pageSize).order("is_default DESC,id DESC").countSelect();
+    let data = await this.model("address").where({user_id: ctrl.user.uid}).page(page, pageSize).order("is_default DESC,id DESC").countSelect();
     let html = ctrl.pagination(data);
 
     ctrl.assign('pagination', html);

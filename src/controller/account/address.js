@@ -5,9 +5,11 @@ import Base from './base.js'
 
 export default class extends Base {
   __before() {
-    super.__before()
-    this.active = ['/address']
-    this.channel = '个人中心'
+    return super.__before().then(data => {
+      this.active = ['/address']
+      this.channel = '个人中心'
+      return data
+    })
   }
 
   /**
@@ -17,7 +19,7 @@ export default class extends Base {
   async indexAction() {
     // 判断是否登陆
     // await this.weblogin();
-
+    
     const addressList = await this.service('account/address').getAddressList(this, this.get())
 
     this.assign("list", addressList);

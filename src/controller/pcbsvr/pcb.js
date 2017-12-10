@@ -276,6 +276,7 @@ export default class extends Base {
     const fee = await this.calculateFee(pcbInfo)
     const data = _.merge({}, _.omit(postParams, pcbKeys), fee)
 
+    data.user_id = this.user.uid
     data.type = 0
     data.pcbInfo = JSON.stringify(pcbInfo)
     data.fee = JSON.stringify(fee)
@@ -298,6 +299,7 @@ export default class extends Base {
   async createEnquireAction() {
     const postParams = this.post()
 
+    postParams.user_id = this.user.uid
     postParams.type = 0
 
     await this.model('enquire').add(postParams)

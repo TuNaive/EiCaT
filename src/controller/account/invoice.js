@@ -11,13 +11,13 @@ export default class extends Base {
   async saveAction () {
     const param = this.post()
 
-    const user = { userId: think.user.uid }
+    const user = { userId: this.user.uid }
 
     const edit = this.post('edit')
 
     let res
     if (!_.isNil(edit)) {
-      res = await this.model('invoice').where({ userId: think.user.uid, id: this.post('dataId') }).update(this.post())
+      res = await this.model('invoice').where({ userId: this.user.uid, id: this.post('dataId') }).update(this.post())
       if (!_.isNil(res)) {
         this.body = {
           rtnCode: 0,

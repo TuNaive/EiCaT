@@ -7,9 +7,5 @@ const moment = require('moment');
 module.exports = {
   _: lodash,
   moment: moment,
-  resource: path.join(think.ROOT_PATH, 'www'),
-  // todo: for test
-  user: {
-    uid: 1
-  }
+  resource: path.join(think.ROOT_PATH, 'www')
 }

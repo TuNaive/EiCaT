@@ -29,7 +29,6 @@ export default class extends think.Model {
   }
 
   beforeAdd (data) {
-    data.user_id = think.user.uid
     data.create_time = moment.now()
     //支付状态 pay_status 0:未付款 ,1:已付款
     data.pay_status = 0;
@@ -49,11 +48,6 @@ export default class extends think.Model {
     return _.map(data, (obj, idx) => {
       return this.processQueryData(obj)
     })
-  }
-
-  async getList ({page, pageSize}) {
-    const orderList = await this.model("pcb_order").where({create_by: think.user.uid}).page(page, pageSize).order("id DESC").countSelect()
-    return orderList
   }
 
   processQueryData (obj) {

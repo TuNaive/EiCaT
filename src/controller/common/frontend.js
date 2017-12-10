@@ -1,7 +1,11 @@
-export default class Frontend extends think.Controller {
-  async __before() {
+import User from './user.js'
+
+export default class Frontend extends User {
+  __before() {
     this.setLocal()
-    this.isLoggedIn = await this.isLoggedIn()
+    return super.__before().then(data => {
+      return data
+    })
   }
 
   setLocal() {
@@ -11,10 +15,5 @@ export default class Frontend extends think.Controller {
       this.assign('__', this.getI18n(locale))
     }
     this.assign('isZh', !_.isEqual(this.cookie('locale'), 'en-us'))
-  }
-
-  async isLoggedIn() {
-    const user = await this.session('webuser')
-    return think.isEmpty(user) ? false : user.uid
   }
 }
