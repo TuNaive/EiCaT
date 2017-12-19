@@ -61,8 +61,7 @@ export default class extends Base {
       return this.success({name: '注册成功,登录中!', url: '/account/index'});
     } else {
       this.meta_title = '用户注册';
-      return this.isMobile ? this.display(this.mtpl()) : this.display();
-
+      return this.display();
     }
   }
   /**
