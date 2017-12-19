@@ -84,14 +84,14 @@ exports.view = require('./view').default
  * logger adapter config
  * @type {Object}
  */
-// exports.logger = {
-//   type: 'dateFile',
-//   dateFile: {
-//     handle: DateFile,
-//     level: 'ALL',
-//     absolute: true,
-//     pattern: '-yyyy-MM-dd',
-//     alwaysIncludePattern: false,
-//     filename: path.join(think.ROOT_PATH, 'logs/server.log')
-//   }
-// }
+exports.logger = {
+  type: 'dateFile',
+  dateFile: {
+    handle: DateFile,
+    level: 'ALL',
+    absolute: true,
+    pattern: '-yyyy-MM-dd',
+    alwaysIncludePattern: false,
+    filename: path.join(think.ROOT_PATH, 'logs/server.log')
+  }
+}
