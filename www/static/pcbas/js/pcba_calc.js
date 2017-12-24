@@ -101,7 +101,7 @@ function bindFormEvents (Enum) {
         success: function (data) {
           if (data.rtnCode === 0) {
             // 跳转到我的订单
-            // window.location.href = '/account'
+            window.location.href = '/account/order/pcb'
           } else {
             console.log(data.rtnMsg)
           }
