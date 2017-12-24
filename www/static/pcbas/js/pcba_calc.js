@@ -20,7 +20,7 @@ function bindFormEvents (Enum) {
   generateAddress()
   generateInvoice()
   pcba.steps({
-    startIndex: 2,
+    startIndex: 0,
     headerTag: "h3",
     bodyTag: "fieldset",
     transitionEffect: "slideLeft",
