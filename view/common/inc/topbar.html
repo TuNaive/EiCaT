@@ -16,7 +16,7 @@
       </ul>
     </li>
     {% else %}
-    <li><a href="/account/auth/login" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> {{__.jed.dgettext('common', 'login')}}</a></li>
+    <li><a id="login-btn" href="/account/auth/login" data-toggle="ajaxModal"><i class="fa fa-sign-in"></i> {{__.jed.dgettext('common', 'login')}}</a></li>
     <li><a href="/account/auth/register"><i class="fa fa-thumbs-o-up"></i> {{__.jed.dgettext('common', 'register')}}</a></li>
     {% endif %}
   </ul>

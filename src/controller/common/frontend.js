@@ -1,9 +1,9 @@
 import User from './user.js'
 
 export default class Frontend extends User {
-  __before() {
+  __before(needLogin) {
     this.setLocal()
-    return super.__before().then(data => {
+    return super.__before(needLogin).then(data => {
       return data
     })
   }

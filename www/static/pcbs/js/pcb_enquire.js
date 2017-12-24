@@ -3,7 +3,7 @@ $(function ($) {
 
   bindEvents()
 
-  initUpload()
+  _bindUpload('#pcbFile')
 })
 
 function initFormValidate () {
@@ -41,31 +41,6 @@ function bindEvents () {
           console.log(err)
         }
       })
-    }
-  })
-}
-
-function initUpload () {
-  $('#pcbFile').fileupload({
-    url: 'upload',
-    dataType: 'json',
-    change: function (e, data) {
-      var file = _.last(data.files)
-      $('#pcbFileName').html(file.name)
-    },
-    done: function (e, data) {
-      var res = data.result
-
-      if (res.errno === 0) {
-        $(e.target).data('uuid', res.data.uuid).blur()
-      } else {
-        $('#pcbFileName').html('')
-        _toastr.error(res.errmsg)
-      }
-    },
-    error: function (err) {
-      $('#pcbFileName').html('')
-      _toastr.error(err)
     }
   })
 }

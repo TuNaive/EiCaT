@@ -11382,6 +11382,10 @@ select.error {
 			transition: all 0.2s ease-in;
 }
 
+label.error {
+	color:#bf6464;
+}
+
 
 /*
 	Form Validation

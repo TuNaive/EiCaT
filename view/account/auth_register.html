@@ -19,7 +19,7 @@
 </section>
 <section>
   <div class="container">
-    <form class="sky-form boxed registerpost" action="/account/auth/register" method="post">
+    <form id="register-form" class="sky-form boxed registerpost" action="/account/auth/register" method="post">
       <header>
         <i class="fa fa-users"></i> {{controller.meta_title}}
       </header>
@@ -27,28 +27,28 @@
       <fieldset class="nomargin">
         <label class="input margin-bottom-10">
           <i class="ico-append fa fa fa-user"></i>
-          <input type="text" placeholder="用户名" name="username">
+          <input class="required" type="text" placeholder="用户名" name="username">
           <b class="tooltip tooltip-bottom-right">字母，数字等，用户名唯一</b>
         </label>
         <label class="input margin-bottom-10">
           <i class="ico-append fa fa-envelope"></i>
-          <input type="email" placeholder="电子邮箱" name="email">
+          <input class="required email" type="email" placeholder="电子邮箱" name="email">
           <b class="tooltip tooltip-bottom-right">user@cmswing.com</b>
         </label>
         <label class="input margin-bottom-10">
           <i class="ico-append fa fa-mobile"></i>
-          <input type="text" placeholder="手机号码" name="mobile">
+          <input class="required mobile" type="text" placeholder="手机号码" name="mobile">
           <b class="tooltip tooltip-bottom-right">18688888888</b>
         </label>
         <label class="input margin-bottom-10">
           <i class="ico-append fa fa-lock"></i>
-          <input type="password" placeholder="密码" name="password">
+          <input class="required" type="password" minlength="6" placeholder="密码" name="password">
           <b class="tooltip tooltip-bottom-right">不少于6位</b>
         </label>
 
         <label class="input margin-bottom-10">
           <i class="ico-append fa fa-lock"></i>
-          <input type="password" placeholder="确认密码" name="password2">
+          <input class="required" type="password" minlength="6" placeholder="确认密码" name="password2">
           <b class="tooltip tooltip-bottom-right">确认密码</b>
         </label>
         <div class="margin-top-30">
@@ -61,7 +61,8 @@
 
       <div class="row margin-bottom-20">
         <div class="col-md-12">
-          <button type="submit" class="btn btn-primary ajax-post" target-form="registerpost" ><i class="fa fa-check"></i> 立即注册</button>
+          <button id="submit-btn" type="submit" class="btn btn-primary"><i class="fa fa-check"></i> 立即注册</button>
+          <button id="real-submit" class="ajax-post" target-form="registerpost"></button>
         </div>
       </div>
     </form>
@@ -69,4 +70,17 @@
 </section>
 {% endblock %}
 {%block script%}
+<script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
+<script src="/static/common/js/validate.js"></script>
+<script src="/static/common/plugins/form.validate/localization/messages_zh.min.js"></script>
+<script type="text/javascript">
+  $(function ($) {
+    $('#submit-btn').click(function (e) {
+      var validRes = $('#register-form').valid();
+      if (validRes) {
+        $('#real-submit').click()
+      }
+    })
+  })
+</script>
 {%endblock%}

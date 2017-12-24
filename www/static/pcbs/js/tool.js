@@ -30,33 +30,29 @@ var tpls = {
     '</div>'
 }
 
-define([], function () {
-  var tool = {}
+var TOOL = {}
 
-  /*
-   * radio dom 的生成函数
-   * @param {String} type
-   * @param {Obeject|Array} options {value: label}|[label]
-   * @param {String} field
-   * @param {String} label
-   * */
-  tool.generateFormElem = function (type, options, field, label, activeIndex, widthClass) {
-    if (!(_.isArray(options) || _.isObject(options))  || _.isEmpty(options)) {
-      throw new Error(field, 'options must be an Array or Object without empty')
-    }
-
-    var tpl = tpls[type]
-
-    if (_.isNil(tpl)) {
-      throw new Error(field, 'finds no tpl')
-    }
-
-    var defaultVal = options[0] || _.keys(options)[0]
-
-    var compiled = _.template(tpl)
-
-    return compiled({options, field, label, defaultVal, activeIndex: _.defaultTo(activeIndex, 0), widthClass})
+/*
+ * radio dom 的生成函数
+ * @param {String} type
+ * @param {Obeject|Array} options {value: label}|[label]
+ * @param {String} field
+ * @param {String} label
+ * */
+TOOL.generateFormElem = function (type, options, field, label, activeIndex, widthClass) {
+  if (!(_.isArray(options) || _.isObject(options))  || _.isEmpty(options)) {
+    throw new Error(field, 'options must be an Array or Object without empty')
   }
 
-  return tool
-})
+  var tpl = tpls[type]
+
+  if (_.isNil(tpl)) {
+    throw new Error(field, 'finds no tpl')
+  }
+
+  var defaultVal = options[0] || _.keys(options)[0]
+
+  var compiled = _.template(tpl)
+
+  return compiled({options, field, label, defaultVal, activeIndex: _.defaultTo(activeIndex, 0), widthClass})
+}

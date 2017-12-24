@@ -79,6 +79,7 @@
 		_owl_carousel();
         _icheck();
         _ajaxmodal();
+        _triggerLogin();
 		_flexslider();
 		_popover();
 		_lightbox();
@@ -152,6 +153,16 @@ function _panel_toggle() {
     );
 
   }
+
+// trigger login modal
+function _triggerLogin() {
+	var reg = /\?login=true/
+	var triggerFlag = window.location.search.search(reg) > -1
+	if (triggerFlag) {
+		$('#login-btn').click()
+	}
+}
+
 //typeb
 function _type_tr_b() {
 	if($('.type_tr_b1').length > 0){
@@ -2269,7 +2280,7 @@ function _ajax_post() {
 		var file_container = jQuery("input[type=file]");
 
 		if(file_container.length > 0) {
-			loadScript(plugin_path + 'custom.fle_upload.js');
+			// loadScript(plugin_path + 'custom.fle_upload.js');
 		}
 
 
@@ -3580,7 +3591,7 @@ function _pingpp(){
 
 				$.ajax({
 					type:"post",
-					url:"/center/pay/pay",
+					url:"/account/pay/index",
 					data:{order_id:order_id,payment:payment},
 					success:function (res) {
 						console.log(res);
