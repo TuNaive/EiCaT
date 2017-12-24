@@ -25,7 +25,7 @@ function bindEvents () {
     if (valid) {
       // todo: add loading
       $.ajax({
-        url: 'createEnquire',
+        url: '/pcbsvr/pcb/createEnquire',
         type: 'POST',
         dataType: 'json',
         data: _.concat(form.serializeArray(), [{name: 'fileUuid', value: $('#pcbFile').data('uuid')}]),
@@ -47,7 +47,7 @@ function bindEvents () {
 
 function initUpload () {
   $('#pcbFile').fileupload({
-    url: 'upload',
+    url: '/pcbsvr/pcb/upload',
     dataType: 'json',
     change: function (e, data) {
       var file = _.last(data.files)
