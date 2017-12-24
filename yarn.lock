@@ -17,6 +17,10 @@ accepts@^1.2.2:
     mime-types "~2.1.16"
     negotiator "0.6.1"
 
+"accounting@git+https://github.com/openexchangerates/accounting.js.git":
+  version "0.4.2"
+  resolved "git+https://github.com/openexchangerates/accounting.js.git#74a2b12800f0483ffeebf05c00ea52f8dde3ac07"
+
 acorn-jsx@^3.0.0:
   version "3.0.1"
   resolved "http://registry.npm.taobao.org/acorn-jsx/download/acorn-jsx-3.0.1.tgz#afdf9488fb1ecefc8348f6fb22f464e32a58b36b"
@@ -1998,6 +2002,10 @@ npmlog@^4.0.2:
 number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/number-is-nan/download/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
+
+number-precision@^1.1.7:
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/number-precision/download/number-precision-1.2.0.tgz#de791d6126e10ff48fcceaeb2821c87d851df136"
 
 numeral@^2.0.6:
   version "2.0.6"
