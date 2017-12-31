@@ -71,12 +71,16 @@ function saveInvoice(dataArr) {
     paramData = _.concat(paramData, dataArr)
   }
   $.ajax({
-    url: 'save',
+    url: '/account/invoice/save',
     type: 'POST',
     dataType: 'json',
     data: paramData,
     success: function (data) {
+      $('.modal-dialog').modal('hide')
       if (data.rtnCode === 0) {
+        setTimeout(function(){
+          location.reload();
+        },1000);
       } else {
         console.log(data.rtnMsg)
       }

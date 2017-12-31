@@ -5,8 +5,7 @@ export default class extends think.Service {
   }
 
   async getInvoiceList(ctrl, {page = ctrl.get('page'), pageSize = ctrl.get('pageSize')}) {
-
-    let data = await this.model("invoice").where({userId: this.user.uid}).page(page, pageSize).countSelect();
+    let data = await this.model("invoice").where({userId: ctrl.user.uid}).page(page, pageSize).countSelect();
     
     let html = ctrl.pagination(data);
 

@@ -84,6 +84,8 @@ function bindFormEvents () {
 
   generateAddress()
 
+  generateInvoice()
+
   pcb.steps({
     // startIndex: 2,
     headerTag: "h3",
@@ -98,6 +100,7 @@ function bindFormEvents () {
       initFormValidates()
       initPcbStateAndEvents()
       initAddressStateAndEvents()
+      initInvoiceStateAndEvents()
     },
     onStepChanging: function (event, currentIndex, newIndex) {
       // Allways allow previous action even if the current form is not valid!
@@ -353,6 +356,91 @@ function generateAddress (pageSize) {
         $('#addressList tbody').html(addressHtml.join('')).data('total', total)
       } else {
         console.log(data.errmsg)
+      }
+    },
+    error: function (err) {
+      console.log(err)
+    }
+  })  
+}
+
+function initInvoiceStateAndEvents() {
+  $('#refreshInvoice').click(function () {
+    generateInvoice()
+  })
+
+  $('#invoice0').click(function () {
+    $('#invoiceList').show()
+    $('#showAllInvoice').show()
+  })
+
+  $('#invoice1').click(function () {
+    $('#invoiceList').hide()
+    $('#showAllInvoice').hide()
+  })
+
+  $('#showAllInvoice').click(function () {
+    var $this = $(this)
+    var $invoiceTb = $('#invoiceList tbody')
+    var total = $invoiceTb.data('total')
+    var $invoiceTrs = $invoiceTb.find('tr')
+    var $extraTrs = $invoiceTrs.filter(':gt(' + (INVOICE_PAGE_SIZE - 1) + ')')
+
+    if ($this.data('disabled')) {
+      $this.html('显示全部发票').data('disabled', false)
+      $extraTrs.hide()
+    } else {
+      $this.html('收起全部发票').data('disabled', true)
+     
+      if ($invoiceTrs.length < total) {
+        generateInvoice(9999)
+      } else {
+        $extraTrs.show()
+      }
+      
+    }
+  })
+}
+
+function generateInvoice (pageSize) {
+  var tdTpl = _.template(
+    '<tr>' +
+      '<td>' +
+        '<input type="radio" name="invoiceId" value="<%- item.id %>" <%- item.is_default == 1 ? " checked" : "" %>>' +
+      '</td>' +
+      '<td ><%- item.invoiceTitle %></td>' +
+      '<td><%- item.receiveName %></td>' +
+      '<td><%- item.receiveAddress %></td>' +
+      '<td>' +
+        '<a href="/account/invoice/editmodal?id=<%-item.id %>&type=1&check=1" data-toggle="ajaxModal" class="margin-right-10">' + '查看' + '</a>' + '<a href="/account/invoice/editmodal?id=<%-item.id %>&type=1" data-toggle="ajaxModal">' + '编辑' + '</a>' +
+      '</td>' +
+    '</tr>'
+  )
+
+  pageSize = _.defaultTo(pageSize, INVOICE_PAGE_SIZE)
+
+  $.ajax({
+    url: '/pcbsvr/pcba/getInvoice',
+    type: 'POST',
+    dataType: 'json',
+    data: {pageSize: pageSize},
+    success: function (data) {
+      if (data.rtnCode === 0) {
+        var invoiceHtml = _.map(_.get(data, 'data.data'), function (item) {
+          return tdTpl({item: item})
+        })
+
+        var total = _.get(data, 'data.count')
+
+        if (total > pageSize) {
+          $('#showAllInvoice').html('显示全部发票')
+        } else {
+          $('#showAllInvoice').html('收起全部发票').data('disabled', true)
+        }
+
+        $('#invoiceList tbody').html(invoiceHtml.join('')).data('total', total)
+      } else {
+        console.log(data.rtnMsg)
       }
     },
     error: function (err) {

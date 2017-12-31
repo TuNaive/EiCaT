@@ -7,7 +7,7 @@ require([], function () {
 
 function bindFormEvents() {
   var self = this;
-  $('.btn-default').click(function (event) {
+  $('.btn-set').click(function (event) {
     var dataId = $(event.target).data('val');
     setupDefault(event, dataId);
   })
@@ -25,13 +25,16 @@ function bindFormEvents() {
 
 function delInfo(dataId) {
   $.ajax({
-    url: 'delete',
+    url: '/account/invoice/delete',
     type: 'POST',
     dataType: 'json',
     data: {id: dataId},
     success: function (data) {
       $('.del-invo-dialog').modal('hide')
       if (data.rtnCode === 0) {
+        setTimeout(function(){
+          location.reload();
+        },1000);
       } else {
         console.log(data.rtnMsg)
       }
@@ -45,7 +48,7 @@ function delInfo(dataId) {
 
 function setupDefault(event, dataId) {
   $.ajax({
-    url: 'default',
+    url: '/account/invoice/default',
     type: 'POST',
     dataType: 'json',
     data: {id: dataId},
