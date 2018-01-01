@@ -2,7 +2,7 @@
  * Created by dengyuying on 2017/10/12.
  */
 
-var ADDRESS_PAGE_SIZE = 2
+var ADDRESS_PAGE_SIZE = 2, INVOICE_PAGE_SIZE = 2
 
 var formKeyConf = {
   radio: {

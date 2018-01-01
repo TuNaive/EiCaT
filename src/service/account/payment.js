@@ -20,7 +20,7 @@ module.exports = class extends think.Service {
     let config;
     let extra = {};
     const amount = Number(order_amount) * 100;
-    const setup = await think.config('setup');
+    const setup = await think.config('settings');
     const pingpp = require('pingpp')(setup.PINGXX_LIVE_SECRET_KEY);
     pingpp.setPrivateKeyPath(think.ROOT_PATH + '/private/pingpp/cmswing_rsa_private_key.pem');
     switch (channel) {
@@ -86,11 +86,11 @@ module.exports = class extends think.Service {
       app: {id: setup.PINGXX_APP_ID},
       extra: extra
     };
-    console.log(config);
+    console.log('[create pingpp config]', config);
     function create(pingpp, config) {
       const deferred = think.defer();
       pingpp.charges.create(config, function(err, charge) {
-        console.log(err);
+        console.log('[create pingpp error]', err);
         deferred.resolve(charge);
       });
       return deferred.promise;
