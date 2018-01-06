@@ -233,31 +233,34 @@ export default class extends Base {
       const payment = think.service('account/payment', this.ctx);
       const charges = await payment.charge(order.pingxx_id);
 
-      if (charges.paid && order.pay_status == 0) {
+      if (charges.paid && order.pay_status == 0) { // 未付款
         // 支付成功改变订单状态
-        const update = await this.model('order').where({order_no: charges.order_no}).update({status: 3, pay_status: 1, pay_time: (charges.time_paid * 1000)});
 
-        if (order.type == 1 && update) {
-          await this.model('member').where({id: order.user_id}).increment('amount', order.order_amount);
+        // 充值订单处理逻辑
+        // const update = await this.model('order').where({order_no: charges.order_no}).update({status: 3, pay_status: 1, pay_time: (charges.time_paid * 1000)});
+        // if (order.type == 1 && update) {
+        //   await this.model('member').where({id: order.user_id}).increment('amount', order.order_amount);
 
-          // 充值成功后插入日志
-          const log = {
-            admin_id: 0,
-            user_id: order.user_id,
-            type: 2,
-            time: new Date().valueOf(),
-            amount: Number(order.order_amount),
-            amount_log: await this.model('member').where({id: order.user_id}).getField('amount', true),
-            note: `${await get_nickname(order.user_id)} 通过[${await this.model('pingxx').where({id: order.payment}).getField('title', true)}]支付方式进行充值,订单编号：${order.order_no}`
-          };
-          await this.model('balance_log').add(log);
-        }
+        //   // 充值成功后插入日志
+        //   const log = {
+        //     admin_id: 0,
+        //     user_id: order.user_id,
+        //     type: 2,
+        //     time: new Date().valueOf(),
+        //     amount: Number(order.order_amount),
+        //     amount_log: await this.model('member').where({id: order.user_id}).getField('amount', true),
+        //     note: `${await get_nickname(order.user_id)} 通过[${await this.model('pingxx').where({id: order.payment}).getField('title', true)}]支付方式进行充值,订单编号：${order.order_no}`
+        //   };
+        //   await this.model('balance_log').add(log);
+        // }
+
         // 记录支付日志
         await this.model('doc_receiving').where({order_id: order.id}).update({pay_status: 1, payment_time: (charges.time_paid * 1000)});
       }
-      if (charges.paid && order.pay_status == 0 && order.type == 1) {
-        await this.model('order').where({order_no: order.order_no}).delete();
-      }
+      // 充值订单处理逻辑
+      // if (charges.paid && order.pay_status == 0 && order.type == 1) {
+      //   await this.model('order').where({order_no: order.order_no}).delete();
+      // }
       charges.amount = charges.amount / 100;
       charges.channel = await this.model('pingxx').where({channel: charges.channel}).getField('title', true);
       this.assign('order', charges);
@@ -266,11 +269,7 @@ export default class extends Base {
     this.meta_title = '支付结果';// 标题1
     this.keywords = this.config('setup.WEB_SITE_KEYWORD') ? this.config('setup.WEB_SITE_KEYWORD') : '';// seo关键词
     this.description = this.config('setup.WEB_SITE_DESCRIPTION') ? this.config('setup.WEB_SITE_DESCRIPTION') : '';// seo描述
-    // 判断浏览客户端
-    if (this.isMobile) {
-      return this.display(this.mtpl());
-    } else {
-      return this.display();
-    }
+    
+    return this.display();
   }
 };

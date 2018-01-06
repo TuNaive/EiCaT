@@ -75,6 +75,7 @@ module.exports = class extends think.Service {
         };
         break;
     }
+
     config = {
       subject: '网站订单支付',
       body: '网站订单支付',
@@ -90,7 +91,7 @@ module.exports = class extends think.Service {
     function create(pingpp, config) {
       const deferred = think.defer();
       pingpp.charges.create(config, function(err, charge) {
-        console.log('[create pingpp error]', err);
+        console.log(`[create pingpp error with config: ${config}]`, err);
         deferred.resolve(charge);
       });
       return deferred.promise;
@@ -106,7 +107,7 @@ module.exports = class extends think.Service {
     function retrieve(pingpp, id) {
       const deferred = think.defer();
       pingpp.charges.retrieve(id, function(err, charge) {
-        console.log(err);
+        console.log(`[retrieve pingpp error with id: ${id}]`, err);
         deferred.resolve(charge);
       }
       );
