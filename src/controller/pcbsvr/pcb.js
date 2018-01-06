@@ -280,6 +280,7 @@ export default class extends Base {
     const fee = await this.calculateFee(pcbInfo)
     const data = _.merge({}, _.omit(postParams, pcbKeys), fee)
 
+    data.order_no = this.model('order').getOrderid(this.user.uid)
     data.user_id = this.user.uid
     data.type = 0
     data.pcbInfo = JSON.stringify(pcbInfo)

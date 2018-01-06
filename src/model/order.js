@@ -51,7 +51,7 @@ export default class extends think.Model {
   }
 
   processQueryData (obj) {
-    obj.order_no = `O${_.get(enums.order_type, obj.type)}${_.toString(obj.create_time).slice(0, -3)}${_.padStart(obj.id, 6, 0)}`
+    obj._order_no = `O${_.get(enums.order_type, obj.type)}${_.toString(obj.create_time).slice(0, -3)}${_.padStart(obj.id, 6, 0)}`
     obj._create_time = moment(_.toNumber(obj.create_time)).format('YYYY-MM-DD HH:mm:ss')
     obj._state = _.get(enums, `order_state.${obj.state}`)
     obj._pay_state = _.get(enums, `pay_state.${obj.pay_state}`)

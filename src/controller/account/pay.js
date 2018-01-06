@@ -77,7 +77,6 @@ export default class extends Base {
         return this.fail('您没有要支付的订单');
       } else {
         // 判断是否已经绑定pingxx_id,如果已绑定查询pingxx订单直接支付。防止订单重复生成。
-        // console.log(order.id);
         if (think.isEmpty(order.pingxx_id)) {
           // console.log(111111111)
           // 获取渠道
@@ -210,13 +209,11 @@ export default class extends Base {
       default:
     }
   }
-  // 支付回掉
+  // 支付回调
   async payresAction() {
     const code = this.get();
 
-    // orderId: '1458722092073', respMsg: 'success'
-    console.log(code);
-    // 站内支付回掉
+    // 站内支付回调
     if (code.c_o_id) {
       const order = await this.model('order').find(code.c_o_id);
       order.amount = order.order_amount;
