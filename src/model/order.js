@@ -62,4 +62,10 @@ export default class extends think.Model {
 
     return obj
   }
+
+  getOrderid(uid) {
+    // 用户id+毫秒时间戳后5位
+    const m = new Date().getTime().toString();
+    return _.padEnd(uid, 10, '0') + m.substr(8);
+  }
 }
