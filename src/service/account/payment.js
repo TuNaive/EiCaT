@@ -76,6 +76,9 @@ module.exports = class extends think.Service {
         break;
     }
 
+    // todo: dev test
+    ip = '47.95.214.86'
+
     config = {
       subject: '网站订单支付',
       body: '网站订单支付',
