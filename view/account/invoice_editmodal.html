@@ -1,3 +1,4 @@
+
 {% block content %}
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
@@ -39,13 +40,13 @@
             <div class="form-group invoice_special" id="invoiceTitle" style="display: none;">
                 <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> 发票抬头：</label>
                 <div class="col-md-6">
-                    <input class="form-control " id="input_InvoiceTitle" name="invoiceTitle" placeholder="发票抬头" type="text" value={{render.invoiceTitle}}>
+                    <input class="form-control" required title="请输入发票抬头" id="input_InvoiceTitle" name="invoiceTitle" placeholder="发票抬头" type="text" value={{render.invoiceTitle}}>
                 </div>
             </div>
             <div class="form-group">
                 <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> 收票人：</label>
                 <div class="col-md-6">
-                    <input class="form-control " id="input_ReceiveName" name="receiveName" placeholder="收票人" type="text" value={{render.receiveName}}>
+                    <input class="form-control" required title="请输入收票人" id="input_ReceiveName" name="receiveName" placeholder="收票人" type="text" value={{render.receiveName}}>
                 </div>
             </div>
             <div class="form-group">
@@ -57,7 +58,7 @@
             <div class="form-group">
                 <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> 收票地址：</label>
                 <div class="col-md-6">
-                    <input class="form-control " id="input_ReceiveAddress" name="receiveAddress" placeholder="收票地址" type="text" value="{{render.receiveAddress}}">
+                    <input class="form-control" required title="请输入收票地址" id="input_ReceiveAddress" name="receiveAddress" placeholder="收票地址" type="text" value="{{render.receiveAddress}}">
                 </div>
             </div>
             <div class="form-group">
@@ -69,37 +70,37 @@
             <div class="form-group invoice_special" style="display: none;">
                 <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> 公司名称：</label>
                 <div class="col-md-6">
-                    <input class="form-control " id="input_CompanyName" name="companyName" placeholder="公司名称" type="text" value={{render.companyName}}>
+                    <input class="form-control" required title="请输入公司名称" id="input_CompanyName" name="companyName" placeholder="公司名称" type="text" value={{render.companyName}}>
                 </div>
             </div>
             <div class="form-group invoice_special" style="display: none;">
                 <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i>公司注册地址：</label>
                 <div class="col-md-6">
-                    <input class="form-control " id="input_CompanyRegisterAddress" name="cRegisterAddress" placeholder="请输入公司注册地址" type="text" value={{render.cRegisterAddress}}>
+                    <input class="form-control" required title="请输入公司注册地址" id="input_CompanyRegisterAddress" name="cRegisterAddress" placeholder="请输入公司注册地址" type="text" value={{render.cRegisterAddress}}>
                 </div>
             </div>
             <div class="form-group invoice_special" style="display: none;">
                 <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> 公司电话：</label>
                 <div class="col-md-6">
-                    <input class="form-control " id="input_CompanyPhone" name="companyPhone" placeholder="公司电话" type="text" value={{render.companyPhone}}>
+                    <input class="form-control " id="input_CompanyPhone" required title="请输入公司电话" name="companyPhone" placeholder="公司电话" type="text" value={{render.companyPhone}}>
                 </div>
             </div>
             <div class="form-group invoice_special" id="invoiceTAXID" style="display: none;">
                 <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> 税务登记号：</label>
                 <div class="col-md-6">
-                    <input class="form-control " id="input_TAXID" name="taxId" placeholder="税务登记号" type="text" value={{render.taxId}}>
+                    <input class="form-control " required title="请输入税务登记号" id="input_TAXID" name="taxId" placeholder="税务登记号" type="text" value={{render.taxId}}>
                 </div>
             </div>
             <div class="form-group invoice_special" style="display: none;">
                 <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> 开户银行：</label>
                 <div class="col-md-6">
-                    <input class="form-control " id="input_DepositBank" name="depositBank" placeholder="开户银行" type="text" value={{render.depositBank}}>
+                    <input class="form-control " required title="请输入开户银行" id="input_DepositBank" name="depositBank" placeholder="开户银行" type="text" value={{render.depositBank}}>
                 </div>
             </div>
             <div class="form-group invoice_special" style="display: none;">
                 <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> 开户银行账号：</label>
                 <div class="col-md-6">
-                    <input class="form-control " id="input_BankAccountNo" name="bankAccountNo" placeholder="开户银行账号" type="text" value={{render.bankAccountNo}}>
+                    <input class="form-control digits" required title="请输入正确开户银行账号" id="input_BankAccountNo" name="bankAccountNo" placeholder="开户银行账号" type="text" value={{render.bankAccountNo}}>
                 </div>
             </div>
             <div class="form-group invoice_special" style="display: none;">
@@ -146,6 +147,6 @@
   <script src="/static/common/plugins/jquery.fileupload/jquery.fileupload.js"></script>
   <script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
   <script src="/static/common/plugins/form.validate/localization/messages_zh.min.js"></script>
-  <!-- <script src="/static/common/plugins/require.js"></script> -->
+  <script src="/static/common/plugins/require.js"></script>
   <script src="/static/account/js/edit_modal.js"></script>
 {%endblock%}

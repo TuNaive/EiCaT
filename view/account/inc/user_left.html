@@ -60,11 +60,18 @@
         <i class="fa fa-user"></i> 订单管理</a>
       <ul id="collapse-2" class="collapse in"><!-- NOTE: "collapse in" to be open on page load -->
         <li>
-          <a href="/account/order/pcb" class="{% if ctx.originalUrl == '/account/order/pcb' %}text-danger{%endif%}"><i
+          <a href="/account/order/pcb?type=0" class="{% if ctx.originalUrl == '/account/order/pcb?type=0' %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> PCB订单</a></li>
         <li>
-          <a href="/account/enquire/pcb" class="{% if ctx.originalUrl == '/account/enquire/pcb' %}text-danger{%endif%}"><i
+          <a href="/account/enquire/pcb?type=0" class="{% if ctx.originalUrl == '/account/enquire/pcb?type=0' %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> PCB询价单</a>
+        </li>
+        <li>
+          <a href="/account/order/pcb?type=1" class="{% if ctx.originalUrl == '/account/order/pcb?type=1' %}text-danger{%endif%}"><i
+              class="fa fa-angle-right"></i> PCBA订单</a></li>
+        <li>
+          <a href="/account/enquire/pcb?type=1" class="{% if ctx.originalUrl == '/account/enquire/pcb?type=1' %}text-danger{%endif%}"><i
+              class="fa fa-angle-right"></i> PCBA询价单</a>
         </li>
       </ul>
     </li>

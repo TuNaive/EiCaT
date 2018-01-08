@@ -13,7 +13,7 @@ export default class extends Base {
   }
 
   /**
-   * pcb询价单管理
+   * 询价单管理
    * @returns {PreventPromise}
    */
   async pcbAction() {
@@ -21,8 +21,10 @@ export default class extends Base {
     // await this.weblogin();
 
     let status = this.para("status") || null;
+
+    const type = this.get('type') || null;
     let map = {
-      type: 0,
+      type: type,
       user_id: this.user.uid,
       status: ["!=", -1]
 

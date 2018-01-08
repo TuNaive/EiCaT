@@ -101,7 +101,7 @@ function bindFormEvents (Enum) {
         success: function (data) {
           if (data.rtnCode === 0) {
             // 跳转到我的订单
-            window.location.href = '/account/order/pcb'
+            window.location.href = '/account/order/pcb?type=1'
           } else {
             console.log(data.rtnMsg)
           }
@@ -145,15 +145,15 @@ function initFormValidates () {
     return $('#pcbaFileName').html()
   }, '请上传文件')
 
-  $.validator.addMethod('pointBGA', function (value, element, params) {
-    return _.toNumber($('#pointBGA').val()) + _.toNumber($('#pointCHIP').val()) + _.toNumber($('#pointIC').val()) <= 500
+  $.validator.addMethod('pointBga', function (value, element, params) {
+    return _.toNumber($('#pointBga').val()) + _.toNumber($('#pointChip').val()) + _.toNumber($('#pointIc').val()) <= 500
   }, 'CHIP+IC+BGA总点数要小于500点，大于请转人工')
 
   $.validator.addMethod('boardNumber', function (value, element, params) {
     return value <= 30000
   }, '订单数量0~30000')
 
-  $.validator.addMethod('pointDIP', function (value, element, params) {
+  $.validator.addMethod('pointDip', function (value, element, params) {
     return value <= 1000
   }, 'DIP脚数0~1000')
 
@@ -182,14 +182,14 @@ function initFormValidates () {
   }
   enquiryForm.validate(_.merge({}, validateConf, {
     rules: {
-      pointBGA: {
-        pointBGA: true
+      pointBga: {
+        pointBga: true
       },
       boardNumber: {
         boardNumber: true
       },
-      pointDIP: {
-        pointDIP: true
+      pointDip: {
+        pointDip: true
       }
     }
   }))
@@ -232,7 +232,7 @@ function generateInvoice (pageSize) {
   var tdTpl = _.template(
     '<tr>' +
       '<td>' +
-        '<input type="radio" name="invoiceId" value="<%- item.id %>" <%- item.is_default == 1 ? " checked" : "" %>>' +
+        '<input type="radio" name="invoiceId" value="<%- item.id %>" <%- item.isDefault == 1 ? " checked" : "" %>>' +
       '</td>' +
       '<td ><%- item.invoiceTitle %></td>' +
       '<td><%- item.receiveName %></td>' +

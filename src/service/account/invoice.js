@@ -5,7 +5,7 @@ export default class extends think.Service {
   }
 
   async getInvoiceList(ctrl, {page = ctrl.get('page'), pageSize = ctrl.get('pageSize')}) {
-    let data = await this.model("invoice").where({userId: ctrl.user.uid}).page(page, pageSize).countSelect();
+    let data = await this.model("invoice").where({userId: ctrl.user.uid}).page(page, pageSize).order("isDefault DESC,id DESC").countSelect();
     
     let html = ctrl.pagination(data);
 
@@ -15,7 +15,7 @@ export default class extends think.Service {
   }
 
   async getNorInvoiceList(ctrl, {page = ctrl.get('page') || 1, pageSize = ctrl.get('pageSize') || 5}) {
-    const res = await ctrl.model('invoice').where({ userId: ctrl.user.uid }).page(page, pageSize).countSelect()
+    const res = await ctrl.model('invoice').where({ userId: ctrl.user.uid }).page(page, pageSize).order("isDefault DESC,id DESC").countSelect()
     let html = ctrl.pagination(res)
     ctrl.assign('pagination', html)
     _.forEach(res.data, (value, key) => {
@@ -27,7 +27,7 @@ export default class extends think.Service {
   }
 
   async getSpeInvoiceList(ctrl, {page = ctrl.get('page') || 1, pageSize = ctrl.get('pageSize') || 2}) {
-    const specialRes = await ctrl.model('invoice').where({ userId: ctrl.user.uid, invoiceType: 1 }).page(page, pageSize).countSelect()
+    const specialRes = await ctrl.model('invoice').where({ userId: ctrl.user.uid, invoiceType: 1 }).order("isDefault DESC,id DESC").page(page, pageSize).countSelect()
     let htmlSpecial = ctrl.pagination(specialRes)
     ctrl.assign('paginationSpecial', htmlSpecial)
     ctrl.assign('listSpecial', specialRes.data)

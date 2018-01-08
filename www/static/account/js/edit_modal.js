@@ -1,8 +1,15 @@
+var Regexmap = {
+  name: /^[\u4E00-\u9FA5A-Za-z]+$/,
+  mobile: /^1[34578]\d{9}$/,
+  email: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+}
 
 $(document).ready(function() {
   bindFormEvents();
   setupData();
+  initFormValidates()
 });
+
 function bindFormEvents() {
   $('#normalInvoice').click(function () {
     $('#invoiceForm').get(0).reset()
@@ -27,15 +34,19 @@ function bindFormEvents() {
   })
 
   $('#saveBtn').click(function (event) {
-    var edit = $(event.target).data('val')
-    var dataId = $(event.target).data('id')
-    console.log('-----save', edit, dataId)
-    if (edit === 1) { // 编辑
-      console.log('-----edit')
-      var editArr = [{name: "edit", value: edit}, {name: "dataId", value: dataId}]
-      saveInvoice(editArr)
-    } else { // 新增
-      saveInvoice()
+
+    var invoiceForm = $("#invoiceForm")
+    var validRes = invoiceForm.valid()
+    if (validRes) {
+      var edit = $(event.target).data('val')
+      var dataId = $(event.target).data('id')
+      if (edit === 1) { // 编辑
+        console.log('-----edit')
+        var editArr = [{name: "edit", value: edit}, {name: "dataId", value: dataId}]
+        saveInvoice(editArr)
+      } else { // 新增
+        saveInvoice()
+      }
     }
   })
 
@@ -89,4 +100,39 @@ function saveInvoice(dataArr) {
       console.log(err)
     }
   })
+}
+
+function initFormValidates () {
+  var invoiceForm = $("#invoiceForm")
+  
+  $.validator.addMethod('receiveName', function (value, element, params) {
+    return $('#pcbaFileName').html()
+  }, '请上传文件')
+
+  $.validator.addMethod('pointBga', function (value, element, params) {
+    return _.toNumber($('#pointBga').val()) + _.toNumber($('#pointChip').val()) + _.toNumber($('#pointIc').val()) <= 500
+  }, 'CHIP+IC+BGA总点数要小于500点，大于请转人工')
+
+  $.validator.addMethod('receivePhone', function (value, element, params) {
+    return Regexmap.mobile.test(value)
+  }, '请输入正确手机号码')
+
+  var validateConf = {
+    ignore: ':hidden',
+    errorPlacement: function errorPlacement (error, element) {
+      var groupParent = element.parentsUntil('.form-group', '[class^="col-sm-"]')
+      if (groupParent.length) {
+        groupParent.append(error)
+      } else {
+        element.after(error)
+      }
+    }
+  }
+  invoiceForm.validate(_.merge({}, validateConf, {
+    rules: {
+      receivePhone: {
+        receivePhone: true
+      }
+    }
+  }))
 }

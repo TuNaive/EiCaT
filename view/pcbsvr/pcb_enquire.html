@@ -20,11 +20,11 @@
 </section>
 <section>
   <div class="container">
-    <p>任何PCB加工需求，只需上传资料生成询价单，报价工程师将一对一为您提供报价服务。</p>
+    <p>任何{{title}}加工需求，只需上传资料生成询价单，报价工程师将一对一为您提供报价服务。</p>
 
     <form id="pcbFileForm" class="form-horizontal">
       <div class="form-group">
-        <label for="pcbFile" class="col-sm-2 control-label">PCB文件：</label>
+        <label for="pcbFile" class="col-sm-2 control-label">{{title}}文件：</label>
         <div class="col-sm-10">
           <span class="btn btn-default">选择文件</span>
           <span id="pcbFileName"></span>
@@ -70,7 +70,7 @@
       </div>
     </form>
 
-    <button id="generateOrder" class="btn btn-default center-block">生成询价单</button>
+    <button id="generateOrder" class="btn btn-default center-block" data-type={{type}}>生成询价单</button>
 
     <div class="row">
       <div class="col-md-3">

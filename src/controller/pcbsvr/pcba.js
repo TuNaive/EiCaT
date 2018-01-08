@@ -87,9 +87,18 @@ export default class extends Base {
 
     const fee = this.calculateFee(postParams)
 
-    console.log('--------merge', _.merge(postParams, fee))
-    const res = await this.model('pcba_order').add(_.merge(postParams, fee))
-    console.log('-------create', res)
+    let data = _.merge(postParams, fee)
+
+    data.user_id = this.user.uid
+
+    data.type = 1
+
+    data.order_amount = data.totalFee
+
+    data.address_id = data.addressId
+
+    const res = await this.model('order').add(data)
+
     if (!_.isNil(res)) {
       this.body = {
         rtnCode: 0,
@@ -124,7 +133,7 @@ export default class extends Base {
       '8': 572.00
     }
     let Fee = {}
-    Fee.plateSizeFee = plateObj[params.plateSize].toFixed(2)
+    Fee.platesizeFee = plateObj[params.plateSize].toFixed(2)
     Fee.otherFee = '0.00'
     const icCount = _.toNumber(params.pointIC)
     const chipCount = _.toNumber(params.pointCHIP)
@@ -141,7 +150,7 @@ export default class extends Base {
       projceFee = 0.017 * (chipCount + icCount + bgaCount) * boardCount * 1.003 * 2 + 0.02 * dipCount * boardCount * 1.003 * 2 + 2.8 * boardCount
     }
     Fee.projceFee = projceFee.toFixed(2)
-    Fee.totalFee = _.toNumber(Fee.plateSizeFee) + _.toNumber(Fee.projceFee) + _.toNumber(Fee.otherFee)
+    Fee.totalFee = _.toNumber(Fee.platesizeFee) + _.toNumber(Fee.projceFee) + _.toNumber(Fee.otherFee)
     Fee.totalFee = Fee.totalFee.toFixed(2)
     return Fee
   }

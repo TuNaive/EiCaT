@@ -1,10 +1,13 @@
 
-require([], function () {
-  $(function ($) {
-    bindFormEvents();
-  })
-})
-
+// require([], function () {
+//   $(function ($) {
+//     bindFormEvents();
+//   })
+// })
+$(document).ready(function() {
+  bindFormEvents();
+  // setupData();
+});
 function bindFormEvents() {
   var self = this;
   $('.btn-set').click(function (event) {
@@ -69,3 +72,4 @@ function setupDefault(event, dataId) {
     }
   })
 }
+

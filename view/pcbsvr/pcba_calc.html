@@ -36,36 +36,36 @@
           <form id="enquiryForm" class="form-horizontal">
             <div class="form-group">
               <div>
-                <label for="pointCHIP" class="col-sm-2 control-label">CHIP点数：</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control required" id="pointCHIP" name="pointCHIP" placeholder="请输入">
+                <label for="pointChip" class="col-sm-2 control-label">CHIP点数：</label>
+                <div class="col-sm-4"> 
+                  <input type="text" class="form-control required digits" title="请输入正确的CHIP点数" id="pointChip" name="pointChip" placeholder="请输入">
                   <span style="display:block;font-size:12px;width:330px;">L.C.R一个元器件算一个点；二三极管、钽电容算两个点。</span>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="pointIC" class="col-sm-2 control-label">IC点数：</label>
+                <label for="pointIc" class="col-sm-2 control-label">IC点数：</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control required" id="pointIC" name="pointIC" placeholder="请输入">
+                  <input type="text" class="form-control required digits" title="请输入正确的IC点数" id="pointIc" name="pointIc" placeholder="请输入">
                   <span style="display:block;font-size:12px;">多引脚元器件4个脚算一点。</span>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="pointBGA" class="col-sm-2 control-label">BGA点数：</label>
+                <label for="pointBga" class="col-sm-2 control-label">BGA点数：</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control required" id="pointBGA" name="pointBGA" placeholder="请输入">
+                  <input type="text" class="form-control required digits" id="pointBga" name="pointBga" placeholder="请输入">
                   <span style="display:block;font-size:12px;">BGA4个脚算一点。</span>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="pointDIP" class="col-sm-2 control-label">DIP脚数：</label>
+                <label for="pointDip" class="col-sm-2 control-label">DIP脚数：</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control required" id="pointDIP" name="pointDIP" placeholder="请输入">
+                  <input type="text" class="form-control required" title="请输入DIP脚数" id="pointDip" name="pointDip" placeholder="请输入">
                   <span style="display:block;font-size:12px;">插件器件一个脚算一个点。</span>
                 </div>
               </div>
@@ -92,7 +92,7 @@
               <div>
                 <label for="boardNumber" class="col-sm-2 control-label">订单数量：</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control required" id="boardNumber" name="boardNumber" placeholder="请输入">
+                  <input type="text" title="请输入正确的订单数量" class="form-control required digits" id="boardNumber" name="boardNumber" placeholder="请输入">
                 </div>
               </div>
             </div>
@@ -112,7 +112,7 @@
               <div>
                 <label for="comment" class="col-sm-2 control-label">备注：</label>
                 <div class="col-sm-4">
-                  <textarea type="text" cols="45" rows="7" class="form-control required" id="comment" name="comment" placeholder="请输入"> </textarea>
+                  <textarea type="text" cols="45" rows="7" class="form-control required" id="comment" name="comment" title="请输入备注信息" placeholder="请输入"> </textarea>
                 </div>
               </div>
             </div>
@@ -160,15 +160,15 @@
                   <tbody>
                     <tr>
                       <td style="text-align: right; color: #999">CHIP点数：</td>
-                      <td id="spointCHIP"></td>
+                      <td id="spointChip"></td>
                       <td style="text-align: right; color: #999">BGA点数：</td>
-                      <td id="spointBGA"></td>
+                      <td id="spointBga"></td>
                     </tr>
                     <tr>
                       <td style="text-align: right; color: #999">IC点数：</td>
-                      <td id="spointIC"></td>
+                      <td id="spointIc"></td>
                       <td style="text-align: right; color: #999">DIP脚数：</td>
-                      <td id="spointDIP"></td>
+                      <td id="spointDip"></td>
                     </tr>
                     <tr>
                       <td style="text-align: right; color: #999">钢网尺寸：</td>
@@ -184,7 +184,7 @@
                     </tr>
                     <tr>
                       <td style="text-align:right;color:#999">备注：</td>
-                      <td colspan="3" id="sremark" style="text-align:left"></td>
+                      <td colspan="3" id="scomment" style="text-align:left"></td>
                     </tr>
                   </tbody>
                 </table>
@@ -203,7 +203,7 @@
                   </tr>
                   <tr>
                     <td id="sprojceFee"></td>              
-                    <td id="splateSizeFee"></td>                
+                    <td id="splatesizeFee"></td>                
                     <td id="sotherFee"></td>
                     <td id="stotalFee"></td>
                   </tr>
@@ -226,19 +226,19 @@
             <div class="form-group form-inline">
               <label for="contact" class="col-sm-2 control-label">联系人：</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control required" id="contact" name="contact">
+                <input type="text" class="form-control required" title="请输入联系人" id="contact" name="contact">
               </div>
             </div>
             <div class="form-group form-inline">
               <label for="mobile" class="col-sm-2 control-label">联系手机：</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control required" id="mobile" name="mobile">
+                <input type="text" class="form-control required" title="请输入联系手机" id="mobile" name="mobile">
               </div>
             </div>
             <div class="form-group form-inline">
               <label for="email" class="col-sm-2 control-label">联系邮箱：</label>
               <div class="col-sm-4">
-                <input type="text" class="form-control required" id="email" name="email">
+                <input type="text" class="form-control required" title="请输入联系邮箱" id="email" name="email">
               </div>
             </div>
 

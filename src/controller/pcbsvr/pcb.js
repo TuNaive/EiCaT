@@ -115,7 +115,11 @@ export default class extends Base {
   }
 
   enquireAction() {
-    this.sub_channel = 'PCB工程师人工询价'
+    const type = this.get('type')
+    let title = ''
+    this.assign('type', type)
+    this.assign('title', title = type === '0' ? 'PCB' : 'PCBA')
+    this.sub_channel = type === '0' ? 'PCB工程师人工询价' : 'PCBA工程师人工询价'
     return this.display()
   }
 
@@ -300,7 +304,7 @@ export default class extends Base {
     const postParams = this.post()
 
     postParams.user_id = this.user.uid
-    postParams.type = 0
+    // postParams.type = 0
 
     await this.model('enquire').add(postParams)
 
