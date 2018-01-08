@@ -100,13 +100,13 @@ const enums = {
 export default class extends Base {
   constructor(ctx) {
     super(ctx)
-
-    // todo: for test
-    this.user = {
-      uid: 1
-    }
-
     this.uploadPath = think.ROOT_PATH + '/uploadFiles'
+  }
+
+  __before() {
+    return super.__before(true).then(data => {
+      return data
+    })
   }
 
   async calcAction() {
@@ -216,8 +216,12 @@ export default class extends Base {
 
   async uploadAction() {
     const pcbFile = this.file('pcbFile')
-    const {path, name} = pcbFile
+    const {path, name, size} = pcbFile
     const suffix = _.last(_.split(name,  '.'))
+
+    if (size > 1024 * 1024 * 40) {
+      return this.fail(-1, '允许上传文件大小在40M以内')
+    }
 
     if (!_.includes(['zip', 'rar'], suffix)) {
       return this.fail(-1, '不合法的文件后缀，仅支持zip、rar格式文件')
@@ -280,6 +284,7 @@ export default class extends Base {
     const fee = await this.calculateFee(pcbInfo)
     const data = _.merge({}, _.omit(postParams, pcbKeys), fee)
 
+    data.order_no = this.model('order').getOrderid(this.user.uid)
     data.user_id = this.user.uid
     data.type = 0
     data.pcbInfo = JSON.stringify(pcbInfo)
@@ -297,7 +302,7 @@ export default class extends Base {
     //生成订单
     let order_id = await this.model("order").add(data);
 
-    return this.success({name:'订单创建成功，正在跳转支付页面！',url:`/center/pay/pay?order=${order_id}&setp=3`});
+    return this.success({name:'订单创建成功，正在跳转支付页面！',url:`/account/pay/index?order=${order_id}&setp=3`});
   }
 
   async createEnquireAction() {

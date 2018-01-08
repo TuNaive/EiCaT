@@ -3,11 +3,6 @@
  */
 
 var ADDRESS_PAGE_SIZE = 2, INVOICE_PAGE_SIZE = 2
-var TOOL
-
-require.config({
-  paths: {}
-})
 
 var formKeyConf = {
   radio: {
@@ -67,18 +62,17 @@ var formActiveConf = {
   boardThickness: 5
 }
 
-require(['/static/pcbs/js/tool.js'], function (tool) {
-  $(function ($) {
-    TOOL = tool
-    // init form dom
-    _.forEach(formKeyConf, function (obj, key) {
-      _.forEach(obj, function (v, k) {
-        appendRadio(key, k, v, formActiveConf[k], formClassConf[k])
-      })
+$(function ($) {
+  // init form dom
+  _.forEach(formKeyConf, function (obj, key) {
+    _.forEach(obj, function (v, k) {
+      appendRadio(key, k, v, formActiveConf[k], formClassConf[k])
     })
-
-    bindFormEvents()
   })
+
+  bindFormEvents()
+
+  _bindUpload('#pcbFile')
 })
 
 function appendRadio (type, field, label, activeIndex, widthClass) {
@@ -196,29 +190,6 @@ function bindFormEvents () {
       })
     }
   })
-
-  $('#pcbFile').fileupload({
-    url: 'upload',
-    dataType: 'json',
-    change: function (e, data) {
-      var file = _.last(data.files)
-      $('#pcbFileName').html(file.name)
-    },
-    done: function (e, data) {
-      var res = data.result
-
-      if (res.errno === 0) {
-        $(e.target).data('uuid', res.data.uuid).blur()
-      } else {
-        $('#pcbFileName').html('')
-        _toastr.error(res.errmsg)
-      }
-    },
-    error: function (err) {
-      $('#pcbFileName').html('')
-      _toastr.error(err)
-    }
-  });
 }
 
 function initFormValidates () {

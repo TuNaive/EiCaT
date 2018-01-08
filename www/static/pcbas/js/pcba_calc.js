@@ -127,12 +127,12 @@ function bindFormEvents (Enum) {
         $(e.target).data('uuid', res.data.uuid).blur()
       } else {
         $('#pcbaFileName').html('')
-        _toastr.error(res.rtnMsg)
+        _toastr(res.rtnMsg, 'top-center', 'error', false)
       }
     },
     error: function (err) {
       $('#pcbaFileName').html('')
-      _toastr.error(err)
+      _toastr(err, 'top-center', 'error', false)
     }
   });
 }

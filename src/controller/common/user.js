@@ -1,10 +1,10 @@
 export default class extends think.Controller {
-  async __before() {
+  async __before(needLogin = false) {
     // 当前登录状态
     this.isLoggedIn = await this.isLogin();
-    if (!this.isLoggedIn && _.indexOf(['/', '/home', '/account/auth/login', '/account/auth/register'], this.ctx.path) === -1) {
+    if (needLogin && !this.isLoggedIn && _.indexOf(['/', '/index', '/account/auth/login', '/account/auth/register'], this.ctx.path) === -1) {
       // 跳转到登录页面
-      this.redirect('/');
+      this.redirect('/index?login=true');
       return false;
     }
     // 用户信息

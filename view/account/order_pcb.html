@@ -101,7 +101,7 @@
                 {%elif item.delivery_status == 1%}
                 <!--<a class="btn btn-success btn-xs confirm ajax-get" href="/account/order/confirmreceipt/?id={{item.id}}"><i class="fa fa-cart-plus white"></i>确认收货 </a>-->
                 {%elif item.pay_status == 0%}
-                <a href="/account/pay/pay?order={{item.id}}">立即付款 </a>
+                <a href="/account/pay/index?order={{item.id}}">立即付款 </a>
                 <a class="confirm ajax-get" href="/account/order/delete/?id={{item.id}}">取消 </a>
                 {%elif item.pay_status == 1 or item.status ==3%}
                 <!--<a class="btn btn-warning btn-xs" href="#"><i class="fa fa-cart-plus white"></i>提醒发货 </a>-->

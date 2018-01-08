@@ -1,10 +1,6 @@
 import User from '../common/user.js'
 
 export default class extends User {
-  constructor(ctx) {
-    super(ctx)
-  }
-
   __before() {
     this.meta_title = '个人中心'
     return super.__before().then(data => {
