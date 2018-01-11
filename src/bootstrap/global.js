@@ -55,3 +55,26 @@ global._ip2int = function(ip) {
   num = num >>> 0;
   return num;
 };
+
+/**
+ * 把返回的数据集转换成Tree
+ * @param array data 要转换的数据集
+ * @param string pid parent标记字段
+ * @return array
+ */
+/* global arr_to_tree */
+global.arr_to_tree = function(data, pid) {
+  var result = [], temp;
+  var length = data.length;
+  for (var i = 0; i < length; i++) {
+    if (data[i].pid == pid) {
+      result.push(data[i]);
+      temp = arr_to_tree(data, data[i].id);
+      if (temp.length > 0) {
+        data[i].children = temp;
+        data[i].chnum = data[i].children.length;
+      }
+    }
+  }
+  return result;
+};

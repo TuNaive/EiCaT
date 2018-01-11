@@ -7,5 +7,8 @@ const moment = require('moment');
 module.exports = {
   _: lodash,
   moment: moment,
-  resource: path.join(think.ROOT_PATH, 'www')
+  resource: path.join(think.ROOT_PATH, 'www'),
+  cmswing: {
+    info: require(path.join(think.ROOT_PATH, 'package.json'))
+  }
 }
