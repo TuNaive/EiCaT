@@ -17,6 +17,7 @@ export default class extends Base {
       let charges;
       const post = this.post();
       // 获取订单信息
+      //todo: order_no 数据库更改
       const order = await this.model('order').where({pay_status: 0, user_id: this.user.uid}).find(post.order_id);
       if (think.isEmpty(order)) {
         return this.fail('订单不存在！');

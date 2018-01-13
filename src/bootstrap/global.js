@@ -17,7 +17,9 @@ global.showDebug = messages => {
 
 global.encryptPassword = (password, md5encoded = false) => {
   password = md5encoded ? password : think.md5(password)
+  // todo: test admin
   return think.md5(think.md5('whatthefuck') + password + think.md5('isthis'))
+  // return think.md5(think.md5('www.cmswing.com') + password + think.md5('Arterli'));
 }
 
 global.toHierarchy = (data, pid = 0) => {

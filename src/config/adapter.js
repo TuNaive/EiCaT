@@ -38,8 +38,11 @@ exports.model = {
   },
   mysql: {
     handle: mysql,
+    // todo: admin
     database: 'ectaio',
+    // database: 'cmswing1.1',
     prefix: 'ect_',
+    // prefix: 'cmswing_',
     encoding: 'utf8',
     host: '127.0.0.1',
     port: 3306,
@@ -84,14 +87,14 @@ exports.view = require('./view').default
  * logger adapter config
  * @type {Object}
  */
-exports.logger = {
-  type: 'dateFile',
-  dateFile: {
-    handle: DateFile,
-    level: 'ALL',
-    absolute: true,
-    pattern: '-yyyy-MM-dd',
-    alwaysIncludePattern: false,
-    filename: path.join(think.ROOT_PATH, 'logs/server.log')
-  }
-}
+// exports.logger = {
+//   type: 'dateFile',
+//   dateFile: {
+//     handle: DateFile,
+//     level: 'ALL',
+//     absolute: true,
+//     pattern: '-yyyy-MM-dd',
+//     alwaysIncludePattern: false,
+//     filename: path.join(think.ROOT_PATH, 'logs/server.log')
+//   }
+// }
