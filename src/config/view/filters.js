@@ -39,4 +39,12 @@ export default env => {
   env.addFilter('getFileName', (uuid) => {
     return _.last(_.split(uuid, '_'))
   })
+
+  /**
+   * 获取用户名称
+   */
+  env.addFilter('get_nickname', async(uid, callback) => {
+    const data = await get_nickname(uid);
+    callback(null, data);
+  }, true);
 }

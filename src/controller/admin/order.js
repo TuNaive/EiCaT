@@ -167,18 +167,18 @@ module.exports = class extends admin {
     //获取订单信息
     let order = await this.model("order").find(id);
     //购物清单
-    let goods = await this.model("order_goods").where({order_id: id}).select();
-    let sum = [];
-    for (let val of goods) {
-      val.title = JSON.parse(val.prom_goods).title;
-      val.pic = JSON.parse(val.prom_goods).pic;
-      val.type = JSON.parse(val.prom_goods).type;
-      val.sum = JSON.parse(val.prom_goods).price;
-      sum.push(val.goods_nums);
-    }
+    // let goods = await this.model("order_goods").where({order_id: id}).select();
+    // let sum = [];
+    // for (let val of goods) {
+    //   val.title = JSON.parse(val.prom_goods).title;
+    //   val.pic = JSON.parse(val.prom_goods).pic;
+    //   val.type = JSON.parse(val.prom_goods).type;
+    //   val.sum = JSON.parse(val.prom_goods).price;
+    //   sum.push(val.goods_nums);
+    // }
     sum = eval(sum.join('+'));
     this.assign("sum", sum);
-    this.assign("goods", goods);
+    // this.assign("goods", goods);
     //获取购买人信息
     //购买人信息
     let user = await this.model("member").find(order.user_id);
@@ -390,7 +390,6 @@ module.exports = class extends admin {
     let html = this.pagination(data);
     this.assign('pagerData', html); //分页展示使用
     //console.log(data.data);
-    // this.active="admin/order/list"
     for (let val of data.data) {
       switch (val.payment_id) {
         case 100:
@@ -422,7 +421,7 @@ module.exports = class extends admin {
       v.express_company_id = await this.model("express_company").where({id: v.express_company_id}).getField("name", true);
     }
     this.assign("list", data.data);
-    this.active = "admin/order/receiving"
+    this.active = "admin/order/invoice"
     this.meta_title = "发货单";
     return this.display();
   }

@@ -80,3 +80,16 @@ global.arr_to_tree = function(data, pid) {
   }
   return result;
 };
+
+/**
+ *根据uid获取用户昵称
+ * @param uid 用户id
+ * @returns Promise {*}
+ */
+/* global get_nickname */
+global.get_nickname = async(uid) => {
+  // console.log(uid);
+  // let data = await think.model('member', think.config("model")).cache(1000).get_nickname(uid);
+  const data = await think.model('member').get_nickname(uid);
+  return data;
+};
