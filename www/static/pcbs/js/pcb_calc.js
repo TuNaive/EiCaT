@@ -168,7 +168,7 @@ function bindFormEvents () {
         [
           {name: 'fileUuid', value: $('#pcbFile').data('uuid')},
           {name: 'freight', value: $('#freight').html()},
-          {name: 'tax', value: $('#tax').data()},
+          {name: 'tax', value: $('#tax').html()},
         ]
       )
       $.ajax({
