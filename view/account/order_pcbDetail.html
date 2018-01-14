@@ -72,33 +72,7 @@
             </div>
           </div>
           <h5 class="bg-info">订单详情</h5>
-          {% set info = data._pcbInfo.slice(0, 7) %}
-          <table class="table table-bordered">
-            <tr>
-              {% for item in info %}
-              <td>{{item.label}}</td>
-              {% endfor %}
-            </tr>
-            <tr>
-              {% for item in info %}
-              <td>{{item.value}}</td>
-              {% endfor %}
-            </tr>
-          </table>
-          {% set info = data._pcbInfo.slice(7) %}
-          <table class="table table-bordered">
-            <tr>
-              {% for item in info %}
-              <td>{{item.label}}</td>
-              {% endfor %}
-            </tr>
-            <tr>
-              {% for item in info %}
-              <td>{{item.value}}</td>
-              {% endfor %}
-            </tr>
-          </table>
-          <p class="extra-info">测试方式：{{data.pcbInfo._testMethod}}</p>
+          {% include "../pcbsvr/pcb/order_detail.html" %}
           <h5 class="bg-info">费用信息</h5>
           {% set fee = data._fee.slice(0, 7) %}
           <table class="table table-bordered">

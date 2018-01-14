@@ -48,7 +48,8 @@ export default class extends Base {
           const decrement = this.model('member').where({user_id: this.user.uid}).decrement('amount', Number(order.order_amount));
           if (decrement) {
             // 扣款成功改变订单状态
-            await this.model('order').where({order_no: order.order_no}).update({status: 3, pay_status: 1});
+            // await this.model('order').where({order_no: order.order_no}).update({status: 3, pay_status: 1});
+
             // 扣款成功后插入日志
             const log = {
               admin_id: 0,
@@ -236,12 +237,12 @@ export default class extends Base {
 
       if (charges.paid && order.pay_status == 0) { // 未付款
         // 支付成功改变订单状态
+        let update = await this.model("order").where({order_no:charges.order_no}).update({status:3,pay_status:1,pay_time:(charges.time_paid*1000)});
 
         // 充值订单处理逻辑
-        // const update = await this.model('order').where({order_no: charges.order_no}).update({status: 3, pay_status: 1, pay_time: (charges.time_paid * 1000)});
         // if (order.type == 1 && update) {
         //   await this.model('member').where({id: order.user_id}).increment('amount', order.order_amount);
-
+        //
         //   // 充值成功后插入日志
         //   const log = {
         //     admin_id: 0,

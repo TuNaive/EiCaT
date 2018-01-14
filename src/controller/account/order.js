@@ -1,6 +1,3 @@
-/**
- * Created by dengyuying on 2017/10/20.
- */
 import Base from './base.js'
 
 export default class extends Base {
@@ -182,36 +179,7 @@ export default class extends Base {
       id: this.para('id')
     }).find();
 
-    const formattedData = this.controller('pcbsvr/pcb').formatPcbLabel(data.pcbInfo, data.fee, ['boardAmount', 'delivery', 'comment'])
-
-    const testMethodIdx = _.findIndex(formattedData.customDetail, {field: 'testMethod'})
-    const testMethod = formattedData.customDetail[testMethodIdx]
-
-    const address = await this.getOrderAddress(data.address_id)
-
-    _.merge(data, address)
-
-    formattedData.customDetail.splice(testMethodIdx, 1)
-    data._pcbInfo = formattedData.customDetail
-
-    _.remove(formattedData.pcbFee, obj => obj.field === 'totalFee')
-
-    data._fee = formattedData.pcbFee
-
-    data._fee = _.concat(data._fee, [
-      {
-        label: '运费',
-        field: 'freight',
-        value: data.real_freight
-      },
-      {
-        label: '税费',
-        field: 'tax',
-        value: data.tax
-      }
-    ])
-
-    data.pcbInfo._testMethod = testMethod.value
+    await this.model('order').formatPcbDetail(data, this)
 
     this.assign('data', data);
     this.meta_title = "订单详情";
@@ -253,6 +221,7 @@ export default class extends Base {
     return plateEnum[size]
   }
 
+  // todo: 替换为model address的方法
   async getOrderAddress(addressId) {
     const resAddr = {}
     let address = await this.model("address").where({id: addressId}).find()

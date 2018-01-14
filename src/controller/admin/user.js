@@ -1,7 +1,7 @@
-import admin from '../cmswing/admin'
+import Admin from '../cmswing/admin'
 import fs from 'fs'
 
-module.exports = class extends admin {
+module.exports = class extends Admin {
   /**
    * index action
    * @return {Promise} []

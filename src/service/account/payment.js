@@ -76,9 +76,6 @@ module.exports = class extends think.Service {
         break;
     }
 
-    // todo: dev test
-    ip = '47.95.214.86'
-
     config = {
       subject: '网站订单支付',
       body: '网站订单支付',
@@ -104,7 +101,7 @@ module.exports = class extends think.Service {
   }
 
   async charge(id) {
-    const setup = await think.config('setup');
+    const setup = await think.config('settings');
     const pingpp = require('pingpp')(setup.PINGXX_LIVE_SECRET_KEY);
     pingpp.setPrivateKeyPath(think.ROOT_PATH + '/private/pingpp/cmswing_rsa_private_key.pem');
     function retrieve(pingpp, id) {

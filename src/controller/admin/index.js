@@ -5,11 +5,10 @@
 // +----------------------------------------------------------------------
 // | Author: arterli <arterli@qq.com>
 // +----------------------------------------------------------------------
-import admin from '../cmswing/admin'
-
-const Os = require('os');
+import Admin from '../cmswing/admin'
+import Os from 'os'
 // const fs = require('fs');
-module.exports = class extends admin {
+module.exports = class extends Admin {
   async indexAction() {
     // auto render template file index_index.html
     // console.log(think.parseConfig(true,think.config("db")).prefix);
@@ -56,5 +55,20 @@ module.exports = class extends admin {
     });
     // console.log(111)
     return this.display();
+  }
+
+  //获取头像
+  async avatarAction() {
+    let uid = this.get("uid")||this.user.uid
+    var uploadPath = think.resource + '/upload/avatar/' + uid;
+    let path = think.isFile(uploadPath + "/" + "/avatar.png");
+    let pic;
+    if (path) {
+      pic = fs.readFileSync(uploadPath + "/" + "/avatar.png")
+    } else {
+      pic = fs.readFileSync(think.resource + '/upload/avatar/avatar.jpg')
+    }
+    this.header('Content-Type', 'image/png');
+    return this.body=pic;
   }
 };

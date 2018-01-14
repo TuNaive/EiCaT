@@ -1,0 +1,38 @@
+<style>
+  .pcb-order-detail .table-bordered {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .pcb-order-detail .table {
+    margin-bottom: 20px !important;
+  }
+</style>
+<div class="pcb-order-detail">
+  {% set info = data._pcbInfo.slice(0, 7) %}
+  <table class="table table-bordered">
+    <tr>
+      {% for item in info %}
+      <td>{{item.label}}</td>
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for item in info %}
+      <td>{{item.value}}</td>
+      {% endfor %}
+    </tr>
+  </table>
+  {% set info = data._pcbInfo.slice(7) %}
+  <table class="table table-bordered">
+    <tr>
+      {% for item in info %}
+      <td>{{item.label}}</td>
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for item in info %}
+      <td>{{item.value}}</td>
+      {% endfor %}
+    </tr>
+  </table>
+  <p class="extra-info">测试方式：{{data.pcbInfo._testMethod}}</p>
+</div>

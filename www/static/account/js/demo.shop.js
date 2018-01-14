@@ -311,7 +311,7 @@
            $('.add-addr-dialog').on('show.bs.modal', function () {
          // 初始化省
             $.ajax({  
-                url: "/center/address/getarea",
+                url: "/account/address/getarea",
                 data: {"pid":0}, 
                 success: function(msg){
                     var province_arr = ['<option value="">--- 省份/直辖市 ---</option>']
@@ -324,7 +324,7 @@
              $("#province").change(function (e) {
                  var pid = $("#province option:selected").val();
                   $.ajax({  
-                url: "/center/address/getarea",
+                url: "/account/address/getarea",
                 data: {"pid":pid}, 
                 success: function(msg){
                     var province_arr = ['<option value="">--- 市 ---</option>']
@@ -339,7 +339,7 @@
               $("#city").change(function (e) {
                  var pid = $("#city option:selected").val();
                   $.ajax({  
-                url: "/center/address/getarea",
+                url: "/account/address/getarea",
                 data: {"pid":pid}, 
                 success: function(msg){
                     var province_arr = ['<option value="">--- 县/区 ---</option>']
@@ -358,7 +358,7 @@
                 var data =  $(this).serialize()
                 $.ajax({
                      type: "POST", 
-                     url: "/center/address/addaddr",
+                     url: "/account/address/addaddr",
                      data: data,
                      success: function(msg){ 
                            if(msg.errno == 0){
@@ -387,7 +387,7 @@
             e.preventDefault();
             var id = $(this).attr("data-addr-id");
             $.ajax({
-                url:"/center/address/addrisdefault",
+                url:"/account/address/addrisdefault",
                 data:{id:id},
                 success: function (res) {
                       if(res.errno == 0){
@@ -407,7 +407,7 @@
              $(document).on( "change","#province1",function (e) {
                  var pid = $("#province1 option:selected").val();
                   $.ajax({  
-                url: "/center/address/getarea",
+                url: "/account/address/getarea",
                 data: {"pid":pid}, 
                 success: function(msg){
                     var province_arr = ['<option value="">--- 市 ---</option>']
@@ -423,7 +423,7 @@
                   $(document).on( "change","#city1",function (e) {
                  var pid = $("#city1 option:selected").val();
                   $.ajax({  
-                url: "/center/address/getarea",
+                url: "/account/address/getarea",
                 data: {"pid":pid}, 
                 success: function(msg){
                     var province_arr = ['<option value="">--- 县/区 ---</option>']
@@ -442,7 +442,7 @@
                 var data =  $(this).serialize() 
                 $.ajax({
                      type: "POST", 
-                     url: "/center/address/addaddr",
+                     url: "/account/address/addaddr",
                      data: data,
                      success: function(msg){ 
                            if(msg.errno == 0){
@@ -482,7 +482,7 @@
             },
             function(){
               $.ajax({
-                url:"/center/address/deladdr",
+                url:"/account/address/deladdr",
                 data:{id:id},
                 success: function (res) {
                       if(res.errno == 0){
@@ -518,7 +518,7 @@
             //获取地址
             function ajaxaddr(addr_id) {
                 $.ajax({
-                    url:"/center/address/getaddr/?id="+addr_id,
+                    url:"/account/address/getaddr/?id="+addr_id,
                     success:function (res) {
                         //console.log(res);
                         if(res.errno==0){
@@ -559,7 +559,7 @@
             '<label ><ul class="text-left list-inline list-separator margin-bottom-0">'+is_default +'<li>' + val.accept_name + '</li><li>' + val.province+ '</li><li>' + val.city+ '</li><li>' + val.county+ '</li><li>' + val.addr + '</li><li>'+ val.mobile +'</li></ul></label>'+
             '</div>'+ 
             ' <div class="item">'+ is_d_btn +
-            ' <a  href="/center/address/editaddrmodal/?id='+val.id+'" class="btn btn-default btn-xs edit"  data-toggle="ajaxModal" ><i class="fa fa-edit white" ></i> 编辑 </a>'+
+            ' <a  href="/account/address/editaddrmodal/?id='+val.id+'" class="btn btn-default btn-xs edit"  data-toggle="ajaxModal" ><i class="fa fa-edit white" ></i> 编辑 </a>'+
             ' <a href="#" class="btn btn-default btn-xs del swal"  data-addr-id = "'+val.id+'"><i class="fa fa-times white" ></i> 删除 </a>'+
             '</div></div>'  
             addrArr.push(html);  

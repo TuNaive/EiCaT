@@ -204,8 +204,6 @@ export default class extends Base {
     //付款总额
     data.order_amount = _.sum([data.real_amount, data.real_freight, data.tax]);
 
-    console.log('=======data', data)
-
     //生成订单
     let order_id = await this.model("order").add(data);
 

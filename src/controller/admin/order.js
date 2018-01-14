@@ -1,6 +1,6 @@
-import admin from '../cmswing/admin'
+import Admin from '../cmswing/admin'
 
-module.exports = class extends admin {
+module.exports = class extends Admin {
   constructor(ctx) {
     super(ctx); // 调用父级的 constructor 方法，并把 ctx 传递进去
     // 其他额外的操作
@@ -166,19 +166,26 @@ module.exports = class extends admin {
     this.meta_title = "查看订单";
     //获取订单信息
     let order = await this.model("order").find(id);
+
     //购物清单
-    // let goods = await this.model("order_goods").where({order_id: id}).select();
-    // let sum = [];
-    // for (let val of goods) {
-    //   val.title = JSON.parse(val.prom_goods).title;
-    //   val.pic = JSON.parse(val.prom_goods).pic;
-    //   val.type = JSON.parse(val.prom_goods).type;
-    //   val.sum = JSON.parse(val.prom_goods).price;
-    //   sum.push(val.goods_nums);
-    // }
+    /*let goods = await this.model("order_goods").where({order_id: id}).select();
+    let sum = [];
+    for (let val of goods) {
+      val.title = JSON.parse(val.prom_goods).title;
+      val.pic = JSON.parse(val.prom_goods).pic;
+      val.type = JSON.parse(val.prom_goods).type;
+      val.sum = JSON.parse(val.prom_goods).price;
+      sum.push(val.goods_nums);
+    }
     sum = eval(sum.join('+'));
     this.assign("sum", sum);
-    // this.assign("goods", goods);
+    this.assign("goods", goods);*/
+
+    //格式化订单详情
+    if (order.type === 0) { // pcb
+      await this.model('order').formatPcbDetail(order, this)
+    }
+
     //获取购买人信息
     //购买人信息
     let user = await this.model("member").find(order.user_id);
@@ -204,9 +211,11 @@ module.exports = class extends admin {
      */
     let olde_order_amount = order.real_amount + order.real_freight
     this.assign("olde_order_amount", olde_order_amount);
-    let province = await this.model('area').where({parent_id: 0}).select();
-    let city = await this.model('area').where({parent_id: order.province}).select();
-    let county = await this.model('area').where({parent_id: order.city}).select();
+    const address = await this.model('address').getAddress(order.address_id);
+    _.merge(order, address);
+    let province = await this.model('area').where({parent_id:0}).select();
+    let city = await this.model('area').where({parent_id:address.address.province}).select();
+    let county = await this.model('area').where({parent_id:address.address.city}).select();
     this.assign("province", province);
     this.assign("city", city);
     this.assign("county", county);
@@ -253,8 +262,13 @@ module.exports = class extends admin {
         return this.fail("订单已经付款，无法编辑！");
       }
 
+      //格式化订单详情
+      if (order.type === 0) { // pcb
+        await this.model('order').formatPcbDetail(order, this)
+      }
+
       //购物清单
-      let goods = await this.model("order_goods").where({order_id: id}).select();
+      /*let goods = await this.model("order_goods").where({order_id: id}).select();
       let sum = [];
       for (let val of goods) {
         val.title = JSON.parse(val.prom_goods).title;
@@ -265,14 +279,10 @@ module.exports = class extends admin {
       }
       sum = eval(sum.join('+'));
       this.assign("sum", sum);
-      this.assign("goods", goods);
+      this.assign("goods", goods);*/
       //获取购买人信息
       //购买人信息
-      let user = await this.model("member").join({
-        customer: {
-          on: ["id", "user_id"]
-        }
-      }).find(order.user_id);
+      let user = await this.model("member").find(order.user_id);
       this.assign("user", user);
       //订单信息
       switch (order.payment) {
@@ -295,9 +305,11 @@ module.exports = class extends admin {
        */
       let olde_order_amount = order.real_amount + order.real_freight
       this.assign("olde_order_amount", olde_order_amount);
-      let province = await this.model('area').where({parent_id: 0}).select();
-      let city = await this.model('area').where({parent_id: order.province}).select();
-      let county = await this.model('area').where({parent_id: order.city}).select();
+      const address = await this.model('address').getAddress(order.address_id);
+      _.merge(order, address);
+      let province = await this.model('area').where({parent_id:0}).select();
+      let city = await this.model('area').where({parent_id:address.address.province}).select();
+      let county = await this.model('area').where({parent_id:address.address.city}).select();
       this.assign("province", province);
       this.assign("city", city);
       this.assign("county", county);
@@ -338,8 +350,12 @@ module.exports = class extends admin {
         default:
           order.payment = await this.model("pingxx").where({id: order.payment}).getField("title", true);
       }
+      //格式化订单详情
+      if (order.type === 0) { // pcb
+        await this.model('order').formatPcbDetail(order, this)
+      }
       //购物清单
-      let goods = await this.model("order_goods").where({order_id: id}).select();
+      /*let goods = await this.model("order_goods").where({order_id: id}).select();
       let sum = []
       for (let val of goods) {
         val.title = JSON.parse(val.prom_goods).title;
@@ -347,25 +363,26 @@ module.exports = class extends admin {
         val.type = JSON.parse(val.prom_goods).type;
         val.sum = JSON.parse(val.prom_goods).price;
         sum.push(val.goods_nums);
-      }
-
+      }*/
       //购买人信息
       let user = await this.model("member").find(order.user_id);
       //获取 快递公司
       let express_company = await this.model("express_company").order("sort ASC").select();
       this.assign("express_company", express_company);
       //获取省份
-      let province = await this.model('area').where({parent_id: 0}).select();
-      let city = await this.model('area').where({parent_id: order.province}).select();
-      let county = await this.model('area').where({parent_id: order.city}).select();
+      const address = await this.model('address').getAddress(order.address_id);
+      _.merge(order, address);
+      let province = await this.model('area').where({parent_id:0}).select();
+      let city = await this.model('area').where({parent_id:address.address.province}).select();
+      let county = await this.model('area').where({parent_id:address.address.city}).select();
       this.assign("province", province);
       this.assign("city", city);
       this.assign("county", county);
       this.assign("user", user);
-      sum = eval(sum.join('+'));
-      this.assign("sum", sum);
-      console.log(goods);
-      this.assign("goods", goods);
+      // sum = eval(sum.join('+'));
+      // this.assign("sum", sum);
+      // console.log(goods);
+      // this.assign("goods", goods);
       this.assign("order", order);
       this.meta_title = "发货";
       return this.display();

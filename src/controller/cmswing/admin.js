@@ -343,9 +343,9 @@ module.exports = class extends think.Controller {
                 data[key] = options[data[key]];
               }
             } else if (type == 'date') { // 日期型
-              data[key] = dateformat('Y-m-d', data[key]);
+              data[key] = moment(data[key]).format('YYYY-MM-DD');
             } else if (type == 'datetime') { // 时间型
-              data[key] = dateformat('Y-m-d H:i', data[key]);
+              data[key] = moment(data[key]).format('YYYY-MM-DD HH:mm:ss');
             } else if (type === 'pics') {
               data[key] = `<span class="thumb-sm"><img alt="..." src="${data[key]}" class="img-responsive img-thumbnail"></span>`;
             }

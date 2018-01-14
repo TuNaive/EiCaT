@@ -7,6 +7,12 @@ const enums = {
     '2': '等待审核',
     '3': '已审核'
   },
+  status: {
+    '2': '等待审核',
+    '3': '已审核',
+    '4': '确认收货',
+    '6': '规定时间未付款系统自动作废'
+  },
   pay_state: {
     '0': '未付款',
     '1': '已付款',
@@ -67,5 +73,38 @@ export default class extends think.Model {
     // 用户id+毫秒时间戳后5位
     const m = new Date().getTime().toString();
     return _.padEnd(uid, 10, '0') + m.substr(8);
+  }
+
+  async formatPcbDetail (data, ctrl) {
+    const formattedData = ctrl.controller('pcbsvr/pcb').formatPcbLabel(data.pcbInfo, data.fee, ['boardAmount', 'delivery', 'comment'])
+
+    const testMethodIdx = _.findIndex(formattedData.customDetail, {field: 'testMethod'})
+    const testMethod = formattedData.customDetail[testMethodIdx]
+
+    const address = await this.model('address').getAddress(data.address_id)
+
+    _.merge(data, address)
+
+    formattedData.customDetail.splice(testMethodIdx, 1)
+    data._pcbInfo = formattedData.customDetail
+
+    _.remove(formattedData.pcbFee, obj => obj.field === 'totalFee')
+
+    data._fee = formattedData.pcbFee
+
+    data._fee = _.concat(data._fee, [
+      {
+        label: '运费',
+        field: 'freight',
+        value: data.real_freight
+      },
+      {
+        label: '税费',
+        field: 'tax',
+        value: data.tax
+      }
+    ])
+
+    data.pcbInfo._testMethod = testMethod.value
   }
 }

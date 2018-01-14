@@ -68,7 +68,7 @@
                 <!--</div>-->
                 <!--{%endif%}-->
                 <!--<h5 class="margin-bottom-0">-->
-                  <!--<small>{{item.create_time|moment('Y-m-d H:i:s')}}</small>-->
+                  <!--<small>{{item.create_time|moment('YYYY-MM-DD HH:mm:ss')}}</small>-->
                   <!--<span class="margin-left-20">订单<a href="#" target="_blank">{{item.order_no}}</a></span></h5>-->
                 <!--</span>-->
               <!--</td>-->
@@ -81,6 +81,8 @@
                 <span class="text-danger">已作废</span>
                 {%elif item.status == 4%}
                 <span class="text-default">已完成</span>
+                {%elif item.status == 2%}
+                <span class="text-default">等待审核</span>
                 {%elif item.delivery_status == 1%}
                 <span class="text-success">等待收货</span>
                 {%elif item.pay_status == 0%}
@@ -96,20 +98,22 @@
               </td>
               <td style="vertical-align: middle;border-bottom: none">
                 {%if item.is_del == 1%}
+                {%elif item.status == 2%}
                 {%elif item.status == 4 or item.status == 6%}
-                <!--<a class="btn btn-default btn-xs" href="/pcbsvr/pcb/calc/?id={item.id}"><i class="fa fa-cart-plus white"></i>重新下单 </a>-->
+                  <a class="btn btn-default btn-xs" href="/pcbsvr/pcb/calc"><i class="fa fa-cart-plus white"></i>重新下单 </a>
                 {%elif item.delivery_status == 1%}
-                <!--<a class="btn btn-success btn-xs confirm ajax-get" href="/account/order/confirmreceipt/?id={{item.id}}"><i class="fa fa-cart-plus white"></i>确认收货 </a>-->
+                  <a class="btn btn-success btn-xs confirm ajax-get" href="/account/order/confirmreceipt/?id={{item.id}}"><i class="fa fa-cart-plus white"></i>确认收货 </a>
                 {%elif item.pay_status == 0%}
-                <a href="/account/pay/index?order={{item.id}}">立即付款 </a>
-                <a class="confirm ajax-get" href="/account/order/delete/?id={{item.id}}">取消 </a>
+                  <a href="/account/pay/index?order={{item.id}}">立即付款 </a>
+                  <a class="confirm ajax-get" href="/account/order/delete/?id={{item.id}}">取消 </a>
                 {%elif item.pay_status == 1 or item.status ==3%}
-                <!--<a class="btn btn-warning btn-xs" href="#"><i class="fa fa-cart-plus white"></i>提醒发货 </a>-->
+                  <a class="btn btn-warning btn-xs" href="#"><i class="fa fa-cart-plus white"></i>提醒发货 </a>
                 {%endif%}
+
                 {%if item.type == 0%}
-                <a href="/account/order/pcbDetail/?id={{item.id}}">详情</a>
+                  <a href="/account/order/pcbDetail/?id={{item.id}}">详情</a>
                 {%else%}
-                <a href="/account/order/pcbaDetail/?id={{item.id}}">详情</a>
+                  <a href="/account/order/pcbaDetail/?id={{item.id}}">详情</a>
                 {%endif%}
               </td>
             </tr>
