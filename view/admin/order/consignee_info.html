@@ -1,0 +1,113 @@
+<section class="panel panel-default m-b-none">
+  <header class="panel-heading">
+    <span class="label bg-danger pull-right m-t-xs"></span>
+    收货人信息
+  </header>
+  <table class="table m-b-none">
+    <tbody>
+
+    <tr>
+      <td class="active">
+        收货人姓名
+      </td>
+      <td>
+        {% if editable %}
+          <input type="text" data-required="true" class=" input-sm form-control" name="accept_name" value="{{order.address.accept_name}}">
+        {% else %}
+          {{order.address.accept_name}}
+        {% endif %}
+      </td>
+      <td class="active">
+        联系手机
+      </td>
+      <td>
+        {% if editable %}
+          <input type="text" data-required="true" class=" input-sm form-control" name="mobile" value="{{order.address.mobile}}">
+        {% else %}
+          {{order.address.mobile}}
+        {% endif %}
+      </td>
+
+    </tr>
+    <tr>
+      <td class="active">
+        联系电话
+      </td>
+      <td>
+        {% if editable %}
+          <input type="text" class=" input-sm form-control" name="phone" value="{{order.address.phone}}">
+        {% else %}
+          {{order.address.phone}}
+        {% endif %}
+      </td>
+      <td class="active">
+        邮编
+      </td>
+      <td>
+        {% if editable %}
+          <input type="text" class=" input-sm form-control" name="zip" value="{{order.address.zip}}">
+        {% else %}
+          {{order.address.zip}}
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td class="active">
+        收货地区
+      </td>
+      <td colspan="3">
+        <div class="form-group m-b-none" id="areas">
+          {% if editable %}
+            <div class="col-md-3 col-sm-12">
+
+              <select class="form-control pointer " id="province1" name="province" data-required="true">
+                <option value="">--- 省份/直辖市 ---</option>
+                {% for val in province %}
+                <option value="{{val.id}}" {% if order.address.province== val.id %} selected {% endif%}>
+                  {{val.name}}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-3 col-sm-12">
+
+              <select class="form-control pointer " id="city1" name="city" data-required="true">
+                {% for val in city %}
+                <option value="{{val.id}}" {% if order.address.city== val.id %} selected {% endif%}>{{val.name}}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-3 col-sm-12">
+
+              <select class="form-control pointer " id="county1" name="county" data-required="true">
+                {% for val in county %}
+                <option value="{{val.id}}" {% if order.address.county== val.id %} selected {% endif%}>
+                  {{val.name}}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% else %}
+            {{order.address._province}} - {{order.address._city}} - {{order.address._county}}
+          {% endif %}
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="active">
+        收货地址
+      </td>
+      <td colspan="3">
+        {% if editable %}
+          <input type="text" class=" input-sm form-control" data-required="true" name="addr" value="{{order.address.addr}}">
+        {% else %}
+          {{order.address.addr}}
+        {% endif %}
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+
+</section>

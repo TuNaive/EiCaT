@@ -93,3 +93,60 @@ global.get_nickname = async(uid) => {
   const data = await think.model('member').get_nickname(uid);
   return data;
 };
+
+/**
+ * 返回一个自定义用户函数给出的第一个参数
+ *  call_user_func（回调 函数名， [参数]）
+ * @param cb  函数名
+ * @param params 数组格式传入参数
+ */
+/* global call_user_func */
+global.call_user_func = function(cb, params) {
+  let func = eval(cb);
+  if (!think.isArray(params)) {
+    params = [params];
+  }
+  return func.apply(cb, params);
+}
+
+//时间格式
+/* global time_format */
+global.time_format = (time) => {
+  return moment(time).format('YYYY-MM-DD HH:mm:ss');
+}
+
+/* global str_replace()
+ * str_replace(条件[]，替换内容[],被替换的内容)
+ * @param search
+ * @param replace
+ * @param subject
+ * @param count
+ * @returns {*}
+ */
+/* global str_replace */
+global.str_replace = function(search, replace, subject, count) {
+  var i = 0, j = 0, temp = '', repl = '', sl = 0, fl = 0,
+    f = [].concat(search),
+    r = [].concat(replace),
+    s = subject,
+    ra = r instanceof Array, sa = s instanceof Array;
+  s = [].concat(s);
+  if (count) {
+    this.window[count] = 0;
+  }
+
+  for (i = 0, sl = s.length; i < sl; i++) {
+    if (s[i] === '') {
+      continue;
+    }
+    for (j = 0, fl = f.length; j < fl; j++) {
+      temp = s[i] + '';
+      repl = ra ? (r[j] !== undefined ? r[j] : '') : r[0];
+      s[i] = (temp).split(f[j]).join(repl);
+      if (count && s[i] !== temp) {
+        this.window[count] += (temp.length - s[i].length) / f[j].length;
+      }
+    }
+  }
+  return sa ? s : s[0];
+}

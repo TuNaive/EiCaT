@@ -4,7 +4,7 @@ export default class extends think.Controller {
     this.isLoggedIn = await this.isLogin();
     if (needLogin && !this.isLoggedIn && _.indexOf(['/', '/index', '/account/auth/login', '/account/auth/register'], this.ctx.path) === -1) {
       // 跳转到登录页面
-      this.redirect('/index?login=true');
+      this.redirect('/?login=true');
       return false;
     }
     // 用户信息

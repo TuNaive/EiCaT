@@ -1,0 +1,38 @@
+<style>
+  .pcb-fee-detail .table-bordered {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .pcb-fee-detail .table {
+    margin-bottom: 20px !important;
+  }
+</style>
+<div class="pcb-fee-detail">
+  {% set fee = data._fee.slice(0, 7) %}
+  <table class="table table-bordered">
+    <tr>
+      {% for item in fee %}
+      <td>{{item.label}}</td>
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for item in fee %}
+      <td>{{item.value|formatCurrency}}</td>
+      {% endfor %}
+    </tr>
+  </table>
+  {% set fee = data._fee.slice(7) %}
+  <table class="table table-bordered">
+    <tr>
+      {% for item in fee %}
+      <td>{{item.label}}</td>
+      {% endfor %}
+    </tr>
+    <tr>
+      {% for item in fee %}
+      <td>{{item.value|formatCurrency}}</td>
+      {% endfor %}
+    </tr>
+  </table>
+  <p class="extra-info">总价格：{{data.order_amount|formatCurrency}}</p>
+</div>

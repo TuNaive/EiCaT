@@ -72,35 +72,9 @@
             </div>
           </div>
           <h5 class="bg-info">订单详情</h5>
-          {% include "../pcbsvr/pcb/order_detail.html" %}
+          {% include "../pcbsvr/pcb/custom_detail.html" %}
           <h5 class="bg-info">费用信息</h5>
-          {% set fee = data._fee.slice(0, 7) %}
-          <table class="table table-bordered">
-            <tr>
-              {% for item in fee %}
-              <td>{{item.label}}</td>
-              {% endfor %}
-            </tr>
-            <tr>
-              {% for item in fee %}
-              <td>{{item.value|formatCurrency}}</td>
-              {% endfor %}
-            </tr>
-          </table>
-          {% set fee = data._fee.slice(7) %}
-          <table class="table table-bordered">
-            <tr>
-              {% for item in fee %}
-              <td>{{item.label}}</td>
-              {% endfor %}
-            </tr>
-            <tr>
-              {% for item in fee %}
-              <td>{{item.value|formatCurrency}}</td>
-              {% endfor %}
-            </tr>
-          </table>
-          <p class="extra-info">总价格：{{data.order_amount|formatCurrency}}</p>
+          {% include "../pcbsvr/pcb/fee_detail.html" %}
           <h5 class="bg-info">收货人信息</h5>
           <div class="form-horizontal">
             {% set address = data.address %}
