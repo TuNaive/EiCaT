@@ -34,7 +34,7 @@ module.exports = class extends think.Model {
    * @return boolean
    * @author arterli <arterli@qq.com>
    */
-  async log(action, model, record_id, user_id, ip , url){
+  async log(action, model, record_id, user_id, ip , url, record = ''){
     //action=action||null,model=model||null,record_id=record_id||null,user_id=user_id||null;
     //参数检查
     if(think.isEmpty(action) || think.isEmpty(model) || think.isEmpty(record_id)){
@@ -71,12 +71,12 @@ module.exports = class extends think.Model {
       if(!think.isEmpty(match)){
         let log={
           user :user_id,
-          record:record_id,
+          record:record,
           model:model,
           time: new Date().valueOf(),
           data:{
             user :user_id,
-            record:record_id,
+            record:record,
             model:model,
             time: new Date().valueOf(),
           }

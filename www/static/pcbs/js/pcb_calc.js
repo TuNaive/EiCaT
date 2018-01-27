@@ -179,7 +179,7 @@ function bindFormEvents () {
         success: function (data) {
           if (data.errno === 0) {
             // 跳转到我的订单
-            // window.location.href = '/account/order/pcb'
+            window.location.href = '/account/order/pcb'
           } else {
             console.log(data.errmsg)
           }

@@ -2,7 +2,7 @@ import Base from './base.js'
 
 export default class extends Base {
   __before() {
-    return super.__before().then(data => {
+    return super.__before(true).then(data => {
       this.active = ['/pcb']
       this.channel = '个人中心'
       return data

@@ -209,7 +209,7 @@ module.exports = class extends Admin {
     /**
      * 订单原价 = 商品真实价格 + 真实运费
      */
-    let olde_order_amount = order.real_amount + order.real_freight
+    let olde_order_amount = order.order_amount - order.adjust_amount
     this.assign("olde_order_amount", olde_order_amount);
     const address = await this.model('address').getAddress(order.address_id);
     _.merge(order, address);
@@ -233,20 +233,20 @@ module.exports = class extends Admin {
       /**
        * 订单原价 = 商品真实价格 + 真实运费
        */
-      let olde_order_amount = order.real_amount + order.real_freight;
+      let olde_order_amount = order.order_amount;
       data.order_amount = Number(olde_order_amount) + Number(data.adjust_amount);
       //更新订单信息
       let res = await this.model("order").update(data);
       if (res) {
         //记录日志
-        // let log;
-        // if (data.adjust_amount == 0) {
-        //   log = `修改了订单，订单编号：${order.order_no}`
-        // } else {
-        //   log = `修改了订单，订单编号：${order.order_no}，并调整订单金额 ${data.adjust_amount} 元，原订单金额：${olde_order_amount} 元，调整后订单金额：${data.order_amount} 元`
-        // }
+        let log;
+        if (data.adjust_amount == 0) {
+          log = `修改了订单，订单编号：${order.order_no}`
+        } else {
+          log = `修改了订单，订单编号：${order.order_no}，并调整订单金额 ${data.adjust_amount} 元，原订单金额：${olde_order_amount} 元，调整后订单金额：${data.order_amount} 元`
+        }
 
-        await this.model("action").log("order", "order", order.id, this.user.uid, this.ip, this.ctx.url);
+        await this.model("action").log("order", "order", order.id, this.user.uid, this.ip, this.ctx.url, log);
         return this.success({name: "编辑成功！"});
       } else {
         return this.fail("编辑失败！");
@@ -300,11 +300,7 @@ module.exports = class extends Admin {
       let express_company = this.model("express_company").order("sort ASC").select();
       this.assign("express_company", express_company);
       //获取省份
-      /**
-       * 订单原价 = 商品真实价格 + 真实运费
-       */
-      let olde_order_amount = order.real_amount + order.real_freight
-      this.assign("olde_order_amount", olde_order_amount);
+      this.assign("olde_order_amount", order.order_amount);
       const address = await this.model('address').getAddress(order.address_id);
       _.merge(order, address);
       let province = await this.model('area').where({parent_id:0}).select();

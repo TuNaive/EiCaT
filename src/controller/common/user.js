@@ -2,6 +2,7 @@ export default class extends think.Controller {
   async __before(needLogin = false) {
     // 当前登录状态
     this.isLoggedIn = await this.isLogin();
+    console.log('=======', needLogin, !this.isLoggedIn)
     if (needLogin && !this.isLoggedIn && _.indexOf(['/', '/index', '/account/auth/login', '/account/auth/register'], this.ctx.path) === -1) {
       // 跳转到登录页面
       this.redirect('/?login=true');

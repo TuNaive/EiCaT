@@ -22,10 +22,12 @@ module.exports = class extends Admin {
    */
   async pingxxAction() {
     //获取app_id
-    let app_id = this.config("setup.PINGXX_APP_ID");
-    let livesecretkey = this.config("setup.PINGXX_LIVE_SECRET_KEY");
+    let app_id = this.config("settings.PINGXX_APP_ID");
+    let livesecretkey = this.config("settings.PINGXX_LIVE_SECRET_KEY");
+    const online = await this.config('settings.PAY_ONLINE')
     this.assign("app_id", app_id);
     this.assign("livesecretkey", livesecretkey);
+    this.assign("online", online);
     //获取支付渠道
     let channel = await this.model('pingxx').order('sort ASC').select();
     //console.log(channel);
@@ -34,13 +36,21 @@ module.exports = class extends Admin {
     return this.display();
   }
 
+  async saveOnlineAction() {
+    let post = this.post() || {};
+    post.online && this.model('settings').where({key: 'PAY_ONLINE'}).update({value: post.online});
+    think.cache("setup", null);
+    process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
+    this.json('success')
+  }
+
   // 添加appid
   async addappidAction() {
     if (this.isAjax("POST")) {
       let appid = this.post('appid');
-      let res = await this.model("setup").where({name: 'PINGXX_APP_ID'}).update({value: appid});
+      let res = await this.model("settings").where({name: 'PINGXX_APP_ID'}).update({value: appid});
       if (res) {
-        await this.cache("setup", null);
+        await this.cache("settings", null);
         process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
         return this.success({name: "设置成功！"});
       } else {
@@ -55,9 +65,9 @@ module.exports = class extends Admin {
   async addlivesecretkeyAction() {
     if (this.isAjax("POST")) {
       let appid = this.post('livesecretkey');
-      let res = await this.model("setup").where({name: 'PINGXX_LIVE_SECRET_KEY'}).update({value: appid});
+      let res = await this.model("settings").where({name: 'PINGXX_LIVE_SECRET_KEY'}).update({value: appid});
       if (res) {
-        await this.cache("setup", null);
+        await this.cache("settings", null);
         process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
         return this.success({name: "设置成功！"});
       } else {

@@ -35,7 +35,7 @@ $(function () {
 
   //改价
   $("#adjust_amount").on("change", function (e) {
-    var olde_order_amount = $(".olde_order_amount").text();
+    var olde_order_amount = $(".olde_order_amount").attr('data-value');
     var adjust_amount = $("#adjust_amount").val();
     var order_amount = Number(olde_order_amount) + Number(adjust_amount);
     $("#order_amount").text(formatCurrency(order_amount));
