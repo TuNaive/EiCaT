@@ -415,6 +415,9 @@ module.exports = class extends Admin {
         case 1001:
           val.channel = "货到付款";
           break;
+        case 1002:
+          val.channel = "线下付款";
+          break;
         default:
           val.channel = await this.model("pingxx").where({id: val.payment_id}).getField("title", true);
       }

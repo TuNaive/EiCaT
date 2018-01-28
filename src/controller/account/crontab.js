@@ -27,9 +27,14 @@ module.exports = class extends think.Controller {
     const map = {
       pay_status: 0,
       status: 2,
-      create_time: ['<', (new Date().getTime() - (Number(this.config('setup.ORDER_DELAY')) * 60000))],
       type: 0
     };
+
+    // 在线支付才过期作废
+    if (this.config('settings').PAY_ONLINE === 1) {
+      map.create_time = ['<', (new Date().getTime() - (Number(this.config('setup.ORDER_DELAY')) * 60000))]
+    }
+
     const order = await this.model('order').where(map).field('id').select();
     if (!think.isEmpty(order)) {
       for (const v of order) {

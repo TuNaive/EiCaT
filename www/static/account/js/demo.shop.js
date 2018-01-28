@@ -612,3 +612,29 @@
         
         
 	}
+
+  /*
+  * 绑定事件
+  */
+  function bindEvents () {
+    $('#pay-btn').click(function (e) {
+      var order_id = $("input[name='order_id']").val()
+      var payment = $('#payment-no').val()
+      $.ajax({
+        type:"post",
+        url:"/account/pay/index",
+        data:{order_id:order_id,payment:payment},
+        success:function (res) {
+          console.log(res);
+          if(res.errno==1000){
+            _toastr(res.errmsg,"top-right","error",false);
+            return false;
+          }else if(res.data.url){
+            window.location.href = res.data.url;
+          } else if(res.data.data){
+            _toastr(res.data.name,"top-right","success",false);
+          }
+        }
+      })
+    })
+  }
