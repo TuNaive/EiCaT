@@ -11,6 +11,7 @@ export default class extends Base {
   }
   // 支付
   async indexAction() {
+    const payOnline = this.config('settings').PAY_ONLINE === 1
     if (this.isAjax('post')) {
       let payment;
       let pay;
@@ -22,8 +23,7 @@ export default class extends Base {
       if (think.isEmpty(order)) {
         return this.fail('订单不存在！');
       }
-      // 更新订单的支付方式
-      await this.model('order').where({id: order.id}).update({payment: post.payment});
+
       // 支付日志
       const receiving = {
         order_id: post.order_id,
@@ -32,12 +32,23 @@ export default class extends Base {
         create_time: new Date().getTime(),
         payment_time: new Date().getTime(),
         doc_type: 0,
-        payment_id: post.payment,
         pay_status: 0
       };
 
-      // 100预付款支付
+      const orderUpdate = {}
 
+      if (payOnline) {
+        receiving.payment_no = post.payment
+        receiving.pay_status = orderUpdate.pay_status = 1
+        post.payment = 1002 // 线下付款
+      }
+
+      receiving.payment_id = orderUpdate.payment = post.payment
+
+      // 更新订单的支付方式
+      await this.model('order').where({id: order.id}).update(orderUpdate);
+      
+      // 100预付款支付
       if (post.payment == 100) {
         // 先检查下用户余额
         const balance = await this.model('member').where({user_id: this.user.uid}).getField('amount', true);
@@ -70,11 +81,19 @@ export default class extends Base {
           }
         }
       }
+
+      // 1001货到付款
       if (post.payment == 1001) {
         const url = `/account/pay/payres/?c_o_id=${post.order_id}`;
         return this.success({name: '支付订单对接成功，正在转跳！', url: url});
       }
-      // 1001货到付款
+
+      // 1002线下付款
+      if (post.payment == 1002) {
+        const url = `/account/pay/payres/?c_o_id=${post.order_id}`;
+        return this.success({name: '支付订单对接成功，正在转跳！', url: url});
+      }
+
       if (think.isEmpty(order)) {
         return this.fail('您没有要支付的订单');
       } else {
@@ -109,8 +128,6 @@ export default class extends Base {
       }
     } else {
       const order_id = this.get('order');
-      const setp = this.get('setp') || '';
-      // this.end(order_id  + "=" + setp)
       // 订单信息
       const order = await this.model('order').where({pay_status: 0, user_id: this.user.uid}).find(order_id);
       if (think.isEmpty(order)) {
@@ -127,27 +144,31 @@ export default class extends Base {
       //      val.logo =  await this.model("pay_plugin").where({id:val.plugin_id}).getField("logo",true);
       //   }
       //   this.assign("paylist",paylist);
-      // 根据不同的客户端调用不同的支付方式
-      let map;
-      if (this.isMobile) {
-        map = {
-          type: 2,
-          status: 1
-        };
-        if (!this.isweixin) {
-          map.channel = ['!=', 'wx_pub'];
+
+      if (payOnline) {
+        // 根据不同的客户端调用不同的支付方式
+        let map;
+        if (this.isMobile) {
+          map = {
+            type: 2,
+            status: 1
+          };
+          if (!this.isweixin) {
+            map.channel = ['!=', 'wx_pub'];
+          } else {
+            map.channel = ['!=', 'alipay_wap'];
+          }
         } else {
-          map.channel = ['!=', 'alipay_wap'];
+          map = {
+            type: 1,
+            status: 1
+          };
         }
-      } else {
-        map = {
-          type: 1,
-          status: 1
-        };
+        const paylist = await this.model('pingxx').where(map).order('sort ASC').select();
+        this.assign('paylist', paylist);
       }
-      const paylist = await this.model('pingxx').where(map).order('sort ASC').select();
-      this.assign('paylist', paylist);
-      this.assign('setp', setp);
+
+      this.assign('payOnline', payOnline);
       this.meta_title = '订单支付';// 标题1
       this.keywords = this.config('setup.WEB_SITE_KEYWORD') ? this.config('setup.WEB_SITE_KEYWORD') : '';// seo关键词
       this.description = this.config('setup.WEB_SITE_DESCRIPTION') ? this.config('setup.WEB_SITE_DESCRIPTION') : '';// seo描述
@@ -222,6 +243,9 @@ export default class extends Base {
       switch (order.payment) {
         case 100:
           order.channel = '预付款支付';
+          break;
+        case 1002:
+          order.channel = "线下付款";
           break;
         default:
           order.channel = '货到付款';
