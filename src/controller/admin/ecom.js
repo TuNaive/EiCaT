@@ -32,16 +32,20 @@ module.exports = class extends Admin {
     let channel = await this.model('pingxx').order('sort ASC').select();
     //console.log(channel);
     this.assign("channel", channel);
-    this.meta_title = "ping++支付设置";
+    this.meta_title = "支付设置";
     return this.display();
   }
 
   async saveOnlineAction() {
     let post = this.post() || {};
-    post.online && this.model('settings').where({key: 'PAY_ONLINE'}).update({value: post.online});
-    think.cache("setup", null);
-    process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
-    this.json('success')
+    if (!_.isNil(post.online)) {
+      await this.model('setting').where({key: 'PAY_ONLINE'}).update({value: post.online});
+      await think.cache("settings", null);
+      // 重启时间无法保证，同步 settings 数据
+      await this.config('settings.PAY_ONLINE', post.online);
+      process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
+    }
+    this.success('saveOnline success')
   }
 
   // 添加appid

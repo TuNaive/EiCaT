@@ -35,16 +35,7 @@ module.exports = class extends Admin {
     //console.log(data.data);
     this.active = "admin/order/list";
     for (let val of data.data) {
-      switch (val.payment) {
-        case 100:
-          val.channel = "预付款支付";
-          break;
-        case 1001:
-          val.channel = "货到付款";
-          break;
-        default:
-          val.channel = await this.model("pingxx").where({id: val.payment}).getField("title", true);
-      }
+      val.channel = await this.getPaymentInfo(val.payment, val.pay_code)
     }
     this.assign('list', data.data);
     this.meta_title = "订单管理";
@@ -191,16 +182,7 @@ module.exports = class extends Admin {
     let user = await this.model("member").find(order.user_id);
     this.assign("user", user);
     //订单信息
-    switch (order.payment) {
-      case 100:
-        order.payment = "预付款支付";
-        break;
-      case 1001:
-        order.payment = "货到付款";
-        break;
-      default:
-        order.payment = await this.model("pingxx").where({id: order.payment}).getField("title", true);
-    }
+    order.payment = await this.getPaymentInfo(order.payment, order.pay_code)
     this.assign("order", order);
     //获取 快递公司
     let express_company = this.model("express_company").order("sort ASC").select();
@@ -284,17 +266,9 @@ module.exports = class extends Admin {
       //购买人信息
       let user = await this.model("member").find(order.user_id);
       this.assign("user", user);
+
       //订单信息
-      switch (order.payment) {
-        case 100:
-          order.payment = "预付款支付";
-          break;
-        case 1001:
-          order.payment = "货到付款";
-          break;
-        default:
-          order.payment = await this.model("pingxx").where({id: order.payment}).getField("title", true);
-      }
+      order.payment = await this.getPaymentInfo(order.payment, order.pay_code)
       this.assign("order", order);
       //获取 快递公司
       let express_company = this.model("express_company").order("sort ASC").select();
@@ -336,16 +310,7 @@ module.exports = class extends Admin {
       if (order.status != 3) {
         return this.fail("订单还没审核！，请先审核订单。")
       }
-      switch (order.payment) {
-        case 100:
-          order.payment = "预付款支付";
-          break;
-        case 1001:
-          order.payment = "货到付款";
-          break;
-        default:
-          order.payment = await this.model("pingxx").where({id: order.payment}).getField("title", true);
-      }
+      order.payment = await this.getPaymentInfo(order.payment, order.pay_code)
       //格式化订单详情
       if (order.type === 0) { // pcb
         await this.model('order').formatPcbDetail(order, this)
@@ -380,6 +345,8 @@ module.exports = class extends Admin {
       // console.log(goods);
       // this.assign("goods", goods);
       this.assign("order", order);
+      let olde_order_amount = order.order_amount - order.adjust_amount
+      this.assign("olde_order_amount", olde_order_amount);
       this.meta_title = "发货";
       return this.display();
     }
@@ -404,20 +371,9 @@ module.exports = class extends Admin {
     this.assign('pagerData', html); //分页展示使用
     //console.log(data.data);
     for (let val of data.data) {
-      switch (val.payment_id) {
-        case 100:
-          val.channel = "预付款支付";
-          break;
-        case 1001:
-          val.channel = "货到付款";
-          break;
-        case 1002:
-          val.channel = "线下付款";
-          break;
-        default:
-          val.channel = await this.model("pingxx").where({id: val.payment_id}).getField("title", true);
-      }
-      val.order_id = await this.model("order").where({id: val.order_id}).getField("order_no", true);
+      const orderInfo = await this.model("order").where({id: val.order_id}).getField("order_no, pay_code", true);
+      val.channel = await this.getPaymentInfo(val.payment_id, orderInfo.pay_code)
+      val.order_id = orderInfo.order_no;
     }
     this.assign('list', data.data);
     // this.active="admin/order/receiving"
@@ -445,7 +401,6 @@ module.exports = class extends Admin {
   /**
    * 退款单
    */
-
   refundAction() {
 
 
@@ -454,4 +409,16 @@ module.exports = class extends Admin {
     return this.display();
   }
 
+  async getPaymentInfo (paymentId, pay_code) {
+    switch (paymentId) {
+      case 100:
+        return "预付款支付";
+      case 1001:
+        return "货到付款";
+      case 1002:
+        return `线下付款${pay_code ? (pay_code) : ''}`;
+      default:
+        return await this.model("pingxx").where({id: paymentId}).getField("title", true);
+    }
+  }
 }

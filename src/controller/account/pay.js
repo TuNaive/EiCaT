@@ -11,7 +11,7 @@ export default class extends Base {
   }
   // 支付
   async indexAction() {
-    const payOnline = this.config('settings').PAY_ONLINE === 1
+    const payOnline = this.config('settings.PAY_ONLINE') === 1
     if (this.isAjax('post')) {
       let payment;
       let pay;
@@ -37,8 +37,8 @@ export default class extends Base {
 
       const orderUpdate = {}
 
-      if (payOnline) {
-        receiving.payment_no = post.payment
+      if (!payOnline) {
+        orderUpdate.pay_code = post.payment
         receiving.pay_status = orderUpdate.pay_status = 1
         post.payment = 1002 // 线下付款
       }
@@ -90,6 +90,7 @@ export default class extends Base {
 
       // 1002线下付款
       if (post.payment == 1002) {
+        await this.model('doc_receiving').add(receiving);
         const url = `/account/pay/payres/?c_o_id=${post.order_id}`;
         return this.success({name: '支付订单对接成功，正在转跳！', url: url});
       }

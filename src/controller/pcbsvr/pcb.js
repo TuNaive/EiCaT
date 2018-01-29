@@ -204,6 +204,10 @@ export default class extends Base {
     //付款总额
     data.order_amount = _.sum([_.toNumber(data.real_amount), _.toNumber(data.real_freight), _.toNumber(data.tax)]);
 
+    if (this.config('settings.PAY_ONLINE') === 1) {
+      data.payment = 1002
+    }
+
     //生成订单
     let order_id = await this.model("order").add(data);
 

@@ -27,18 +27,14 @@ module.exports = class extends think.Controller {
     const map = {
       pay_status: 0,
       status: 2,
-      type: 0
+      type: 0,
+      create_time: ['<', (new Date().getTime() - (Number(this.config('setup.ORDER_DELAY')) * 60000))]
     };
-
-    // 在线支付才过期作废
-    if (this.config('settings').PAY_ONLINE === 1) {
-      map.create_time = ['<', (new Date().getTime() - (Number(this.config('setup.ORDER_DELAY')) * 60000))]
-    }
 
     const order = await this.model('order').where(map).field('id').select();
     if (!think.isEmpty(order)) {
       for (const v of order) {
-        await this.model('order').where({id: v.id}).update({status: 6, admin_remark: '规定时间未付款系统自动作废'});
+        order.payment !== 1002 && await this.model('order').where({id: v.id}).update({status: 6, admin_remark: '规定时间未付款系统自动作废'});
         // 释放库存
         // await this.model('cmswing/order').stock(v.id, false);
       }
