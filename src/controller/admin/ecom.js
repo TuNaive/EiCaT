@@ -24,7 +24,7 @@ module.exports = class extends Admin {
     //获取app_id
     let app_id = this.config("settings.PINGXX_APP_ID");
     let livesecretkey = this.config("settings.PINGXX_LIVE_SECRET_KEY");
-    const online = await this.config('settings.PAY_ONLINE')
+    const online = this.config('settings.PAY_ONLINE')
     this.assign("app_id", app_id);
     this.assign("livesecretkey", livesecretkey);
     this.assign("online", online);
@@ -42,7 +42,7 @@ module.exports = class extends Admin {
       await this.model('setting').where({key: 'PAY_ONLINE'}).update({value: post.online});
       await think.cache("settings", null);
       // 重启时间无法保证，同步 settings 数据
-      await this.config('settings.PAY_ONLINE', post.online);
+      this.config('settings.PAY_ONLINE', post.online);
       // process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
     }
     this.success('saveOnline success')
