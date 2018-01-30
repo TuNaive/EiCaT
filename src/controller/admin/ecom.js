@@ -6,7 +6,6 @@ module.exports = class extends Admin {
     super(ctx); // 调用父级的 constructor 方法，并把 ctx 传递进去
     // 其他额外的操作
     this.tactive = "ecom"
-    this.payOnline = this.config('settings.PAY_ONLINE')
   }
 
   /**
@@ -25,9 +24,11 @@ module.exports = class extends Admin {
     //获取app_id
     let app_id = this.config("settings.PINGXX_APP_ID");
     let livesecretkey = this.config("settings.PINGXX_LIVE_SECRET_KEY");
+    const settings = await this.model('setting').getSettings()
+    const online = settings['PAY_ONLINE']
     this.assign("app_id", app_id);
     this.assign("livesecretkey", livesecretkey);
-    this.assign("online", this.payOnline);
+    this.assign("online", online);
     //获取支付渠道
     let channel = await this.model('pingxx').order('sort ASC').select();
     //console.log(channel);
