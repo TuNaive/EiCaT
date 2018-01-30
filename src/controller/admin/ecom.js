@@ -6,6 +6,7 @@ module.exports = class extends Admin {
     super(ctx); // 调用父级的 constructor 方法，并把 ctx 传递进去
     // 其他额外的操作
     this.tactive = "ecom"
+    this.payOnline = this.config('settings.PAY_ONLINE')
   }
 
   /**
@@ -24,10 +25,9 @@ module.exports = class extends Admin {
     //获取app_id
     let app_id = this.config("settings.PINGXX_APP_ID");
     let livesecretkey = this.config("settings.PINGXX_LIVE_SECRET_KEY");
-    const online = this.config('settings.PAY_ONLINE')
     this.assign("app_id", app_id);
     this.assign("livesecretkey", livesecretkey);
-    this.assign("online", online);
+    this.assign("online", this.payOnline);
     //获取支付渠道
     let channel = await this.model('pingxx').order('sort ASC').select();
     //console.log(channel);
@@ -42,7 +42,7 @@ module.exports = class extends Admin {
       await this.model('setting').where({key: 'PAY_ONLINE'}).update({value: post.online});
       await think.cache("settings", null);
       // 重启时间无法保证，同步 settings 数据
-      this.config('settings.PAY_ONLINE', post.online);
+      this.payOnline = this.config('settings.PAY_ONLINE', post.online);
       // process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
     }
     this.success('saveOnline success')
