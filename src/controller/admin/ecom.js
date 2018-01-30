@@ -43,7 +43,7 @@ module.exports = class extends Admin {
       await think.cache("settings", null);
       // 重启时间无法保证，同步 settings 数据
       await this.config('settings.PAY_ONLINE', post.online);
-      process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
+      // process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
     }
     this.success('saveOnline success')
   }
