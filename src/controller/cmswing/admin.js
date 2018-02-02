@@ -29,8 +29,8 @@ module.exports = class extends think.Controller {
     // 菜单当前状态
 
     /**
-         * 权限验证超级管理员
-         */
+     * 权限验证超级管理员
+     */
     const url = `${this.ctx.controller}/${this.ctx.action}`;
     // console.log(url);
     if (!this.is_admin) {
@@ -55,7 +55,12 @@ module.exports = class extends think.Controller {
     const approval = await this.model('approval').count();
     if (approval > 0) {
       notifications.count = notifications.count + Number(approval);
-      notifications.data.push({type: 'approval', info: `有 ${approval} 条内容待审核`, url: '/admin/approval/index', ico: 'fa-umbrella'});
+      notifications.data.push({
+        type: 'approval',
+        info: `有 ${approval} 条内容待审核`,
+        url: '/admin/approval/index',
+        ico: 'fa-umbrella'
+      });
     }
 
     // console.log(notifications);
@@ -67,9 +72,9 @@ module.exports = class extends think.Controller {
   }
 
   /**
-     * 判断是否登录
-     * @returns {boolean}
-     */
+   * 判断是否登录
+   * @returns {boolean}
+   */
   async islogin() {
     // 判断是否登录
     const user = await this.session('userInfo');
@@ -78,26 +83,27 @@ module.exports = class extends think.Controller {
   }
 
   /**
-     * 检查当前用户是否为管理员
-     * @param uid
-     * @returns {*|boolean}
-     */
+   * 检查当前用户是否为管理员
+   * @param uid
+   * @returns {*|boolean}
+   */
   async isadmin(uid) {
     uid = uid || null;
     uid = think.isEmpty(uid) ? await this.islogin() : uid;
     return uid && (_.indexOf(this.config('user_administrator'), parseInt(uid)) > -1);
   }
+
   /**
-     * 对数据表中的单行或多行记录执行修改 GET参数id为数字或逗号分隔的数字
-     *
-     * @param {String} model 模型名称,供M函数使用的参数
-     * @param {Object}  data  修改的数据
-     * @param {Object}  where 查询时的where()方法的参数
-     * @param {Object}  msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
-     *                      url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
-     *
-     * @author arterli <arterli@qq.com>
-     */
+   * 对数据表中的单行或多行记录执行修改 GET参数id为数字或逗号分隔的数字
+   *
+   * @param {String} model 模型名称,供M函数使用的参数
+   * @param {Object}  data  修改的数据
+   * @param {Object}  where 查询时的where()方法的参数
+   * @param {Object}  msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
+   *                      url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
+   *
+   * @author arterli <arterli@qq.com>
+   */
   async editRow(model, data, where, msg) {
     // let id = this.para('id');
     // id = think.isArray(id) ? id : id;
@@ -108,7 +114,7 @@ module.exports = class extends think.Controller {
     //     where = think.extend({ 'id': ['IN', id] }, where);
     // }
 
-    msg = think.extend({ 'success': '操作成功！', 'error': '操作失败！', 'url': '', 'ajax': this.isAjax() }, msg);
+    msg = think.extend({'success': '操作成功！', 'error': '操作失败！', 'url': '', 'ajax': this.isAjax()}, msg);
     const res = await this.model(model).where(where).update(data);
     if (res) {
       switch (model) {
@@ -122,75 +128,75 @@ module.exports = class extends think.Controller {
           update_cache('model');// 更新栏目缓存
           break;
       }
-      return this.success({ name: msg.success, url: msg.url });
+      return this.success({name: msg.success, url: msg.url});
     } else {
       return this.fail(msg.error, msg.url);
     }
   }
 
   /**
-     * 禁用条目
-     * @param {String} model 模型名称,供D函数使用的参数
-     * @param {Object}  where 查询时的 where()方法的参数
-     * @param {Object}  msg   执行正确和错误的消息,可以设置四个元素 {'success':'','error':'', 'url':'','ajax':false}
-     *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
-     *
-     * @author arterli <arterli@qq.com>
-     */
+   * 禁用条目
+   * @param {String} model 模型名称,供D函数使用的参数
+   * @param {Object}  where 查询时的 where()方法的参数
+   * @param {Object}  msg   执行正确和错误的消息,可以设置四个元素 {'success':'','error':'', 'url':'','ajax':false}
+   *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
+   *
+   * @author arterli <arterli@qq.com>
+   */
   async forbid(model, where, msg) {
-    where = where || {}, msg = msg || { 'success': '状态禁用成功！', 'error': '状态禁用失败！' };
-    const data = { 'status': 0 };
+    where = where || {}, msg = msg || {'success': '状态禁用成功！', 'error': '状态禁用失败！'};
+    const data = {'status': 0};
     await this.editRow(model, data, where, msg);
   }
 
   /**
-     * 恢复条目
-     * @param {String} model 模型名称,供D函数使用的参数
-     * @param {Object}  where 查询时的where()方法的参数
-     * @param {Object}  msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
-     *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
-     *
-     * @author arterli <arterli@qq.com>
-     */
+   * 恢复条目
+   * @param {String} model 模型名称,供D函数使用的参数
+   * @param {Object}  where 查询时的where()方法的参数
+   * @param {Object}  msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
+   *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
+   *
+   * @author arterli <arterli@qq.com>
+   */
   async resume(model, where, msg) {
-    where = where || {}, msg = msg || { 'success': '状态恢复成功！', 'error': '状态恢复失败！' };
-    const data = { 'status': 1 };
+    where = where || {}, msg = msg || {'success': '状态恢复成功！', 'error': '状态恢复失败！'};
+    const data = {'status': 1};
     await this.editRow(model, data, where, msg);
   }
 
   /**
-     * 还原条目
-     * @param {string} model 模型名称,供D函数使用的参数
-     * @param {array}  where 查询时的where()方法的参数
-     * @param {array}  msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
-     *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
-     * @author arterli <arterli@qq.com>
-     */
+   * 还原条目
+   * @param {string} model 模型名称,供D函数使用的参数
+   * @param {array}  where 查询时的where()方法的参数
+   * @param {array}  msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
+   *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
+   * @author arterli <arterli@qq.com>
+   */
   async restore(model, where, msg) {
-    where = where || {}, msg = msg || { 'success': '状态还原成功！', 'error': '状态还原失败！' };
-    const data = { 'status': 1 };
-    where = think.extend({ 'status': -1 }, where);
+    where = where || {}, msg = msg || {'success': '状态还原成功！', 'error': '状态还原失败！'};
+    const data = {'status': 1};
+    where = think.extend({'status': -1}, where);
     await this.editRow(model, data, where, msg);
   }
 
   /**
-     * 条目假删除
-     * @param {string} model 模型名称,供D函数使用的参数
-     * @param {array}  where 查询时的where()方法的参数
-     * @param {array} msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
-     *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
-     *
-     * @author arterli <arterli@qq.com>
-     */
+   * 条目假删除
+   * @param {string} model 模型名称,供D函数使用的参数
+   * @param {array}  where 查询时的where()方法的参数
+   * @param {array} msg   执行正确和错误的消息 {'success':'','error':'', 'url':'','ajax':false}
+   *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
+   *
+   * @author arterli <arterli@qq.com>
+   */
   async delete(model, where, msg) {
-    where = where || {}, msg = msg || { 'success': '删除成功！', 'error': '删除失败！' };
-    const data = { 'status': -1 };
+    where = where || {}, msg = msg || {'success': '删除成功！', 'error': '删除失败！'};
+    const data = {'status': -1};
     await this.editRow(model, data, where, msg);
   }
 
   /**
-     * 设置一条或者多条数据的状态
-     */
+   * 设置一条或者多条数据的状态
+   */
   async setstatusAction(model, pk = 'id') {
     if (think.isEmpty(this.ctx.param('model'))) {
       model = model || this.ctx.controller.substring(6);
@@ -213,13 +219,13 @@ module.exports = class extends think.Controller {
 
     switch (status) {
       case -1:
-        await this.delete(model, map, { 'success': '删除成功', 'error': '删除失败' });
+        await this.delete(model, map, {'success': '删除成功', 'error': '删除失败'});
         break;
       case 0:
-        await this.forbid(model, map, { 'success': '禁用成功', 'error': '禁用失败' });
+        await this.forbid(model, map, {'success': '禁用成功', 'error': '禁用失败'});
         break;
       case 1:
-        await this.resume(model, map, { 'success': '启用成功', 'error': '启用失败' });
+        await this.resume(model, map, {'success': '启用成功', 'error': '启用失败'});
         break;
       default:
         this.fail('参数错误');
@@ -228,8 +234,8 @@ module.exports = class extends think.Controller {
   }
 
   /**
-     * 排序
-     */
+   * 排序
+   */
   async sortAction(model, id = 'id') {
     model = model || this.ctx.controller.substring(6);
     const param = this.para('sort');
@@ -252,12 +258,13 @@ module.exports = class extends think.Controller {
           update_cache('category');// 更新栏目缓存
           break;
       }
-      return this.success({ name: '更新排序成功！'});
+      return this.success({name: '更新排序成功！'});
     } else {
-      return this.success({ name: '更新排序成功！'});
+      return this.success({name: '更新排序成功！'});
       // return this.fail('排序失败！');
     }
   }
+
   async puliccacheAction(model) {
     let type = this.para('type');
     if (think.isEmpty(type)) {
@@ -283,20 +290,21 @@ module.exports = class extends think.Controller {
         break;
     }
     if (res) {
-      return this.success({ name: msg});
+      return this.success({name: msg});
     } else {
       return this.fail(msg);
     }
   }
+
   /**
-     * 返回后台节点数据
-     * @param {boolean} tree    是否返回多维数组结构(生成菜单时用到),为false返回一维数组(生成权限节点时用到)
-     * @retrun {array}
-     *
-     * 注意,返回的主菜单节点数组中有'controller'元素,以供区分子节点和主节点
-     *
-     * @author
-     */
+   * 返回后台节点数据
+   * @param {boolean} tree    是否返回多维数组结构(生成菜单时用到),为false返回一维数组(生成权限节点时用到)
+   * @retrun {array}
+   *
+   * 注意,返回的主菜单节点数组中有'controller'元素,以供区分子节点和主节点
+   *
+   * @author
+   */
   async returnnodes(tree) {
     tree = tree || true;
     // let modelname = http.module;
@@ -316,10 +324,10 @@ module.exports = class extends think.Controller {
   }
 
   /**
-     * 处理文档列表显示
-     * @param {array} list 列表数据
-     * @param {integer} model_id 模型id
-     */
+   * 处理文档列表显示
+   * @param {array} list 列表数据
+   * @param {integer} model_id 模型id
+   */
   async parseDocumentList(list, model_id) {
     model_id = model_id || 1;
     const attrList = await this.model('cmswing/attribute').get_model_attribute(model_id, false, 'id,name,type,extra');
@@ -358,14 +366,15 @@ module.exports = class extends think.Controller {
       return list;
     }
   }
+
   /**
-     * 后台栏目权限验证方法
-     * await this.admin_priv("init",cid,error) 查看
-     * @param ac //init:查看,add:添加,edit:编辑,delete:删除,listorder:排序,push:推送,move:移动，examine：审核，disable：禁用
-     * @param cid //栏目id
-     * @param error //错误提示
-     * @returns {PreventPromise}
-     */
+   * 后台栏目权限验证方法
+   * await this.admin_priv("init",cid,error) 查看
+   * @param ac //init:查看,add:添加,edit:编辑,delete:删除,listorder:排序,push:推送,move:移动，examine：审核，disable：禁用
+   * @param cid //栏目id
+   * @param error //错误提示
+   * @returns {PreventPromise}
+   */
   async admin_priv(ac, cid, errors = '您所在的用户组,禁止本操作！') {
     if (!this.is_admin) {
       // 访问控制
@@ -376,6 +385,7 @@ module.exports = class extends think.Controller {
       }
     }
   }
+
   // 获取分类信息
   /**
    * 获取分类信息
