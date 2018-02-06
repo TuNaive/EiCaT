@@ -181,6 +181,10 @@ export default class extends Base {
 
     await this.model('order').formatPcbDetail(data, this)
 
+    const invoice = await this.getOrderInvoice(data.invoiceId)
+
+    _.merge(data, invoice)
+
     this.assign('data', data);
     this.meta_title = "订单详情";
 
