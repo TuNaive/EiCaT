@@ -42,3 +42,6 @@ obsoleted/
 # files
 package-lock.json
 database.sql
+
+# avatar upload
+www/upload
