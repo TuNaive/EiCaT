@@ -121,7 +121,6 @@ module.exports = class extends Admin {
       } else {
         data.overduedate = think.isEmpty(data.overduedate) ? 0 : data.overduedate;
       }
-      console.log(data);
       // return this.fail("ddd")
       data.status = 1;
       let self = this;
@@ -144,9 +143,11 @@ module.exports = class extends Admin {
         return this.fail("添加失败!")
       }
     } else {
+      /*
       //会员组
       let usergroup = await this.model("member_group").select();
       this.assign("usergroup", usergroup);
+      */
       //获取管理组
       let role = await this.model("auth_role").where({status: 1}).select();
       this.assign("role", role);
@@ -221,9 +222,11 @@ module.exports = class extends Admin {
         let roleid = await this.model("auth_user_role").where({user_id: user.id}).getField("role_id", true);
         this.assign("roleid", roleid)
       }
+      /*
       //会员组
       let usergroup = await this.model("member_group").select();
       this.assign("usergroup", usergroup);
+      */
       //获取管理组
       let role = await this.model("auth_role").where({status: 1}).select();
       this.assign("role", role);
@@ -254,9 +257,11 @@ module.exports = class extends Admin {
       let roleid = await this.model("auth_user_role").where({user_id: user.id}).getField("role_id", true);
       this.assign("roleid", roleid)
     }
+    /*
     //会员组
     let usergroup = await this.model("member_group").select();
     this.assign("usergroup", usergroup);
+    */
     //获取管理组
     let role = await this.model("auth_role").where({status: 1}).select();
     this.assign("role", role);

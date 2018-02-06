@@ -47,4 +47,27 @@ export default env => {
     const data = await get_nickname(uid);
     callback(null, data);
   }, true);
+
+  env.addFilter("in_Array", function (str, arr) {
+    arr= arr||0;
+    if (!think.isArray(arr)) {
+      if(think.isNumber(arr)){
+        arr = "'"+arr+"'";
+      }
+      arr = arr.split(",");
+    }
+    //console.log(arr);
+    return in_array(str, arr);
+  })
+  /**
+   * 数字转ip
+   */
+  env.addFilter("int2ip",function (int) {
+    return _int2iP(int);
+  })
+
+  // todo: test
+  env.addFilter("JSON",function (int) {
+    return JSON.stringify(int);
+  })
 }

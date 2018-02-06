@@ -107,7 +107,7 @@ function ajaxpost(){
         }else if ( form.get(0).nodeName=='FORM' ){
 
             //表单验证
-            if($('[data-validate="parsley"]')){
+            if($('[data-validate="parsley"]').length){
                 $('[data-validate="parsley"]').parsley().validate();
                 if(true !== $('[data-validate="parsley"]').parsley().isValid()){
                     return false;

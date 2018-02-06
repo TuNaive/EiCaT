@@ -14,7 +14,6 @@ module.exports = class extends think.Model {
       where.is_dev = 0;
     }
     const groups = think.config('settings.MENU_GROUP');
-    console.log('----------groups', groups)
     // let pid = await this.topmenu();
     var arr = {};
     for (var v of Object.keys(groups)) {

@@ -109,8 +109,7 @@
                   </li>
                   {%endif%}
                   {%if item.status ==2 %}
-                  <li><a href="/admin/order/audit/?id={{item.id}}" data-toggle="ajaxModal"><i
-                      class="fa fa-check-square-o"></i> 审核</a></li>
+                  <li><a href="/admin/order/audit/?id={{item.id}}" data-toggle="ajaxModal"><i class="fa fa-check-square-o"></i> 审核</a></li>
                   {%elif item.status ==3 and item.delivery_status == 0%}
                   <li><a href="/admin/order/ship/?id={{item.id}}" data-toggle="ajaxModal"><i class="fa fa-truck"></i> 发货</a>
                   </li>

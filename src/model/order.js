@@ -46,6 +46,10 @@ export default class extends think.Model {
     return data
   }
 
+  async afterAdd (data) {
+    await this.model("approval").adds(9, data.user_id, '创建订单', {}, data.id);
+  }
+
   afterFind (data) {
     return this.processQueryData(data)
   }

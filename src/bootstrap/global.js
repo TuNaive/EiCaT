@@ -59,6 +59,24 @@ global._ip2int = function(ip) {
 };
 
 /**
+ * 数字转ip
+ * @param num
+ * @returns {string|*}
+ * @private
+ */
+/*global _int2ip(num: number) */
+global._int2iP = function(num) {
+  var str;
+  var tt = new Array();
+  tt[0] = (num >>> 24) >>> 0;
+  tt[1] = ((num << 8) >>> 24) >>> 0;
+  tt[2] = (num << 16) >>> 24;
+  tt[3] = (num << 24) >>> 24;
+  str = String(tt[0]) + "." + String(tt[1]) + "." + String(tt[2]) + "." + String(tt[3]);
+  return str;
+}
+
+/**
  * 把返回的数据集转换成Tree
  * @param array data 要转换的数据集
  * @param string pid parent标记字段
@@ -93,6 +111,23 @@ global.get_nickname = async(uid) => {
   const data = await think.model('member').get_nickname(uid);
   return data;
 };
+
+/**
+ * in_array
+ * @param stringToSearch
+ * @param arrayToSearch
+ * @returns {boolean}
+ */
+/* global in_array */
+global.in_array = function(stringToSearch, arrayToSearch) {
+  for (let s = 0; s < arrayToSearch.length; s++) {
+    let thisEntry = arrayToSearch[s].toString();
+    if (thisEntry == stringToSearch) {
+      return true;
+    }
+  }
+  return false;
+}
 
 /**
  * 返回一个自定义用户函数给出的第一个参数

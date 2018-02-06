@@ -24,7 +24,6 @@ module.exports = class extends think.Controller {
     this.is_admin = await this.isadmin();
     // 后台菜单
     this.adminmenu = await this.model('menu').getallmenu(this.user.uid, this.is_admin);
-    // console.log(this.adminmenu);
     // this.assign("setup", this.setup);
     // 菜单当前状态
 

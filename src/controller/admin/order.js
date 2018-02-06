@@ -51,11 +51,11 @@ module.exports = class extends Admin {
       let admin_remark = this.post("admin_remark");
       let audit = await this.model("order").where({id: id}).update({status: 3, admin_remark: admin_remark});
       if (audit) {
+        await this.model("approval").where({model_id: id}).delete();
         return this.success({name: "审核成功！", url: this.referer()})
       } else {
         return this.fail("审核失败！")
       }
-
     } else {
       let id = this.get("id");
       this.assign("id", id);

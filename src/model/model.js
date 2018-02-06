@@ -122,9 +122,11 @@ export default class extends think.Model {
   //获取模型信息并缓存
   async get_model(id = null, field = null, extend = {}) {
     /* 读取缓存数据 */
-    let list = await think.cache("get_model", () => {
-      return this._get_model();
-    }, {timeout: 365 * 24 * 3600});
+    // let list = await think.cache("get_model", () => {
+    //   return this._get_model();
+    // }, {timeout: 365 * 24 * 3600});
+
+    let list = await this._get_model();
 
     if (!think.isEmpty(id) && think.isEmpty(field)) {
       return think._.find(list, {id: Number(id)})

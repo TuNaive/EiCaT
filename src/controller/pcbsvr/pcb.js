@@ -84,14 +84,14 @@ export default class extends Base {
   async calculateFee (params) {
     const {boardLength, boardWidth, boardLayer, boardMaterial, boardThickness, boardAmount, aluminumOutThickness, aluminumInThickness, makeupNum, surfacing, solderMaskColor, charColor, minLineSpace, minAperture, holeAmount, halfHole, testMethod, urgent, comment} = params
     const boardSize = boardLength * boardWidth
-    const projectPrice = await this.model('pcb_price').getPrice({boardLayer, option: 0})
-    const makeupPrice = await this.model('pcb_price').getPrice({boardLayer, option: 1})
-    const filmPrice = 5
+    const projectPrice = await this.model('pcb_price').getPrice({boardLayer, option: 'project'})
+    const makeupPrice = await this.model('pcb_price').getPrice({boardLayer, option: 'makeup'})
+    const filmPrice = await this.model('pcb_price').getPrice({option: 'film'})
     const boardPrice = await this.model('pcb_price').getPrice({boardLayer, boardMaterial})
     const surfacePrice = await this.model('pcb_price').getPrice({boardLayer: Math.min(boardLayer, 1), surfacing, boardThickness})
-    const testPrice = 0.2 // 单位/平方米
-    const urgentPrice = 100 // 100 线性递增
-    const halfHolePrice = 55 // 双数递增
+    const testPrice = await this.model('pcb_price').getPrice({option: 'test'}) // 单位/平方米
+    const urgentPrice = await this.model('pcb_price').getPrice({option: 'urgent'}) // 100 线性递增
+    const halfHolePrice = await this.model('pcb_price').getPrice({option: 'halfHole'}) // 双数递增
 
     const fee = {}
 
