@@ -221,7 +221,6 @@ export default class extends Base {
 
     postParams.user_id = this.user.uid
     postParams.order_no = this.model('enquire').getOrderid(this.user.uid)
-    postParams.type = 0
 
     await this.model('enquire').add(postParams)
 
