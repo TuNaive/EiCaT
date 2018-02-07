@@ -27,7 +27,8 @@ module.exports = class extends Admin {
     }
 
     map.is_del = 0
-    map.type = 0;
+    map.type = this.get("type") || 0;
+    this.assign('type', map.type);
     // this.config("db.nums_per_page",20)
     let data = await this.model("order").where(map).page(this.get('page') || 1, 20).order("create_time DESC").countSelect();
     let html = this.pagination(data);
@@ -36,6 +37,8 @@ module.exports = class extends Admin {
     this.active = "admin/order/list";
     for (let val of data.data) {
       val.channel = await this.getPaymentInfo(val.payment, val.pay_code)
+      const address = await this.model('address').getAddress(val.address_id)
+      _.merge(val, address)
     }
     this.assign('list', data.data);
     this.meta_title = "订单管理";
@@ -153,7 +156,6 @@ module.exports = class extends Admin {
    */
   async seeAction() {
     let id = this.get("id");
-    console.log(id);
     this.meta_title = "查看订单";
     //获取订单信息
     let order = await this.model("order").find(id);

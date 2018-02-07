@@ -31,7 +31,7 @@
           {{controller.meta_title}}</h4>
 
         <ul class="nav nav-tabs nav-top-border">
-          <li {%if status == null%}class="active"{%endif%}><a href="/account/order/pcb?&type={{type}}">全部订单</a></li>
+          <li {%if status == null%}class="active"{%endif%}><a href="/account/order/pcb?type={{type}}">全部订单</a></li>
           <li {% if status == 0%}class="active"{%endif%}><a href="/account/order/pcb/?status=0&type={{type}}" ><span class="badge badge-red btn-xs badge-corner">{{nopaid}}</span>待付款</a></li>
           <li {% if status == 1%}class="active"{%endif%}><a href="/account/order/pcb/?status=1&type={{type}}"><span class="badge badge-red btn-xs badge-corner">{{receipt}}</span>待收货</a></li>
           <li {% if status == -1%}class="active"{%endif%}><a href="/account/order/pcb/?status=-1&type={{type}}">已取消</a></li>

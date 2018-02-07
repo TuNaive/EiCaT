@@ -66,6 +66,10 @@ export default env => {
     return _int2iP(int);
   })
 
+  env.addFilter("test",function (string, reg) {
+    return (new RegExp(reg)).test(string);
+  })
+
   // todo: test
   env.addFilter("JSON",function (int) {
     return JSON.stringify(int);

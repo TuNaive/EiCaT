@@ -29,8 +29,13 @@ export default class extends think.Model {
     })
   }
 
+  getOrderid(uid) {
+    // 用户id+毫秒时间戳后5位
+    const m = new Date().getTime().toString();
+    return 'E' + _.padEnd(uid, 10, '0') + m.substr(8);
+  }
+
   processQueryData (obj) {
-    obj._order_no = `E${_.get(enums.enquire_type, obj.type)}${_.toString(obj.create_time).slice(0, -3)}${_.padStart(obj.id, 6, 0)}`
     obj._create_time = moment(_.toNumber(obj.create_time)).format('YYYY-MM-DD HH:mm:ss')
     obj._status = _.get(enums, `status.${obj.status}`)
 

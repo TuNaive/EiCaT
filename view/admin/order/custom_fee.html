@@ -3,11 +3,12 @@
     发货清单
   </header>
   {% set data = order %}
-  {% include "../../pcbsvr/pcb/custom_detail.html" %}
+  {% set admin = true %}
+  {% include "../../pcbsvr/pcb/order_custom_detail.html" %}
 </section>
 <section class="panel panel-default m-b-xs">
   <header class="panel-heading">
     费用清单
   </header>
-  {% include "../../pcbsvr/pcb/fee_detail.html" %}
+  {% include "../../pcbsvr/pcb/order_fee_detail.html" %}
 </section>

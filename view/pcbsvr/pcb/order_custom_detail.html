@@ -11,11 +11,23 @@
   {% set info = data._pcbInfo.slice(0, 7) %}
   <table class="table table-bordered">
     <tr>
+      {% if admin %}
+      <td>板子数量（PCS）</td>
+      <td>文件</td>
+      {% endif %}
+
       {% for item in info %}
       <td>{{item.label}}</td>
       {% endfor %}
     </tr>
     <tr>
+      {% if admin %}
+      <td>{{data.pcbInfo.boardAmount}}</td>
+      <td>
+        <a class="text-success" href="/pcbsvr/pcb/download?uuid={{data.fileUuid}}">{{data.fileUuid | getFileName}}</a>
+      </td>
+      {% endif %}
+
       {% for item in info %}
       <td>{{item.value}}</td>
       {% endfor %}

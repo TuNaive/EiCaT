@@ -1,0 +1,122 @@
+{% extends "./inc/base.html" %}
+{% block content %}
+<section class="vbox">
+  <header class="header bg-light dk">
+    <ul class="nav nav-tabs pull-left">
+      <li class="{%if type == 0%}active{%endif%}"><a href="/admin/order/list?type=0">PCB</a></li>
+      <li class="{%if type == 1%}active{%endif%}"><a href="/admin/order/list?type=1">PCBA</a></li>
+    </ul>
+  </header>
+  <section class="scrollable wrapper">
+
+    <section class="panel panel-default">
+      <header class="panel-heading">
+        询价单列表
+      </header>
+      <div class="row wrapper">
+        <div class="col-sm-9 m-b-xs">
+          <div class="btn-group">
+            <a class="btn btn-sm btn-info {%if status == null %}active{%endif%}" href="{{'/admin/enquire/list?type=' + type}}">
+              全部
+            </a>
+            <a class="btn btn-sm btn-info {%if status == 0 %}active{%endif%}" href="{{'/admin/enquire/list?status=0&type=' + type}}">
+              等待回复
+            </a>
+            <a class="btn btn-sm btn-info {%if status == 1 %}active{%endif%}" href="{{'/admin/enquire/list?status=1&type=' + type}}">
+              已回复
+            </a>
+            <a class="btn btn-sm btn-info {%if status == -1 %}active{%endif%}" href="{{'/admin/enquire/list?status=-1&type=' + type}}">
+              已取消
+            </a>
+          </div>
+        </div>
+        <!--<div class="col-sm-3">-->
+        <!--<div class="input-group pull-right">-->
+        <!--<input type="text" class="input-sm form-control" placeholder="Search">-->
+        <!--<span class="input-group-btn">-->
+        <!--<button class="btn btn-sm btn-default" type="button">Go!</button>-->
+        <!--</span>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover b-t b-light">
+          <thead>
+          <tr>
+            <th>询价单号</th>
+            <th>会员账号</th>
+            <th>板子数量（PCS）</th>
+            <th>联系人</th>
+            <th>联系手机</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for item in list %}
+          <tr>
+            <td>{{item.order_no}}</td>
+            <td>{{item.user_id|get_nickname}}</td>
+            <td>{{item.boardAmount}}</td>
+            <td>{{item.contact}}</td>
+            <td>{{item.mobile}}</td>
+            <td>
+              {%if item.status == 0 %}
+              <span class="text-muted">{{item._status}}</span>
+              {%elif item.status == 1%}
+              <span class="text-success">{{item._status}}</span>
+              {%elif item.status == -1%}
+              <del class="text-danger">{{item._status}}</del>
+              {%endif%}
+            </td>
+            <td>
+              <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle"><i class="fa fa-cog"></i>
+                  处理 <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><a href="/admin/enquire/see/?id={{item.id}}" data-toggle="ajaxModal"><i class="fa fa-eye"></i>
+                    查看</a></li>
+                  {%if item.status == 0%}
+                  <li><a href="/admin/enquire/update?operation=finish&id={{item.id}}" data-toggle="ajaxModal"><i
+                      class="fa fa-smile-o"></i> 完成</a></li>
+                  {%elif item.status != -1%}
+                  <li><a href="/admin/enquire/update?operation=void&id={{item.id}}" data-toggle="ajaxModal"><i
+                      class="fa fa-trash-o"></i>
+                    作废</a></li>
+                  {%endif%}
+                  <li><a href="/admin/enquire/update?operation=remark&id={{item.id}}" data-toggle="ajaxModal"><i
+                      class="fa fa-paperclip"></i> 备注</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="11">
+              <div class="alert alert-warning alert-block">
+                <button data-dismiss="alert" class="close" type="button">×</button>
+                <p>This would display if the 'item' collection were empty</p>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <footer class="panel-footer">
+        <div class="row">
+          <div class="col-sm-12 text-right text-center-xs">
+            {{pagerData | safe}}
+          </div>
+        </div>
+      </footer>
+    </section>
+  </section>
+</section>
+
+{% endblock %}
+{% block script%}
+<script src="/static/admin/js/parsley/parsley.min.js"></script>
+<script src="/static/admin/js/parsley/parsley.extend.js"></script>
+
+{% endblock%}

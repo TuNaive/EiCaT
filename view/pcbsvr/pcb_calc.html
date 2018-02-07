@@ -100,7 +100,7 @@
         <h3>加工详情</h3>
         <table id="machiningDetail" class="table table-bordered"></table>
 
-        <h3>价格明细（含税17%）</h3>
+        <h3>价格明细</h3>
         <table id="priceDetail" class="table table-bordered"></table>
       </fieldset>
 
@@ -165,15 +165,11 @@
           <div class="express clearfix">
             <h3 class="pull-left">快递公司：</h3>
             <div class="col-sm-10">
-              <!--<label class="radio-inline">-->
-                <!--<input type="radio" name="express" id="express0" value="0">联昊通(只送广东省内,免费)-->
-              <!--</label>-->
-              <!--<label class="radio-inline">-->
-                <!--<input type="radio" name="express" id="express1" value="1">顺丰-->
-              <!--</label>-->
+              {%for item in express%}
               <label class="radio-inline">
-                <input type="radio" name="express" id="express2" value="2" checked>德邦物流(适用批量板)
+                <input type="radio" name="express" id="{{'express' + item.id}}" value="{{item.id}}" {%if item.id == 1%}checked{%endif%}>{{item.name}}
               </label>
+              {%endfor%}
             </div>
           </div>
 

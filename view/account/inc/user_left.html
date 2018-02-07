@@ -1,7 +1,7 @@
 <div class="col-lg-2 col-md-2 col-sm-4">
 
   <div class="thumbnail text-center avatar-view hide">
-    <img src="/u/avatar" alt="{{controller.user.username}}" style="width: 100%"/>
+    <!--<img src="/u/avatar" alt="{{controller.user.username}}" style="width: 100%"/>-->
     <h2 class="size-18 margin-top-10 margin-bottom-0">{{controller.user.username}}</h2>
     <h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">DEVELOPER</h3>
   </div>
@@ -31,7 +31,7 @@
       </a>
       <ul id="collapse-1" class="collapse in"><!-- NOTE: "collapse in" to be open on page load -->
         <li>
-          <a href="/account/setting" class="{% if ctx.originalUrl == '/account/setting' %}text-danger{%endif%}"><i
+          <a href="/account/seting" class="{% if ctx.originalUrl == '/account/seting' %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> 个人设置
           </a>
         </li>
@@ -60,17 +60,17 @@
         <i class="fa fa-user"></i> 订单管理</a>
       <ul id="collapse-2" class="collapse in"><!-- NOTE: "collapse in" to be open on page load -->
         <li>
-          <a href="/account/order/pcb?type=0" class="{% if ctx.originalUrl == '/account/order/pcb?type=0' %}text-danger{%endif%}"><i
+          <a href="/account/order/pcb?type=0" class="{% if ctx.originalUrl | test('/account/order/pcb.*type=0') %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> PCB订单</a></li>
         <li>
-          <a href="/account/enquire/pcb?type=0" class="{% if ctx.originalUrl == '/account/enquire/pcb?type=0' %}text-danger{%endif%}"><i
+          <a href="/account/enquire/pcb?type=0" class="{% if ctx.originalUrl | test('/account/enquire/pcb.*type=0') %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> PCB询价单</a>
         </li>
         <li>
-          <a href="/account/order/pcb?type=1" class="{% if ctx.originalUrl == '/account/order/pcb?type=1' %}text-danger{%endif%}"><i
+          <a href="/account/order/pcb?type=1" class="{% if ctx.originalUrl | test('/account/order/pcb.*type=1') %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> PCBA订单</a></li>
         <li>
-          <a href="/account/enquire/pcb?type=1" class="{% if ctx.originalUrl == '/account/enquire/pcb?type=1' %}text-danger{%endif%}"><i
+          <a href="/account/enquire/pcb?type=1" class="{% if ctx.originalUrl | test('/account/enquire/pcb.*type=1') %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> PCBA询价单</a>
         </li>
       </ul>
