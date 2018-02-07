@@ -72,44 +72,9 @@
             </div>
           </div>
           <h5 class="bg-info">订单详情</h5>
-          <table class="table table-bordered">
-            <tr>
-              <td>CHIP点数</td>
-              <td>IC点数</td>
-              <td>BGA点数</td>
-              <td>DIP脚数</td>
-              <td>钢网尺寸</td>
-              <td>订单数量</td>
-              <td>交期</td>
-              <td>备注</td>
-            </tr>
-            <tr>
-              <td>{{data.pointChip}}</td>
-              <td>{{data.pointIc}}</td>
-              <td>{{data.pointBga}}</td>
-              <td>{{data.pointDip}}</td>
-              <td>{{data.plateSize}}</td>
-              <td>{{data.order_amount}}</td>
-              <td>2-3天</td>
-              <td>{{data.comment}}</td>
-            </tr>
-          </table>
+          {% include "../pcbsvr/pcba/custom_detail.html" %}
           <h5 class="bg-info">费用信息</h5>
-          <table class="table table-bordered">
-            <tr>
-              <td>组装费</td>
-              <td>钢网费</td>
-              <td>其它</td>
-              <td>运费</td>
-            </tr>
-            <tr>
-              <td>{{data.projceFee}}</td>
-              <td>{{data.platesizeFee}}</td>
-              <td>{{data.otherFee}}</td>
-              <td>{{data.otherFee}}</td>
-            </tr>
-          </table>
-          <p class="extra-info">总价格：{{data.order_amount|formatCurrency}}</p>
+          {% include "../pcbsvr/pcba/fee_detail.html" %}
           <h5 class="bg-info">发票信息</h5>
           <div class="form-horizontal">
             <div class="form-group">

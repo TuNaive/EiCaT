@@ -9,9 +9,11 @@ export default class extends Base {
   }
 
   async saveAction () {
-    const param = this.post()
+    let param = this.post()
 
-    const user = { userId: this.user.uid }
+    param.userId = this.user.uid
+
+    // const user = { userId: this.user.uid }
 
     const edit = this.post('edit')
 
@@ -30,7 +32,7 @@ export default class extends Base {
         }
       }
     } else {
-      res = await this.model('invoice').add(_.merge(param, user))
+      res = await this.model('invoice').add(param)
       if (!_.isNil(res)) {
         this.body = {
           rtnCode: 0,
@@ -47,7 +49,6 @@ export default class extends Base {
   }
 
   async editmodalAction () {
-    console.log('------edit')
     // type 1 编辑  0 新增
     const type = this.get('type')
     if (_.isEqual(type, '1')) {

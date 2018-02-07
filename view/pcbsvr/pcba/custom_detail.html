@@ -1,0 +1,33 @@
+<style>
+  .pcb-order-detail .table-bordered {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .pcb-order-detail .table {
+    margin-bottom: 20px !important;
+  }
+</style>
+<div class="pcb-order-detail">
+  <table class="table table-bordered">
+    <tr>
+      <td>CHIP点数</td>
+      <td>IC点数</td>
+      <td>BGA点数</td>
+      <td>DIP脚数</td>
+      <td>钢网尺寸</td>
+      <td>订单数量</td>
+      <td>交期</td>
+      <td>备注</td>
+    </tr>
+    <tr>
+      <td>{{data.pointChip}}</td>
+      <td>{{data.pointIc}}</td>
+      <td>{{data.pointBga}}</td>
+      <td>{{data.pointDip}}</td>
+      <td>{{data.plateSize}}</td>
+      <td>{{data.order_amount}}</td>
+      <td>2-3天</td>
+      <td>{{data.comment}}</td>
+    </tr>
+  </table>
+</div>

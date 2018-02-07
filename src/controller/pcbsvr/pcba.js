@@ -97,6 +97,8 @@ export default class extends Base {
 
     data.address_id = data.addressId
 
+    data.order_no = this.model('order').getOrderid(this.user.uid)
+
     const res = await this.model('order').add(data)
 
     if (!_.isNil(res)) {
@@ -135,10 +137,10 @@ export default class extends Base {
     let Fee = {}
     Fee.platesizeFee = plateObj[params.plateSize].toFixed(2)
     Fee.otherFee = '0.00'
-    const icCount = _.toNumber(params.pointIC)
-    const chipCount = _.toNumber(params.pointCHIP)
-    const bgaCount = _.toNumber(params.pointBGA)
-    const dipCount = _.toNumber(params.pointDIP)
+    const icCount = _.toNumber(params.pointIc)
+    const chipCount = _.toNumber(params.pointChip)
+    const bgaCount = _.toNumber(params.pointBga)
+    const dipCount = _.toNumber(params.pointDip)
     const boardCount = _.toNumber(params.boardNumber)
     const totalCount = (chipCount + icCount + bgaCount + dipCount) * boardCount
     let projceFee = 0.00

@@ -229,7 +229,8 @@ export default class extends Base {
   async getOrderAddress(addressId) {
     const resAddr = {}
     let address = await this.model("address").where({id: addressId}).find()
-
+    if (_.isEmpty(address)) { return false }
+    console.log("==============address", addressId, address)
     resAddr.address = _.merge(address, {
       province: await this.model("area").where({id: address.province}).getField("name", true),
       city: await this.model("area").where({id: address.city}).getField("name", true),

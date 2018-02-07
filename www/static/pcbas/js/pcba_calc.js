@@ -93,6 +93,18 @@ function bindFormEvents (Enum) {
       var totalFee = {name: "totalFee", value: _.get(self, 'feeData.totalFee')}
       var feeArr = [projceFee, plateSizeFee, otherFee, totalFee]
       paramData = _.concat(paramData, feeArr)
+      console.log("==========paramData", paramData)
+      // var hasAdd
+      // _.forEach(paramData, function (o) {
+      //   if (_.isNil(o.addressId)) {
+      //     hasAdd = false
+      //   }
+      // })
+      var hasAdd = _.find(paramData, function(o) { return o.name === 'addressId'; });
+      if (!hasAdd) {
+        _toastr('请选择收获地址',"top-right","success",false);
+        return false;
+      }
       $.ajax({
         url: 'createOrder',
         type: 'POST',

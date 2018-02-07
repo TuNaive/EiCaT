@@ -4,11 +4,19 @@
   </header>
   {% set data = order %}
   {% set admin = true %}
-  {% include "../../pcbsvr/pcb/order_custom_detail.html" %}
+  {% if data.type == 0 %}
+    {% include "../../pcbsvr/pcb/order_custom_detail.html" %}
+  {% else %}
+    {% include "../../pcbsvr/pcba/custom_detail.html" %}
+  {% endif %}
 </section>
 <section class="panel panel-default m-b-xs">
   <header class="panel-heading">
     费用清单
   </header>
-  {% include "../../pcbsvr/pcb/order_fee_detail.html" %}
+  {% if data.type == 0 %}
+    {% include "../../pcbsvr/pcb/order_fee_detail.html" %}
+  {% else %}
+    {% include "../../pcbsvr/pcba/fee_detail.html" %}
+  {% endif %}
 </section>

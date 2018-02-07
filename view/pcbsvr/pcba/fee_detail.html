@@ -1,0 +1,26 @@
+<style>
+  .pcb-fee-detail .table-bordered {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .pcb-fee-detail .table {
+    margin-bottom: 20px !important;
+  }
+</style>
+<div class="pcb-fee-detail">
+ <table class="table table-bordered">
+    <tr>
+      <td>组装费</td>
+      <td>钢网费</td>
+      <td>其它</td>
+      <td>运费</td>
+    </tr>
+    <tr>
+      <td>{{data.projceFee}}</td>
+      <td>{{data.platesizeFee}}</td>
+      <td>{{data.otherFee}}</td>
+      <td>{{data.otherFee}}</td>
+    </tr>
+  </table>
+  <p class="extra-info">总价格：{{data.order_amount|formatCurrency}}</p>
+</div>

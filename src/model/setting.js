@@ -8,7 +8,9 @@ export default class extends think.Model {
    * @returns 
    */
   async initSettings () {
-    return await think.cache('settings', () => this.getSettings(), { timeout: 365 * 24 * 3600 })
+    // TODO: 暂时去掉缓存
+    // return await think.cache('settings', () => this.getSettings(), { timeout: 365 * 24 * 3600 })
+    return await this.getSettings()
   }
 
   /**
