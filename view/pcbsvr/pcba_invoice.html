@@ -1,4 +1,4 @@
-<div class="modal-dialog">
+<div id="inotice-modal" class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
       <button aria-label="Close" 
@@ -64,3 +64,7 @@
     </div>
   </div>
 </div>
+{%block script%}
+  <script src="/static/common/plugins/require.js"></script>
+  <script src="/static/account/js/notice_modal.js"></script>
+{%endblock%}

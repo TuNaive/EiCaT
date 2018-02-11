@@ -99,8 +99,10 @@
               <td style="vertical-align: middle;border-bottom: none">
                 {%if item.is_del == 1%}
                 {%elif item.status == 2%}
-                {%elif item.status == 4 or item.status == 6%}
+                {%elif (item.status == 4 or item.status == 6) and item.type == 0%}
                   <a class="btn btn-default btn-xs" href="/pcbsvr/pcb/calc"><i class="fa fa-cart-plus white"></i>重新下单 </a>
+                {%elif (item.status == 4 or item.status == 6) and item.type == 1%}
+                  <a class="btn btn-default btn-xs" href="/pcbsvr/pcba/calc"><i class="fa fa-cart-plus white"></i>重新下单 </a>
                 {%elif item.delivery_status == 1%}
                   <a class="btn btn-success btn-xs confirm ajax-get" href="/account/order/confirmreceipt/?id={{item.id}}"><i class="fa fa-cart-plus white"></i>确认收货 </a>
                 {%elif item.pay_status == 0%}
