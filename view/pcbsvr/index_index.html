@@ -216,13 +216,58 @@
             </div>
           </div>
           <div class="tab-pane fade" id="pcb">
-            22222222222222
+            <div class="row ">
+              {% for val in pcbList %}
+                <div class="col-md-3 col-sm-3 ">
+                  <div class="item-box margin-bottom-20">
+                    <div class="panel panel-default" style="margin-bottom: 0">
+                      <div class="panel-body padding-10">
+                          <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="">
+                      </div>
+                      <div class="panel-footer padding-10 size-14 elipsis" >
+                        {{val.title|truncate(16)}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {%endfor%}
+            </div>
           </div>
           <div class="tab-pane fade" id="fpc">
-            33333333333333
+            <div class="row ">
+              {% for val in fpcList %}
+                <div class="col-md-3 col-sm-3 ">
+                  <div class="item-box margin-bottom-20">
+                    <div class="panel panel-default" style="margin-bottom: 0">
+                      <div class="panel-body padding-10">
+                          <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="">
+                      </div>
+                      <div class="panel-footer padding-10 size-14 elipsis" >
+                        {{val.title|truncate(16)}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {%endfor%}
+            </div>
           </div>
           <div class="tab-pane fade" id="pcba">
-            44444444444444
+            <div class="row ">
+              {% for val in pcbaList %}
+                <div class="col-md-3 col-sm-3 ">
+                  <div class="item-box margin-bottom-20">
+                    <div class="panel panel-default" style="margin-bottom: 0">
+                      <div class="panel-body padding-10">
+                          <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="">
+                      </div>
+                      <div class="panel-footer padding-10 size-14 elipsis" >
+                        {{val.title|truncate(16)}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {%endfor%}
+            </div>
           </div>
         </div>
       </div>
