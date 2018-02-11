@@ -15,7 +15,7 @@ export default class extends Base {
   }
 
   async calcAction() {
-    let express = await this.model("express_company")select();
+    let express = await this.model("express_company").select();
     this.assign('express', express);
     this.sub_channel = 'PCB自助询价'
     return this.display()
@@ -221,7 +221,6 @@ export default class extends Base {
 
     postParams.user_id = this.user.uid
     postParams.order_no = this.model('enquire').getOrderid(this.user.uid)
-    postParams.type = 0
 
     await this.model('enquire').add(postParams)
 
