@@ -159,7 +159,14 @@ function bindFormEvents () {
       }
     },
     onFinishing: function (event, currentIndex) {
-      return $("#pcbFileForm").valid();
+      var formValidRes = $("#pcbFileForm").valid()
+      var hasAddress = $('[name="address_id"]:checked').length > 0
+      // 收货人信息判断
+      if (!hasAddress) {
+        $('#addressErr').css({display: 'inline-block'}).removeClass('hide');
+      }
+
+      return formValidRes && hasAddress;
     },
     onFinished: function (event, currentIndex) {
       var paramData = _.concat(
@@ -248,7 +255,12 @@ function initPcbStateAndEvents () {
 }
 
 function initAddressStateAndEvents () {
+  $('#addressList').on('change', '[type="radio"]', function () {
+    $('#addressErr').addClass('hide');
+  })
+
   $('#refreshAddress').click(function () {
+    $('#addressErr').addClass('hide');
     generateAddress()
   })
 

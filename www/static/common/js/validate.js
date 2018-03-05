@@ -11,7 +11,7 @@ $(function ($) {
 
 function addValidateMethods () {
   var regs = {
-    mobile: /^1[3457]\d{9}$/
+    mobile: /^1[34578]\d{9}$/
   }
 
   var rules = {
