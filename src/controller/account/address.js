@@ -93,7 +93,6 @@ export default class extends Base {
     }
     let res
     if(think.isEmpty(data.id)){
-      console.log('===========', data)
       res =await this.model("address").add(data);
     }else{
       res = await this.model("address").update(data);
