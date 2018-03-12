@@ -133,7 +133,6 @@ export default class extends think.Model {
     }
     if (!think.isEmpty(id) && !think.isEmpty(field)) {
       let arr = think._.find(list, {id: Number(id)});
-      //console.log(arr);
       if (!think.isEmpty(arr)) {
         return arr[field]
       } else {

@@ -168,7 +168,7 @@
             <div class="col-sm-10">
               {%for item in express%}
               <label class="radio-inline">
-                <input type="radio" name="express" id="{{'express' + item.id}}" value="{{item.id}}" {%if item.id == 1%}checked{%endif%}>{{item.name}}
+                <input type="radio" name="expressId" id="{{'express' + item.id}}" value="{{item.id}}" {%if item.id == 1%}checked{%endif%}>{{item.name}}
               </label>
               {%endfor%}
             </div>

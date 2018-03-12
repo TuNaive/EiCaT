@@ -10,6 +10,19 @@ export default class extends Base {
   }
 
   /**
+   * 商城订单管理
+   * @returns {PreventPromise}
+   */
+  async shangchengAction() {
+    const type = 2
+    const status = this.get('status') || null
+
+    await this.setupOrder(type, status)
+
+    return this.display();
+  }
+
+  /**
    * pcb订单管理
    * @returns {PreventPromise}
    */
@@ -28,17 +41,17 @@ export default class extends Base {
    * pcba订单管理
    * @returns {PreventPromise}
    */
-   // async pcbaAction() {
+  // async pcbaAction() {
 
-   //  console.log('pcba order')
+  //  console.log('pcba order')
 
-   //  await this.setupOrder(1)
+  //  await this.setupOrder(1)
 
-   //  return this.display()
-   // }
+  //  return this.display()
+  // }
 
-   async setupOrder(type, status) {
-      //判断是否登陆
+  async setupOrder(type, status) {
+    //判断是否登陆
     await this.weblogin();
 
     // let status = this.para("status") || null;
@@ -64,18 +77,18 @@ export default class extends Base {
     } else if (status == 1) {
       //待收货的订单
       /*(item.pay_status == 1 or item.status ==3) and item.delivery_status != 1 and item.status != 6 and item.status != 4
-      item.delivery_status == 1 and item.status != 6 and item.status != 4
-      map={
-          status: ["NOTIN", [4, 6]],
-          delivery_status: ["!=", 1],
-          is_del: 0,
-          user_id: this.user.uid,
-          _complex:{
-              pay_status: 1,
-              status: 3,
-              _logic: "or"
-          }
-      }*/
+       item.delivery_status == 1 and item.status != 6 and item.status != 4
+       map={
+       status: ["NOTIN", [4, 6]],
+       delivery_status: ["!=", 1],
+       is_del: 0,
+       user_id: this.user.uid,
+       _complex:{
+       pay_status: 1,
+       status: 3,
+       _logic: "or"
+       }
+       }*/
       _.merge(map, {
         status: ["NOTIN", [4, 6]],
         delivery_status: 1
@@ -110,17 +123,17 @@ export default class extends Base {
     let address_id = data.address_id
 
     for (let val of data.data) {
-      // switch (val.payment) {
-      //   case 100:
-      //     val.channel = "预付款支付";
-      //     break;
-      //   case 1001:
-      //     val.channel = "货到付款";
-      //     break;
-      //   default:
-      //     // 付款方式
-      //     val.channel = await this.model("pingxx").where({id: val.payment}).getField("title", true);
-      // }
+      /*switch (val.payment) {
+       case 100:
+       val.channel = "预付款支付";
+       break;
+       case 1001:
+       val.channel = "货到付款";
+       break;
+       default:
+       // 付款方式
+       val.channel = await this.model("pingxx").where({id: val.payment}).getField("title", true);
+       }*/
       if (!_.isNil(val.address_id) && !_.isEqual(val.address_id, 0)) {
         address_id = val.address_id
       }
@@ -128,20 +141,19 @@ export default class extends Base {
       _.merge(val, address)
 
       //未付款订单倒计时
-      // if (val.pay_status == 0) {
-      //   val.end_time = moment(val.create_time + (Number(this.config('setup.ORDER_DELAY')) * 60000)).format('MMM D, YYYY H:m:s')
-      // }
-      //console.log(this.setup.ORDER_DELAY_BUND)
+      if (this.model('order').isShangchengOrder(type) && val.pay_status == 0) {
+        val.end_time = moment(val.create_time + (Number(this.config('settings.ORDER_DELAY')) * 60000)).format('M D, YYYY H:m:s')
+      }
       //查出订单里面的商品列表
-      /*val.goods = await this.model("order_goods").where({order_id: val.id}).select();
-      let numarr=[];
+      val.goods = await this.model("order_goods").where({order_id: val.id}).select();
+      let numarr = [];
       for (let v of val.goods) {
         v.prom_goods = JSON.parse(v.prom_goods);
         numarr.push(v.goods_nums);
         v = think.extend(v, v.prom_goods);
         delete v.prom_goods;
       }
-      val.nums = eval(numarr.join("+"));*/
+      val.nums = eval(numarr.join("+"));
     }
 
     //未付款统计
@@ -153,7 +165,6 @@ export default class extends Base {
       is_del: 0,
       user_id: this.user.uid,
     }).count("id");
-    this.assign("nopaid", nopaid);
     //未付款统计
     let receipt = await this.model("order").where({
       type: type,
@@ -164,11 +175,46 @@ export default class extends Base {
     }).count("id");
     this.assign("nopaid", nopaid);
     this.assign("receipt", receipt);
-    this.assign("count",data.count);
+    this.assign("count", data.count);
     this.assign('list', data.data);
     this.assign('type', type)
     this.meta_title = "我的订单";
-   }
+  }
+
+  /**
+   * 商城订单详情
+   * @returns {PreventPromise}
+   */
+  async shangchengDetailAction() {
+    const orderId = this.get('id')
+    const orderInfo = await this.model("order").where({id: orderId}).find()
+    this.assign('data', orderInfo)
+
+    //查出订单里面的商品列表
+    const goods = await this.model("order_goods").where({order_id: orderId}).select();
+    for (let v of goods) {
+      v.prom_goods = JSON.parse(v.prom_goods);
+      v = think.extend(v, v.prom_goods);
+      delete v.prom_goods;
+    }
+    this.assign('goods', goods)
+
+    // 支付概览
+    await this.controller('account/cart').getPayOverview.call(this, goods)
+
+    // 支付方式
+    const payment = await this.controller('admin/order').getPaymentInfo(orderInfo.payment)
+    this.assign('payment', payment)
+
+    // 收货人信息
+    const { address } = await this.model('address').getAddress(orderInfo.address_id)
+    this.assign('address', address)
+
+    this.meta_title = "订单详情";
+
+    return this.display();
+  }
+
 
   /**
    * pcb订单详情
@@ -229,7 +275,9 @@ export default class extends Base {
   async getOrderAddress(addressId) {
     const resAddr = {}
     let address = await this.model("address").where({id: addressId}).find()
-    if (_.isEmpty(address)) { return false }
+    if (_.isEmpty(address)) {
+      return false
+    }
     console.log("==============address", addressId, address)
     resAddr.address = _.merge(address, {
       province: await this.model("area").where({id: address.province}).getField("name", true),

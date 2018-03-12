@@ -1,11 +1,3 @@
-// +----------------------------------------------------------------------
-// | CmsWing [ 网站内容管理框架 ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2015-2115 http://www.cmswing.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: arterli <arterli@qq.com>
-// +----------------------------------------------------------------------
-
 module.exports = class extends think.Controller {
   /**
    * index action
@@ -26,15 +18,14 @@ module.exports = class extends think.Controller {
     // 查询未付款，未作废的订单的订单
     const map = {
       pay_status: 0,
-      status: 2,
-      type: 0,
+      // status: 2,
       create_time: ['<', (new Date().getTime() - (Number(this.config('setup.ORDER_DELAY')) * 60000))]
     };
 
-    const order = await this.model('order').where(map).field('id').select();
-    if (!think.isEmpty(order)) {
-      for (const v of order) {
-        order.payment !== 1002 && await this.model('order').where({id: v.id}).update({status: 6, admin_remark: '规定时间未付款系统自动作废'});
+    const orders = await this.model('order').where(map).field('id, payment').select();
+    if (!think.isEmpty(orders)) {
+      for (const v of orders) {
+        v.payment !== 1002 && await this.model('order').where({id: v.id}).update({status: 6, admin_remark: '规定时间未付款系统自动作废'});
         // 释放库存
         // await this.model('cmswing/order').stock(v.id, false);
       }

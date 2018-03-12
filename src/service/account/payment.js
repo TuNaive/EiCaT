@@ -1,10 +1,3 @@
-// +----------------------------------------------------------------------
-// | CmsWing [ 网站内容管理框架 ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2015-2115 http://www.cmswing.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: arterli <arterli@qq.com>
-// +----------------------------------------------------------------------
 module.exports = class extends think.Service {
   /**
      * init
@@ -16,7 +9,15 @@ module.exports = class extends think.Service {
   }
   // 发起付款
   async pingxx(channel, order_no, order_amount, ip, open_id) {
-    const http_ = think.config('http_') == 1 ? 'http' : 'https';
+    let http_ = think.config('http_') == 1 ? 'http' : 'https';
+
+    // todo: dev test
+    ip = '127.0.0.1'
+    http_= 'https'
+    this.http = {
+      host: '127.0.0.1'
+    }
+
     let config;
     let extra = {};
     const amount = Number(order_amount) * 100;
@@ -91,7 +92,7 @@ module.exports = class extends think.Service {
     function create(pingpp, config) {
       const deferred = think.defer();
       pingpp.charges.create(config, function(err, charge) {
-        console.log(`[create pingpp error with config: ${config}]`, err);
+        console.log(`[create pingpp error with config: ${JSON.stringify(config)}]`, err);
         deferred.resolve(charge);
       });
       return deferred.promise;

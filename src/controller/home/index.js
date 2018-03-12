@@ -1,6 +1,6 @@
-import Frontend from '../common/frontend.js'
+import Base from './base'
 
-export default class extends Frontend {
+export default class extends Base{
   indexAction() {
     this.meta_title = '首页'
     this.active = ['/', '/index', '/index.html']

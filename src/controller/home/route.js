@@ -1,6 +1,6 @@
-const Home = require('../common/home');
-module.exports = class extends Home {
+import Base from './base'
 
+export default class extends Base{
   /**
    * 解析路由，判断是频道页面还是列表页面
    */

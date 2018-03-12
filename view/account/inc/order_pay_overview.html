@@ -1,0 +1,31 @@
+<!--支付概览-->
+<div class="row">
+  <div class="col-md-8 hidden-xs"></div>
+  <div class="col-md-4 col-xs-12">
+    <div class="table-responsive margin-top-20">
+      <table class="table margin-bottom-0">
+        <tbody>
+        <tr>
+          <td class="text-right"><span class="text-danger">{{nums}}</span> 件商品，总商品金额：</td>
+          <td>¥ <span
+              class="text-danger">{% if real_amount %}{{real_amount|formatCurrency}}{%else%}0.00{%endif%}</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-right">优惠：</td>
+          <td><span class="text-success">- </span> ¥<span class="text-success">0.00</span></td>
+        </tr>
+        <tr>
+          <td class="text-right">运费：</td>
+          <td id="real_freight">¥ <span class="text-danger">{%if real_freight%}{{real_freight|formatCurrency}}{%else%}0.00{%endif%}</span>
+          </td>
+        </tr>
+        <tr class="danger">
+          <td class="text-right text-danger size-18">应付总额：</td>
+          <td class="text-danger size-18" id="order_amount">¥{{order_amount|formatCurrency}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

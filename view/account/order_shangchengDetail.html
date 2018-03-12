@@ -1,0 +1,70 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/account/css/index.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section class="page-header page-header-xs " >
+  <div class="container">
+    {#
+    <h1>{{category.title}}</h1>
+    #}
+
+    <!-- breadcrumbs -->
+    <ol class="breadcrumb breadcrumb-inverse">
+      <li><a href="/">首页</a></li>
+      <li><a href="/account">{{controller.channel}}</a></li>
+      <li class="active">{{controller.sub_channel}}</li>
+    </ol>
+    <!-- /breadcrumbs -->
+  </div>
+</section>
+
+<section class="bg-white">
+  <div class="container">
+    <div class="row">
+      <!-- LEFT -->
+      {% include "./inc/user_left.html" %}
+      <!-- RIGHT -->
+      <div class="col-lg-10 col-md-10 col-sm-8 order-detail">
+
+        <h4 class="page-header margin-top-0">
+          <i class="fa fa-reorder fa-lg text-default"></i>
+          {{controller.meta_title}}
+        </h4>
+
+        <div>
+          <h5 class="bg-info">订单信息</h5>
+          <div class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">订单号：</label>
+              <div class="col-sm-10 control-label text-left">{{data.order_no}}</div>
+            </div>
+            <!--todo：快递单号-->
+            <div class="form-group">
+              <label class="col-sm-2 control-label">物流单号：</label>
+              <div class="col-sm-10 control-label text-left">{{data.express}}</div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">支付方式：</label>
+              <div class="col-sm-10 control-label text-left">{{payment}}</div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label not-required">备注：</label>
+              <div class="col-sm-6 control-label text-left">{{data.comment}}</div>
+            </div>
+          </div>
+          {% include "./inc/consignee_info.html" %}
+          <h5 class="bg-info">订单详情</h5>
+          {% include "./inc/good_info.html" %}
+          {% include "./inc/order_pay_overview.html" %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block script %}
+<!--<script src="/static/account/js/address.js"></script>-->
+{% endblock %}

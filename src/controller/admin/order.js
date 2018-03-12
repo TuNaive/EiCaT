@@ -303,7 +303,7 @@ module.exports = class extends Admin {
       data.create_time = new Date().getTime();
       let res = await this.model("doc_invoice").add(data);
       if (res) {
-        await this.model("order").where({id: data.order_id}).update({delivery_status: 1});
+        await this.model("order").where({id: data.order_id}).update({express: data.express_no, delivery_status: 1});
       }
       return this.success({"name": "发货成功！", "url": this.referer()});
     } else {

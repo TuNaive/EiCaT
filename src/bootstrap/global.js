@@ -479,6 +479,39 @@ global.image_view = (str, w, m) => {
 }
 
 /**
+ * 获取商品suk suk, arr:类型数组
+ */
+global.getsuk = function (suk, arr) {
+  //console.log(suk);
+  var suk_;
+  suk.forEach(function (v, k) {
+
+    if (v.name == arr[0]) {
+      if (v.ch) {
+        v.ch.forEach(function (v_, k_) {
+          if (v_.name == arr[1]) {
+            if (v_.ch) {
+              v_.ch.forEach(function (v__, k__) {
+                if (v__.name == arr[2]) {
+
+                  suk_ = think.extend(v__, v_, v);
+                }
+              })
+            } else {
+              suk_ = think.extend(v_, v);
+            }
+
+          }
+        })
+      } else {
+        suk_ = v;
+      }
+    }
+  })
+  return suk_;
+}
+
+/**
  * 排序函数
  */
 function sort_node(v, w) {

@@ -138,6 +138,12 @@ export default env => {
     }
   })
 
+  env.addFilter("jsonToStr", function (json) {
+    if (!think.isEmpty(json)) {
+      return JSON.stringify(json);
+    }
+  })
+
   // todo: test
   env.addFilter("JSON", function (int) {
     return JSON.stringify(int);

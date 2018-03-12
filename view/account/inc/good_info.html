@@ -1,0 +1,28 @@
+<div class="table-responsive">
+  <table class="table table-hover margin-bottom-0">
+    <thead>
+    <tr class="active">
+      <th style="width: 60px">商品</th>
+      <th style="width: 350px">名称</th>
+      <th>规格</th>
+      <th>单价</th>
+      <th>数量</th>
+      <th>优惠</th>
+      <th>小计</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for val in goods%}
+    <tr>
+      <td><img src="{{val.pic}}" alt="" width="45" class="img-responsive img-thumbnail"/></td>
+      <td>{{val.title}}</td>
+      <td>{% if val.type%}{{val.type}}{%endif%}</td>
+      <td>¥{{val.unit_price|formatCurrency}}</td>
+      <td>{{val.qty}}</td>
+      <td>无</td>
+      <td>¥{{val.price|formatCurrency}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>

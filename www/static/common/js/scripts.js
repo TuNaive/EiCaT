@@ -1030,7 +1030,7 @@ function _ajax_post() {
 				//return false;
             $.ajax({
             type: "POST",
-            url: "/center/cart/addcart",
+            url: "/account/cart/addcart",
             data: str
             }).done(function( msg ) {
                 

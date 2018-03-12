@@ -203,6 +203,8 @@ export default class extends Base {
     //TODO: 根据重量和公司进行计算
     data.real_freight = data.freight;
 
+    // todo: 快递方式
+
     //付款总额
     data.order_amount = _.sum([_.toNumber(data.real_amount), _.toNumber(data.real_freight), _.toNumber(data.tax)]);
 

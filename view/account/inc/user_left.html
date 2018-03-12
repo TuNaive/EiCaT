@@ -60,6 +60,10 @@
         <i class="fa fa-user"></i> 订单管理</a>
       <ul id="collapse-2" class="collapse in"><!-- NOTE: "collapse in" to be open on page load -->
         <li>
+          <a href="/account/order/shangcheng" class="{% if ctx.originalUrl | test('/account/order/shangcheng') %}text-danger{%endif%}"><i
+              class="fa fa-angle-right"></i> 商城订单</a></li>
+        <li>
+        <li>
           <a href="/account/order/pcb?type=0" class="{% if ctx.originalUrl | test('/account/order/pcb.*type=0') %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> PCB订单</a></li>
         <li>

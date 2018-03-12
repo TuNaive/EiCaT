@@ -1,5 +1,10 @@
-const Home = require('../common/home');
-module.exports = class extends Home {
+import Base from './base'
+
+export default class extends Base{
+  constructor (ctx) {
+    super(ctx)
+    this.active = [ctx.url]
+  }
 
   //列表页[核心]
   async indexAction() {
@@ -265,13 +270,11 @@ module.exports = class extends Home {
     //获取面包屑信息
     let breadcrumb = await this.model('category').get_parent_category(cate.id, true);
     this.assign('breadcrumb', breadcrumb);
-    //console.log(breadcrumb)
 
     /* 模板赋值并渲染模板 */
     this.assign('category', cate);
     this.assign('list', data.data);
     this.assign('count', data.count);
-    //console.log(cate)
     let temp = cate.template_lists ? `${cate.template_lists}` : "index";
     //console.log(cate);
     //console.log(111)

@@ -113,9 +113,9 @@
                 {%endif%}
 
                 {%if item.type == 0%}
-                  <a href="/account/order/pcbDetail/?id={{item.id}}">详情</a>
+                  <a href="/account/order/pcbDetail/?id={{item.id}}&type={{item.type}}">详情</a>
                 {%else%}
-                  <a href="/account/order/pcbaDetail/?id={{item.id}}">详情</a>
+                  <a href="/account/order/pcbaDetail/?id={{item.id}}&type={{item.type}}">详情</a>
                 {%endif%}
               </td>
             </tr>

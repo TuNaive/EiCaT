@@ -1,6 +1,6 @@
-const Home = require('../common/home');
+import Base from './base'
 
-module.exports = class extends Home{
+export default class extends Base{
   //详情页[核心]
   async indexAction() {
     /* 标识正确性检测*/

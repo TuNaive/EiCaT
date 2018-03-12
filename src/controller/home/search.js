@@ -1,6 +1,7 @@
-const Home = require('../common/home');
-const Segment = require('segment');
-module.exports = class extends Home {
+import Segment from 'segment'
+import Base from './base'
+
+export default class extends Base{
   /**
    * index action import Segment from 'segment';
    * @return {Promise} []

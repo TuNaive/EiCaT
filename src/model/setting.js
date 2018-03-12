@@ -33,7 +33,7 @@ export default class extends think.Model {
       }
       settings[record.key] = record.value
     })
-    
+
     return settings
   }
 }

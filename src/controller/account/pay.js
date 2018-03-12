@@ -11,7 +11,7 @@ export default class extends Base {
   }
   // 支付
   async indexAction() {
-    const payOnline = this.config('settings.PAY_ONLINE') === 1
+    let payOnline = this.config('settings.PAY_ONLINE') === 1
     if (this.isAjax('post')) {
       let payment;
       let pay;
@@ -23,6 +23,7 @@ export default class extends Base {
       if (think.isEmpty(order)) {
         return this.fail('订单不存在！');
       }
+      payOnline = this.model('order').isShangchengOrder(order.type) ? true : payOnline
 
       // 支付日志
       const receiving = {
@@ -135,6 +136,8 @@ export default class extends Base {
         const error = this.controller('common/error');
         return error.noAction('订单不存在或者已经支付！');
       }
+      payOnline = this.model('order').isShangchengOrder(order.type) ? true : payOnline
+
       order.end_time = moment(order.create_time + (Number(this.config('setup.ORDER_DELAY')) * 60000));
       // console.log(order);
       this.assign('order', order);

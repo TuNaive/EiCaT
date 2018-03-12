@@ -204,7 +204,7 @@ function _shop() {
       //查询实时库存
       console.log(goods_id);
       $.ajax({
-        url: "/center/cart/getstock",
+        url: "/account/cart/getstock",
         data: {id: goods_id, type: arr.join(",")},
         success: function (res) {
           var html = ""
@@ -527,7 +527,7 @@ function _shop() {
     //获取运费
     function real_freight(addr_id) {
       $.ajax({
-        url: "/center/cart/getfare/?id=" + addr_id,
+        url: "/account/cart/getfare/?id=" + addr_id,
         success: function (res) {
           //console.log(res);
           //return false;
