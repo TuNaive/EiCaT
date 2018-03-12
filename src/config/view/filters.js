@@ -144,6 +144,46 @@ export default env => {
     }
   })
 
+  /**
+   *分析枚举类型配置值 格式 a:名称1,b:名称2
+   */
+  env.addFilter("parse_config_attr", function (str) {
+      return parse_config_attr(str)
+  })
+  //格式化字段列表
+  env.addFilter("get_list_field", function (data, grid, controller, module) {
+      return get_list_field(data, grid, controller, module);
+  })
+  //解析分类信息当前状态
+  env.addFilter("sort_act",function (id,getid) {
+    //console.log(decodeURI(getid));
+    //console.log(in_array(id, sanjiao(getid.split("."))));
+    if(!think.isEmpty(getid)){
+      return in_array(id,sanjiao(decodeURI(getid).split(".")));
+    }
+  })
+  //解析分类信息url
+  env.addFilter("sort_url", function (id,val,arr,http) {
+    return sort_url(id,val,arr,http);
+  })
+
+  /**
+   * 获取商品价格不格式
+   */
+  env.addFilter('get_price', function (price, type) {
+    return get_price(price, type);
+  })
+
+  /**
+   * 获取关联
+   */
+  env.addFilter("get_relation", async(id,model,pk,val, callback) => {
+    let map ={};
+    map[pk] = id;
+    let data = await think.model(model,think.config("db")).where(map).getField(val,true);
+    callback(null, data);
+  }, true)
+
   // todo: test
   env.addFilter("JSON", function (int) {
     return JSON.stringify(int);

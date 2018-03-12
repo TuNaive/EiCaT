@@ -38,7 +38,7 @@ export default class extends Base{
       }
       info.content = img
     }
-    //console.log(info);
+    // console.log('==========info', info);
     //分类信息
     let cate = await this.category(info.category_id);
     cate = think.extend({}, cate);
@@ -59,6 +59,7 @@ export default class extends Base{
       return this.redirect(info.link_id);
     }
     //获取面包屑信息
+    console.log('==========cate', cate);
     let breadcrumb = await this.model('category').get_parent_category(cate.id, true);
     this.assign('breadcrumb', breadcrumb);
 
