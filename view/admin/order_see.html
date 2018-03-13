@@ -6,17 +6,20 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">{{controller.meta_title}}</h4>
       </div>
-      <div class="modal-body">
-        {% include "./order/custom_fee.html" %}
-        {% include "./order/buyer_info.html" %}
-        {% include "./order/order_info.html" %}
-        {% include "./order/consignee_info.html" %}
-      </div>
+        {% if order.type == 2 %}
+          {% include "./order/shop.html" %}
+        {% else %}
+          <div class="modal-body">
+            {% include "./order/custom_fee.html" %}
+            {% include "./order/buyer_info.html" %}
+            {% include "./order/order_info.html" %}
+            {% include "./order/consignee_info.html" %}
+          </div>
+        {% endif%}
       <div class="modal-footer">
         <input type="hidden" value="{{order.id}}" name="id">
         <a href="javascript:;" class="btn btn-default" data-dismiss="modal">关闭</a>
-
       </div>
-    </div><!-- /.modal-content -->
+    </div>
   </form>
 </div><!-- /.modal-dialog -->

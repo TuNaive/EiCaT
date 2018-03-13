@@ -184,6 +184,16 @@ export default env => {
     callback(null, data);
   }, true)
 
+  /**
+   * 时间戳格式化 dateformat('Y-m-d H:i:s')
+   * @param extra 'Y-m-d H:i:s'
+   * @param date  时间戳
+   * @return  '2015-12-17 15:39:44'
+   */
+  env.addFilter("dateformat", function (extra, date) {
+      return dateformat(date, extra);
+  })
+
   // todo: test
   env.addFilter("JSON", function (int) {
     return JSON.stringify(int);
