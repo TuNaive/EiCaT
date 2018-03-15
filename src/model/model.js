@@ -86,12 +86,11 @@ export default class extends think.Model {
     //if(!(think.isNumberString(id) || think.isNumber(id))){
     //    return '555';
     //}
-    //console.log(333333333)
     /* 读取缓存数据 */
-    let list = await think.cache("get_document_model", () => {
-      return this._get_document_model();
-    }, {timeout: 365 * 24 * 3600});
-
+    // let list = await think.cache("get_document_model", () => {
+    //   return this._get_document_model();
+    // }, {timeout: 365 * 24 * 3600});
+    let list = await this._get_document_model();
 
     /* 根据条件返回数据 */
     if (think.isEmpty(id)) {
@@ -133,6 +132,7 @@ export default class extends think.Model {
     }
     if (!think.isEmpty(id) && !think.isEmpty(field)) {
       let arr = think._.find(list, {id: Number(id)});
+      //console.log(arr);
       if (!think.isEmpty(arr)) {
         return arr[field]
       } else {

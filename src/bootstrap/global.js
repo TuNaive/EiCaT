@@ -520,3 +520,325 @@ function sort_node(v, w) {
 function sort_node1(v, w) {
   return w["sort"] - v["sort"];
 }
+
+/**
+ * 分析枚举类型配置值 格式 a:名称1,b:名称2
+ * @param str
+ * @returns {*}
+ */
+/* global parse_config_attr */
+global.parse_config_attr = function(str) {
+    let strs;
+    if (str.search(/\r\n/ig) > -1) {
+        strs = str.split("\r\n");
+    } else if (str.search(/,/ig) > -1) {
+        strs = str.split(",");
+    } else if(str.search(/\n/ig) > -1){
+        strs = str.split("\n");
+    }else {
+        strs = [str];
+    }
+    if (think.isArray(strs)) {
+        let obj = {}
+        strs.forEach(n => {
+            n = n.split(":");
+            obj[n[0]] = n[1];
+        })
+        return obj;
+    }
+
+}
+global.parse_type_attr = function (str) {
+    let strs;
+    if (str.search(/\r\n/ig) > -1) {
+        strs = str.split("\r\n");
+    } else if (str.search(/,/ig) > -1) {
+        strs = str.split(",");
+    } else if(str.search(/\n/ig) > -1){
+        strs = str.split("\n");
+    }else {
+        strs = [str];
+    }
+    if(think.isArray(strs)){
+            let arr = [];
+            for (let v of strs){
+                let obj = {};
+                v = v.split(":");
+                if(!think.isEmpty(v[0])&&!think.isEmpty(v[1])){
+                obj.id = v[0];
+                obj.name = v[1];
+                if(obj.id.split(".").length ==1){
+                    obj.pid = 0
+                }else {
+                    obj.pid = obj.id.split(".").splice(0,obj.id.split(".").length-1).join(".");
+                }
+                arr.push(obj);
+                }
+            }
+        //console.log(arr);
+        let tree = arr_to_tree(arr,0)
+       //think.log(tree);
+        return tree;
+    }
+
+}
+
+/* 解析列表定义规则*/
+/* global get_list_field */
+global.get_list_field = function(data, grid, controller, module) {
+    module = module || "admin";
+    //console.log(module);
+    let data2 = {};
+    let value;
+
+    // 获取当前字段数据
+    //console.log(grid);
+    for (let field of grid.field) {
+        let temp;
+        let array = field.split('|');//TODO
+        //console.log(array);
+        temp = data[array[0]];
+        //console.log(temp);
+        // 函数支持
+        if (!think.isEmpty(array[1])) {
+            temp = call_user_func(array[1], temp);
+        }
+        data2[array[0]] = temp;
+    }
+    //console.log(data2);
+    if (!think.isEmpty(grid.format)) {
+        // value  =   preg_replace_callback('/\[([a-z_]+)\]/', function($match) use($data2){return $data2[$match[1]];}, $grid['format']);
+    } else {
+        value = data2[Object.keys(data2)];
+    }
+
+    // 链接支持
+    if ('title' == grid.field[0] && '目录' == data.type) {
+        // 目录类型自动设置子文档列表链接
+        grid.href = '[LIST]';
+    } else if ('title' == grid.field[0]) {
+        grid.href = '[EDIT]';
+    }
+
+    if (!think.isEmpty(grid.href)) {
+
+        let links = grid.href.split(',');
+
+        let val = []
+        for (let link of links) {
+            let array = link.split('|');
+            let href = array[0];
+
+            //console.log(href);
+            let matches = href.match(/^\[([a-z_]+)\]$/);
+            if (matches) {
+                val.push(data2[matches[1]])
+                // console.log(val);
+            } else {
+                let show = !think.isEmpty(array[1]) ? array[1] : value;
+                // console.log(show)
+                // 替换系统特殊字符串
+                let hrefs = {
+                    '[DELETE]': 'setstatus/?status=-1&ids=[id]',
+                    '[EDIT]': 'edit/?id=[id]&model=[model_id]&cate_id=[category_id]',
+                    '[LIST]': 'index/?pid=[id]&model=[model_id]&cate_id=[category_id]'
+                }
+                let match = hrefs[href].match(/\[(\S+?)\]/g);
+                // console.log(match);
+                let u = [];
+                for (let k of match) {
+                    let key = k.replace(/(^\[)|(\]$)/g, "");
+                    u.push(data[key]);
+                }
+                // console.log(u);
+                let query = str_replace(match, u, hrefs[href]);
+                let href1 = `/${controller}/${query}`;
+                //console.log(query);
+                if (href == "[DELETE]") {
+                    val.push('<a href="' + href1 + '" class="text-info ajax-get confirm">' + show + '</a> ');
+                } else {
+                    val.push('<a href="' + href1 + '" class="text-info">' + show + '</a> ');
+                }
+            }
+        }
+        value = val.join(" ");
+    }
+    console.log('=========value', value)
+    //console.log(value)
+    return value;
+}
+
+/**
+ * 获取多图封面
+ * @param array arr_id
+ * @param string field
+ * @return 完整的数据或者 指定的field字段值
+ * @author arterli <arterli@qq.com>
+ */
+/*global get_pics_one */
+global.get_pics_one = async (arr_id, field) => {
+    if (think.isEmpty(arr_id)) {
+        return false;
+    }
+    var arr = arr_id.split(",");
+    return get_cover(arr[0], field);
+
+}
+
+/**
+ * 获取分类信息url
+ * @param id
+ * @param val
+ * @param arr
+ */
+global.sort_url = (id,val,arr,http)=>{
+    //console.log(http.get(val))
+    let url;
+        url=`${val}_${id}`;
+        for(let v of arr){
+            if(v.option.identifier != val){
+                url += `|${v.option.identifier}_${http[v.option.identifier]||0}`
+            }
+        }
+    //console.log(url);
+    return url;
+}
+
+//{present_price:100,discount_price:80}
+global.formatprice = function(price) {
+    let pr = JSON.parse(price);
+    var present_price;
+    //console.log(pr);
+    if (think.isNumber(pr.present_price)) {
+        pr.present_price = pr.present_price.toString();
+    }
+    var price = pr.present_price.split("-");
+    if (price.length > 1) {
+        present_price = formatCurrency(price[0]) + "-" + formatCurrency(price[1]);
+    } else {
+        present_price = formatCurrency(price[0])
+    }
+    if (pr.discount_price == 0) {
+        return `<span class="text-xs"><span class="text-danger">现价:￥${present_price}</span></span>`;
+    } else {
+        return `<span class="text-xs"><span class="text-danger">现价:￥${present_price}</span> <br>原价:￥${formatCurrency(pr.discount_price)}</span>`;
+    }
+
+}
+
+//获取价格不格式化
+global.get_price = function(price, type) {
+    if (price) {
+        price = JSON.parse(price);
+        if (1 == type) {
+            return price.present_price;
+        } else {
+            if (price.discount_price == 0) {
+                return "";
+            } else {
+                return price.discount_price;
+            }
+
+        }
+    }
+}
+
+/**
+ * 将数值四舍五入(保留1位小数)后格式化成金额形式
+ *
+ * @param num 数值(Number或者String)
+ * @return 金额格式的字符串,如'1,234,567.4'
+ * @type String
+ */
+/*global formatCurrencyTenThou */
+global.formatCurrencyTenThou = function(num) {
+    num = num.toString().replace(/\$|\,/g, '');
+    if (isNaN(num))
+        num = "0";
+    let sign = (num == (num = Math.abs(num)));
+    num = Math.floor(num * 10 + 0.50000000001);
+    let cents = num % 10;
+    num = Math.floor(num / 10).toString();
+    for (let i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+        num = num.substring(0, num.length - (4 * i + 3)) + ',' +
+            num.substring(num.length - (4 * i + 3));
+    return (((sign) ? '' : '-') + num + '.' + cents);
+}
+
+/**
+ * 获取模型字段信息 
+ * @param model_id 模型id 或 模型名称
+ * @param id 数据id
+ * @param field 字段
+ * @param return 整条数据或字段数据
+ * @author arterli <arterli@qq.com>
+ */
+/* global getmodelfield */
+global.getmodelfield = async(model_id,id,field)=>{
+     let res;
+     let table = await think.model('model',think.config('model')).get_table_name(model_id);
+     let modelinfo = await think.model(table,think.config('model')).find(id);
+     if(!think.isEmpty(field)){
+         res = modelinfo[field]
+     }else{
+         res = modelinfo;
+     }
+     return res;
+}
+/**
+ * 获取模型字段
+ * @param model_id
+ * @param field
+ * @returns {*}
+ */
+global.get_model= async(model_id,field)=>{
+    return await think.model('model',think.config('model')).get_model(model_id,field);
+
+}
+
+/**
+ * 时间戳格式化 dateformat()
+ * @param extra 'Y-m-d H:i:s'
+ * @param date  时间戳
+ * @return  '2015-12-17 15:39:44'
+ */
+/* global dateformat */
+global.dateformat = function(extra, date) {
+    let D = new Date(date);
+    let time = {
+        "Y": D.getFullYear(),
+        'm': D.getMonth() + 1,
+        'd': D.getDate(),
+        'H': D.getHours(),
+        'i': D.getMinutes(),
+        's': D.getSeconds()
+    }
+    let key = extra.split(/\W/);
+    let _date;
+    for (let k of key) {
+        time[k] = time[k] < 10 ? "0" + time[k] : time[k]
+        _date = extra.replace(k, time[k])
+        extra = _date;
+    }
+    return _date;
+}
+
+//更新缓存
+global.update_cache =(type)=>{
+    switch (type){
+        case 'category':
+            //更新栏目缓存
+            think.cache("sys_category_list",null);
+            think.cache("all_category",null);
+            think.cache("all_priv",null);//栏目权限缓存
+            break;
+        case 'channel'://更新频道缓存信息
+            think.cache("get_channel_cache",null);
+            break;
+        case 'model':
+            think.cache("get_document_model", null);//清除模型缓存
+            think.cache("get_model", null);//清除模型缓存
+            break;
+    }
+}
+

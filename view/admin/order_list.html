@@ -5,6 +5,7 @@
     <ul class="nav nav-tabs pull-left">
       <li class="{%if type == 0%}active{%endif%}"><a href="/admin/order/list?type=0">PCB</a></li>
       <li class="{%if type == 1%}active{%endif%}"><a href="/admin/order/list?type=1">PCBA</a></li>
+      <li class="{%if type == 2%}active{%endif%}"><a href="/admin/order/list?type=2">商城</a></li>
     </ul>
   </header>
   <section class="scrollable wrapper">
@@ -88,30 +89,43 @@
                 <span class="text-success">已发货</span>
               {%endif%}
             </td>
-
-            <td class="text-danger">
-              {%if item.status ==2 %}
-                <span class="text-muted">等待审核 </span>
-              {%elif item.status ==3%}
-                <span class="text-success">已审核</span>
-              {%elif item.status ==6%}
-                <del>已作废</del>
-              {%elif item.status == 4%}
-                <span class="text-primary">已完成</span>
-              {%endif%}
-            </td>
+            {%if item.type == 2%}
+              <td class="text-danger">
+                {%if item.status ==2 %}
+                  <span class="text-muted">未完成 </span>
+                {%elif item.status ==3%}
+                  <span class="text-success">未完成</span>
+                {%elif item.status ==6%}
+                  <del>已作废</del>
+                {%elif item.status == 4%}
+                  <span class="text-primary">已完成</span>
+                {%endif%}
+              </td>
+            {%else%}
+              <td class="text-danger">
+                {%if item.status ==2 %}
+                  <span class="text-muted">等待审核 </span>
+                {%elif item.status ==3%}
+                  <span class="text-success">已审核</span>
+                {%elif item.status ==6%}
+                  <del>已作废</del>
+                {%elif item.status == 4%}
+                  <span class="text-primary">已完成</span>
+                {%endif%}
+              </td>
+            {%endif%}
             <td>
               <div class="btn-group">
                 <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle"><i class="fa fa-cog"></i>
                   处理 <span class="caret"></span></button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a href="/admin/order/see/?id={{item.id}}" data-toggle="ajaxModal"><i class="fa fa-eye"></i>
+                  <li><a href="/admin/order/see/?id={{item.id}}&type={{item.type}}" data-toggle="ajaxModal"><i class="fa fa-eye"></i>
                     查看</a></li>
                   {%if item.pay_status !=1 and item.status != 3 and item.delivery_status != 1 and item.status != 4%}
                   <li><a href="/admin/order/edit/?id={{item.id}}" data-toggle="ajaxModal"><i class="fa fa-edit"></i> 编辑</a>
                   </li>
                   {%endif%}
-                  {%if item.status ==2 %}
+                  {%if item.status ==2 and item.type !== 2 %}
                   <li><a href="/admin/order/audit/?id={{item.id}}" data-toggle="ajaxModal"><i class="fa fa-check-square-o"></i> 审核</a></li>
                   {%elif item.status ==3 and item.delivery_status == 0%}
                   <li><a href="/admin/order/ship/?id={{item.id}}" data-toggle="ajaxModal"><i class="fa fa-truck"></i> 发货</a>

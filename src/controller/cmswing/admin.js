@@ -192,11 +192,10 @@ module.exports = class extends think.Controller {
     const data = {'status': -1};
     await this.editRow(model, data, where, msg);
   }
-
   /**
    * 设置一条或者多条数据的状态
    */
-  async setstatusAction(model, pk = 'id') {
+  async setsuperStatusAction(model, pk = 'id') {
     if (think.isEmpty(this.ctx.param('model'))) {
       model = model || this.ctx.controller.substring(6);
     } else {
@@ -215,7 +214,6 @@ module.exports = class extends think.Controller {
     }
     map[pk] = ['IN', ids];
     // return this.fail(model);
-
     switch (status) {
       case -1:
         await this.delete(model, map, {'success': '删除成功', 'error': '删除失败'});
@@ -329,7 +327,7 @@ module.exports = class extends think.Controller {
    */
   async parseDocumentList(list, model_id) {
     model_id = model_id || 1;
-    const attrList = await this.model('cmswing/attribute').get_model_attribute(model_id, false, 'id,name,type,extra');
+    const attrList = await this.model('attribute').get_model_attribute(model_id, false, 'id,name,type,extra');
     // attrList=attrList[model_id];
     // this.end(attrList);
     // console.log(attrList);

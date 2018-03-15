@@ -109,6 +109,7 @@ export default class Frontend extends User {
       return error.noAction("没有指定数据分类！");
     }
     let cate = await this.model("category").info(id, field);
+    // console.log('========cate1', id, cate)
     if (cate && 1 == cate.status) {
 
       switch (cate.display) {

@@ -399,7 +399,7 @@ module.exports = class extends Admin {
    */
   setstatusAction() {
     let table = this.get("table");
-    super.setstatusAction(table).then()
+    this.setsuperStatusAction(table).then()
   }
 
 }

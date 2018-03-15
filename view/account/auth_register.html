@@ -37,7 +37,7 @@
         </label>
         <label class="input margin-bottom-10">
           <i class="ico-append fa fa-mobile"></i>
-          <input class="required mobile" type="text" placeholder="手机号码" name="mobile">
+          <input id="mobile" class="required mobile" type="text" placeholder="手机号码" name="mobile">
           <b class="tooltip tooltip-bottom-right">18688888888</b>
         </label>
         <label class="input margin-bottom-10">
@@ -45,7 +45,6 @@
           <input class="required" type="password" minlength="6" placeholder="密码" name="password">
           <b class="tooltip tooltip-bottom-right">不少于6位</b>
         </label>
-
         <label class="input margin-bottom-10">
           <i class="ico-append fa fa-lock"></i>
           <input class="required" type="password" minlength="6" placeholder="确认密码" name="password2">
@@ -80,6 +79,22 @@
       if (validRes) {
         $('#real-submit').click()
       }
+    })
+    $('#codeBtn').click(function (e) {
+      var mobile = $('#mobile').val()
+      $.ajax({
+        url: '/account/sms/send',
+        type: 'POST',
+        dataType: 'json',
+        data: {mobile: mobile},
+        success: function (data) {
+          console.log(data)
+        },
+        error: function (err) {
+          console.log(err)
+        }
+      })
+      return false
     })
   })
 </script>

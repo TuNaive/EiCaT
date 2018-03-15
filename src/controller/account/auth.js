@@ -10,6 +10,12 @@ export default class extends Base {
       const data = this.post();
       // console.log(data);
       // 验证
+      // let codeRes = await this.action('account/sms', 'validate')
+      // if (codeRes.code === 303) {
+      //   return this.fail('验证码已经超时，请重新发送')
+      // } else if (codeRes.code === 304) {
+      //   return this.fail('验证码输入不正确')
+      // }
       let res;
       if (think.isEmpty(data.username)) {
         return this.fail('用户昵称不能为空！');
