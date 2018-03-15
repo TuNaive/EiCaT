@@ -119,9 +119,27 @@ function Init(is_ajax) {
   _recharge();
   _type_tr_b();
   _panel_toggle();
+  _track_more();
 
   /** Bootstrap Tooltip **/
   jQuery("a[data-toggle=tooltip], button[data-toggle=tooltip], span[data-toggle=tooltip]").tooltip();
+}
+
+//物流追踪
+function _track_more() {
+  loadScript('//cdn.trackingmore.com/plugins/v1/plugins.min.js', function () {
+    $('.track-more').click(function (e) {
+      var id = $(this).attr('id')
+      TRACKINGMORE.trackMynumber({
+        TR_ElementId:id,      //必须，指定悬浮位置的元素ID。
+        TR_Width:800,        //可选，指定查询结果宽度，最小宽度为600px，默认撑满容器。
+        TR_Height:600,       //可选，指定查询结果高度，最大高度为800px，默认撑满容器。
+        // TR_ExpressCode:"0",       //可选，指定运输商，默认为自动识别。
+        TR_Lang:"cn",        //可选，指定UI语言，默认根据浏览器自动识别。
+        TR_Num:id.split('-').pop()      //必须，指定要查询的单号。
+      });
+    });
+  })
 }
 
 // panel toggle
