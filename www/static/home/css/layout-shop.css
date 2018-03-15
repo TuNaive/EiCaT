@@ -869,3 +869,17 @@ button.product-color-dd > .tag {
   top: -48px;
   right: 0px;
 }
+
+.addr-box {
+  position: relative;
+  padding-bottom: 20px;
+}
+.parsley-error-list {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 6px;
+  color: #8a1f11;
+}

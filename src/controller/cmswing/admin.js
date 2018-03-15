@@ -416,7 +416,7 @@ module.exports = class extends think.Controller {
           if (!think.isEmpty(val.option.rules)) {
             val.option.rules = JSON.parse(val.option.rules);
             val.rules = parse_type_attr(val.option.rules.choices);
-            console.log(val.rules);
+            // console.log(val.rules);
             for (const v of val.rules) {
               v.id = 'l>' + v.id;
             }

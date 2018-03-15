@@ -51,7 +51,7 @@ export default class extends Base{
       let variables = await this.model("mysql").query(`show variables`);
       let ft_min_word_len = think._.find(variables, ['Variable_name', 'ft_min_word_len']).Value;
       if (ft_min_word_len == 1) {
-        console.log(segment_q.join(" "));
+        // console.log(segment_q.join(" "));
         sql = "";
         sql = `MATCH (data) AGAINST ('${segment_q.join(" ")}' IN BOOLEAN MODE)`;
         if (m_id) {
@@ -76,9 +76,9 @@ export default class extends Base{
         if (search_time != 0) {
           sql += sql_time
         }
-        console.log(q + "dddddddddd");
+        // console.log(q + "dddddddddd");
       }
-      console.log(sql);
+      // console.log(sql);
       let numsPerPage = 10;
       let currentPage = Number(this.get("page")) || 1;
       let count = await this.model("mysql").query(`SELECT count(search_id) FROM __SEARCH__ WHERE ${sql}`)
@@ -99,7 +99,7 @@ export default class extends Base{
         } else {
           if (!in_array(q, hs.split("|"))) {
             hsq = hs + '|' + q;
-            console.log(hsq);
+            // console.log(hsq);
             this.cookie("cmswing_historical_search", hsq);
           }
 

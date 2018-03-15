@@ -99,11 +99,11 @@ export default class extends Base {
       if (think.isEmpty(order)) {
         return this.fail('您没有要支付的订单');
       } else {
+        const channel = await this.model('pingxx').where({id: post.payment}).getField('channel', true);
         // 判断是否已经绑定pingxx_id,如果已绑定查询pingxx订单直接支付。防止订单重复生成。
         if (think.isEmpty(order.pingxx_id)) {
           // console.log(111111111)
           // 获取渠道
-          const channel = await this.model('pingxx').where({id: post.payment}).getField('channel', true);
           let open_id;
           if (channel == 'wx_pub') {
             open_id = await this.session('wx_openid');
@@ -111,14 +111,19 @@ export default class extends Base {
           // 调用ping++ 服务端
           payment = think.service('account/payment', this.ctx);
           // 传入 channel,order_no,order_amount,this.ip()
-          charges = await payment.pingxx(channel, order.order_no, order.order_amount, this.ip, open_id);
+          if (channel == 'paypal') {
+            charges = await payment.createPayment(channel, order.order_no, order.order_amount, post.order_id, this.user.uid);
+          } else {
+            charges = await payment.createPayment(channel, order.order_no, order.order_amount, this.ip, open_id);
+          }
+
           // 把pingxx_id存到订单
           await this.model('order').where({id: post.order_id}).update({pingxx_id: charges.id});
         } else {
           // console.log(33333333);
           // 调用ping++ 服务端
           payment = think.service('account/payment', this.ctx);
-          charges = await payment.charge(order.pingxx_id);
+          charges = await payment.getPayment(channel, order.pingxx_id);
         }
         // console.log(charges);
         if (charges) {
@@ -240,28 +245,24 @@ export default class extends Base {
   async payresAction() {
     const code = this.get();
 
+    // paypal 回调处理
+    if (code.paymentId) {
+      code.order_no = await this.model('order').where({pingxx_id: code.paymentId}).getField('order_no', true)
+    }
+
     // 站内支付回调
     if (code.c_o_id) {
       const order = await this.model('order').find(code.c_o_id);
       order.amount = order.order_amount;
-      switch (order.payment) {
-        case 100:
-          order.channel = '预付款支付';
-          break;
-        case 1002:
-          order.channel = "线下付款";
-          break;
-        default:
-          order.channel = '货到付款';
-          break;
-      }
+      order.channel = await this.controller('admin/order').getPaymentInfo(order.order_no)
       this.assign('order', order);
     } else {
       // 支付接口回掉
       const order = await this.model('order').where({order_no: code.out_trade_no || code.orderId || code.order_no}).find();
+      order.channel = await this.controller('admin/order').getPaymentInfo(order.payment)
       // 调用ping++ 服务端
       const payment = think.service('account/payment', this.ctx);
-      const charges = await payment.charge(order.pingxx_id);
+      const charges = await payment.excutePayment(order.channel, order.pingxx_id, code.PayerID, order.order_no);
 
       if (charges.paid && order.pay_status == 0) { // 未付款
         // 支付成功改变订单状态

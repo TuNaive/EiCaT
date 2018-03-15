@@ -165,7 +165,7 @@ module.exports = class extends think.Model {
         let rule = val.split("|");
         for(let v of rule){
           let field = think.isEmpty(v)?[]:v.split(":");
-          console.log(field);
+          // console.log(field);
           if(!think.isEmpty(field)){
             obj[field[0]]=field[1];
           }

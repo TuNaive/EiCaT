@@ -34,7 +34,7 @@ module.exports = class extends think.Model {
 
     //获取所有分类
     let map = think.extend({"status": {">": -1}}, where)
-    console.log(map);
+    // console.log(map);
     let list = await this.field(field).where(map).order('sort ASC').select();
     for (let v of list) {
       if (!think.isEmpty(v.name)) {

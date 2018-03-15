@@ -52,7 +52,7 @@ module.exports = class extends think.Model {
       let vs = v.split("|||");
 
       if (vs.length > 1) {
-        console.log(data[v]);
+        // console.log(data[v]);
         data[vs[1]] = (think.isEmpty(data[v]) || data[v] == 0) ? 0 : new Date(data[v]).getTime();
       }
       ;

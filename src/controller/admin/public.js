@@ -20,7 +20,7 @@ module.exports = class extends think.Controller {
       if (Number(this.config('ext.geetest.isa')) === 1) {
         const geetest = this.service('ext/geetest');
         const res = await geetest.validate(this.ctx, this.post());
-        console.log(res);
+        // console.log(res);
         if (res.status != 'success') {
           const error = this.controller('cmswing/error');
           return error.noAction('验证码不正确');
@@ -145,7 +145,7 @@ module.exports = class extends think.Controller {
     const map = {};
     map[val] = ['like', '%' + key + '%'];
     const data = await this.model(model).where(map).field(`${id} as id, ${val} as data`).select();
-    console.log(data);
+    // console.log(data);
     this.header('Content-Type', 'text/html');
     return this.body=JSON.stringify(data);
   }

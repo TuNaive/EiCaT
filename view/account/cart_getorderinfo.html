@@ -37,7 +37,7 @@
 
 
 <!-- CART -->
-<form class="form-post" method="post" action="/account/cart/createorder">
+<form class="form-post" method="post" action="/account/cart/createorder" data-validate="parsley">
   <section>
     <div class="container">
 
@@ -99,7 +99,7 @@
 
               <div class="icheck addr-list m-b">
                 <div class="item">
-                  <input type="radio" name="address" value="{{val.id}}" {% if val.is_default== 1 %} checked {% endif%}>
+                  <input type="radio" name="address" value="{{val.id}}" required {% if val.is_default== 1 %} checked {% endif%}>
                   <label>
                     <ul class="text-left list-inline list-separator margin-bottom-0">
                       {% if val.is_default == 1 %}
@@ -395,5 +395,7 @@
 
 {% block script%}
 <!-- PAGE LEVEL SCRIPTS -->
+<script src="/static/admin/js/parsley/parsley.min.js"></script>
+<script src="/static/admin/js/parsley/parsley.extend.js"></script>
 <script type="text/javascript" src="/static/common/js/demo.shop.js"></script>
 {% endblock %}

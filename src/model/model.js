@@ -5,7 +5,7 @@ export default class extends think.Model {
   async del(id) {
     let table_name;
     let model = await this.field('name,extend').find(id);
-    console.log(model);
+    // console.log(model);
     if (model.extend == 0) {
       table_name = think.config("model").prefix + model.name.toLowerCase();
     } else if (model.extend == 1) {
