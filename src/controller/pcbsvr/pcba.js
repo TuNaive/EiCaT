@@ -8,7 +8,11 @@ export default class extends Base {
     super(ctx)
     this.uploadPath = think.ROOT_PATH + '/uploadFiles'
   }
-
+  __before() {
+    return super.__before(true).then(data => {
+      return data
+    })
+  }
   calcAction() {
     this.sub_channel = 'PCBA自助询价'
     // this.assign({
