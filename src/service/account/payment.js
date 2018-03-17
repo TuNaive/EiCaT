@@ -1,7 +1,8 @@
 import paypal from 'paypal-rest-sdk'
 
 paypal.configure({
-  'mode': think.env === 'production' ? 'live' : 'sandbox', //sandbox or live
+  //'mode': think.env === 'production' ? 'live' : 'sandbox', //sandbox or live
+  'mode': 'sandbox',
   'client_id': 'AeFWGEbWjmgjUa4tnnOMIzoTEvSMp3-C5XEcKyi1BhY0LRRKzzIDnaF0AF89N05J96wbdAhcVcPyCy_W',
   'client_secret': 'EGXEYgrekbRjlfnXQU9M8Gs-GfK1zlz7HMwR_ycuU47NMqi39e8vsicsEqwD-Uk-u4a1gPnFTGwjOaxZ',
   'headers' : {

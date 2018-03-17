@@ -232,6 +232,68 @@ class Banner extends BaseTag {
   }
 }
 
+/**
+ *获取分类分组标签
+ *  {% groups data="groups",cid="1"%}
+ */
+
+class Groups extends BaseTag {
+  constructor () {
+    super()
+    this.tags = ['groups']
+  }
+
+  async run (context, args, callback) {
+    const data = think.isEmpty(args.data) ? 'data' : args.data;
+    context.ctx[data] = await think.model('category').get_groups(args.cid);
+    return callback(null, '');
+  }
+};
+
+/**
+ *获取话题标签
+ * {% keywords data ="kws"%}
+ *
+ * data:接受返回数据的变量名称，例: data = "data"
+ * limit: 设置查询结果的条数，例: limit="10",limit="3,10"
+ * type: hot
+ * cache {Number} 缓存有效时间，单位为秒,建议1000秒
+ */
+
+class Keywords extends BaseTag {
+  constructor () {
+    super()
+    this.tags = ['keywords']
+  }
+
+
+  async run (context, args, callback) {
+    const data = think.isEmpty(args.data) ? 'data' : args.data;
+    const where = {};
+    const limit = think.isEmpty(args.limit) ? '10' : args.limit;
+    const mod = think.isEmpty(args.mod) ? '' : ',' + args.mod;
+    let type = 'discuss_count_update DESC';
+    if (!think.isEmpty(args.type)) {
+      if (args.type == 'hot') {
+        type = 'videonum DESC';
+      }
+    }
+    const model = think.model('keyword');
+    const cache = think.isEmpty(args.cache) ? false : Number(args.cache) * 1000;
+    // 缓存
+    if (cache) {
+      model.cache(cache);
+    }
+    const keywrod = await model.where(where).limit(limit).order(type).select();
+    // console.log(channel);
+    for (const k of keywrod) {
+      k.url = `/t/${k.keyname}${mod}`;
+    }
+    context.ctx[data] = keywrod;
+    return callback(null, '');
+  };
+};
+
 export default env => {
   // env.addExtension('channel', new Channel())
   env.addExtension('banner', new Banner())
@@ -245,4 +307,12 @@ export default env => {
    * 获取数据标签
    */
   env.addExtension('topic', new Topic(), true);
+  /**
+   * 获取分类分组
+   */
+  env.addExtension('groups', new Groups(), true);
+  /**
+   * 获取话题
+   */
+  env.addExtension('keywords', new Keywords(), true);
 }
