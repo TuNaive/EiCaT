@@ -1,0 +1,49 @@
+{% extends "./inc/base.html" %}
+{% block content %}
+<section class="vbox">
+  <header class="header bg-light dk">
+    <p>{{controller.meta_title}}</p>
+  </header>
+  <section class="scrollable wrapper">
+    <section class="panel panel-default">
+      <form method="post" action="/admin/pcba/update" class="pcb-price-form">
+
+        {% for quotie in quoties %}
+        <section class="panel">
+          <header class="panel-heading">
+            {{quotie.label}}：{{quotie.formula}}
+          </header>
+          <div class="table-responsive">
+            <table class="table b-t b-light" id="export-form">
+              <thead>
+              <tr>
+                <th>系数</th>
+                <th>系数值</th>
+              </tr>
+              </thead>
+              <tbody>
+              {%for value in quotie.quotieLabel%}
+              <tr>
+                <td>
+                  {{value.label}}
+                <td>
+                  <input type="text" class="form-control form-control-text" name="{{value.key}}" value="{{price[value.key]}}">
+                </td>
+              </tr>
+              {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </section>
+        {% endfor %}
+      </form>
+      <footer class="panel-footer">
+        <div class="row"><div class="col-sm-offset-2"> <button class="btn btn-primary btn-s-md ajax-post" type="submit" target-form="pcb-price-form">确定</button></div></div>
+      </footer>
+    </section>
+  </section>
+</section>
+
+{% endblock %}
+{% block script %}
+{% endblock%}

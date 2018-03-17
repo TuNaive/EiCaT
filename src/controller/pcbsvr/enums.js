@@ -91,5 +91,88 @@ export const pcbEnums = {
     urgentFee: '加急费',
     otherFee: '其他',
     totalFee: '总费用'
+  },
+  pcbaFeeQuotie: {
+    quotie: [
+      {
+        label: '点数50万以内',
+        formula: '系数1*点数*（1+系数2）*2 + 系数3*dip点数 (1 + 系数4)*2 + （2 + 系数5）*订单 +（工程费）',
+        quotieLabel: [
+          {
+            label: '系数1',
+            key: 'quotie1'
+          },
+          {
+            label: '系数2',
+            key: 'quotie2'
+          },
+          {
+            label: '系数3',
+            key: 'quotie3'
+          },
+          {
+            label: '系数4',
+            key: 'quotie4'
+          },
+          {
+            label: '系数5',
+            key: 'quotie5'
+          },
+          {
+            label: '工程费(元)',
+            key: 'quotie0'
+          }
+        ],
+      },
+      {
+        label: '点数50万--100万之间',
+        formula: '系数1*点数*（1+系数2）*2 + 系数3*dip点数 (1 + 系数4)*2 + （2 + 系数5）*订单',
+        quotieLabel: [{
+            label: '系数1',
+            key: 'quotie6'
+          },
+          {
+            label: '系数2',
+            key: 'quotie7'
+          },
+          {
+            label: '系数3',
+            key: 'quotie8'
+          },
+          {
+            label: '系数4',
+            key: 'quotie9'
+          },
+          {
+            label: '系数5',
+            key: 'quotie10'
+          }
+        ],
+      },
+      {
+        label: '点数100万以上',
+        formula: '系数1*点数*（1+系数2）*2 + 系数3*dip点数 (1 + 系数4)*2 + （2 + 系数5）*订单',
+        quotieLabel: [{
+            label: '系数1',
+            key: 'quotie11'
+          },
+          {
+            label: '系数2',
+            key: 'quotie12'
+          },
+          {
+            label: '系数3',
+            key: 'quotie13'
+          },
+          {
+            label: '系数4',
+            key: 'quotie14'
+          },
+          {
+            label: '系数5',
+            key: 'quotie15'
+          }]
+      }
+    ]
   }
 }
