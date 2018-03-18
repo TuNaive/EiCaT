@@ -46,9 +46,88 @@
               </div>
             </div>
           </div>
-          <div id="boardLayer" class="form-group"></div>
-          <div id="boardMaterial" class="form-group"></div>
-          <div id="boardThickness" class="form-group"></div>
+          <div id="boardLayer" class="form-group">
+            <label for="boardLayer" class="col-sm-2 control-label">
+              板子层数：
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer0"
+                value="0">
+                单面
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer1"
+                value="1" checked="">
+                双面
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer2"
+                value="2">
+                四层
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer3"
+                value="3">
+                六层
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer4"
+                value="4">
+                八层
+              </label>
+            </div>
+          </div>
+          <div id="boardMaterial" class="form-group">
+            <label for="boardMaterial" class="col-sm-2 control-label">
+              板材：
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline hide-layer0">
+                <input type="radio" name="boardMaterial" class="required" id="boardMaterial0"
+                value="0" checked="">
+                FR4
+              </label>
+              <label class="radio-inline hide-layer1" style="display: none;">
+                <input type="radio" name="boardMaterial" class="required" id="boardMaterial2"
+                value="2" checked="">
+                FR1
+              </label>
+            </div>
+          </div>
+          <div id="boardThickness" class="form-group">
+            <label for="boardThickness" class="col-sm-2 control-label">
+              板厚（mm）：
+            </label>
+            <div class="col-sm-4">
+              <select class="form-control required" name="boardThickness" id="boardThickness">
+                <option value="0">
+                  0.4
+                </option>
+                <option value="1">
+                  0.6
+                </option>
+                <option value="2">
+                  0.8
+                </option>
+                <option value="3">
+                  1.0
+                </option>
+                <option value="4">
+                  1.2
+                </option>
+                <option value="5" selected="">
+                  1.6
+                </option>
+                <option value="6">
+                  2.0
+                </option>
+                <option value="7">
+                  2.5
+                </option>
+              </select>
+            </div>
+          </div>
           <div class="form-group form-inline">
             <label for="boardAmount" class="col-sm-2 control-label">数量：</label>
             <div class="col-sm-4">
@@ -56,30 +135,278 @@
             </div>
           </div>
           <div class="form-inline form-group">
-            <div id="aluminumOutThickness"></div>
-            <div id="aluminumInThickness"></div>
+            <div id="aluminumOutThickness">
+              <label for="aluminumOutThickness" class="col-sm-2 control-label">
+                铜箔厚度 外层（oz）：
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="aluminumOutThickness" id="aluminumOutThickness">
+                  <option value="0" selected="">
+                    1
+                  </option>
+                  <option value="1">
+                    2
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div id="aluminumInThickness">
+              <label for="aluminumInThickness" class="col-sm-2 control-label">
+                内层（oz）：
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="aluminumInThickness" id="aluminumInThickness">
+                  <option value="0" selected="">
+                    0.5
+                  </option>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="form-inline form-group">
-            <div id="makeupNum"></div>
-            <div id="surfacing"></div>
+            <div id="makeupNum">
+              <label for="makeupNum" class="col-sm-2 control-label">
+                拼版款数：
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="makeupNum" id="makeupNum">
+                  <option value="0" selected="">
+                    1
+                  </option>
+                  <option value="1">
+                    2
+                  </option>
+                  <option value="2">
+                    3
+                  </option>
+                  <option value="3">
+                    4
+                  </option>
+                  <option value="4">
+                    5
+                  </option>
+                  <option value="5">
+                    6
+                  </option>
+                  <option value="6">
+                    7
+                  </option>
+                  <option value="7">
+                    8
+                  </option>
+                  <option value="8">
+                    9
+                  </option>
+                  <option value="9">
+                    10
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div id="surfacing">
+              <label for="surfacing" class="col-sm-2 control-label">
+                表面处理：
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="surfacing" id="surfacing">
+                  <option value="0" selected="">
+                    有铅喷锡
+                  </option>
+                  <option value="1">
+                    无铅喷锡
+                  </option>
+                  <option value="2" class="hide-layer0">
+                    沉金
+                  </option>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="form-inline form-group">
-            <div id="solderMaskColor"></div>
-            <div id="charColor"></div>
+            <div id="solderMaskColor">
+              <label for="solderMaskColor" class="col-sm-2 control-label">
+                阻焊颜色：
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="solderMaskColor" id="solderMaskColor">
+                  <option value="0" selected="">
+                    绿色
+                  </option>
+                  <option value="1">
+                    红色
+                  </option>
+                  <option value="2">
+                    蓝色
+                  </option>
+                  <option value="3">
+                    白色
+                  </option>
+                  <option value="4">
+                    黑色
+                  </option>
+                  <option value="5">
+                    哑光黑色
+                  </option>
+                  <option value="6">
+                    无
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div id="charColor">
+              <label for="charColor" class="col-sm-2 control-label">
+                字符颜色：
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="charColor" id="charColor">
+                  <option value="0" selected="">
+                    白色
+                  </option>
+                  <option value="1">
+                    黄色
+                  </option>
+                  <option value="2">
+                    黑色
+                  </option>
+                  <option value="3">
+                    无
+                  </option>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="form-inline form-group">
             <div>
-              <div id="minLineSpace"></div>
-              <div id="minAperture"></div>
+              <div id="minLineSpace">
+                <label for="minLineSpace" class="col-sm-2 control-label">
+                  最小线宽线距：
+                </label>
+                <div class="col-sm-4">
+                  <label class="radio-inline">
+                    <input type="radio" name="minLineSpace" class="required" id="minLineSpace0"
+                    value="0" checked="">
+                    5/5mil以上
+                  </label>
+                </div>
+              </div>
+              <div id="minAperture">
+                <label for="minAperture" class="col-sm-2 control-label">
+                  最小孔径：
+                </label>
+                <div class="col-sm-4">
+                  <label class="radio-inline">
+                    <input type="radio" name="minAperture" class="required" id="minAperture0"
+                    value="0" checked="">
+                    0.30mm以上
+                  </label>
+                </div>
+              </div>
             </div>
             <span class="col-sm-offset-2 col-sm-4">3mil、4mil可做，请改用人工报价</span>
             <span class="col-sm-offset-2 col-sm-4">最小0.2mm，请改用人工报价</span>
           </div>
-          <div id="holeAmount" class="form-group"></div>
-          <div id="halfHole" class="form-group"></div>
-          <div id="testMethod" class="form-group"></div>
+          <div id="holeAmount" class="form-group">
+            <label for="holeAmount" class="col-sm-2 control-label">
+              孔数：
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount0"
+                value="0" checked="">
+                10万孔以下/m²
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount1"
+                value="1">
+                10-20万孔/m²
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount2"
+                value="2">
+                20万孔以上/m²
+              </label>
+            </div>
+          </div>
+          <div id="halfHole" class="form-group">
+            <label for="halfHole" class="col-sm-2 control-label">
+              半孔：
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole0" value="0"
+                checked="">
+                无
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole1" value="1">
+                一边半孔
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole2" value="2">
+                二边半孔
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole3" value="3">
+                三边半孔
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole4" value="4">
+                四边半孔
+              </label>
+            </div>
+          </div>
+          <div id="testMethod" class="form-group">
+            <label for="testMethod" class="col-sm-2 control-label">
+              测试方式：
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <input type="radio" name="testMethod" class="required" id="testMethod0"
+                value="0" checked="">
+                全部飞针测试(样板飞测免费)：光学AOI测试 + 飞针测试，成品直通率100%测试
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="testMethod" class="required" id="testMethod1"
+                value="1">
+                抽测免费：成品直通率95%以上测试：全部光学AOI测试 + 飞针测试抽测（如抽测过程中直通率低于95%，此批全部免费飞针测试 ）
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="testMethod" class="required" id="testMethod2"
+                value="2">
+                测试架测试：测试免费，测试架工具费为一次性收费，返单免费
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="testMethod" class="required" id="testMethod3"
+                value="3">
+                目测：用人工目检，适合单面板及简单的板
+              </label>
+            </div>
+          </div>
           <div class="form-inline form-group">
-            <div id="urgent"></div>
+            <div id="urgent">
+              <label for="urgent" class="col-sm-2 control-label">
+                加急：
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="urgent" id="urgent">
+                  <option value="0" selected="">
+                    正常交期
+                  </option>
+                  <option value="1">
+                    加急48小时
+                  </option>
+                  <option value="2">
+                    加急24小时
+                  </option>
+                  <option value="3">
+                    特快加急12小时
+                  </option>
+                  <option value="4">
+                    火箭加急8小时
+                  </option>
+                </select>
+              </div>
+            </div>
             <div>
               <label for="delivery" class="col-sm-2 control-label">交期：</label>
               <div id="deliveryVal" class="col-sm-4"></div>
