@@ -5,7 +5,7 @@ export default class Base extends Frontend {
     return super.__before(needLogin).then(data => {
       this.meta_title = 'PCB服务'
       this.active = ['/pcbsvr', '/pcbsvr.html']
-      this.channel = 'PCB/SMT'
+      this.channel = 'PCB/PCBA'
       return data
     })
   }

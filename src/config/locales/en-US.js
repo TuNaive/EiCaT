@@ -75,6 +75,14 @@ module.exports = {
       },
       hi: [ 'Hi！Glad to have you here' ],
       services: [ 'Our Services' ],
+      s1: [ 'PCB/PCBA online bidding/ordering' ],
+      s2: [ 'PCB Layout / PCBs / FPCs / rigid-flex PCBs fabrication' ],
+      s3: [ 'PCB Assembly、Testing service' ],
+      s4: [ 'Non-standard parts / Solution customization' ],
+      s5: [ 'Supply chain management outsourcing service' ],
+      s6: [ 'Component replacement proposal and selection' ],
+      s7: [ 'Sheet metal design and fabrication' ],
+      s8: [ 'Backplane Assembly and System integration' ],
       news: [ 'News' ],
       products: [ 'Products' ],
       links: [ 'Friendly Links' ],
@@ -83,6 +91,27 @@ module.exports = {
       question: [ 'Hi! Any question please send message' ],
       ask: [ 'Send Message' ],
       more: [ 'More' ]
+    },
+    "smt": {
+      "": {
+        "domain": "smt",
+        "lang": "en",
+        "plural_forms": "nplurals=1; plural=(n != 1);"
+      },
+      pcb: [ 'PCB Services' ],
+      pcba: [ 'PCBA Services' ],
+      order: [ 'Online Ordering' ],
+      quote: [ 'Online Quotation' ],
+      delivery: [ 'Delivery Ensurance' ],
+      quality: [ 'Quality Assurance' ],
+      professional: [ 'Professional' ],
+      economy: [ 'Economy & Practical' ],
+      poh1: [ 'According to your requirements, fill in the following information and the system will calculate the relevant price' ],
+      poh2: [ 'Ordering applied at the 1-8 layer, 30 meters below the ordinary cardboard price' ],
+      poh3: [ 'Parameters are not within the scope of the options or have special requirements, please use the Online Quotation' ],
+      pos1: [ 'Fill in the required fields' ],
+      pos2: [ 'Generate PCB quotation' ],
+      pos3: [ 'Upload PCB files, submit your order' ]
     }
   }
 }

@@ -12,7 +12,7 @@
   
     <!-- breadcrumbs -->
     <ol class="breadcrumb breadcrumb-inverse">
-      <li><a href="/">首页</a></li>
+      <li><a href="/">{{__.jed.dgettext('common', 'home')}}</a></li>
       <li><a href="/pcbsvr">{{controller.channel}}</a></li>
       <li class="active">{{controller.sub_channel}}</li>
     </ol>
@@ -23,13 +23,13 @@
   <div class="container">
 
     <ol class="pcb_hint">
-      <li>根据您的所需，填写下面相关内容，系统会匹配出相关价格；</li>
-      <li>自助询价适用于1-8层，30平米以下的普通硬板报价，其它类型请选择人工报价；</li>
-      <li>阻抗、塞孔、厚铜、盲埋孔、高Tg，高CTI等参数不在选项范围内或有特殊工艺要求的，请选择工程师人工报价。</li>
+      <li>{{__.jed.dgettext('smt', 'poh1')}}</li>
+      <li>{{__.jed.dgettext('smt', 'poh2')}}</li>
+      <li>{{__.jed.dgettext('smt', 'poh3')}}</li>
     </ol>
 
     <div id="pcb">
-      <h3>填写所需询价信息</h3>
+      <h3>{{__.jed.dgettext('smt', 'pos1')}}</h3>
       <fieldset>
         <form id="enquiryForm" class="form-horizontal">
           <div class="form-inline form-group">
@@ -95,7 +95,7 @@
         </form>
       </fieldset>
 
-      <h3>生成PCB报价单</h3>
+      <h3>{{__.jed.dgettext('smt', 'pos2')}}</h3>
       <fieldset>
         <h3>加工详情</h3>
         <table id="machiningDetail" class="table table-bordered"></table>
@@ -104,7 +104,7 @@
         <table id="priceDetail" class="table table-bordered"></table>
       </fieldset>
 
-      <h3>上传PCB文件，提交订单</h3>
+      <h3>{{__.jed.dgettext('smt', 'pos3')}}</h3>
       <fieldset>
         <form id="pcbFileForm" class="form-horizontal">
           <div class="form-group form-inline">

@@ -21,7 +21,7 @@
   <div class="container">
     <div class="row">
       <!-- LEFT -->
-      <div class="col-lg-10 col-md-10 col-sm-10 ">
+      <div class="col-lg-9 col-md-9 col-sm-9">
         <!-- CAROUSEL -->
         <div class="owl-carousel buttons-autohide controlls-over margin-bottom-30 radius-4" 
           data-plugin-options='{"singleItem": true, "autoPlay": 6000, "navigation": true, "pagination": true, "transitionStyle":"fade"}'>
@@ -69,18 +69,18 @@
       </div>
 
       <!-- RIGHT -->
-      <div class="col-lg-2 col-md-2 col-sm-2">
+      <div class="col-lg-3 col-md-3 col-sm-3">
         <div class="panel panel-default side-nav">
           <div class="panel-heading">
-            <h2 class="panel-title text-center">PCB 制版询价</h2>
+            <h2 class="panel-title text-center">{{__.jed.dgettext('smt', 'pcb')}}</h2>
           </div>
           <div class="panel-body" style="padding: 10px 0 0 10px">
             <ul class="list-group list-group-bordered uppercase nomargin">
               <li class="list-group-item">
-                <a href="/pcbsvr/pcb/calc"><i class="fa fa-calculator"></i>在线自助询价</a>
+                <a href="/pcbsvr/pcb/calc"><i class="fa fa-calculator"></i>{{__.jed.dgettext('smt', 'order')}}</a>
               </li>
               <li class="list-group-item">
-                <a href="/pcbsvr/pcb/enquire?type=0"><i class="fa fa-group"></i>工程师人工报价</a>
+                <a href="/pcbsvr/pcb/enquire?type=0"><i class="fa fa-group"></i>{{__.jed.dgettext('smt', 'quote')}}</a>
               </li>
             </ul>
           </div>
@@ -88,15 +88,15 @@
 
         <div class="panel panel-default side-nav">
           <div class="panel-heading text-center">
-            <h2 class="panel-title">PCBA 制版询价</h2>
+            <h2 class="panel-title">{{__.jed.dgettext('smt', 'pcba')}}</h2>
           </div>
           <div class="panel-body" style="padding: 10px 0 0 10px">
             <ul class="list-group list-group-bordered uppercase nomargin">
               <li class="list-group-item">
-                <a href="/pcbsvr/pcba/calc"><i class="fa fa-calculator"></i>在线自助询价</a>
+                <a href="/pcbsvr/pcba/calc"><i class="fa fa-calculator"></i>{{__.jed.dgettext('smt', 'order')}}</a>
               </li>
               <li class="list-group-item">
-                <a href="/pcbsvr/pcb/enquire?type=1"><i class="fa fa-group"></i>工程师人工报价</a>
+                <a href="/pcbsvr/pcb/enquire?type=1"><i class="fa fa-group"></i>{{__.jed.dgettext('smt', 'quote')}}</a>
               </li>
             </ul>
           </div>
@@ -113,7 +113,7 @@
                 src="/static/pcbs/images/key1.png"
                 style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">交期保障</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'delivery')}}</h4>
           </div>
           <p class="nomargin" style="height: 66px; overflow: hidden">
             PCB单双面板8小时加急 
@@ -132,7 +132,7 @@
                 src="/static/pcbs/images/key2.png" 
                 style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">品质保障</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'quality')}}</h4>
           </div>
           <p class="nomargin" style="height: 66px; overflow: hidden">
             批量抽测免费
@@ -152,7 +152,7 @@
                 src="/static/pcbs/images/key3.png" 
                 style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">专业团队</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'professional')}}</h4>
           </div>
           <p class="nomargin" style="height: 66px;overflow: hidden">
             资深工程师团队
@@ -170,7 +170,7 @@
                 src="/static/pcbs/images/key4.png" 
                 style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">经济实惠</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'economy')}}</h4>
           </div>
           <p class="nomargin" style="height: 66px; overflow: hidden"></p>
         </div>

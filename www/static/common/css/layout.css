@@ -3106,6 +3106,7 @@ section.dark.page-header ul.page-options a {
 		}
 	}
 	#topBar ul.top-links li.text-welcome {
+    color: #ebebeb;
 		padding:0 15px;
 		font-size:12px;
 	}
@@ -8675,18 +8676,18 @@ i.ico-60 {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	overflow: hidden;
+}
+.con span {
+  width: 5px;
 }
 .con li {
-	height: 18px;
-	margin: 7px 0 15px;
-	overflow: hidden;
-	width: 278px;
+	margin: 7px 0 10px;
+	width: auto;
 	display: block;
 	line-height: 18px;
 	clear: both;
 }
-.con li:first-child{margin-top: 0}
+
 .con li:last-child {margin-bottom: 0}
 .con ol span {
 	width: 15px;

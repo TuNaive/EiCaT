@@ -77,15 +77,17 @@
             <!-- <a class="btn btn-primary btn-xs pull-right"><i class="fa fa-fire"></i></a> -->
             <h2 class="panel-title">{{__.jed.dgettext('home', 'services')}}</h2>
           </div>
-          <div class="panel-body con " style="height: 354px">
+          <div class="panel-body con ">
             <ol class="current">
-              <!--  model data="hotnews",table="document",order="view DESC,create_time DESC",limit="10",cache="1000"  TODO -->
-              {% for val in hotnews %}
-              <li>
-                <span {% if loop.index < 4 %}class="topRank"{% endif %}>{{loop.index}}</span><a target="_blank" href="{{val.name|get_url(val.id)}} " >{{val.title}}</a>
-              </li>
-              {%endfor%}
-              </ol>
+              <li>{{__.jed.dgettext('home', 's1')}}</li>
+              <li>{{__.jed.dgettext('home', 's2')}}</li>
+              <li>{{__.jed.dgettext('home', 's3')}}</li>
+              <li>{{__.jed.dgettext('home', 's4')}}</li>
+              <li>{{__.jed.dgettext('home', 's5')}}</li>
+              <li>{{__.jed.dgettext('home', 's6')}}</li>
+              <li>{{__.jed.dgettext('home', 's7')}}</li>
+              <li>{{__.jed.dgettext('home', 's8')}}</li>
+            </ol>
           </div>
         </div>
 
@@ -123,7 +125,7 @@
         {% if controller.isLoggedIn %}
         <div class="alert alert-info margin-bottom-20 box-shadow-4"><!-- INFO -->
           {{__.jed.dgettext('home', 'question')}}
-          <a href="/mod/question/sys/add/?cid=123" class="btn btn-primary btn-3d btn-block margin-top-10">提问</a>
+          <a href="/mod/question/sys/add/?cid=123" class="btn btn-primary btn-3d btn-block margin-top-10">{{__.jed.dgettext('home', 'ask')}}</a>
         </div>
         {%else%}
         <div class="alert alert-info margin-bottom-20 box-shadow-4"><!-- INFO -->
@@ -135,7 +137,7 @@
         {%endif%}
         <div class="panel panel-default">
           <div class="panel-heading">
-            <a class="btn btn-primary btn-xs pull-right" href="/topic" >更多</a>
+            <a class="btn btn-primary btn-xs pull-right" href="/topic" >{{__.jed.dgettext('home', 'more')}}</a>
             <h2 class="panel-title">{{__.jed.dgettext('home', 'faq')}}</h2>
           </div>
           <div class="panel-body padding-10">

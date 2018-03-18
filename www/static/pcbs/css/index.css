@@ -5,7 +5,12 @@ div.side-nav ul {
 }
 
 div.side-nav li.list-group-item {
-  padding-left: 7px;
+  text-align: center;
+  padding: 2px 14px 2px 0;
+}
+
+div.side-nav ul.list-group-bordered>li.list-group-item>a{
+  padding: 6px 0;
 }
 
 div.side-nav ul > li:before {
@@ -13,7 +18,7 @@ div.side-nav ul > li:before {
 }
 
 div.side-nav ul > li i {
-  margin-right: 8px;
+  margin-right: 6px;
 }
 
 /*custom layout style*/

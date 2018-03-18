@@ -16,8 +16,9 @@ export default class extends Base {
 
   async calcAction() {
     let express = await this.model("express_company").select();
+    let __ = this.getI18n();
     this.assign('express', express);
-    this.sub_channel = 'PCB自助询价'
+    this.sub_channel = `PCB ${__.jed.dgettext('smt', 'order')}`;
     return this.display()
   }
 
