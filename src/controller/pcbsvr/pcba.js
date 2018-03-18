@@ -13,8 +13,7 @@ export default class extends Base {
     })
   }
   calcAction() {
-    let __ = this.getI18n();
-    this.sub_channel = `PCBA ${__.jed.dgettext('smt', 'order')}`;
+    this.sub_channel = `PCBA ${this.__.jed.dgettext('smt', 'order')}`;
     // this.assign({
     //   sub_channel: 'PCBA自助询价'
     // })

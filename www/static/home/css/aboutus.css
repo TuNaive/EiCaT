@@ -1,0 +1,20 @@
+.aboutus_block {
+  background-color: white;
+  padding: 12px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  margin-bottom: 12px;
+}
+
+.aboutus_block .aboutus_content {
+  padding: 12px 24px;
+}
+
+.aboutus_block .aboutus_content h2 {
+  margin-bottom: 8px;
+}
+
+.aboutus_block .aboutus_content p {
+  font-size: 16px;
+  line-height: 2;
+}

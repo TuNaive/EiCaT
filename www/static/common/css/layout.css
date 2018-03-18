@@ -3252,7 +3252,7 @@ section.dark.page-header ul.page-options a {
 		list-style:none;
 		background-color:#fff;
 		box-shadow:rgba(0,0,0,0.2) 0 6px 12px;
-		min-width:200px;
+		min-width:160px;
 		padding:0;
 
 		border-color: #1ABC9C #fff #fff;
@@ -3525,7 +3525,7 @@ section.dark.page-header ul.page-options a {
 
 	/* DARK SUBMENU */
 	#topNav div.submenu-dark ul.dropdown-menu {
-		background-color:#333;
+		background-color: #878787;
 	}
 	#topNav div.submenu-dark ul.dropdown-menu a.dropdown-toggle {
 		background-image: url('../images/submenu_dark.png');

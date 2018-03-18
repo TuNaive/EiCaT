@@ -64,11 +64,11 @@ var formActiveConf = {
 
 $(function ($) {
   // init form dom
-  _.forEach(formKeyConf, function (obj, key) {
-    _.forEach(obj, function (v, k) {
-      appendRadio(key, k, v, formActiveConf[k], formClassConf[k])
-    })
-  })
+  // _.forEach(formKeyConf, function (obj, key) {
+  //   _.forEach(obj, function (v, k) {
+  //     appendRadio(key, k, v, formActiveConf[k], formClassConf[k])
+  //   })
+  // })
 
   bindFormEvents()
 
@@ -241,16 +241,23 @@ function initPcbStateAndEvents () {
     var materialHtml
 
     if (layer > 0) {
-      surfacingHtml = TOOL.generateFormElem('select', formValConf.surfacing, 'surfacing', formKeyConf.select.surfacing, formActiveConf.surfacing, formClassConf.surfacing)
-      materialHtml = TOOL.generateFormElem('radio', formValConf.boardMaterial, 'boardMaterial', formKeyConf.radio.boardMaterial, formActiveConf.boardMaterial, formClassConf.boardMaterial)
-
+      $('#surfacing').find('.hide-layer0').show().end()
+        .find('.hide-layer1').hide();
+      $('#boardMaterial').find('.hide-layer0').show().end()
+        .find('.hide-layer1').hide();
+      // surfacingHtml = TOOL.generateFormElem('select', formValConf.surfacing, 'surfacing', formKeyConf.select.surfacing, formActiveConf.surfacing, formClassConf.surfacing)
+      // materialHtml = TOOL.generateFormElem('radio', formValConf.boardMaterial, 'boardMaterial', formKeyConf.radio.boardMaterial, formActiveConf.boardMaterial, formClassConf.boardMaterial)
     } else {
-      surfacingHtml = TOOL.generateFormElem('select', {'0': '有铅喷锡', '1': '无铅喷锡'}, 'surfacing', formKeyConf.select.surfacing, 0, formClassConf.surfacing)
-      materialHtml = TOOL.generateFormElem('radio', {'2': 'FR1'}, 'boardMaterial', formKeyConf.radio.boardMaterial, 2, formClassConf.boardMaterial)
+      $('#surfacing').find('.hide-layer0').hide().end()
+        .find('.hide-layer1').show();
+      $('#boardMaterial').find('.hide-layer0').hide().end()
+        .find('.hide-layer1').show();
+      // surfacingHtml = TOOL.generateFormElem('select', {'0': '有铅喷锡', '1': '无铅喷锡'}, 'surfacing', formKeyConf.select.surfacing, 0, formClassConf.surfacing)
+      // materialHtml = TOOL.generateFormElem('radio', {'2': 'FR1'}, 'boardMaterial', formKeyConf.radio.boardMaterial, 2, formClassConf.boardMaterial)
     }
 
-    $('#surfacing').html(surfacingHtml)
-    $('#boardMaterial').html(materialHtml)
+    // $('#surfacing').html(surfacingHtml)
+    // $('#boardMaterial').html(materialHtml)
   })
 }
 

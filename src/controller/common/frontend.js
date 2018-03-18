@@ -96,6 +96,7 @@ export default class Frontend extends User {
       this.assign('__', this.getI18n(locale))
     }
     this.assign('isZh', !_.isEqual(this.cookie('locale'), 'en-us'))
+    this.__ = this.getI18n()
   }
 
   //获取分类信息

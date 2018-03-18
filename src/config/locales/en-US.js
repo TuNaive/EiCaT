@@ -50,7 +50,10 @@ module.exports = {
       email: [ 'Email Address: sales09@tspcba.com' ],
       copyright: [ 'Copyright' ],
       company: [ '上海融尔电子科技有限公司' ],
-      placeholder: [ 'Please input' ]
+      placeholder: [ 'Please input' ],
+      companyProfile: [ 'Company Profile' ],
+      coreBusiness: [ 'Core Business' ],
+      contactInfo: [ 'Contact Info' ]
     },
     "messages": {
       "": {
@@ -157,6 +160,42 @@ module.exports = {
       parmc3: [ 'Stable batch processing material loss rate is about 0.3%-0.5%' ],
       parmc4: [ 'If the small amount of material preparation is not homogeneous, no welding is required, please list details' ],
       parmc5: [ 'Special requirements, attention, please explain in advance' ]
+    },
+    "aboutus": {
+      "": {
+        "domain": "aboutus",
+        "lang": "en",
+        "plural_forms": "nplurals=1; plural=(n != 1);"
+      },
+      introduction: [ 'Company Profile' ],
+      cp1: [ `TSPCBA is a professional PCBA turnkey solution 
+        innovation platform. We offer one-shop services including PCB layout, 
+        PCB fabrication, material procurement, PCB assembly, 
+        non-standard customization, supply chain management outsourcing, 
+        box building and testing. We also offer value-added services 
+        to meet our customers' diversified demands of instant responses, 
+        shorter development cycles, competitive pricing, high performance products.`],
+      cp2: [`Our core business covers “PCB/PCBA online ordering, 
+        Non-standard parts/solution customization, 
+        Supply chain management outsourcing service”. 
+        We believe continuous improvement process will achieve the best customer experience.` ],
+      ppoo: [ 'PCB/PCBA online ordering' ],
+      ppoo1: [ `- Meet customers' one-stop demands from PCB layout to finished goods delivery.` ],
+      ppoo2: [ '- Provide PCB, FPC, rigid-flex PCB, online bidding /ordering, then quick delivery.' ],
+      ppoo3: [ '- Provide small batches of PCBA online bidding /ordering, then quick delivery.' ],
+      ppoo4: [ '- Also provide mass production for PCB/PCBA, SMT, assembly, box building and testing.' ],
+      ppoo5: [ '- ISO9001/TS16949 certification.' ],
+      customize: [ 'Non-standard parts / solution customization' ],
+      customize1: [ '-  Assist our customer to search parts replacement achieve cost-reduction target and quality assurance.' ],
+      customize2: [ `-  Realize electronic manufacturer cost-effective based on our globalization resource information, 
+        customer demand data and our team professional experience.` ],
+      customize3: [ '-  Provide electronic products/system design services , focus on smart hardware, automotive electronics, smart meters, and energy management system.' ],
+      sc: [ 'Supply chain management outsourcing service' ],
+      sc1: [ 'Making samples according to customer requirements and product concepts.' ],
+      sc2: [ 'Provide high integration services from material purchasing, processing and production to domestic and international distribution.' ],
+      sc3: [ 'Help our customers to establish a complete supply chain system from manufacturers to distributors.' ],
+      sc4: [ 'Assist our customers to save fixed investment, focus on high value-added products R&D and market development.' ],
+      sc5: [ 'Achieve the minimum input and maximize output to improve core competitiveness of enterprises.' ]
     }
   }
 }

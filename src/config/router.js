@@ -1,6 +1,9 @@
 export default [
   ['', '/home/index/index', 'get'],
   ['/home', 'home/index/index', 'get'],
+  ['/aboutus/profile', 'aboutus/index/profile', 'get'],
+  ['/aboutus/business', 'aboutus/index/business', 'get'],
+  ['/aboutus/contact', 'aboutus/index/contact', 'get'],
   ['/u/avatar',"/account/index/avatar/:1/",'get'],
   ['/u/avatar/:uid',"/account/index/avatar/:1/",'get'],
   ['/p/:id', "/home/detail/index/:1/",'get'],
