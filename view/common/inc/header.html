@@ -70,7 +70,6 @@
       <!-- Logo -->
       <a class="logo pull-left" href="/" style="font-size: 20px;">
         <img src="/static/common/images/logo.png" style="margin-right: 16px;" alt="" />
-        E i C a T
       </a>
       <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
         <nav class="nav-main">
@@ -82,26 +81,26 @@
               <span class="aline"></span>
             </li>
             <li class="{% if (controller.active|contains('/pcbsvr')) %}active{% endif %}">
-              <a href="/pcbsvr">
-                PCB/SMT
+              <a href="/pcbsvr" title="{{__.jed.dgettext('hints', 'pcb')}}">
+                PCB/PCBA
+              </a>
+              <span class="aline"></span>
+            </li>
+            <li class="{% if (controller.active|contains('/bom')) %}active{% endif %}">
+              <a href="/bom">
+                {{__.jed.dgettext('common', 'bom')}}
+              </a>
+              <span class="aline"></span>
+            </li>
+            <li class="{% if (controller.active|contains('/shangcheng')) %}active{% endif %}">
+              <a href="/shangcheng">
+                {{__.jed.dgettext('common', 'services')}}
               </a>
               <span class="aline"></span>
             </li>
             <li class="{% if (controller.active|contains('/aboutus')) %}active{% endif %}">
               <a href="/aboutus">
                 {{__.jed.dgettext('common', 'aboutus')}}
-              </a>
-              <span class="aline"></span>
-            </li>
-            <li class="{% if (controller.active|contains('/sitemap')) %}active{% endif %}">
-              <a href="/sitemap">
-                {{__.jed.dgettext('common', 'map')}}
-              </a>
-              <span class="aline"></span>
-            </li>
-            <li class="{% if (controller.active|contains('/shangcheng')) %}active{% endif %}">
-              <a href="/shangcheng">
-                {{__.jed.dgettext('common', 'shangcheng')}}
               </a>
               <span class="aline"></span>
             </li>

@@ -75,7 +75,7 @@
         <div class="panel panel-default margin-bottom-0">
           <div class="panel-heading">
             <!-- <a class="btn btn-primary btn-xs pull-right"><i class="fa fa-fire"></i></a> -->
-            <h2 class="panel-title">PCB/PCBA服务</h2>
+            <h2 class="panel-title">{{__.jed.dgettext('common', 'ourservices')}}</h2>
           </div>
           <div class="panel-body con " style="height: 354px">
             <ol class="current">
@@ -100,8 +100,8 @@
       <!-- RIGHT -->
       <div class="col-sm-9 margin-top-20">
         <ul class="nav nav-tabs nav-justified" style="position: inherit;background-color: #f1f2f7">
-          <li class="active"><a href="#new" data-toggle="tab" class="size-18">公司新闻</a></li>
-          <li><a href="#wenda" data-toggle="tab" class="size-18">产品展示</a></li>
+          <li class="active"><a href="#new" data-toggle="tab" class="size-18">{{__.jed.dgettext('home', 'news')}}</a></li>
+          <li><a href="#wenda" data-toggle="tab" class="size-18">{{__.jed.dgettext('home', 'products')}}</a></li>
           {#
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
@@ -122,21 +122,21 @@
 
         {% if controller.isLoggedIn %}
         <div class="alert alert-info margin-bottom-20 box-shadow-4"><!-- INFO -->
-          今天，你遇到了什么问题呢？
+          {{__.jed.dgettext('home', 'question')}}
           <a href="/mod/question/sys/add/?cid=123" class="btn btn-primary btn-3d btn-block margin-top-10">提问</a>
         </div>
         {%else%}
         <div class="alert alert-info margin-bottom-20 box-shadow-4"><!-- INFO -->
-          你好! 你还没有登录，请先登录.
+          {{__.jed.dgettext('home', 'hi')}}
           <a class="btn btn-block btn-social btn-dropbox margin-top-10  " href="/account/auth/login" data-toggle="ajaxModal">
-            <i class="fa fa-sign-in"></i> 登录{{config.setup.WEB_SITE_TITLE}}
+            <i class="fa fa-sign-in"></i> {{__.jed.dgettext('home', 'login')}}
           </a>
         </div>
         {%endif%}
         <div class="panel panel-default">
           <div class="panel-heading">
             <a class="btn btn-primary btn-xs pull-right" href="/topic" >更多</a>
-            <h2 class="panel-title">常见问题</h2>
+            <h2 class="panel-title">{{__.jed.dgettext('home', 'faq')}}</h2>
           </div>
           <div class="panel-body padding-10">
             <!--  keywords data ="topic",type="hot",limit="5",cache="1000"  TODO -->
@@ -167,8 +167,9 @@
   <div class="container">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <a class="btn btn-primary btn-xs pull-right" href="/ext/link/index">更多&gt;&gt;</a> <a class="btn btn-info btn-xs pull-right" href="/ext/link/index/apply" style="margin-right: 15px">申请友情链接</a>
-        <h2 class="panel-title">友情链接</h2>
+        <a class="btn btn-primary btn-xs pull-right" href="/ext/link/index">{{__.jed.dgettext('home', 'more')}}&gt;&gt;</a>
+        <!-- <a class="btn btn-info btn-xs pull-right" href="/ext/link/index/apply" style="margin-right: 15px">申请友情链接</a> -->
+        <h2 class="panel-title">{{__.jed.dgettext('home', 'links')}}</h2>
       </div>
       <div class="panel-body link padding-10">
         <div class="owl-carousel nomargin" data-plugin-options='{"items":6, "singleItem": false, "autoPlay": true}'>

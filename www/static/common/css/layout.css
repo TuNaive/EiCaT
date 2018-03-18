@@ -2983,7 +2983,7 @@ section.dark.page-header ul.page-options a {
 	*/
 	#topBar {
 		display:block;
-		background-color: #fff;
+		background-color: #449ae0;
 		border-bottom:rgba(0,0,0,0.05) 1px solid;
 	}
 	#topBar>.border-bottom {
@@ -3080,7 +3080,7 @@ section.dark.page-header ul.page-options a {
 	#topBar ul.top-links>li>a {
 		padding:10px;
 		font-size:12px;
-		color:#151515;
+		color:#ebebeb;
 		display:block;
 		text-decoration:none;
 	}
@@ -3088,9 +3088,9 @@ section.dark.page-header ul.page-options a {
 		background-color:rgba(0,0,0,0.01);
 	}
 	#topBar ul.top-links>li>a>i {
+    color: white;
 		margin-right:5px;
 		filter: alpha(opacity=30);
-		opacity:0.3;
 	}
 	@media only screen and (max-width: 768px) {
 		#topBar {
@@ -7401,7 +7401,7 @@ ul.search-history {
 		background:url('../images/world-map.png') no-repeat center;
 	}*/
 	#footer address .footer-sprite {
-		margin-bottom:20px;
+		margin-bottom:12px;
 		padding-left:30px; 
 		background:url('../images/footer_sprite.png') no-repeat 0 0;
 	}
@@ -7416,16 +7416,9 @@ ul.search-history {
 		padding:0 0 10px 0;
 		border-bottom:#403E44 1px dashed;
 	}
-	#footer address .footer-sprite.address {
-		background-position:0 0;
-	}
-	#footer address .footer-sprite.phone {
-		background-position:0 -138px;
-		line-height:30px;
-	}		
-	#footer address .footer-sprite.email {
-		background-position:0 -247px;
-	}
+  #footer ul > li {
+    line-height: 30px;
+  }
 
 
 	/* footer links - breadcrumbs like */

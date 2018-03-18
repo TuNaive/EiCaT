@@ -73,17 +73,24 @@
     <footer id="footer" class="footer-light footer-white" >
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-7">
             <address>
               <ul class="list-unstyled">
-                <li class="footer-sprite address">
-                  公司地址
+                <li>
+                  <i class="fa fa-map-marker"></i>
+                  {{__.jed.dgettext('common', 'address')}}
                 </li>
-                <li class="footer-sprite phone">
-                  电话: 1234567
+                <li>
+                  <i class="fa fa-phone"></i>
+                  {{__.jed.dgettext('common', 'phone')}}
                 </li>
-                <li class="footer-sprite email">
-                  <a href="mailto:test@outlook.com">test@outlook.com</a>
+                <li>
+                  <i class="fa fa-envelope"></i>
+                  <a href="mailto:test@outlook.com">{{__.jed.dgettext('common', 'email')}}</a>
+                </li>
+                <li>
+                  <i class="fa fa-qq"></i>
+                  QICQ: 3063230029, 3603009730
                 </li>
               </ul>
             </address>

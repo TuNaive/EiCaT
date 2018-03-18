@@ -1,5 +1,5 @@
 export default [
-  ['', '/pcbsvr/index/index', 'get'],
+  ['', '/home/index/index', 'get'],
   ['/home', 'home/index/index', 'get'],
   ['/u/avatar',"/account/index/avatar/:1/",'get'],
   ['/u/avatar/:uid',"/account/index/avatar/:1/",'get'],

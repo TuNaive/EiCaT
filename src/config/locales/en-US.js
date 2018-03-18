@@ -42,9 +42,14 @@ module.exports = {
       logout: [ 'logout' ],
       home: [ 'Home'],
       aboutus: [ 'About Us' ],
+      services: [ 'Services' ],
+      bom: [ 'BOM RFQ' ],
       map: [ 'Site Map' ],
+      address: [ 'Company Address: 199 Haichuan Rd., Jiading District, Shanghai, China, 201800' ],
+      phone: [ 'Phone Number: 400-920-5532' ],
+      email: [ 'Email Address: sales09@tspcba.com' ],
       copyright: [ 'Copyright' ],
-      company: [ 'Company Name' ]
+      company: [ '上海融尔电子科技有限公司' ]
     },
     "messages": {
       "": {
@@ -53,6 +58,31 @@ module.exports = {
         "plural_forms": "nplurals=2; plural=(n != 1);"
       },
       hi: [ 'Hi' ]
+    },
+    "hints": {
+      "": {
+        "domain": "hints",
+        "lang": "en",
+        "plural_forms": "nplurals=1; plural=(n != 1);"
+      },
+      pcb: [ 'PCB/PCBA Onling Ordering' ]
+    },
+    "home": {
+      "": {
+        "domain": "home",
+        "lang": "en",
+        "plural_forms": "nplurals=1; plural=(n != 1);"
+      },
+      hi: [ 'Hi！Glad to have you here' ],
+      services: [ 'Our Services' ],
+      news: [ 'News' ],
+      products: [ 'Products' ],
+      links: [ 'Friendly Links' ],
+      faq: [ 'FAQ' ],
+      login: [ 'Login' ],
+      question: [ 'Hi! Any question please send message' ],
+      ask: [ 'Send Message' ],
+      more: [ 'More' ]
     }
   }
 }

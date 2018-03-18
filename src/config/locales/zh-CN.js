@@ -132,9 +132,14 @@ module.exports = {
       logout: [ '注销' ],
       home: [ '首页'],
       aboutus: [ '关于我们' ],
+      services: [ '增值服务' ],
+      bom: [ 'BOM配单' ],
       map: [ '网站地图' ],
+      address: [ '公司地址: 199 Haichuan Rd., Jiading District, Shanghai, China, 201800' ],
+      phone: [ '联系电话: 400-920-5532' ],
+      email: [ '邮箱地址: sales09@tspcba.com' ],
       copyright: [ '版权所有' ],
-      company: [ '公司的名称' ]
+      company: [ '上海融尔电子科技有限公司' ]
     },
     "messages": {
       "": {
@@ -143,6 +148,32 @@ module.exports = {
         "plural_forms": "nplurals=1; plural=(n != 1);"
       },
       hi: [ '您好' ]
+    },
+    "hints": {
+      "": {
+        "domain": "hints",
+        "lang": "cn",
+        "plural_forms": "nplurals=1; plural=(n != 1);"
+      },
+      pcb: [ 'PCB/PCBA 在线下单' ]
+    },
+    "home": {
+      "": {
+        "domain": "home",
+        "lang": "cn",
+        "plural_forms": "nplurals=1; plural=(n != 1);"
+      },
+      hi: [ '您好！您还未登录，请先登录' ],
+      services: [ '公司服务' ],
+      news: [ '公司新闻' ],
+      products: [ '产品展示' ],
+      links: [ '友情链接' ],
+      address: [ '公司地址' ],
+      faq: [ '常见问题' ],
+      login: [ '登录' ],
+      question: [ '您好！有任何问题欢迎咨询' ],
+      ask: [ '咨询' ],
+      more: [ '更多' ]
     }
   }
 }
