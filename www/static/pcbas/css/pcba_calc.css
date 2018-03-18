@@ -7,6 +7,10 @@ body li {
   float: right;
 }
 
+.offer_mode_cont {
+  margin-bottom: 20px;
+}
+
 @media screen and (min-width:1100px) {
   .right-wrap {
     position: absolute;

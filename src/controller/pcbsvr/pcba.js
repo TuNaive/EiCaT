@@ -1,7 +1,6 @@
 import Base from './base.js'
 import fs from 'mz/fs'
 
-
 export default class extends Base {
 
   constructor (ctx) {
@@ -14,7 +13,8 @@ export default class extends Base {
     })
   }
   calcAction() {
-    this.sub_channel = 'PCBA自助询价'
+    let __ = this.getI18n();
+    this.sub_channel = `PCBA ${__.jed.dgettext('smt', 'order')}`;
     // this.assign({
     //   sub_channel: 'PCBA自助询价'
     // })

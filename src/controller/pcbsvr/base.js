@@ -6,6 +6,7 @@ export default class Base extends Frontend {
       this.meta_title = 'PCB服务'
       this.active = ['/pcbsvr', '/pcbsvr.html']
       this.channel = 'PCB/PCBA'
+      this.$locale = _.get(this.getLocale(), '0')
       return data
     })
   }

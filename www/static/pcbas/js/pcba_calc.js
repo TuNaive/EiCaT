@@ -16,6 +16,7 @@ require(['/static/pcbas/js/enum.js',
 
 function bindFormEvents (Enum) {
   var self = this
+  var isEn = $('#locale').val() === 'en-us'
   var pcba = $('#pcba')
   generateAddress()
   generateInvoice()
@@ -24,7 +25,11 @@ function bindFormEvents (Enum) {
     headerTag: "h3",
     bodyTag: "fieldset",
     transitionEffect: "slideLeft",
-    labels: {
+    labels: isEn ? {
+      finish: "Submit Order",
+      next: "Calculate Price",
+      previous: "Back",
+    } : {
       finish: "提交订单",
       next: "计算价格",
       previous: "返回",

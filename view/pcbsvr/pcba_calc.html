@@ -12,7 +12,7 @@
   
     <!-- breadcrumbs -->
     <ol class="breadcrumb breadcrumb-inverse">
-      <li><a href="/">首页</a></li>
+      <li><a href="/">{{__.jed.dgettext('common', 'home')}}</a></li>
       <li><a href="/pcbsvr">{{controller.channel}}</a></li>
       <li class="active">{{controller.sub_channel}}</li>
     </ol>
@@ -20,58 +20,59 @@
   </div>
 </section>
 <section>
+  <input id="locale" style="display: none" value="{{controller.$locale}}">
   <div class="container">
     <div class="offer_mode_cont">
       <div class="introduce">
-          <ul style="border-bottom: 1px dashed #ccc; padding-left: 5px;" class="padding-bottom-10">
-              <li>1、根据您的所需，填写下面相关内容，系统会匹配出相关价格；</li>
-              <li>2、本自助询价适用于1000套以下的样板小批量的报价；量大请选择人工报价，有更多优惠哦；</li>
-              <li>3、洗板费、测试费要根据板子要求和测试难度而定，如果洗板要求特殊、测试复杂的，要酌情增加收费；</li>
-              <li>4、贴片总点数（不含DIP脚数）&gt;500点的样板，请选择人工报价。板子数量少于500pcs即为样板；</li>
-          </ul>
+        <ul style="border-bottom: 1px dashed #ccc; padding-left: 5px;" class="padding-bottom-10">
+          <li>{{__.jed.dgettext('smt', 'paoh1')}}</li>
+          <li>{{__.jed.dgettext('smt', 'paoh2')}}</li>
+          <li>{{__.jed.dgettext('smt', 'paoh3')}}</li>
+          <li>{{__.jed.dgettext('smt', 'paoh4')}}</li>
+        </ul>
       </div>
       <div id="pcba">
-        <h3>填写所需询价信息</h3>
+        <h3>{{__.jed.dgettext('smt', 'paos1')}}</h3>
         <fieldset>
           <form id="enquiryForm" class="form-horizontal">
             <div class="form-group">
               <div>
-                <label for="pointChip" class="col-sm-2 control-label">CHIP点数：</label>
+                <label for="pointChip" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paChipPoint')}}：</label>
                 <div class="col-sm-4"> 
-                  <input type="text" class="form-control required digits" title="请输入正确的CHIP点数" id="pointChip" name="pointChip" placeholder="请输入">
-                  <span style="display:block;font-size:12px;width:330px;">L.C.R一个元器件算一个点；二三极管、钽电容算两个点。</span>
+                  <input type="text" class="form-control required digits" title="{{__.jed.dgettext('smt', 'paChipPointError')}}" id="pointChip" name="pointChip" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
+                  <span style="display:block;font-size:12px;width:330px;">{{__.jed.dgettext('smt', 'paChipPointHint')}}</span>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="pointIc" class="col-sm-2 control-label">IC点数：</label>
+                <label for="pointIc" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paIcPoint')}}：</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control required digits" title="请输入正确的IC点数" id="pointIc" name="pointIc" placeholder="请输入">
-                  <span style="display:block;font-size:12px;">多引脚元器件4个脚算一点。</span>
+                  <input type="text" class="form-control required digits" title="{{__.jed.dgettext('smt', 'paIcPointError')}}" id="pointIc" name="pointIc" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
+                  <span style="display:block;font-size:12px;">{{__.jed.dgettext('smt', 'paIcPointHint')}}</span>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="pointBga" class="col-sm-2 control-label">BGA点数：</label>
+                <label for="pointBga" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paBgaPoint')}}：</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control required digits" id="pointBga" name="pointBga" placeholder="请输入">
-                  <span style="display:block;font-size:12px;">BGA4个脚算一点。</span>
+                  <input type="text" class="form-control required digits" title="{{__.jed.dgettext('smt', 'paBgaPointError')}}" id="pointBga" name="pointBga" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
+                  <span style="display:block;font-size:12px;">{{__.jed.dgettext('smt', 'paBgaPointHint')}}</span>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="pointDip" class="col-sm-2 control-label">DIP脚数：</label>
+                <label for="pointDip" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paDipPoint')}}</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control required" title="请输入DIP脚数" id="pointDip" name="pointDip" placeholder="请输入">
-                  <span style="display:block;font-size:12px;">插件器件一个脚算一个点。</span>
+                  <input type="text" class="form-control required" title="{{__.jed.dgettext('smt', 'paDipPointError')}}" id="pointDip" name="pointDip" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
+                  <span style="display:block;font-size:12px;">{{__.jed.dgettext('smt', 'paDipPointHint')}}</span>
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <label for="plateSize" class="col-sm-2 control-label">钢网尺寸：</label>
+              <label for="plateSize" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paMeshSize')}}：</label>
               <div class="col-sm-4">
                 <select name="plateSize" id="plateSize" class="form-control required">
                   <option value="1" selected="selected">300*400mm</option>
@@ -84,35 +85,35 @@
                   <option value="8">400*1400mm</option>
                 </select>
                 <span style="display:block;font-size:12px;width:330px;">
-                  样板钢网尺寸=PCB板子长宽各加100mm以上（用于手工印刷）批量板要选大于420*520mm的钢网尺寸（用于自动印刷机）
+                  {{__.jed.dgettext('smt', 'paMeshSizeHint')}}
                 </span>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="boardNumber" class="col-sm-2 control-label">订单数量：</label>
+                <label for="boardNumber" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paOrderQuantity')}}：</label>
                 <div class="col-sm-4">
-                  <input type="text" title="请输入正确的订单数量" class="form-control required digits" id="boardNumber" name="boardNumber" placeholder="请输入">
+                  <input type="text" title="{{__.jed.dgettext('smt', 'paOrderQuantityError')}}" class="form-control required digits" id="boardNumber" name="boardNumber" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="deliveryDate" class="col-sm-2 control-label">交期：</label>
+                <label for="deliveryDate" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paDelivery')}}：</label>
                 <div class="col-sm-4">
                   <!-- <input type="text" class="form-control required" id="DeliveryDate" name="DeliveryDate" placeholder="请输入">
                   <span id="spanDeliveryDate"> 0 天 </span> -->
                   <span style="display:block;font-size:12px;width:330px;">
-                    样板小批量交期一般2-3天，批量贴片正常交期3天+插件正常交期3天；如需加急请提前48小时通知。
+                    {{__.jed.dgettext('smt', 'paDeliveryHint')}}
                   </span>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="comment" class="col-sm-2 control-label">备注：</label>
+                <label for="comment" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paRemark')}}：</label>
                 <div class="col-sm-4">
-                  <textarea type="text" cols="45" rows="7" class="form-control required" id="comment" name="comment" title="请输入备注信息" placeholder="请输入"> </textarea>
+                  <textarea type="text" cols="45" rows="7" class="form-control required" id="comment" name="comment" title="{{__.jed.dgettext('smt', 'paRemarkError')}}" placeholder="{{__.jed.dgettext('common', 'placeholder')}}"> </textarea>
                 </div>
               </div>
             </div>
@@ -120,38 +121,38 @@
           <!-- <div style="position:relative"> -->
           <ul class="margin-top-30 margin-right-50 right-wrap" style="width:450px;border:1px solid #ddd; !important;">
             <li style="margin:0px !important;">
-              <span style="color:red;background:#dedede;display:block;padding:5px 10px;">*客户须提供资料：</span>
+              <span style="color:red;background:#dedede;display:block;padding:5px 10px;">{{__.jed.dgettext('smt', 'pacdTitle')}}</span>
               <ul style="padding:0px 10px;">
-                <li>1.详细、准确的BOM清单，如有变更须在BOM上注明（必须提供）；</li>
-                <li>2.Gerber文件（在融创芯城加工PCB无需提供此项），如需开拼版钢网，请提供拼版文件；</li>
-                <li>3.元器件位号图(Reference Designator)；</li>
-                <li>4.坐标文件(Pick Place file)；</li>
-                <li>5.PCB文件（如果坐标文件、位号图、Gerber文件客户未能导出的，也可提供PCB文件）；</li>
-                <li>6.样板（生产参照用，有条件的可提供）</li>
+                <li>1. {{__.jed.dgettext('smt', 'pacd1')}}</li>
+                <li>2. {{__.jed.dgettext('smt', 'pacd2')}}</li>
+                <li>3. {{__.jed.dgettext('smt', 'pacd3')}}</li>
+                <li>4. {{__.jed.dgettext('smt', 'pacd4')}}</li>
+                <li>5. {{__.jed.dgettext('smt', 'pacd5')}}</li>
+                <li>6. {{__.jed.dgettext('smt', 'pacd6')}}</li>
               </ul>
             </li>
             <li>
-              <span style="color:red;background:#dedede;display:block;padding:5px 10px;">*原材料及原材料损耗：</span>
+              <span style="color:red;background:#dedede;display:block;padding:5px 10px;">{{__.jed.dgettext('smt', 'parmcTitle')}}</span>
               <ul style="padding: 0px 10px;">
-                <li>1.样品/小批量订单:单品加工批量小于等于500PCS的损耗不计(尽量按5%以上提供备品)，IC等贵重物料不包含在内,PCB尽量多给2-3pcs；  </li>
+                <li>1. {{__.jed.dgettext('smt', 'parmc1')}}</li>
                 <li>
-                  <span style="padding: 0px">2.首次批量订单（&gt;500pcs)损耗： </span>
+                  <span style="padding: 0px">2. {{__.jed.dgettext('smt', 'parmc2')}}</span>
                   <ul style="padding: 0px 10px;">
-                    <li>2.1.电子料：便宜的容阻件按3%-4%损耗计算;CHIP(0402)按1.5%损耗计算；CHIP0603/0805/1206以及二、三极管按1%损耗计算。    </li>
-                    <li>2.2.贵重元器件来料不良1:1更换。</li>
-                    <li>2.3.PCB以1:1更换,尽量多提供几pcs备品； </li>
-                    <li>2.4.原包装少数（双方抽点原包装为准）由贵司补数。 </li>
+                    <li>2-1. {{__.jed.dgettext('smt', 'parmc2_1')}}</li>
+                    <li>2-2. {{__.jed.dgettext('smt', 'parmc2_2')}}</li>
+                    <li>2-3. {{__.jed.dgettext('smt', 'parmc2_3')}}</li>
+                    <li>2-4. {{__.jed.dgettext('smt', 'parmc2_4')}}</li>
                   </ul>
                 </li>
-                <li>3.稳定后批量加工物料损耗率约为0.3%-0.5%；</li>
-                <li>4.如少量物料备不齐，暂无需焊接，请列出明细；</li>
-                <li>5.有特殊要求、注意事项，请提前说明.</li>
+                <li>3. {{__.jed.dgettext('smt', 'parmc3')}}</li>
+                <li>4. {{__.jed.dgettext('smt', 'parmc4')}}</li>
+                <li>5. {{__.jed.dgettext('smt', 'parmc5')}}</li>
               </ul>
             </li>
           </ul>
           <!-- </div> -->
         </fieldset>
-        <h3>生成PCBA报价单</h3>
+        <h3>{{__.jed.dgettext('smt', 'paos2')}}</h3>
         <fieldset>
           <div class="machining">
             <div class="machining_top"><h3>加工详情</h3></div>
@@ -212,7 +213,7 @@
             </div>
           </div>
         </fieldset>
-        <h3>上传PCBA文件，提交订单</h3>
+        <h3>{{__.jed.dgettext('smt', 'paos3')}}</h3>
         <fieldset>
           <form id="pcbaFileForm" class="form-horizontal">
             <div class="form-group form-inline">
@@ -327,79 +328,6 @@
             </div>
           </form>
         </fieldset>
-      </div>
-  </div>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-          <div class="box-icon-title">
-            <i>
-              <img class="thumbnail rounded" 
-                src="/static/pcbs/images/key1.png"
-                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
-            </i>
-            <h4 class="nomargin">交期保障</h4>
-          </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden">
-            PCB单双面板8小时加急 
-            <br>
-            批量72小时加急
-            <br>
-            交期保证95%以上
-          </p>
-        </div>
-      </div>
-        <div class="col-md-3">
-          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-            <div class="box-icon-title">
-              <i>
-                <img class="thumbnail rounded" 
-                  src="/static/pcbs/images/key2.png" 
-                  style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
-              </i>
-              <h4 class="nomargin">品质保障</h4>
-            </div>
-            <p class="nomargin" style="height: 66px; overflow: hidden">
-              批量抽测免费
-              <br>
-              测试直通率95%以上
-              <br>
-              XXKB版A级材料
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-            <div class="box-icon-title">
-              <i>
-                <img class="thumbnail rounded" 
-                  src="/static/pcbs/images/key3.png" 
-                  style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
-              </i>
-              <h4 class="nomargin">专业团队</h4>
-            </div>
-            <p class="nomargin" style="height: 66px;overflow: hidden">
-              资深工程师团队
-              <br>
-              先进工厂设备及工作环境
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-            <div class="box-icon-title">
-              <i>
-                <img class="thumbnail rounded" 
-                  src="/static/pcbs/images/key4.png" 
-                  style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
-              </i>
-              <h4 class="nomargin">经济实惠</h4>
-            </div>
-            <p class="nomargin" style="height: 66px; overflow: hidden"></p>
-          </div>
-        </div>
       </div>
     </div>
   </div>
