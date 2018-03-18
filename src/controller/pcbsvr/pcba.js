@@ -32,7 +32,7 @@ export default class extends Base {
 
   async calculateAction() {
     let paramData = this.post()
-    const res = this.calculateFee(paramData)
+    const res = await this.calculateFee(paramData)
     paramData = _.assign({}, paramData, res)
     this.body = {
       rtnCode: 0,
@@ -127,7 +127,8 @@ export default class extends Base {
    *     0.018*点数*（1+0.003）*2 + 0.03*dip (1 + 0.003)*2 + （2 + 0.8）*订单 + 800（工程费）
    * 
    */
-  calculateFee (params) {
+  async calculateFee (params) {
+    const price = await this.model('pcba_price').where({id: 1}).find();
     const plateObj = {
       '1': 99.00,
       '2': 110.00,
@@ -149,11 +150,11 @@ export default class extends Base {
     const totalCount = (chipCount + icCount + bgaCount + dipCount) * boardCount
     let projceFee = 0.00
     if (totalCount <= 500000) {
-      projceFee = 0.018 * (chipCount + icCount + bgaCount) * boardCount * 1.003 * 2 + 0.03 * dipCount * boardCount * 1.003 * 2 + 2.8 * boardCount + 800
+      projceFee = price.quotie1 * (chipCount + icCount + bgaCount) * boardCount * (1 + price.quotie2) * 2 + price.quotie3 * dipCount * boardCount * (1 + price.quotie4) * 2 + (2 + price.quotie5) * boardCount + price.quotie0
     } else if (totalCount > 500000 && totalCount < 1000000) {
-      projceFee = 0.018 * (chipCount + icCount + bgaCount) * boardCount * 1.003 * 2 + 0.03 * dipCount * boardCount * 1.003 * 2 + 2.8 * boardCount
+      projceFee = price.quotie6 * (chipCount + icCount + bgaCount) * boardCount * (1 + price.quotie7) * 2 + price.quotie8 * dipCount * boardCount * (1 + price.quotie9) * 2 + (2 + price.quotie10) * boardCount
     } else if (totalCount > 1000000) {
-      projceFee = 0.017 * (chipCount + icCount + bgaCount) * boardCount * 1.003 * 2 + 0.02 * dipCount * boardCount * 1.003 * 2 + 2.8 * boardCount
+      projceFee = price.quotie11 * (chipCount + icCount + bgaCount) * boardCount * (1 + price.quotie12) * 2 + price.quotie13 * dipCount * boardCount * (1 + price.quotie14) * 2 + (2 + price.quotie15) * boardCount
     }
     Fee.projceFee = projceFee.toFixed(2)
     Fee.totalFee = _.toNumber(Fee.platesizeFee) + _.toNumber(Fee.projceFee) + _.toNumber(Fee.otherFee)

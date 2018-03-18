@@ -193,6 +193,20 @@ export default env => {
   env.addFilter("dateformat", function (extra, date) {
       return dateformat(date, extra);
   })
+  
+  /**
+    *缓存权限列表 all_priv
+    * @param catid 要验证的栏目id
+    * @param roleid 用户组
+    * @param action 权限类型
+    * @param is_admin 谁否前台 0前台，1后台
+    * @returns {bool} 返回flase 或true flase:没权限，true:有权限。
+    */
+   env.addFilter('priv', async(catid, roleid, action, is_admin = 0, type = true, callback) => {
+     const isp = await priv(catid, roleid, action, is_admin, type);
+     // console.log(isp);
+     callback(null, isp);
+   }, true);
 
   // todo: test
   env.addFilter("JSON", function (int) {
