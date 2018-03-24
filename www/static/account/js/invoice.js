@@ -35,16 +35,17 @@ function delInfo(dataId) {
     success: function (data) {
       $('.del-invo-dialog').modal('hide')
       if (data.rtnCode === 0) {
+        _toastr(data.rtnMsg, "top-right", "success", false);
         setTimeout(function(){
           location.reload();
         },1000);
       } else {
-        console.log(data.rtnMsg)
+        _toastr(data.rtnMsg, "top-right", "error", false);
       }
     },
     error: function (err) {
       $('.del-invo-dialog').modal('hide')
-      console.log(err)
+      _toastr('网络问题，请稍后再试', "top-right", "error", false);
     }
   })
 }
@@ -63,12 +64,13 @@ function setupDefault(event, dataId) {
         })
         $(event.target).addClass('btn-success');
         $(event.target).text('默认发票');
+        _toastr(data.rtnMsg, "top-right", "success", false);
       } else {
-        console.log(data.rtnMsg)
+        _toastr(data.rtnMsg, "top-right", "error", false);
       }
     },
     error: function (err) {
-      console.log(err)
+      _toastr('网络问题，请稍后再试', "top-right", "error", false);
     }
   })
 }

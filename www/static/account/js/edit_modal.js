@@ -41,7 +41,6 @@ function bindFormEvents() {
       var edit = $(event.target).data('val')
       var dataId = $(event.target).data('id')
       if (edit === 1) { // 编辑
-        console.log('-----edit')
         var editArr = [{name: "edit", value: edit}, {name: "dataId", value: dataId}]
         saveInvoice(editArr)
       } else { // 新增
@@ -89,15 +88,16 @@ function saveInvoice(dataArr) {
     success: function (data) {
       $('.modal-dialog').modal('hide')
       if (data.rtnCode === 0) {
+        _toastr(data.rtnMsg, "top-right", "success", false);
         setTimeout(function(){
           location.reload();
         },1000);
       } else {
-        console.log(data.rtnMsg)
+        _toastr(data.rtnMsg,"top-right","error",false);
       }
     },
     error: function (err) {
-      console.log(err)
+      _toastr('网络问题，请稍后再试',"top-right","error",false);
     }
   })
 }
