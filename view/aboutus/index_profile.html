@@ -1,0 +1,28 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/home/css/aboutus.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section>
+  <div class="container">
+    <a class="margin-bottom-20 block thumbnail" href="/" title = "TSPCB" >
+      <img class="img-responsive" src="/static/common/images/aboutus1.png" 
+        alt="TSPCB" style="height:120px;width:100%">
+    </a>
+    <div class="aboutus_block">
+      <div class="row">
+        <div class="aboutus_content col-lg-6 col-md-6 col-sm-6">
+          <h2>{{__.jed.dgettext('common', 'companyProfile')}}</h2>
+          <p>{{__.jed.dgettext('aboutus', 'cp1')}}</p>
+          <p>{{__.jed.dgettext('aboutus', 'cp2')}}</p>
+        </div>
+        <div class="aboutus_content col-lg-6 col-md-6 col-sm-6">
+          <img class="img-responsive" src="/static/common/images/aboutus2.jpg" alt="TSPCB" style="width:100%">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{%block script%}
+{%endblock%}
