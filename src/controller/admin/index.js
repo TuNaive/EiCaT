@@ -1,11 +1,4 @@
-// +----------------------------------------------------------------------
-// | CmsWing [ 网站内容管理框架 ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2015-2115 http://www.cmswing.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: arterli <arterli@qq.com>
-// +----------------------------------------------------------------------
-import Admin from '../cmswing/admin'
+import Admin from '../inc/admin'
 import Os from 'os'
 // const fs = require('fs');
 module.exports = class extends Admin {
@@ -15,7 +8,6 @@ module.exports = class extends Admin {
     // await this.model("action").log("testaction","member","sdffds",this.user.uid,this.ip,this.ctx.url);//测试日志行为
     // console.log(think.config('model.mysql.prefix'));
     // let pa = JSON.parse(fs.readFileSync(think.ROOT_PATH+"/package.json",'utf-8'));
-    // console.log(cmswing);
     // console.log(this.config('setup.WEB_SITE_TITLE'));
     // console.log(process);
 
@@ -25,7 +17,7 @@ module.exports = class extends Admin {
 
     const node = process.versions;
     this.assign({
-      'version': think.cmswing.info.version,
+      'version': think.ect.info.version,
       'OS': Os.type(),
       'nodejs_v': node.node,
       'thinkjs': think.version,

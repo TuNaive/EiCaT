@@ -36,4 +36,12 @@ export default class extends think.Model {
 
     return settings
   }
+
+  /**
+   * 获取PCB/PCBA支付配置
+   * @returns 
+   */
+  async getPayOnline () {
+    return (await this.where({ status: 1, key: 'PAY_ONLINE' }).order('sort ASC').field('value').find()).value
+  }
 }

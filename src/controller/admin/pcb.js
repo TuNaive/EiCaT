@@ -1,4 +1,4 @@
-import Admin from '../cmswing/admin'
+import Admin from '../inc/admin'
 import { pcbEnums } from '../pcbsvr/enums.js'
 
 module.exports = class extends Admin {
@@ -52,7 +52,7 @@ module.exports = class extends Admin {
   }
 
   getPriceLabel (val) {
-    return pcbEnums.pcbFee[`${val}Fee`].replace('费', '价格')
+    return pcbEnums.pcbFee[`${val}Fee`] + ' = ' + pcbEnums.pcbFeeRule[`${val}Fee`]
   }
 
   getPriceOption (val) {

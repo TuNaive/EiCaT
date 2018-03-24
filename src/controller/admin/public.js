@@ -1,10 +1,3 @@
-// +----------------------------------------------------------------------
-// | CmsWing [ 网站内容管理框架 ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.cmswing.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: arterli <arterli@qq.com>
-// +----------------------------------------------------------------------
 module.exports = class extends think.Controller {
   /**
      * public action
@@ -22,7 +15,7 @@ module.exports = class extends think.Controller {
         const res = await geetest.validate(this.ctx, this.post());
         // console.log(res);
         if (res.status != 'success') {
-          const error = this.controller('cmswing/error');
+          const error = this.controller('inc/error');
           return error.noAction('验证码不正确');
         }
       }
@@ -33,7 +26,7 @@ module.exports = class extends think.Controller {
       const res = await this.model('member').signin(username, password, this.ip, 1, 1);
       if (res.uid > 0) {
         // 记录用户登录行为
-        // await this.model("cmswing/action").log("user_login","member",res.uid,res.uid,this.ip,this.ctx.url);
+        // await this.model("action").log("user_login","member",res.uid,res.uid,this.ip,this.ctx.url);
         // console.log(11111111111111);
         await this.session('userInfo', res);
         // TODO 用户密钥
@@ -54,7 +47,7 @@ module.exports = class extends think.Controller {
           default:
             fail = '未知错误'; // 0-接口参数错误（调试阶段使用）
         }
-        const error = this.controller('cmswing/error');
+        const error = this.controller('inc/error');
         return error.noAction(fail);
       }
     } else {
@@ -111,7 +104,7 @@ module.exports = class extends think.Controller {
 
   // 获取分类
   async getmenuAction() {
-    const cate = await this.model('cmswing/category').get_all_category();
+    const cate = await this.model('category').get_all_category();
     // console.log(cate);
     // 生成菜单
 

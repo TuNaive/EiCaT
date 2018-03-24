@@ -21,7 +21,7 @@
       </header>
       <div class="row wrapper" style="padding-bottom: 0">
         <div class="col-sm-12 m-b-xs">
-          {% if online == 1%}
+          <!-- {% if online == 1%}
           <P>
             Ping++ 集成微信、支付宝、银联等主流第三方支付渠道，提供包括商户入网申请、交易处理和支付运营的一站式服务。<br>
             如果您还没有ping++账号请 <a href="https://www.pingxx.com/" target="_blank"
@@ -57,7 +57,7 @@
                                     </span>
                 </strong>
                 <strong class="block m-b-xs RSA">商户私钥:
-                  <small><code>cmswing_rsa_private_key.pem</code> <a data-toggle="ajaxModal"
+                  <small><code>ect_rsa_private_key.pem</code> <a data-toggle="ajaxModal"
                                                                      href="/admin/ecom/rsa/?type=private"
                                                                      class="text-info">配置</a></small>
 
@@ -91,14 +91,16 @@
             </li>
 
           </ul>
-          {% endif %}
+          {% endif %} -->
           <form id="online-form" target="#">
             <h4 class="text-success m-b-xs form-group">
-              <!--<small>{% if config.setup.PREPAID == 0 %}<code>支持预付款消费</code>{%else%}<code>不支持预付款消费</code>{%endif%} ,-->
-              <!--{% if config.setup.COD == 0 %}<code>支持货到付款</code>{%else%}<code>不支持货到付款</code>{%endif%}-->
-              <!--如要更改，请到 系统设置>网站设置>商城 <a href="/admin/setup/index?id=5" class="text-info">设置</a>-->
-              <!--</small>-->
-              <label class="control-label">支付渠道:</label>
+              {#
+              <small>{% if config.setup.PREPAID == 0 %}<code>支持预付款消费</code>{%else%}<code>不支持预付款消费</code>{%endif%} ,
+              {% if config.setup.COD == 0 %}<code>支持货到付款</code>{%else%}<code>不支持货到付款</code>{%endif%}
+              如要更改，请到 系统设置>网站设置>商城 <a href="/admin/setup/index?id=5" class="text-info">设置</a>
+              </small>
+              #}
+              <label class="control-label">PCB/PCBA支付渠道:</label>
               <div class="col-sm-offset-1">
                 <label class="radio">
                   <input type="radio" {%if online == 1 %} checked="checked"{%endif%} value="1" name="online">线上支付

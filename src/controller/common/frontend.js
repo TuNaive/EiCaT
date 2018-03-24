@@ -71,10 +71,10 @@ export default class Frontend extends User {
   /*
    * 访问控制
    * */
-  async accessCtrl (cateId) {
+  async accessCtrl (cateId, needLogin = true) {
     const error = this.controller('common/error');
 
-    if (!this.is_login) {
+    if (needLogin && !this.is_login) {
       return error.noAction('请登录！')
     }
 

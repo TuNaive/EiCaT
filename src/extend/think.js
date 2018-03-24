@@ -8,7 +8,7 @@ module.exports = {
   _: lodash,
   moment: moment,
   resource: path.join(think.ROOT_PATH, 'www'),
-  cmswing: {
+  ect: {
     info: require(path.join(think.ROOT_PATH, 'package.json'))
   }
 }

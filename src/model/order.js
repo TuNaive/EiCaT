@@ -250,7 +250,7 @@ export default class extends think.Model {
     return ressku;
   }
 
-  isShangchengOrder (type) {
+  isShopOrder (type) {
     return type === 2
   }
 }

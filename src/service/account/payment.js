@@ -72,7 +72,7 @@ module.exports = class extends think.Service {
     const amount = Number(order_amount) * 100;
     const setup = await think.config('settings');
     const pingpp = require('pingpp')(setup.PINGXX_LIVE_SECRET_KEY);
-    pingpp.setPrivateKeyPath(think.ROOT_PATH + '/private/pingpp/cmswing_rsa_private_key.pem');
+    pingpp.setPrivateKeyPath(think.ROOT_PATH + '/private/pingpp/ect_rsa_private_key.pem');
     switch (channel) {
       case 'alipay_pc_direct':
         // 支付宝网页支付
@@ -153,7 +153,7 @@ module.exports = class extends think.Service {
   async getPingxx(id) {
     const setup = await think.config('settings');
     const pingpp = require('pingpp')(setup.PINGXX_LIVE_SECRET_KEY);
-    pingpp.setPrivateKeyPath(think.ROOT_PATH + '/private/pingpp/cmswing_rsa_private_key.pem');
+    pingpp.setPrivateKeyPath(think.ROOT_PATH + '/private/pingpp/ect_rsa_private_key.pem');
     function retrieve(pingpp, id) {
       const deferred = think.defer();
       pingpp.charges.retrieve(id, function(err, charge) {

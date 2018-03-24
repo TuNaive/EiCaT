@@ -4,7 +4,8 @@ export default class extends think.Controller {
     this.is_login = this.isLoggedIn = await this.isLogin();
     if (needLogin && !this.isLoggedIn && _.indexOf(['/', '/index', '/account/auth/login', '/account/auth/register'], this.ctx.path) === -1) {
       // 跳转到登录页面
-      this.redirect('/?login=true');
+      this.controller('common/error').noAction('请登录！');
+      // this.redirect('/?login=true');
       return false;
     }
     // 用户信息
@@ -26,7 +27,9 @@ export default class extends think.Controller {
     const isLogin = await this.isLogin();
     if (!isLogin) {
       // 跳转到登录页面
-      return this.redirect('/accout/login');
+      this.controller('common/error').noAction('请登录！');
+      return false;
+      // return this.redirect('/accout/login');
     }
   }
 }

@@ -29,7 +29,7 @@ export default class extends Base{
     let cate = await this.category(id);
     cate = think.extend({}, cate);
     //访问控制
-    const accessCtrlRes = await this.accessCtrl(cate.id)
+    const accessCtrlRes = await this.accessCtrl(cate.id, false)
     if (!_.isNil(accessCtrlRes)) {
       return
     }

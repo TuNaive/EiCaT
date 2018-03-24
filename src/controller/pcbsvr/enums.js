@@ -92,6 +92,23 @@ export const pcbEnums = {
     otherFee: '其他',
     totalFee: '总费用'
   },
+  pcbFeeRule: {
+    boardAreaAmount: '下单数量 / ((102 / 板子尺寸宽（CM） + 5) * (102 / 板子尺寸长（CM） + 5))，并向上取整',
+    areaAmount: '下单数量 * 板子尺寸宽（CM） * 板子尺寸长（CM） / 100',
+    projectFee: '板子层数对应的价格',
+    boardFee: '整板数量 * 对应的板价格',
+    makeupFee: '单层总面积 * 对应的拼版价格',
+    specialBoardFee: '0',
+    filmFee: '单层总面积 * 对应的菲林价格',
+    surfaceFee: '单层总面积 * 对应的表面处理价格',
+    testFee: '单层总面积 * 价格',
+    solderMaskColorFee: '0',
+    charColorFee: '0',
+    halfHoleFee: '向下取整(半孔 / 2) * 价格',
+    urgentFee: '价格 * [加急48小时：1 | 加急24小时：2 | 特快加急12小时：3 | 火箭加急8小时：4]',
+    otherFee: '0',
+    totalFee: '所有费用总和'
+  },
   pcbaFeeQuotie: {
     quotie: [
       {

@@ -1,11 +1,3 @@
-// +----------------------------------------------------------------------
-// | CmsWing [ 网站内容管理框架 ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2015-2115 http://www.cmswing.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: arterli <arterli@qq.com>
-// +----------------------------------------------------------------------
-
 module.exports = class extends think.Controller {
   async __before() {
     // 登陆验证
@@ -36,7 +28,7 @@ module.exports = class extends think.Controller {
       const auth = this.service('admin/rbac', this.user.uid);
       const res = await auth.check(url);
       if (!res) {
-        const error = this.controller('cmswing/error');
+        const error = this.controller('inc/error');
         return error.noAction('未授权访问!');
       }
     }
@@ -375,9 +367,9 @@ module.exports = class extends think.Controller {
   async admin_priv(ac, cid, errors = '您所在的用户组,禁止本操作！') {
     if (!this.is_admin) {
       // 访问控制
-      const priv = await this.model('cmswing/category_priv').priv(cid, this.roleid, ac, 1);
+      const priv = await this.model('category_priv').priv(cid, this.roleid, ac, 1);
       if (!priv) {
-        const error = this.controller('cmswing/error');
+        const error = this.controller('inc/error');
         return error.noAction(errors);
       }
     }
@@ -395,7 +387,7 @@ module.exports = class extends think.Controller {
     if (think.isEmpty(sortid)) {
       sortid = this.get('sortid') || 0;
     }
-    let sort = await this.model('cmswing/category').get_category(cate_id, 'documentsorts');
+    let sort = await this.model('category').get_category(cate_id, 'documentsorts');
     if (sort) {
       sort = JSON.parse(sort);
       if (sortid == 0) {
@@ -510,7 +502,7 @@ module.exports = class extends think.Controller {
       group_id = this.get('group_id') || 0;
     }
     // 获取分组
-    let groups = await this.model('cmswing/category').get_category(cate_id, 'groups');
+    let groups = await this.model('category').get_category(cate_id, 'groups');
     if (groups) {
       groups = parse_config_attr(groups);
     }
@@ -526,7 +518,7 @@ module.exports = class extends think.Controller {
    */
   async breadcrumb(cate_id = this.get('cate_id')) {
     // 获取面包屑信息
-    const nav = await this.model('cmswing/category').get_parent_category(cate_id);
+    const nav = await this.model('category').get_parent_category(cate_id);
     this.assign('breadcrumb', nav);
   }
 };

@@ -13,7 +13,7 @@ export default class extends Base {
    * 商城订单管理
    * @returns {PreventPromise}
    */
-  async shangchengAction() {
+  async shopAction() {
     const type = 2
     const status = this.get('status') || null
 
@@ -141,7 +141,7 @@ export default class extends Base {
       _.merge(val, address)
 
       //未付款订单倒计时
-      if (this.model('order').isShangchengOrder(type) && val.pay_status == 0) {
+      if (this.model('order').isShopOrder(type) && val.pay_status == 0) {
         val.end_time = moment(val.create_time + (Number(this.config('settings.ORDER_DELAY')) * 60000)).format('M D, YYYY H:m:s')
       }
       //查出订单里面的商品列表
@@ -185,7 +185,7 @@ export default class extends Base {
    * 商城订单详情
    * @returns {PreventPromise}
    */
-  async shangchengDetailAction() {
+  async shopDetailAction() {
     const orderId = this.get('id')
     const orderInfo = await this.model("order").where({id: orderId}).find()
     this.assign('data', orderInfo)

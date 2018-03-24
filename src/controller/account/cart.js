@@ -91,6 +91,9 @@ export default class Cart extends Base {
 
   //添加购物车
   async addcartAction() {
+    if (!this.is_login) {
+      return this.fail("请先登录");
+    }
     let data = this.post();
     data = think.extend({}, data);
     // 添加购物车前判断是否有库存

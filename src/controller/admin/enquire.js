@@ -1,4 +1,4 @@
-import Admin from '../cmswing/admin'
+import Admin from '../inc/admin'
 
 module.exports = class extends Admin {
   constructor(ctx) {

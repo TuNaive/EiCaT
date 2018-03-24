@@ -19,7 +19,7 @@ export default class extends Base{
     }
     /* 页码检测*/
     //访问控制
-    const accessCtrlRes = await this.accessCtrl(info.category_id)
+    const accessCtrlRes = await this.accessCtrl(info.category_id, false)
     if (!_.isNil(accessCtrlRes)) {
       return
     }

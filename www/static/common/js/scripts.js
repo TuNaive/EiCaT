@@ -36,6 +36,36 @@
  *************************************************** **/
 window.width = jQuery(window).width();
 
+/* 
+ * 封装$.ajax，增加loading效果
+ */
+(function () {
+  var originFn = $.ajax
+  $.ajax = function (url, settings) {
+    if (_.isObject(url)) {
+      settings = url
+    } else {
+      settings = settings || {}
+      settings.url = url
+    }
+
+    var _beforeSend = settings.beforeSend
+    var _complete = settings.complete
+
+    settings.beforeSend = function () {
+      $('#ect-loading').show()
+      _.isFunction(_beforeSend) && _beforeSend()
+    }
+
+    settings.complete = function () {
+      $('#ect-loading').hide()
+      _.isFunction(_complete) && _complete()
+    }
+
+    return originFn(settings)
+  }
+})()
+
 /* Init */
 jQuery(window).ready(function () {
   jQuery.browserDetect();
@@ -184,7 +214,7 @@ function _triggerLogin() {
 //typeb
 function _type_tr_b() {
   if ($('.type_tr_b1').length > 0) {
-    if (localStorage.getItem("cmswing_type_tr_b") == 1) {
+    if (localStorage.getItem("ect_type_tr_b") == 1) {
       $("tr.type_tr_m").show();
       $(".type_tr_b1").hide();
       $(".type_tr_b2").show();
@@ -193,13 +223,13 @@ function _type_tr_b() {
       $("tr.type_tr_m").show();
       $(this).hide();
       $(".type_tr_b2").show();
-      localStorage.setItem("cmswing_type_tr_b", 1)
+      localStorage.setItem("ect_type_tr_b", 1)
     })
     $(".type_tr_b2").click(function () {
       $("tr.type_tr_m").hide();
       $(this).hide();
       $(".type_tr_b1").show();
-      localStorage.removeItem("cmswing_type_tr_b")
+      localStorage.removeItem("ect_type_tr_b")
     })
   }
 }
@@ -997,8 +1027,8 @@ function _cart() {
 
   if (_container.length > 0) {
     loadScript(plugin_path + 'jquery-fly/jquery.fly.min.js', function () {
-      var offset = $(".quick-cart").offset();  //结束的地方的元素
-      console.log(offset);
+      var offset = $(".quick-cart").offset() || {};  //结束的地方的元素
+      // console.log(offset);
       $('.product-add-cart').click(function (event) {
         event.preventDefault();
         var addcar = $(this);
@@ -1028,8 +1058,8 @@ function _cart() {
             top: event.pageY
           },
           end: {
-            left: offset.left + 10,
-            top: offset.top + 10,
+            left: offset.left || 0 + 10,
+            top: offset.top || 0 + 10,
             width: 0,
             height: 0
           },
@@ -1041,9 +1071,9 @@ function _cart() {
               type: "POST",
               url: "/account/cart/addcart",
               data: str
-            }).done(function (msg) {
+            }).success(function (msg) {
 
-              if (msg) {
+              if (msg.data) {
                 _toastr("添加购物车成功!", "top-right", "success", false);
                 $("total").html("￥" + formatCurrency(msg.total));
                 $("#badge-corner").html(msg.num);
@@ -1058,6 +1088,8 @@ function _cart() {
                   htmlarr.push(html);
                 })
                 $(".quick-cart-wrapper").html(htmlarr.join(""));
+              } else if (msg.errno == 100) {
+                location.href = '/common/error/login'
               } else {
                 _toastr("该商品已经售罄，请选择其他商品！", "top-right", "error", false);
               }

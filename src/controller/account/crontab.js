@@ -11,7 +11,7 @@ module.exports = class extends think.Controller {
     // 订单在规定时间为付款自动作废执行方法
     // 禁止 URL 访问该 Action
     if (!this.isCli) {
-      const error = this.controller('cmswing/error');
+      const error = this.controller('inc/error');
       return error.noAction('only invoked in cli mode！');
     }
 
@@ -27,7 +27,7 @@ module.exports = class extends think.Controller {
       for (const v of orders) {
         v.payment !== 1002 && await this.model('order').where({id: v.id}).update({status: 6, admin_remark: '规定时间未付款系统自动作废'});
         // 释放库存
-        // await this.model('cmswing/order').stock(v.id, false);
+        // await this.model('order').stock(v.id, false);
       }
     }
 

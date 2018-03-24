@@ -1,4 +1,4 @@
-import Admin from '../cmswing/admin'
+import Admin from '../inc/admin'
 import { pcbEnums } from '../pcbsvr/enums.js'
 
 module.exports = class extends Admin {

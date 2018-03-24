@@ -1,4 +1,4 @@
-import Admin from '../cmswing/admin'
+import Admin from '../inc/admin'
 import Fs from 'fs'
 
 module.exports = class extends Admin {
@@ -24,8 +24,7 @@ module.exports = class extends Admin {
     //获取app_id
     let app_id = this.config("settings.PINGXX_APP_ID");
     let livesecretkey = this.config("settings.PINGXX_LIVE_SECRET_KEY");
-    const settings = await this.model('setting').getSettings()
-    const online = settings['PAY_ONLINE']
+    const online = await this.model('setting').getPayOnline()
     this.assign("app_id", app_id);
     this.assign("livesecretkey", livesecretkey);
     this.assign("online", online);
@@ -41,9 +40,9 @@ module.exports = class extends Admin {
     let post = this.post() || {};
     if (!_.isNil(post.online)) {
       await this.model('setting').where({key: 'PAY_ONLINE'}).update({value: post.online});
-      await think.cache("settings", null);
+      // await think.cache("settings", null);
       // 重启时间无法保证，同步 settings 数据
-      this.payOnline = this.config('settings.PAY_ONLINE', post.online);
+      this.payOnline = await this.model('setting').getPayOnline();
       // process.send('think-cluster-reload-workers'); // 给主进程发送重启的指令
     }
     this.success('saveOnline success')
@@ -91,7 +90,7 @@ module.exports = class extends Admin {
     let path;
     switch (type) {
       case "private":
-        path = think.ROOT_PATH + "/private/pingpp/cmswing_rsa_private_key.pem";
+        path = think.ROOT_PATH + "/private/pingpp/ect_rsa_private_key.pem";
         break;
       default:
         path = think.ROOT_PATH + "/private/pingpp/pingpp_rsa_public_key.pem";

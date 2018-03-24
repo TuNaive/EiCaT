@@ -83,7 +83,7 @@ export default class extends Base{
       let currentPage = Number(this.get("page")) || 1;
       let count = await this.model("mysql").query(`SELECT count(search_id) FROM __SEARCH__ WHERE ${sql}`)
       let res = await this.model("mysql").query(`SELECT * FROM __SEARCH__ WHERE ${sql} order by search_id DESC LIMIT ${(currentPage - 1) * numsPerPage},${numsPerPage}`);
-      let hs = this.cookie("cmswing_historical_search");
+      let hs = this.cookie("ect_historical_search");
       let hss = [];
       if (!think.isEmpty(hs)) {
         hss = hs.split("|").reverse()
@@ -95,12 +95,12 @@ export default class extends Base{
 
         let hsq;
         if (think.isEmpty(hs)) {
-          this.cookie("cmswing_historical_search", q);
+          this.cookie("ect_historical_search", q);
         } else {
           if (!in_array(q, hs.split("|"))) {
             hsq = hs + '|' + q;
             // console.log(hsq);
-            this.cookie("cmswing_historical_search", hsq);
+            this.cookie("ect_historical_search", hsq);
           }
 
         }

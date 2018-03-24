@@ -23,6 +23,7 @@
         </li>
         <!-- /SEARCH -->
         <!-- QUICK SHOP CART -->
+        {% if controller.isLoggedIn %}
         <li class="quick-cart">
           <a href="#">
             <span class="badge badge-aqua btn-xs badge-corner" id="badge-corner">{% if controller.cart.num %}{{controller.cart.num}}{% endif %}</span>
@@ -62,6 +63,7 @@
             <!-- /quick cart footer -->
           </div>
         </li>
+        {% endif %}
         <!-- /QUICK SHOP CART -->
       </ul>
       <!-- /BUTTONS -->
@@ -92,8 +94,8 @@
               </a>
               <span class="aline"></span>
             </li>
-            <li class="{% if (controller.active|contains('/shangcheng')) %}active{% endif %}">
-              <a href="/shangcheng">
+            <li class="{% if (controller.active|contains('/shop')) %}active{% endif %}">
+              <a href="/shop">
                 {{__.jed.dgettext('common', 'services')}}
               </a>
               <span class="aline"></span>

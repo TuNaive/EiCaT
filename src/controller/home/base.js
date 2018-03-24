@@ -10,6 +10,6 @@ export default class extends Frontend {
 
   constructor (ctx) {
     super(ctx)
-    this.active = ['/shangcheng']
+    this.active = ['/shop']
   }
 }

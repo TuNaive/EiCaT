@@ -8601,22 +8601,22 @@ ul.search-history {
 #upload-img-wrap .uploader-list{
 	overflow: inherit;
 }
-#contentcmswing {
+#contentect {
 	font-size: 1.5rem;
 	color: #555;
 }
-#contentcmswing .syntaxhighlighter{
+#contentect .syntaxhighlighter{
 	margin: .6em 0 .6em 0!important;
 }
-#contentcmswing blockquote{
+#contentect blockquote{
 	font-size: 1.4rem;
 	padding: 5px 15px ;
 	margin: 10px 0;
 }
-#contentcmswing h1{
+#contentect h1{
 	margin-bottom: 10px;
 }
-#contentcmswing h2{
+#contentect h2{
 	margin-bottom: 7px;
 }
 i.ico-65 {

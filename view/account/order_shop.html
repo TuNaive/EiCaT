@@ -45,10 +45,10 @@
           {{controller.meta_title}}</h4>
 
         <ul class="nav nav-tabs nav-top-border">
-          <li {%if status== null%}class="active" {%endif%}><a href="/account/order/shangcheng">全部订单</a></li>
-          <li {% if status== 0%}class="active" {%endif%}><a href="/account/order/shangcheng/?status=0"><span
+          <li {%if status== null%}class="active" {%endif%}><a href="/account/order/shop">全部订单</a></li>
+          <li {% if status== 0%}class="active" {%endif%}><a href="/account/order/shop/?status=0"><span
               class="badge badge-red btn-xs badge-corner">{{nopaid}}</span>待付款</a></li>
-          <li {% if status== 1%}class="active" {%endif%}><a href="/account/order/shangcheng/?status=1"><span
+          <li {% if status== 1%}class="active" {%endif%}><a href="/account/order/shop/?status=1"><span
               class="badge badge-red btn-xs badge-corner">{{receipt}}</span>待收货</a></li>
           <!--<li><a href="#profile_3"><span class="badge badge-red btn-xs badge-corner">8</span>待评价</a></li>-->
           <li class="dropdown">
@@ -93,7 +93,7 @@
                 {%endif%}
                 <h5 class="margin-bottom-0">
                   <small>{{item.create_time|moment('YYYY-MM-DD HH:mm:ss')}}</small>
-                  <span class="margin-left-20">订单<a href="/account/order/shangchengDetail/?id={{item.id}}" target="_blank">{{item.order_no}}</a></span></h5>
+                  <span class="margin-left-20">订单<a href="/account/order/shopDetail/?id={{item.id}}" target="_blank">{{item.order_no}}</a></span></h5>
                 </span>
 
 
@@ -156,7 +156,7 @@
                   {%endif%}
 
                   <br>
-                  <a target="_blank" href="/account/order/shangchengDetail/?id={{item.id}}">订单详情</a>
+                  <a target="_blank" href="/account/order/shopDetail/?id={{item.id}}">订单详情</a>
                 </div>
               </td>
               <td style="vertical-align: middle;border-bottom: none">
