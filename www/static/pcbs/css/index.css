@@ -1,12 +1,29 @@
 @import url('/static/common/plugins/jquery.steps-1.1.0/jquery.steps.css');
 
 div.side-nav ul {
-  padding-bottom: 24px;
+  padding-bottom: 14px;
 }
 
 div.side-nav li.list-group-item {
   text-align: center;
-  padding: 2px 14px 2px 0;
+  padding: 2px 16px 2px 0;
+}
+
+div.side-nav li.list-group-item + li {
+  padding-top: 10px;
+}
+
+div.side-nav li.list-group-item > a {
+  margin: 0 24px;
+  border-radius: 5px;
+  color: white;
+  background-color: #449ae0 !important;
+}
+
+div.side-nav li.list-group-item:hover > a,
+div.side-nav li.list-group-item:hover > a:hover {
+  color: white !important;
+  background-color: #2688d8 !important;
 }
 
 div.side-nav ul.list-group-bordered>li.list-group-item>a{

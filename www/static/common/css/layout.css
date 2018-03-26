@@ -8681,11 +8681,13 @@ i.ico-60 {
   width: 5px;
 }
 .con li {
-	margin: 7px 0 10px;
+	margin: 7px 0;
+  padding-bottom: 3px;
 	width: auto;
 	display: block;
 	line-height: 18px;
 	clear: both;
+  border-bottom: 1px solid #449ae0;
 }
 
 .con li:last-child {margin-bottom: 0}
@@ -8740,4 +8742,43 @@ i.ico-60 {
  margin-left:0;
 	height:auto;
 	font-size: 12px;
+}
+
+.affix-nav {
+  top: 35%;
+  right: 0;
+  height: auto;
+}
+
+.affix-nav-item {
+  display: block;
+  width: 64px;
+  height: 64px;
+  padding: 4px;
+  text-align: center;
+  background-color: #449ae0;
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+
+.affix-nav-item:visited  {
+  color: white;
+  background-color: #449ae0;
+}
+
+.affix-nav-item:hover {
+  color: white;
+  background-color: #8cc3f1;
+}
+
+.affix-nav-item > i{
+  color: white;
+  font-size: 16px;
+  padding: 8px;
+}
+
+.affix-nav-item > p {
+  color: white;
+  font-size: 12px;
+  padding: 4px 4px 0 4px;
 }
