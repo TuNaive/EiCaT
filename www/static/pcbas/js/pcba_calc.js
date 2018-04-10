@@ -6,15 +6,24 @@ require.config({
   paths: {}
 })
 var Regexmap
-require(['/static/pcbas/js/enum.js',
-  '/static/pcbas/js/validate.js'], function (Enum, regexmap) {
+var plateSizeEnum = {
+  '1': '300*400mm',
+  '2': '370*470mm',
+  '3': '420*520mm',
+  '4': '550*650mm',
+  '5': '400*600mm',
+  '6': '400*800mm',
+  '7': '400*1200mm',
+  '8': '400*1400mm'
+}
+require(['/static/pcbas/js/validate.js'], function (regexmap) {
   $(function ($) {
     Regexmap = regexmap
-    bindFormEvents(Enum)
+    bindFormEvents()
   })
 })
 
-function bindFormEvents (Enum) {
+function bindFormEvents () {
   var self = this
   var isEn = $('#locale').val() === 'en-us'
   var pcba = $('#pcba')
@@ -58,7 +67,7 @@ function bindFormEvents (Enum) {
               // generateDetail(data.data.customDetail)
               // generateFee(data.data.pcbFee)
               self.feeData = data.data
-              setupNext(data.data, Enum)
+              setupNext(data.data)
               setupFee(data.data)
             } else {
               console.log(data.rtnMsg)
@@ -98,7 +107,6 @@ function bindFormEvents (Enum) {
       var totalFee = {name: "totalFee", value: _.get(self, 'feeData.totalFee')}
       var feeArr = [projceFee, plateSizeFee, otherFee, totalFee]
       paramData = _.concat(paramData, feeArr)
-      console.log("==========paramData", paramData)
       // var hasAdd
       // _.forEach(paramData, function (o) {
       //   if (_.isNil(o.addressId)) {
@@ -228,10 +236,9 @@ function initFormValidates () {
   }))
 }
 
-function setupNext(data, Enum) {
-  console.log('------setup', data)
+function setupNext(data) {
   if (!_.isNil(data.plateSize)) {
-    data.plateSize = Enum.plateSize[data.plateSize]
+    data.plateSize = plateSizeEnum[data.plateSize]
   }
   _.map(data, function (value, key) {
     $('#s' + key).html(value)
