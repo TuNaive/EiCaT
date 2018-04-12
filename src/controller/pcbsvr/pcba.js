@@ -67,9 +67,18 @@ export default class extends Base {
     }
   }
 
-  uploadAction () {
+  async uploadAction () {
     const pcbaFile = this.file('pcbaFile')
-    const { path, name } = pcbaFile
+    const { path, name, size } = pcbaFile
+    const suffix = _.last(_.split(name,  '.'))
+
+    if (size > 1024 * 1024 * 40) {
+      return this.fail(-1, '允许上传文件大小在40M以内')
+    }
+
+    if (!_.includes(['zip', 'rar', 'xlsx'], suffix)) {
+      return this.fail(-1, '不合法的文件后缀，仅支持zip、rar、xlsx格式文件')
+    }
     const uuid = think.uuid(`userUuid_${Date.now()}_${name}`)
 
     think.mkdir(this.uploadPath)

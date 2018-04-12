@@ -152,7 +152,7 @@ function bindFormEvents () {
         $(e.target).data('uuid', res.data.uuid).blur()
       } else {
         $('#pcbaFileName').html('')
-        _toastr(res.rtnMsg, 'top-center', 'error', false)
+        _toastr(res.errmsg, 'top-center', 'error', false)
       }
     },
     error: function (err) {
@@ -190,9 +190,9 @@ function initFormValidates () {
     return Regexmap.mobile.test(value)
   }, '请输入正确手机号码')
 
-  $.validator.addMethod('email', function (value, element, params) {
-    return Regexmap.email.test(value)
-  }, '请输入正确的电子邮箱')
+  // $.validator.addMethod('email', function (value, element, params) {
+  //   return Regexmap.email.test(value)
+  // }, '请输入正确的电子邮箱')
 
   var validateConf = {
     ignore: '.ignore',
