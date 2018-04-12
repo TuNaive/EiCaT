@@ -76,8 +76,8 @@ export default class extends Base {
       return this.fail(-1, '允许上传文件大小在40M以内')
     }
 
-    if (!_.includes(['zip', 'rar', 'xlsx'], suffix)) {
-      return this.fail(-1, '不合法的文件后缀，仅支持zip、rar、xlsx格式文件')
+    if (!_.includes(['zip', 'rar', 'xlsx', 'xls'], suffix)) {
+      return this.fail(-1, '不合法的文件后缀，仅支持zip、rar、xlsx、xls格式文件')
     }
     const uuid = think.uuid(`userUuid_${Date.now()}_${name}`)
 
