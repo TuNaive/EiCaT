@@ -26,6 +26,13 @@ function addValidateMethods () {
       handler: function (value, element, params) {
         return regs.mobile.test(value)
       }
+    },
+    mobileNotRequired: {
+      errMsg: '请填写正确的手机号码',
+      handler: function (value, element, params) {
+        value && $('#mobile-not-required').hide()
+        return value === '' || regs.mobile.test(value)
+      }
     }
   }
 

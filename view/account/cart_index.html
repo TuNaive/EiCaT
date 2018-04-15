@@ -143,15 +143,14 @@
                 <div class="inform"> {%if val.stock == 0%}<a href="#" class="btn btn-default btn-xs margin-bottom-6">
                   到货通知 </a>{%endif%}
                 </div>
-                <div class="follow"><a href="#" class="btn btn-default btn-xs"> 移到我的关注 </a></div>
+                <!-- <div class="follow"><a href="#" class="btn btn-default btn-xs"> 移到我的关注 </a></div> -->
                 {%else%}
                 <div class="del"><a href="/center/public/login" data-toggle="ajaxModal"
                                     class="btn btn-default btn-xs margin-bottom-6"> 删除 </a></div>
                 <div class="inform"> {%if val.stock == 0%}<a href="/user/login" data-toggle="ajaxModal"
                                                              class="btn btn-default btn-xs margin-bottom-6"> 到货通知 </a>{%endif%}
                 </div>
-                <div class="follow"><a href="/center/public/login" data-toggle="ajaxModal"
-                                       class="btn btn-default btn-xs"> 移到我的关注 </a></div>
+                <!-- <div class="follow"><a href="/center/public/login" data-toggle="ajaxModal" class="btn btn-default btn-xs"> 移到我的关注 </a></div> -->
                 {% endif %}
               </td>
             </tr>
@@ -169,11 +168,11 @@
           <div class="col-md-6 col-sm-6"><!-- left text -->
             {% if controller.is_login %}
             <a class="btn btn-default lightbox delall" href="/account/cart/delcart" data-lightbox="iframe"
-               data-plugin-options='{"type":"ajax", "closeOnBgClick":false}'>删除选中的商品</a> <a class="btn btn-default "
-                                                                                            type="button">移到我的关注</a>
+               data-plugin-options='{"type":"ajax", "closeOnBgClick":false}'>删除选中的商品</a>
+            <!-- <a class="btn btn-default " type="button">移到我的关注</a> -->
             {%else%}
-            <a class="btn btn-default" href="/center/public/login" data-toggle="ajaxModal">删除选中的商品</a> <a
-                href="/center/public/login" class="btn btn-default" data-toggle="ajaxModal">移到我的关注</a>
+            <a class="btn btn-default" href="/center/public/login" data-toggle="ajaxModal">删除选中的商品</a>
+            <!-- <a href="/center/public/login" class="btn btn-default" data-toggle="ajaxModal">移到我的关注</a> -->
             {% endif %}
           </div><!-- /left text -->
 

@@ -160,13 +160,20 @@ function bindFormEvents () {
     },
     onFinishing: function (event, currentIndex) {
       var formValidRes = $("#pcbFileForm").valid()
+
+      // 手机或邮箱二选一判断
+      var hasMobileOrEmail = $('#mobile').val().trim() || $('#email').val().trim()
+      $('#mobile').toggleClass(function () {
+        return hasMobileOrEmail ? '' : 'error'
+      }).next('#mobile-not-required').toggle(!hasMobileOrEmail);
+      
+      // 收货人信息判断      
       var hasAddress = $('[name="address_id"]:checked').length > 0
-      // 收货人信息判断
       if (!hasAddress) {
         $('#addressErr').css({display: 'inline-block'}).removeClass('hide');
       }
 
-      return formValidRes && hasAddress;
+      return formValidRes && hasMobileOrEmail && hasAddress;
     },
     onFinished: function (event, currentIndex) {
       var paramData = _.concat(
