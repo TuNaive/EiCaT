@@ -283,7 +283,16 @@ module.exports = class extends think.Service {
   }
 
   async convertCurrency (amount) {
-    // todo: 汇率转换：https://www.nowapi.com/?app=intf.appkey
+    const appkey = '32176'
+    const sign = 'bc64473c62b68828a711cc96b817a463'
+    const scur = 'CNY'
+    const tcur = 'USD'
+    const url = `http://api.k780.com/?app=finance.rate&scur=${scur}&tcur=${tcur}&appkey=${appkey}&sign=${sign}&format=json`
+    const rate = await this.fetch(url).then(res => res.json())
+    console.log('========rate', rate)
+    if (rate.success === '1') {
+      return amount * rate.result.rate
+    }
     return amount
   }
 };
