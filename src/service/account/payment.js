@@ -170,7 +170,8 @@ module.exports = class extends think.Service {
   }
 
   async createPaypal(order_no, order_amount, order_id, uuid) {
-    var create_payment_json = {
+    const amount = await this.convertCurrency(order_amount)
+    const create_payment_json = {
       "intent": "sale",
       "payer": {
         "payment_method": "paypal"
@@ -178,9 +179,16 @@ module.exports = class extends think.Service {
       "transactions": [
         {
           "amount": {
-            "total": await this.convertCurrency(order_amount),
+            "total": amount,
             "currency": "USD",
-            "details": {}
+            "details": {
+              "subtotal": amount,
+              "tax": "0.00",
+              "shipping": "0.00",
+              "handling_fee": "0.00",
+              "shipping_discount": "0.00",
+              "insurance": "0.00"
+            }
           },
           "description": "详情请返回原网站查看",
           "custom": uuid,
@@ -189,7 +197,17 @@ module.exports = class extends think.Service {
             "allowed_payment_method": "INSTANT_FUNDING_SOURCE"
           },
           // "soft_descriptor": '111',
-          "item_list": {}
+          "item_list": {
+            // "items": [
+            //   {
+            //     "name": "增值服务",
+            //     "description": "详情请返回原网站查看",
+            //     "quantity": "1",
+            //     "price": amount,
+            //     "currency": "USD"
+            //   }
+            // ]
+          }
         }
       ],
       "note_to_payer": "订单有误请联系我们", // todo: 联系方式
@@ -289,9 +307,8 @@ module.exports = class extends think.Service {
     const tcur = 'USD'
     const url = `http://api.k780.com/?app=finance.rate&scur=${scur}&tcur=${tcur}&appkey=${appkey}&sign=${sign}&format=json`
     const rate = await this.fetch(url).then(res => res.json())
-    console.log('========rate', rate)
     if (rate.success === '1') {
-      return amount * rate.result.rate
+      return (amount * rate.result.rate).toFixed(2)
     }
     return amount
   }

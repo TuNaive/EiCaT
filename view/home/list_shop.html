@@ -132,6 +132,7 @@ CLASSES:
 
 
         <!-- LIST OPTIONS -->
+        {%if (pagination | safe).length > 0%}
         <div class="panel panel-default">
           <div class="panel-body padding-6">
             <div class="clearfix shop-list-options nomargin" style="height: 35px;overflow: hidden">
@@ -157,11 +158,12 @@ CLASSES:
             </div>
           </div>
         </div>
+        {%endif%}
 
         <!-- /LIST OPTIONS -->
 
 
-        <ul class="shop-item-list1 row list-inline " style="margin-left:-5px;margin-right: -5px ">
+        <ul class="shop-item-list1 row list-inline margin-top-20" style="margin-left:-5px;margin-right: -5px;">
           {% for item in list%}
           <!-- ITEM -->
           <li class="col-xs-6 col-lg-3 col-md-3 col-sm-3 ">
@@ -243,6 +245,7 @@ CLASSES:
 
         <!-- Pagination Default -->
         <!-- LIST OPTIONS -->
+        {%if (pagination | safe).length > 0%}
         <div class="panel panel-default">
           <div class="panel-body padding-6">
             <div class="clearfix shop-list-options nomargin" style="height: 35px;overflow: hidden">
@@ -268,6 +271,7 @@ CLASSES:
             </div>
           </div>
         </div>
+        {%endif%}
 
         <!-- /LIST OPTIONS -->
         <!-- /Pagination Default -->

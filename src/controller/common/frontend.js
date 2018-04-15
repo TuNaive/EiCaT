@@ -1,9 +1,9 @@
 import User from './user.js'
 
 export default class Frontend extends User {
-  __before(needLogin) {
+  __before() {
     this.setLocal()
-    return super.__before(needLogin).then(async data => {
+    return super.__before.apply(this, arguments).then(async data => {
       //关闭站点
       if (this.config('settings.WEB_SITE_CLOSE') == 0) {
         let isshow = await this.session('webuser');

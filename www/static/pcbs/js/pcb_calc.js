@@ -163,7 +163,9 @@ function bindFormEvents () {
 
       // 手机或邮箱二选一判断
       var hasMobileOrEmail = $('#mobile').val().trim() || $('#email').val().trim()
-      $('#mobile').next('.error').toggle(!hasAddress);
+      $('#mobile').toggleClass(function () {
+        return hasMobileOrEmail ? '' : 'error'
+      }).next('#mobile-not-required').toggle(!hasMobileOrEmail);
       
       // 收货人信息判断      
       var hasAddress = $('[name="address_id"]:checked').length > 0
