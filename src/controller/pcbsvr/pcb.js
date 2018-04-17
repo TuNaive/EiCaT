@@ -9,7 +9,7 @@ export default class extends Base {
   }
 
   __before() {
-    return super.__before(true).then(data => {
+    return super.__before(true, true).then(data => {
       return data
     })
   }

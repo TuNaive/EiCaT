@@ -8,7 +8,7 @@ export default class extends Base {
     this.uploadPath = think.ROOT_PATH + '/uploadFiles'
   }
   __before() {
-    return super.__before(true).then(data => {
+    return super.__before(true, true).then(data => {
       return data
     })
   }
