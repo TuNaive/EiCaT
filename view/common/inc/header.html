@@ -89,9 +89,12 @@
               <span class="aline"></span>
             </li>
             <li class="{% if (controller.active|contains('/bom')) %}active{% endif %}">
-              <a href="/bom">
+              <a href="/bom/index">
                 {{__.jed.dgettext('common', 'bom')}}
               </a>
+              <!-- <a href="/pcbsvr/pcb/enquire?type=2">
+                {{__.jed.dgettext('common', 'bom')}}
+              </a> -->
               <span class="aline"></span>
             </li>
             <li class="{% if (controller.active|contains('/shop')) %}active{% endif %}">

@@ -5,6 +5,7 @@
     <ul class="nav nav-tabs pull-left">
       <li class="{%if type == 0%}active{%endif%}"><a href="/admin/enquire/list?type=0">PCB</a></li>
       <li class="{%if type == 1%}active{%endif%}"><a href="/admin/enquire/list?type=1">PCBA</a></li>
+      <li class="{%if type == 2%}active{%endif%}"><a href="/admin/enquire/list?type=2">BOM</a></li>
     </ul>
   </header>
   <section class="scrollable wrapper">
@@ -45,7 +46,8 @@
           <tr>
             <th>询价单号</th>
             <th>会员账号</th>
-            <th>板子数量（PCS）</th>
+            <!-- <th>板子数量（PCS）</th> -->
+            <th>{{amountLabel}}</th>
             <th>联系人</th>
             <th>联系手机</th>
             <th>状态</th>
@@ -74,17 +76,17 @@
                 <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle"><i class="fa fa-cog"></i>
                   处理 <span class="caret"></span></button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a href="/admin/enquire/see/?id={{item.id}}" data-toggle="ajaxModal"><i class="fa fa-eye"></i>
+                  <li><a href="/admin/enquire/see/?id={{item.id}}&type={{item.type}}" data-toggle="ajaxModal"><i class="fa fa-eye"></i>
                     查看</a></li>
                   {%if item.status == 0%}
-                  <li><a href="/admin/enquire/update?operation=finish&id={{item.id}}" data-toggle="ajaxModal"><i
+                  <li><a href="/admin/enquire/update?operation=finish&id={{item.id}}&type={{item.type}}" data-toggle="ajaxModal"><i
                       class="fa fa-smile-o"></i> 完成</a></li>
                   {%elif item.status != -1%}
-                  <li><a href="/admin/enquire/update?operation=void&id={{item.id}}" data-toggle="ajaxModal"><i
+                  <li><a href="/admin/enquire/update?operation=void&id={{item.id}}&type={{item.type}}" data-toggle="ajaxModal"><i
                       class="fa fa-trash-o"></i>
                     作废</a></li>
                   {%endif%}
-                  <li><a href="/admin/enquire/update?operation=remark&id={{item.id}}" data-toggle="ajaxModal"><i
+                  <li><a href="/admin/enquire/update?operation=remark&id={{item.id}}&type={{item.type}}" data-toggle="ajaxModal"><i
                       class="fa fa-paperclip"></i> 备注</a></li>
                 </ul>
               </div>

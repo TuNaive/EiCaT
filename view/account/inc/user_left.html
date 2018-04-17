@@ -31,7 +31,7 @@
       </a>
       <ul id="collapse-1" class="collapse in"><!-- NOTE: "collapse in" to be open on page load -->
         <li>
-          <a href="/account/seting" class="{% if ctx.originalUrl == '/account/seting' %}text-danger{%endif%}"><i
+          <a href="/account/setting" class="{% if ctx.originalUrl == '/account/setting' %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> 个人设置
           </a>
         </li>
@@ -76,6 +76,14 @@
         <li>
           <a href="/account/enquire/pcb?type=1" class="{% if ctx.originalUrl | test('/account/enquire/pcb.*type=1') %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> PCBA询价单</a>
+        </li>
+        <!-- <li>
+          <a href="/account/enquire/pcb?type=2" class="{% if ctx.originalUrl | test('/account/enquire/pcb.*type=2') %}text-danger{%endif%}"><i
+              class="fa fa-angle-right"></i> BOM询价单</a>
+        </li> -->
+        <li>
+          <a href="/account/bom/enquire" class="{% if ctx.originalUrl | test('/account/bom/enquire') %}text-danger{%endif%}"><i
+              class="fa fa-angle-right"></i> BOM询价单</a>
         </li>
       </ul>
     </li>

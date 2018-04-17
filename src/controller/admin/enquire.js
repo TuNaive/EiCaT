@@ -33,14 +33,19 @@ module.exports = class extends Admin {
   //询价单列表
   async listAction() {
     let status = this.get("status");
-    let map = {};
+    let map = {}, amountLabel = '板子数量（PCS）';
+    if (this.get("type") === '2') {
+      amountLabel = '件数'
+    }
+    this.assign('amountLabel', amountLabel)
     if (!think.isEmpty(status)) {
       map.status = status;
       this.assign('status', status);
     }
     map.type = this.get("type") || 0;
     this.assign('type', map.type);
-    let data = await this.model("enquire").where(map).page(this.get('page') || 1, 20).order("create_time DESC").countSelect();
+    const modelName = map.type === '2' ? 'bom_enquire' : 'enquire'
+    let data = await this.model(modelName).where(map).page(this.get('page') || 1, 20).order("create_time DESC").countSelect();
     let html = this.pagination(data);
     this.assign('pagerData', html); //分页展示使用
     this.active = "admin/enquire/list";
@@ -55,10 +60,13 @@ module.exports = class extends Admin {
   async updateAction() {
     let operation = this.post("operation") || this.get("operation")
     let oprConf = this.updateMap[operation];
+    let type = this.post("type") || this.get("type");
+    console.log('------update', type)
     if (this.isPost) {
       let id = this.post("id");
       let admin_remark = this.post("admin_remark");
-      let finish = await this.model("enquire").where({id: id}).update({status: oprConf.status, admin_remark: admin_remark});
+      const modelName = type === '2' ? 'bom_enquire' : 'enquire'
+      let finish = await this.model(modelName).where({id: id}).update({status: oprConf.status, admin_remark: admin_remark});
       if (finish) {
         return this.success({name: "操作成功！", url: this.referer()})
       } else {
@@ -69,6 +77,7 @@ module.exports = class extends Admin {
       let id = this.get("id");
       this.assign("id", id);
       this.assign("operation", operation);
+      this.assign("type", type);
       this.meta_title = oprConf.title;
       return this.display();
     }
@@ -80,10 +89,13 @@ module.exports = class extends Admin {
    */
   async seeAction() {
     let id = this.get("id");
+    let type = this.get("type")
     this.meta_title = "查看询价单";
+    const modelName = type === '2' ? 'bom_enquire' : 'enquire'
     //获取询价单信息
-    let order = await this.model("enquire").find(id);    
+    let order = await this.model(modelName).find(id);
     this.assign("data", order);
+    this.assign("type", type);
     return this.display();
   }
 }

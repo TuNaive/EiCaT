@@ -12,7 +12,6 @@
     <!-- breadcrumbs -->
     <ol class="breadcrumb breadcrumb-inverse">
       <li><a href="/">{{__.jed.dgettext('common', 'home')}}</a></li>
-      <li><a href="/pcbsvr">{{controller.channel}}</a></li>
       <li class="active">{{controller.sub_channel}}</li>
     </ol>
     <!-- /breadcrumbs -->
@@ -20,28 +19,28 @@
 </section>
 <section>
   <div class="container">
-    <p>任何{{title}}加工需求，只需上传资料生成询价单，报价工程师将一对一为您提供报价服务。</p>
+    <p>任何BOM加工需求，只需上传资料生成询价单，报价工程师将一对一为您提供报价服务。</p>
 
-    <form id="pcbFileForm" class="form-horizontal">
+    <form id="bomFileForm" class="form-horizontal">
       <div class="form-group">
-        <label for="pcbFile" class="col-sm-2 control-label">{{title}}文件：</label>
+        <label for="bomFile" class="col-sm-2 control-label">BOM文件：</label>
         <div class="col-sm-10">
           <span class="btn btn-default">选择文件</span>
-          <span id="pcbFileName"></span>
-          <input type="file" class="form-control pcbFile" id="pcbFile" name="pcbFile">
-          <p>许上传文件大小在40M以内，rar、zip、xlsx、xls格式的文件。</p>
+          <span id="bomFileName"></span>
+          <input type="file" class="form-control bomFile" id="bomFile" name="bomFile">
+          <p>允许上传文件大小在40M以内，rar、zip、xlsx、xls格式的文件。</p>
         </div>
       </div>
       <div class="form-group form-inline">
-        <label for="boardAmount" class="col-sm-2 control-label">{{accountLabel}}：</label>
+        <label for="boardAmount" class="col-sm-2 control-label">件数：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control required digits" title="请输入板子数量" id="boardAmount" name="boardAmount">
+          <input type="text" class="form-control required digits" title="请输入正确的BOM数量" id="boardAmount" name="boardAmount">
         </div>
       </div>
       <div class="form-group form-inline">
         <label for="delivery" class="col-sm-2 control-label">交期（天）：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control required digits" title="请输入交期" id="delivery" name="delivery">
+          <input type="text" class="form-control required digits" title="请输入正确的交期" id="delivery" name="delivery">
         </div>
       </div>
       <div class="form-group">
@@ -59,13 +58,13 @@
       <div class="form-group form-inline">
         <label for="mobile" class="col-sm-2 control-label">联系手机：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control required mobile" title="请输入手机号" id="mobile" name="mobile">
+          <input type="text" value="{{user.mobile}}" class="form-control required mobile" title="请输入正确的手机号" id="mobile" name="mobile">
         </div>
       </div>
       <div class="form-group form-inline">
         <label for="email" class="col-sm-2 control-label">联系邮箱：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control required email" title="请输入邮箱" id="email" name="email">
+          <input type="text" value="{{user.email}}" class="form-control required email" title="请输入正确的邮箱" id="email" name="email">
         </div>
       </div>
     </form>
@@ -154,5 +153,5 @@
 <script src="/static/common/js/validate.js"></script>
 <script src="/static/common/plugins/form.validate/localization/messages_zh.min.js"></script>
 <script src="/static/common/js/fileUpload.js"></script>
-<script src="/static/pcbs/js/pcb_enquire.js"></script>
+<script src="/static/bom/js/index.js"></script>
 {%endblock%}

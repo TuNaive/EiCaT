@@ -1,0 +1,48 @@
+<style>
+  .text-left {
+    text-align: left !important;
+  }
+</style>
+<div class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-3 control-label">询价单号：</label>
+    <div class="col-sm-9 control-label text-left">{{data.order_no}}</div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">BOM文件：</label>
+    <div class="col-sm-9 control-label text-left">
+      <span>{{data.fileUuid | getFileName}}</span>
+      <a class="text-primary" href="/pcbsvr/pcb/download?uuid={{data.fileUuid}}">点击下载</a>
+    </div>
+  </div>
+  <div class="form-group form-inline">
+    <label class="col-sm-3 control-label">件数：</label>
+    <div class="col-sm-9 control-label text-left">{{data.boardAmount}}</div>
+  </div>
+  <div class="form-group form-inline">
+    <label class="col-sm-3 control-label">交期（天）：</label>
+    <div class="col-sm-9 control-label text-left">{{data.delivery}}</div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label not-required">{%if admin%}用户备注：{%else%}备注：{%endif%}</label>
+    <div class="col-sm-6 control-label text-left">{{data.comment}}</div>
+  </div>
+  <div class="form-group form-inline">
+    <label class="col-sm-3 control-label">联系人：</label>
+    <div class="col-sm-9 control-label text-left">{{data.contact}}</div>
+  </div>
+  <div class="form-group form-inline">
+    <label class="col-sm-3 control-label">联系手机：</label>
+    <div class="col-sm-9 control-label text-left">{{data.mobile}}</div>
+  </div>
+  <div class="form-group form-inline">
+    <label class="col-sm-3 control-label">联系邮箱：</label>
+    <div class="col-sm-9 control-label text-left">{{data.email}}</div>
+  </div>
+  {%if admin%}
+  <div class="form-group form-inline">
+    <label class="col-sm-3 control-label">管理员备注：</label>
+    <div class="col-sm-9 control-label text-left">{{data.admin_remark}}</div>
+  </div>
+  {%endif%}
+</div>

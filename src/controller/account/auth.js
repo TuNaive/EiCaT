@@ -61,7 +61,9 @@ export default class extends Base {
       const userInfo = {
         'uid': reg,
         'username': data.username,
-        'last_login_time': data.reg_time
+        'last_login_time': data.reg_time,
+        'email': data.email,
+        'mobile': data.mobile
       };
       await this.session('webuser', userInfo);
       return this.success({name: '注册成功,登录中!', url: '/account/index'});

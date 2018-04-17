@@ -7,7 +7,11 @@
       </div>
       <div class="modal-body">
         {% set admin = true %}
-        {% include "../pcbsvr/pcb/enquire_detail.html" %}
+        {%if type == 2%}
+          {% include "../bom/enquire_detail.html" %}
+        {%else%}
+          {% include "../pcbsvr/pcb/enquire_detail.html" %}
+        {%endif%}
       </div>
       <div class="modal-footer">
         <input type="hidden" value="{{order.id}}" name="id">

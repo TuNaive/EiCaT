@@ -1,0 +1,48 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/account/css/index.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section class="page-header page-header-xs " >
+  <div class="container">
+    {#
+    <h1>{{category.title}}</h1>
+    #}
+
+    <!-- breadcrumbs -->
+    <ol class="breadcrumb breadcrumb-inverse">
+      <li><a href="/">首页</a></li>
+      <li><a href="/account">{{controller.channel}}</a></li>
+      <li class="active">{{controller.sub_channel}}</li>
+    </ol>
+    <!-- /breadcrumbs -->
+  </div>
+</section>
+
+<section class="bg-white">
+  <div class="container">
+    <div class="row">
+      <!-- LEFT -->
+      {% include "./inc/user_left.html" %}
+      <!-- RIGHT -->
+      <div class="col-lg-10 col-md-10 col-sm-8 order-detail">
+
+        <h4 class="page-header margin-top-0">
+          <i class="fa fa-reorder fa-lg text-default"></i>
+          {{controller.meta_title}}
+        </h4>
+
+        <div>
+          <h5 class="bg-info">询价信息</h5>
+          {% include "../bom/enquire_detail.html" %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block script %}
+<!--<script src="/static/account/js/address.js"></script>-->
+{% endblock %}

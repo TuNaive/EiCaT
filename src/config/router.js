@@ -11,6 +11,6 @@ export default [
   ['/pcbsvr/pcb/calc', 'pcbsvr/pcb/calc', 'get'],
   ['/pcbsvr/pcb/enquire', 'pcbsvr/pcb/enquire', 'get'],
   ['/admin', 'admin/index/index', 'get'],
-  ['/search',"home/search/index","get"],
+  ['/search','home/search/index', 'get'],
   ['/:category', '/home/route/index/:1/', 'get']
 ]
