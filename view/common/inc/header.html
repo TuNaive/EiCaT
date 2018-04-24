@@ -1,3 +1,9 @@
+{%if category.pid !=0%}
+{%column data="column",pid=category.pid%}
+{%else%}
+{%column data="column",cid=category.id%}
+{%endif%}
+
 <div id="header" class="sticky clearfix header-sm ">  
   <header id="topNav">
     <div class="container">
@@ -98,9 +104,16 @@
               <span class="aline"></span>
             </li>
             <li class="{% if (controller.active|contains('/shop')) %}active{% endif %}">
-              <a href="/shop">
+              <a class="dropdown-toggle" href="/shop">
                 {{__.jed.dgettext('common', 'services')}}
               </a>
+              {%if column|length>0%}
+              <ul class="dropdown-menu has-topBar">
+                {%for val in column%}
+                <li><a href="{{val.url}}">{{val.name}}</a></li>
+                {%endfor%}
+              </ul>
+              {%endif%}
               <span class="aline"></span>
             </li>
             <li class="dropdown {% if (controller.active|contains('/aboutus')) %}active{% endif %}">

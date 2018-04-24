@@ -48,7 +48,6 @@ class Column extends BaseTag {
   }
 
   async run (context, args, callback) {
-    //console.log(args);
     let data = think.isEmpty(args.data) ? "data" : args.data;
     let pid = !think.isEmpty(args.pid) ? args.pid : false;
     let cid = !think.isEmpty(args.cid) ? args.cid : false;
