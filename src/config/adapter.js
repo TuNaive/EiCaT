@@ -44,7 +44,7 @@ exports.model = {
     prefix: 'ect_',
     // prefix: 'cmswing_',
     encoding: 'utf8',
-    host: '127.0.0.1',
+    host: '47.95.214.86',
     port: 3306,
     connectionLimit: 5,
     user: 'ectuser',
