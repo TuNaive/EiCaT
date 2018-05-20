@@ -1,7 +1,7 @@
 export default [
-  ['', '/home/index/index', 'get'],
-  ['/home', 'home/index/index', 'get'],
-  ['/index', 'home/index/index', 'get'],
+  ['', '/pcbsvr/index/index', 'get'],
+  ['/home', 'pcbsvr/index/index', 'get'],
+  ['/index', 'pcbsvr/index/index', 'get'],
   ['/aboutus/profile', 'aboutus/index/profile', 'get'],
   ['/aboutus/business', 'aboutus/index/business', 'get'],
   ['/aboutus/contact', 'aboutus/index/contact', 'get'],
