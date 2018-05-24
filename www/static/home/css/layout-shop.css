@@ -51,7 +51,7 @@ section.dark .tag.shop-color:hover {
   border-color: #fff;
 }
 
-@media only screen and (max-width: 760px) {
+_@media only screen and (max-width: 760px) {
   .tag.shop-color {
     width: 30px;
     height: 30px;
@@ -65,13 +65,13 @@ section.dark .tag.shop-color:hover {
 	Fix for owl-carousel or flexslider 
 	on responsive 
 */
-@media only screen and (max-width: 769px) {
+_@media only screen and (max-width: 769px) {
   ul.shop-item-list > li {
     width: 49%;
   }
 }
 
-@media only screen and (max-width: 480px) {
+_@media only screen and (max-width: 480px) {
   ul.shop-item-list > li {
     width: 100%;
   }
@@ -473,7 +473,7 @@ div.shop-item:hover > .thumbnail > .shop-item-counter > .countdown .countdown-pe
   background-color: #333;
 }
 
-@media only screen and (max-width: 768px) {
+_@media only screen and (max-width: 768px) {
   .shop-list-options {
     text-align: center;
   }
@@ -534,7 +534,7 @@ div.shop-item:hover > .thumbnail > .shop-item-counter > .countdown .countdown-pe
   display: inline-block;
 }
 
-@media only screen and (max-width: 480px) {
+_@media only screen and (max-width: 480px) {
   .shop-item-list > .col-lg-12 > .shop-item {
     min-height: 100px;
   }
@@ -677,7 +677,7 @@ section.dark .shop-compare-title {
   margin-top: 20px;
 }
 
-@media only screen and (max-width: 992px) {
+_@media only screen and (max-width: 992px) {
   .cartContent .item.head {
     display: none;
   }
@@ -841,7 +841,7 @@ button.product-color-dd > .tag {
   padding: 0 1px !important;
 }
 
-@media only screen and (max-width: 480px) {
+_@media only screen and (max-width: 480px) {
 
   ul#product-size-dd,
   ul#product-qty-dd {
