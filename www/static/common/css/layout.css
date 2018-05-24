@@ -60,6 +60,7 @@ body {
 
 	font-size:14px; line-height:1.5;
 	margin:0; padding:0;
+	min-width: 1200px;
 }
 b, strong {
 	font-weight: 600;
@@ -7486,7 +7487,64 @@ ul.search-history {
 #footer .copyright ul.list-social-icons a.social-icon {
 	margin:0;
 }
-	
+
+/** Footer 样式覆盖
+ **************************************************************** **/
+.footer {
+    width: 100%;
+    overflow: hidden;
+    background: #036;
+    color: #fff;
+    padding: 35px 0 30px
+}
+
+.footer a {
+    color: #fff;
+    font-size: .875em
+}
+
+.footer a:active,.footer a:hover {
+    color: #cab272
+}
+
+.footer .inner-center {
+	max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.footer .footer-list {
+    overflow: hidden;
+    float: left;
+    margin: 0 3% 0 4%
+}
+
+.footer .footer-list dt {
+    font-size: 1.125em;
+    margin-bottom: 20px
+}
+
+.footer .footer-list dd {
+    line-height: 34px;
+    font-size: .875em
+}
+
+.footer .footer-list .footer-qrcode {
+    background-image: url(http://img0.yztcdn.com/app_images/ifabchina/layout/qrcode.png?v=1493719821860);
+    width: 90px;
+    height: 90px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    margin-top: 10px
+}
+
+.footer .footer-copyright {
+    margin-top: 50px;
+    line-height: 20px;
+    text-align: center;
+    font-size: .75em
+}
 	
 
 /** Footer Light

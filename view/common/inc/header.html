@@ -5,7 +5,7 @@
 {% endif %}
 
 <div id="header" class="sticky clearfix">  
-  <header id="topNav">
+  <header id="topNav" class="clearfix">
     <div>
       <!-- Logo -->
       <a class="logo pull-left" href="/" style="font-size: 20px;">
@@ -15,7 +15,7 @@
       <form method="get" action="/search" class="clearfix search-big nomargin">
         <div class="input-group">
 
-<!--           <div class="input-group-btn">
+          <!-- <div class="input-group-btn">
             <button type="button" class="btn btn-default input-lg dropdown-toggle noborder-right" data-toggle="dropdown">
               一周内 <span class="caret"></span>
             </button>
@@ -44,7 +44,7 @@
             </ul>
           </div> -->
 
-          <input name="q" class="form-control input-lg" type="text" value="123" placeholder="Search...">
+          <input name="q" class="form-control input-lg" type="text" value="" placeholder="Search...">
           <input name="d" type="hidden" value="week"> 
           
           <div class="input-group-btn">
@@ -56,6 +56,32 @@
         </div>
 
       </form>
+      <!-- QUICK SHOP CART -->
+      <ul class="pull-right nav nav-pills nav-second-main has-topBar">
+        <li class="quick-cart">
+          <a class="{% if controller.isLoggedIn %} is-login {% endif %}" href="#">
+            <span class="badge badge-aqua btn-xs badge-corner" id="badge-corner">{% if controller.cart.num %}{{controller.cart.num}}{% endif %}</span>
+            <i class="fa fa-shopping-cart"></i>
+          </a>
+
+              <a href="/search?q=123&amp;d=day">
+                 一天内</a>
+              </li>
+              <li class="active">
+
+            <!-- quick cart footer -->
+            <div class="quick-cart-footer clearfix">
+              <a href="/account/cart" class="btn btn-primary btn-xs pull-right">去购物车结算</a>
+              <span class="pull-left">
+                <strong>合计: </strong>
+                <total>￥{% if controller.cart.total %}{{controller.cart.total|formatCurrency}}{%else%}0{%endif%}</total>
+              </span>
+            </div>
+            <!-- /quick cart footer -->
+          </div>
+        </li>
+      </ul>
+      <!-- /QUICK SHOP CART -->
     </div>
   </header>
   <div class="submenu-dark">
@@ -78,14 +104,15 @@
         </li>
         {%if column|length>0%}
           {%for val in column%}
-          <li class="{% if (controller.active|contains('/asda')) %}active{% endif %}">
+          <li class="{% if (controller.active == val.url) %}active{% endif %}">
             <a href="{{val.url}}">
               {{val.name}}
             </a>
+            <span class="aline"></span>
           </li>
           {%endfor%}
         {%endif%}
-<!--         <li class="dropdown {% if (controller.active|contains('/aboutus')) %}active{% endif %}">
+        <!-- <li class="dropdown {% if (controller.active|contains('/aboutus')) %}active{% endif %}">
           <a class="dropdown-toggle" href="/aboutus/profile">{{__.jed.dgettext('common', 'aboutus')}}</a> 
           <ul class="dropdown-menu has-topBar">
             <li>

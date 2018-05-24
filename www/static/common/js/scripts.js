@@ -643,6 +643,11 @@ function _topNav() {
   jQuery('li.quick-cart>a').click(function (e) {
     e.preventDefault();
 
+    if (!$(this).hasClass('is-login')) {
+      $('#login-btn').click()
+      return;
+    }
+
     var _quick_cart_box = jQuery('li.quick-cart div.quick-cart-box');
 
     if (_quick_cart_box.is(":visible")) {
