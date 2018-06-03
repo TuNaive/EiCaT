@@ -41,6 +41,7 @@ module.exports = {
       register: [ 'Register' ],
       logout: [ 'logout' ],
       home: [ 'Home'],
+      guide: [ 'Guide' ],
       aboutus: [ 'About Us' ],
       services: [ 'Services' ],
       bom: [ 'BOM RFQ' ],
@@ -171,7 +172,10 @@ module.exports = {
         "lang": "en",
         "plural_forms": "nplurals=1; plural=(n != 1);"
       },
+      title: [ 'About Us' ],
       introduction: [ 'Company Profile' ],
+      business: [ 'Core Business' ],
+      assurance: [ 'Quality Assurance' ],
       cp1: [ `TSPCBA is a professional PCBA turnkey solution 
         innovation platform. We offer one-shop services including PCB layout, 
         PCB fabrication, material procurement, PCB assembly, 
@@ -199,7 +203,10 @@ module.exports = {
       sl2: [ 'Provide high integration services from material purchasing, processing and production to domestic and international distribution.' ],
       sl3: [ 'Help our customers to establish a complete supply chain system from manufacturers to distributors.' ],
       sl4: [ 'Assist our customers to save fixed investment, focus on high value-added products R&D and market development.' ],
-      sl5: [ 'Achieve the minimum input and maximize output to improve core competitiveness of enterprises.' ]
+      sl5: [ 'Achieve the minimum input and maximize output to improve core competitiveness of enterprises.' ],
+      as1: [ '从供应链管理至分销管理至运输，TSPCBA对售出的元件进行全方位追踪。' ],
+      as2: [ '我们致力于满足您对准时交付高性价比产品的要求。 我们的使命是成为产品研发及采购人员最信赖的供货渠道，助力中小客户提供最优质的零部件，产品快速上市。' ],
+      as3: [ '如果您对我们的质量管理体系有任何疑问，请随时与我们的相关人员联系：' ]
     }
   }
 }

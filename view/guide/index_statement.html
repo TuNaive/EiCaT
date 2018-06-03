@@ -1,0 +1,54 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/home/css/guide.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section>
+  <div class="container">
+    {% if isZh %}
+    <div class="guide_block">
+      <h2 style="text-align: center; padding-top: 12px;">免责说明</h2>
+      <hr>
+      <ol>  
+        <li>凡以任何方式登陆本网站或直接、间接使用本网站资料者，视为同意接受本网站声明的约束。</li>  
+        <li>当您进入、访问、浏览、使用本网站或服务，或就本网站或服务进行交互或尝试交互时，则视为同意本网站声明的约束。若您通过本网站、邮件、电子邮件、电话、传真或其他方式订购产品，则视为同意接受本网站声明的约束。</li>  
+        <li>本网站包含链接至第三方网站的外部链接，本网站不保证该等外部链接的准确性和完整性。该外部链接指向的不由本网站实际控制的任何网页上的内容，不表明本网站之观点或意见，本网站对其合法性及安全性概不负责，亦不承担任何法律责任。用户须独自承担访问该等第三方网站产生的一切风险。</li>  
+        <li>任何单位或个人认为本网站内容可能涉嫌侵犯其合法权益，应该及时向本网站进行书面反馈，并提供身份证明、权属证明及详细情况证明，本站在收到上述文件后将会尽快移除相关内容。</li>  
+        <li>由于用户将个人密码告知他人或与他人共享注册帐户导致的任何个人资料泄露，本网站不负任何责任。</li>  
+        <li>当行政机关或司法机关依照法定程序要求本网站披露个人资料时，我们将根据其合法要求或为公共安全之目的提供个人资料。在此情况下之任何披露，本网站均得免责。</li>
+      </ol>
+    </div>
+    {% else %}
+    <div class="guide_block">
+      <h2 style="text-align: center; padding-top: 12px;">TSPCBA STATEMENT OF PRIVACY</h2>
+      <hr>
+      <p>Please read the following privacy Statement before using this website.  Use of the Site indicates a site user’s acceptance of this Statement.</p>
+      <ol>  
+        <li>We may change this Statement from time to time in our sole discretion. Accordingly, we encourage site users to review this Statement periodically. We reserve the right (but are not required) to send a notice via email or any other delivery method of any such change to this Statement.  The most current version of this Statement will be linked on the Site.  If a user continues to use the Site after we change this Statement, then user accepts all such changes.</li>  
+        <li>
+          We collect information about site users in two ways: 
+          <p>(1) when users give the information to us or when users give us permission to obtain the information.</p>
+          <p>(2) when users access and/or use the Site.</p>
+          <p>The following list, which is not meant to be exhaustive, provides examples of when we obtain Information and the type of Information obtained:</p>
+          <p>(a)  When establishing and maintaining a user account, which may result in our obtaining user name, email address, and other registration and profile information;</p>
+          <p>(b) When establishing and maintaining user purchases, which may result in our obtaining user credit card information, billing address, and other financial records;</p>
+          <p>(c) When customizing the content users see, access, and/or use as part of the Site, which may result in our obtaining, with user permission, access to user information in or through other third party services;</p>
+          <p>(d) When providing user access to, and use of, the Site through a personal computer or other device, which may result in our obtaining the following automatically recorded information (collectively the “Log Data”):  (1) user Internet Protocol address, (2) the address of the web page visited before user came to the Site, (3) user browser type and settings, (4) the date and time of any request user makes to the Site, (5) how user used the Site during user’s visit, (6) user type of personal computer or other device, (7) the operating system and other software on a user’s personal computer or other device, (8) the settings on a user’s personal computer or other device, (9) a user’s geo-coordinates and other location data and geo-targeting data, and (10) other information provided by tracking technologies, such as cookies (as described in more detail below);</p>
+          <p>(e) When contacting user regarding the Site, when reviewing or processing a questionnaire user submits for or through the Site, or when reviewing or processing a user request for a product or service offered by or through the Site, which, in any such case, may result in our obtaining information that user discloses or submits;</p>
+          <p>(f) When user participates in any survey, sweepstakes, contest, or promotion by or through the Site, which may result in our obtaining user‘s name, profile photo, email address, and other registration and profile information.</p>
+        </li>  
+        <li>
+          All Collected Information falls into one of two categories:
+          <p>(1) Identifiable Information” or (2) “Unlimited-Use Information.”</p>
+        </li>  
+        <li>
+          All Collected Information other than Identifiable Information. 
+        </li>
+      </ol>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{%block script%}
+{%endblock%}

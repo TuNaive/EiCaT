@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="form-group form-inline">
-        <label for="boardAmount" class="col-sm-2 control-label">件数：</label>
+        <label for="boardAmount" class="col-sm-2 control-label">数量：</label>
         <div class="col-sm-10">
           <input type="text" class="form-control required digits" title="请输入正确的BOM数量" id="boardAmount" name="boardAmount">
         </div>
@@ -71,23 +71,20 @@
 
     <button id="generateOrder" class="btn btn-default center-block" data-type={{type}}>生成询价单</button>
 
-    <div class="row">
+
+    <div class="row" style="margin-top: 96px;">
       <div class="col-md-3">
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded"
-                   src="/static/pcbs/images/key1.png"
-                   style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key1.png"
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">交期保障</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'delivery')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden">
-            PCB单双面板8小时加急
-            <br>
-            批量72小时加急
-            <br>
-            交期保证95%以上
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'deliveryText')}}
           </p>
         </div>
       </div>
@@ -95,18 +92,14 @@
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded"
-                   src="/static/pcbs/images/key2.png"
-                   style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key2.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">品质保障</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'quality')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden">
-            批量抽测免费
-            <br>
-            测试直通率95%以上
-            <br>
-            XXKB版A级材料
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;;">
+            {{__.jed.dgettext('smt', 'qualityText')}}
           </p>
         </div>
       </div>
@@ -115,16 +108,14 @@
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded"
-                   src="/static/pcbs/images/key3.png"
-                   style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key3.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">专业团队</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'professional')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px;overflow: hidden">
-            资深工程师团队
-            <br>
-            先进工厂设备及工作环境
+          <p class="nomargin" style="height: 66px;overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'professionalText')}}
           </p>
         </div>
       </div>
@@ -133,13 +124,15 @@
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded"
-                   src="/static/pcbs/images/key4.png"
-                   style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key4.png" 
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">经济实惠</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'economy')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden"></p>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'economyText')}}
+          </p>
         </div>
       </div>
     </div>

@@ -1,19 +1,19 @@
 import Base from './base'
 
 export default class extends Base {
-  profileAction() {
+  termsAction() {
     return this.display()
   }
 
-  businessAction() {
+  statementAction() {
     return this.display()
   }
 
-  contactAction() {
+  securityAction() {
     return this.display()
   }
 
-  assuranceAction() {
+  operationAction() {
     return this.display()
   }
 }

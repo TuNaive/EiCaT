@@ -1,0 +1,28 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/home/css/guide.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section>
+  <div class="container">
+    {% if isZh %}
+    <div class="guide_block">
+      <h2 style="text-align: center; padding-top: 12px;">网站运营</h2>
+      <hr>
+      <ol>  
+        <li>本网站如因系统维护或升级而需暂停服务时，将事先公告。若因线路及本公司控制范围外的硬件故障或其它不可抗力而导致暂停服务，于暂停服务期间造成的一切不便与损失，本网站不负任何责任。</li>  
+        <li>任何由于黑客攻击、计算机病毒侵入或发作、因政府管制而造成的暂时性关闭等影响网络正常经营的不可抗力因素造成的个人资料泄露、丢失、被盗用或被窜改等，本网站不承担责任。</li> 
+      </ol>
+    </div>
+    {% else %}
+    <div class="guide_block">
+      <h2 style="text-align: center; padding-top: 12px;">Questions or Comments</h2>
+      <hr>
+      <p>If user has any questions or comments concerning this Statement, contact us at <a href="mailto:admin.ts@tspcba.com">admin.ts@tspcba.com</a></p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{%block script%}
+{%endblock%}

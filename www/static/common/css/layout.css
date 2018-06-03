@@ -3187,7 +3187,6 @@ _@media only screen and (max-width: 767px) {
 		margin:0;
 		padding:0;
 
-		opacity:0.6;
 		filter: alpha(opacity=60);
 
 		-webkit-transition: all .300s;
@@ -7508,7 +7507,7 @@ _@media only screen and (max-width: 482px) {
 }
 
 .footer .inner-center {
-	max-width: 800px;
+	max-width: 1175px;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -7516,7 +7515,7 @@ _@media only screen and (max-width: 482px) {
 .footer .footer-list {
     overflow: hidden;
     float: left;
-    margin: 0 3% 0 4%
+    margin: 0  100px 0 0;
 }
 
 .footer .footer-list dt {

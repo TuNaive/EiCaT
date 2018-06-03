@@ -1,0 +1,138 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/home/css/guide.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section>
+  <div class="container">
+    {% if isZh %}
+    <div class="guide_block">
+      <h2 style="text-align: center; padding-top: 12px;">使用条款和订购条件</h2>
+      <hr>
+      <p>&#12288;&#12288;当您进入、访问、游览、使用本网站或服务，或就本网站或服务进行交互或尝试交互时，则表明您本人同意，以及您作为代理人或表面上的代理人代理的实体(以下合称“您”、“您们”或“用户”)同意接受以下条款和条件(“使用条款”)的约束。若您通过本网站、邮件、电子邮件、电话、传真或其他方式订购产品，则表明您本人同意，以及您作为代理人或表面上的代理人代理的实体同意接受使用条款和订购条件的约束。就助芯通在您访问和使用网站时所收集和共享的信息的披露问题，请参照以下隐私声明。</p>
+      <h3>1．订单的确认</h3>
+      <p>&#12288;&#12288;所有产品订单均应经助芯通或助芯通正式授权的代理人书面接受。如书面确认收到订单，这本身并不构成订单接受。客户仅可在获得助芯通书面同意的情况下取消助芯通已接受的订单。如订单因任何原因被取消，则客户应当向助芯通支付合理的取消费或补货费（涵盖助芯通发生的一切费用及作出的承诺），且这并不限制助芯通因该等取消而可享有的任何其他补助。客户申请重新安排产品交付时间，应当经助芯通接受（且由助芯通自行决定是否接受）。订单已经由助芯通提交装运承运人之后，助芯通将不会同意取消或重新安排产品交付时间。助芯通有权利，自行决定分配其客户之间被选产品的销售及其数量。产品规格和产品供应可不经事先通知而被变更。</p>
+      <h3>2．非标定制</h3>
+      <p>&#12288;&#12288;某些产品订单可能涉及助芯通在普通存货中未存在的货品，并因此必须代表客户从制造商处特别定制的零件编号及数量（“非标定制”），此类产品属于NCNR(不能取消不能退货)。</p>
+      <h3>3．价格及支付条款</h3>
+      <p>&#12288;&#12288;如未确定任何期间，则所报价格有效期将为30天。助芯通目录反映目录印刷时可用的最新定价信息。目录中载明的价格可不经通知而被变更。产品价格包含所有运输费用。如助芯通的成本增加或出现助芯通合理控制以外的其他情形，则价格将会上涨。客户同意根据助芯通开具的每张发票的条款支付该等发票的全部金额，不进行任何抵销或扣除。所有付款必须以中国货币（人民币）进行。</p>
+      <h3>4．责任限制</h3>
+      <p>&#12288;&#12288;如若本条款和条件有任何其他相反规定，在适用法律允许的范围内，助芯通在任何情况下均不对任何其他方承担因产品的销售或购买、对本条款和条件的履行、对本条款和条件的违反及/或对产品的使用而产生的或在任何方面与此有关的任何性质的任何间接、特别、偶然、附带、惩罚性或惩戒性的损害赔偿金或价值减少、利润损失或丧失业务机会的损害赔偿金，也不对此负有任何责任，包括但不限于因利润或收入损失、收回成本、对服务中断或未提供服务提及的索赔、测试、安装或删除成本、替代产品成本、或法律费用导致的损害赔偿金。如该过错归因于客户的行为或疏忽，则客户应就任何人针对助芯通销售的且用在客户产品中的产品提及的任何索赔对助芯通进行赔偿，为助芯通进行抗辩，使助芯通免受损害。</p>
+      <h3>5．保密性</h3>
+      <p>&#12288;&#12288;您不得披露助芯通任何保密信息，只要该等信息具有保密性。为本协议之目的，“助芯通保密信息”包括所有我们通过软件披露的指定为机密的未公开信息，或根据信息的性质或披露的情况，可合理被理解为机密的信息。除特此明确批准外，您不得使用，或允许使用助芯通的保密信息。助芯通保密信息包括但不限于，与我们或我们的商业伙伴销售额、利润率、利润、技术、客户、商业计划、促销和市场活动、财务和其他商业事务有关的未公开信息，以及我们有义务保密的第三方信息。</p>
+      <h3>6．不可抗力</h3>
+      <p>&#12288;&#12288;因超出助芯通合理控制的原因（包括但不限于产品分配、物资短缺、劳动纠纷、运输延误、不可预见的环境、天灾、其他方的作为或不作为、民事或军事主管机关的作为或不作为、政府优先权、火灾、罢工、洪水、极端天气条件、计算机中断、恐怖主义、流行病、检疫限制、暴动或战争）导致的交付延误或未履行其义务，助芯通不承担责任。助芯通进行交付或履行合同的时间将被延长，延长期限等于该延误的期间，或助芯通可自行决定向客户作出通知而取消任何订单或订单的剩余部分。如发生该等不可抗力事件，助芯通应当及时通知客户，并随后在合理期限内提供不可抗力事件发生的证明。</p>
+    </div>
+    {% else %}
+    <div class="guide_block">
+      <h2 style="text-align: center; padding-top: 12px;">Binding terms and conditions of sale</h2>
+      <hr>
+      <p>
+        The following are the terms and conditions for the sale of productsby TSPCBA. 
+        The Terms and Conditions may not be modified or cancelled without TSPCBA's written agreement. Accordingly, 
+        goods furnished and services rendered by TSPCBA are sold only on the terms and conditions stated herein.
+      </p>
+      <h3>1. ACCEPTANCE AND CANCELLATION OF ORDERS</h3>
+      <p>
+        All orders are subject to acceptance in writing by TSPCBA or a duly authorized agent of TSPCBA. 
+        Any written acknowledgement of receipt of an order shall not, in and of itself, constitute such acceptance. 
+        Orders accepted by TSPCBA may be cancelled by Customer upon written consent of TSPCBA provided 
+        such order is not "NC/NR" or "Non-Cancelable/Non-Returnable", 
+        "Non-Standard Products" or governed by a Purchase Agreement Letter. 
+        Non-Standard Products are defined as Products that are special orders, custom orders, 
+        orders for non-standard products, products not customarily in stock or orders for value-added products. 
+        Non-standard products are non-cancelable and non-refundable. 
+        In the event of cancellation or other withdrawal of an order for any reason, 
+        and without limiting any other remedy which TSPCBA may have as a result of such cancellation or other withdrawal, 
+        reasonable cancellation or restocking charges shall include all expenses incurred and commitments made by TSPCBA, 
+        and shall be paid by Customer to TSPCBA. Customer requests to reschedule are subject to acceptance by TSPCBA in its sole discretion. 
+        Orders may not be canceled or rescheduled after the order has been submitted by TSPCBA to the shipment carrier. 
+        TSPCBA reserves the right to allocate sales and limit quantities of selected Products among its customers in its sole discretion. 
+        Product specifications and availability are subject to change without prior notice.
+      </p>
+      <h4>1) Returns</h4>
+      <p>
+        Returns are normally accepted when completed within 30 days of the ship date. 
+        If TSPCBA agrees to accept a return, return freight charges must be prepaid by customer. 
+        TSPCBA will not accept COD shipments. Some products may require return directly to the manufacturer. 
+        All items must be in the original packaging and in resalable condition. 
+        The foregoing statements concerning Returns do not apply to NON-CANCELABLE/NON-RETURNABLE PRODUCTS. 
+        (See the NON-CANCELABLE/NON-RETURNABLE PRODUCTS section in these terms.)
+      </p>
+      <h4>2) Counterfeit Product Prevention Clause</h4>
+      <p>
+        Only products originally shipped from TSPCBA or from a supplier at TSPCBA's direction (drop-ship) will be returned to TSPCBA. 
+        All others will be promptly quarantined and disposed of or returned to the customer. 
+        By a Customer returning products to TSPCBA, the Customer certifies that the products were purchased from TSPCBA and 
+        there has been no substitution in whole or part of same product from another supplier, 
+        distributor or other such source of the product. The return should be in the original packaging (manufacturer or TSPCBA), 
+        in unused condition (except defective). ESD sensitive products should not be opened except under controlled conditions.
+      </p>
+      <h3>2. PRICES</h3>
+      <p>
+        Orders are billed at the prices in effect at the time of shipment. 
+        Prices will be as specified by TSPCBA and will be applicable for the period specified in TSPCBA's quote. 
+        If no period is specified, quoted prices will be applicable for thirty (30) days. 
+        The catalog reflects the latest pricing information available at the time of printing. 
+        Prices shown in the catalog are subject to change without notice. 
+        Prices are subject to increase in the event of an increase in TSPCBA's costs or other circumstances beyond TSPCBA's reasonable control. 
+        Prices are exclusive of taxes, impositions and other charges, including sales, use, excise, 
+        value-added and similar taxes or charges imposed by any government authority, international shipping charges, 
+        forwarding agent's and broker's fees, bank fees, consular fees, and document fees.
+      </p>
+      <h3>3. TERMS OF PAYMENT</h3>
+      <p>
+        All payments must be made in the currency billed on the original invoice.
+      </p>
+      <p>
+        Prepaid Wire Transfer/EFT/Proforma: Customers can wire the funds to our bank. 
+        After your order is placed we will e-mail a Proforma invoice which includes our bank information, 
+        the merchandise total and shipping charges. We will reserve stock for your order for 72 hours on orders awaiting funds. 
+        Orders will be canceled after 20 business days if funds have not been received. Customer is responsible for duties and taxes.
+      </p>
+      <h4>1) TERMS OF PAYMENT</h4>
+      <p>
+        For All Orders
+      </p>
+      <p>
+        Customer agrees to pay the entire net amount of each invoice from TSPCBA pursuant to the terms of each such invoice, 
+        without offset or deduction. Orders are subject to credit approval by TSPCBA, 
+        which may in its sole discretion at any time change the terms of Customer's credit, 
+        require payment in cash, bank wire transfer/EFT or by official bank check, 
+        and/or require payment of any or all amounts due or to become due for Customer's order before shipment of any or all of the Products. 
+        If TSPCBA reasonably believes that the Customer's ability to make payments may be impaired or if Customer fails to pay any invoice when due, 
+        TSPCBA may suspend delivery of any order or any remaining balance thereof, until such payment is made or cancel any order or any remaining balance thereof. 
+        Customer will remain liable to pay for any Products already shipped and all Non-Standard Products ordered by Customer. 
+        Customer agrees to submit such financial information as TSPCBA may reasonably require for determination of credit terms and/or continuation of credit terms. 
+        Checks are accepted subject to collection and the date of collection will be deemed the date of payment. 
+        Any check received from Customer may be applied by TSPCBA against any obligation owing by Customer to TSPCBA under this or any other contract, 
+        regardless of any statement appearing on or referring to such check, without discharging Customer's liability for any additional amounts owing by Customer to TSPCBA. 
+        The acceptance by TSPCBA of such check will not constitute a waiver of TSPCBA's right to pursue the collection of any remaining balance. 
+        Invoices not paid when due will bear interest to date of payment at the annual rate of eighteen (18%) percent or such lower rate as may be the maximum permitted by law. 
+        If Customer fails to make payment when due, TSPCBA may pursue any legal or equitable remedies, 
+        in which event TSPCBA will be entitled to reimbursement of costs for collection and reasonable attorneys' fees.
+      </p>
+      <h3>4. SALES TAX</h3>
+      <p>Customer will remit the correct tax unless customer is tax exempt and TSPCBA has a valid signed tax exemption certificate on file.</p>
+      <p>All applicable VAT or other charges along with brokerage fees will be the responsibility of the Customer and due at the time of delivery.</p>
+      <h3>5. DELIVERY AND TITLE</h3>
+      <p>All shipments by TSPCBA are F.O.B. point of shipment from TSPCBA's facility and the amount of all transportation charges will be paid to TSPCBA by the Customer in addition to the purchase price of the Products. Subject to TSPCBA's right of stoppage in transit, delivery of the Products to the carrier will constitute delivery to Customer and title and risk of loss will pass to Customer. TSPCBA will make reasonable efforts to initiate shipment and schedule delivery as close as possible to Customer's requested delivery date(s). Customer acknowledges that delivery dates provided by TSPCBA are estimates only and that TSPCBA will not be liable for failure to deliver on such dates. Selection of the carrier and delivery route will be made by TSPCBA unless specifically designated by Customer. TSPCBA reserves the right to make deliveries in installments. Delay in delivery of one installment will not entitle Customer to cancel any other installment(s). Delivery of any installment of Products within thirty (30) days after the date requested will constitute a timely delivery. Delivery of a quantity that varies from the quantity specified shall not relieve Customer of the obligation to accept delivery and pay for the Products delivered.</p>
+      <h3>6. TSPCBA'S LIMITED WARRANTY</h3>
+      <p>TSPCBA agrees to transfer to Customer whatever transferable warranties TSPCBA receives from the manufacturer of Products sold to Customer. TSPCBA makes no other warranty, express or implied, with respect to the Products. IN PARTICULAR, TSPCBA MAKES NO WARRANTY RESPECTING THE MERCHANTABILITY OF THE PRODUCTS OR THEIR SUITABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR USE OR RESPECTING INFRINGEMENT. TSPCBA's liability arising out of any sale of products to Customer is expressly limited to either (1) Refund of the purchase price paid by Customer for such Products (without interest), or (2) Repair and/or replacement of such Products, at TSPCBA's election, with such remedies exclusive and in lieu of all others. Customer must notify TSPCBA within 90 days from date of shipment of any defective product. This warranty is in lieu of any and all other warranties, whether oral, written, expressed, implied or statutory. Implied warranties of fitness for a particular purpose and merchantability are specifically excluded and shall not apply. Customer's obligations and TSPCBA's remedies with respect to defective or nonconforming products, are solely and exclusively as stated herein. Furthermore, no warranty will apply if the Product has been subject to misuse, static discharge, neglect, accident, modification, or has been soldered or altered in any way.</p>
+      <h3>7. LIMITATION OF LIABILITIES</h3>
+      <p>IN NO EVENT SHALL TSPCBA BE LIABLE FOR ANY SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OF ANY NATURE including, but not limited to, damages resulting from loss of profit or revenue, recall costs, claims for service interruptions or failure to supply downtime, testing, installation or removal costs, costs of substitute products, property damage, personal injury, death or legal expenses. Customer's recovery from TSPCBA for any claim shall not exceed the purchase price paid by Customer for the goods, irrespective of the nature of the claim, whether in warrant, contract or otherwise. CUSTOMER SHALL INDEMNIFY, DEFEND AND HOLD TSPCBA HARMLESS FROM ANY CLAIMS BROUGHT BY ANY PARTY REGARDING PRODUCTS SUPPLIED BY TSPCBA AND INCORPORATED INTO THE CUSTOMER'S PRODUCT.</p>
+      <h3>8. NON-CANCELABLE/NON-RETURNABLE PRODUCTS</h3>
+      <p>From time to time, Seller will notify Buyer of a product that is "NC/NR", (Non-Cancelable/Non-Returnable) upon determining that an order requires such conditions of sale. Buyer understands that "NC/NR" products are obtained by TSPCBA from the manufacturer specifically for the buyer. Irrespective of circumstances, the buyer agrees that "NC/NR" products may not be cancelled, returned or rescheduled by the buyer without the agreement of both TSPCBA's supplier and the written consent of TSPCBA. Any Mil-Spec product purchased from TSPCBA is Non-Cancelable/Non-Returnable. Products labeled as moisture sensitive are NC/NR if the packaging has been opened. All products purchased by Customers classified by TSPCBA as Electronic Component Distributors or Brokers shall be deemed Non-Cancellable/Non-Returnable.</p>
+      <h3>9. INTELLECTUAL PROPERTY</h3>
+      <p>If an order includes software or other intellectual property, such software or other intellectual property is provided by TSPCBA to Customer subject to the copyright and user license, the terms and conditions of which are set forth in the license agreement accompanying such software or other intellectual property. Nothing herein shall be construed to grant any rights or license to use any software or other intellectual property in any manner or for any purpose not expressly permitted by such license agreement. Unopened software may be returned for credit. Opened software may not be returned unless defective.</p>
+      <h3>10. FORCE MAJEURE</h3>
+      <p>TSPCBA will not be liable for delays in delivery or for failure to perform its obligations due to causes beyond its reasonable control including, but not limited to, product allocations, material shortages, labor disputes, transportation delays, unforeseen circumstances, acts of God, acts or omissions of other parties, acts or omissions of civil or military authorities, Government priorities, fires, strikes, floods, severe weather conditions, computer interruptions, terrorism, epidemics, quarantine restrictions, riots or war. TSPCBA's time for delivery or performance will be extended by the period of such delay or TSPCBA may, at its option, cancel any order or remaining part thereof, without liability by giving notice to Customer.</p>
+      <h3>11. ADDITIONAL CLAUSE</h3>
+      <p>The sale of Products hereunder will be governed by the Terms and Conditions, notwithstanding contrary or additional terms and conditions in any order purchase order, planning schedule, acknowledgment, confirmation or any other form or document issued by either party affecting the purchase and/or sale of Products. Notwithstanding any terms and conditions on Customer's order, the information and conditions on the Credit Application are controlling over Customer and TSPCBA. Any conflicting statements or terms listed on the Customer purchase orders, invoices, confirmations or other Customer generated documents ("Customer Documents"), whether heretofore or hereafter submitted, are negated by submission of the Credit Application and the issuance of credit by TSPCBA, and all different or additional terms and conditions contained in any Customer Documents are hereby objected to by TSPCBA. TSPCBA's performance of any contract is expressly made conditional on Customer's agreement to TSPCBA's Terms and Conditions of Sale, unless otherwise specifically agreed upon in writing by TSPCBA. In the absence of such agreement, commencement of performance and/or delivery shall be for Customer's convenience only and shall not be deemed or construed to be acceptance of Customer's terms and conditions or any of them. If a contract is not earlier formed by mutual agreement in writing, acceptance by Customer of any goods or services shall be deemed acceptance by Customer of the terms and conditions stated herein. No rights, duties, agreements or obligations hereunder, may be assigned or transferred by operation of law, merger or otherwise, without the prior written consent of TSPCBA. The obligations, rights, terms and conditions hereof will be binding on the parties hereto and their respective successors and assigns. The waiver or breach of any term, condition or covenant hereof, or default under any provision hereof, will not be deemed to constitute a waiver of any other term, condition, or covenant contained herein, or of any subsequent breach or default of any kind or nature. Any provision hereof which is prohibited or unenforceable in any jurisdiction shall, as to such jurisdiction, be ineffective to the extent of such prohibition or unenforceability without invalidating the remaining provisions hereof in that jurisdiction, or affecting the validity or enforceability of such provision in any other jurisdiction.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{%block script%}
+{%endblock%}

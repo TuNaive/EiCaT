@@ -44,11 +44,11 @@ exports.model = {
     prefix: 'ect_',
     // prefix: 'cmswing_',
     encoding: 'utf8',
-    host: '47.95.214.86',
+    host: '127.0.0.1',
     port: 3306,
     connectionLimit: 5,
     user: 'ectuser',
-    password: 'ect123',
+    password: 'ectuser123',
     cache: { // 额外的缓存配置
       type: 'file',
       handle: fileCache,

@@ -113,7 +113,7 @@
             </i>
             <h4 class="nomargin">{{__.jed.dgettext('smt', 'delivery')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden">
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
             {{__.jed.dgettext('smt', 'deliveryText')}}
           </p>
         </div>
@@ -128,7 +128,7 @@
             </i>
             <h4 class="nomargin">{{__.jed.dgettext('smt', 'quality')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden">
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;;">
             {{__.jed.dgettext('smt', 'qualityText')}}
           </p>
         </div>
@@ -144,7 +144,7 @@
             </i>
             <h4 class="nomargin">{{__.jed.dgettext('smt', 'professional')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px;overflow: hidden">
+          <p class="nomargin" style="height: 66px;overflow: hidden; padding: 6px 0;">
             {{__.jed.dgettext('smt', 'professionalText')}}
           </p>
         </div>
@@ -160,7 +160,7 @@
             </i>
             <h4 class="nomargin">{{__.jed.dgettext('smt', 'economy')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden">
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
             {{__.jed.dgettext('smt', 'economyText')}}
           </p>
         </div>
@@ -169,9 +169,9 @@
 
     <div class="row margin-top-20">
       <ul class="nav nav-tabs nav-justified" style="position: relative;background-color: #f1f2f7">
-        <li class="active"><a href="#all" data-toggle="tab" class="size-18">全部</a></li>
-        <li><a href="#pcb" data-toggle="tab" class="size-18">PCB</a></li>
-        <li><a href="#fpc" data-toggle="tab" class="size-18">FPC</a></li>
+        <li class="active"><a href="#all" data-toggle="tab" class="size-18">FPC软板</a></li>
+        <li><a href="#pcb" data-toggle="tab" class="size-18">软硬结合板</a></li>
+        <li><a href="#fpc" data-toggle="tab" class="size-18">PCB</a></li>
         <li><a href="#pcba" data-toggle="tab" class="size-18">PCBA</a></li>
         {#
         <li class="dropdown">
@@ -187,13 +187,13 @@
         <div class="tab-content panel-body padding-10">
           <div class="tab-pane fade in active" id="all">
             <div class="row ">
-              {% for val in list %}
+              {% for val in fpcList %}
                 <!-- item -->
                   <div class="col-md-3 col-sm-3 ">
                     <div class="item-box margin-bottom-20">
                       <div class="panel panel-default" style="margin-bottom: 0">
                         <div class="panel-body padding-10">
-                            <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="">
+                            <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="" style="height: 350px">
                         </div>
                         <div class="panel-footer padding-10 size-14 elipsis" >
                           {{val.title|truncate(16)}}
@@ -207,12 +207,12 @@
           </div>
           <div class="tab-pane fade" id="pcb">
             <div class="row ">
-              {% for val in pcbList %}
+              {% for val in fsList %}
                 <div class="col-md-3 col-sm-3 ">
                   <div class="item-box margin-bottom-20">
                     <div class="panel panel-default" style="margin-bottom: 0">
                       <div class="panel-body padding-10">
-                          <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="">
+                          <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="" style="height: 350px">
                       </div>
                       <div class="panel-footer padding-10 size-14 elipsis" >
                         {{val.title|truncate(16)}}
@@ -225,12 +225,12 @@
           </div>
           <div class="tab-pane fade" id="fpc">
             <div class="row ">
-              {% for val in fpcList %}
+              {% for val in pcbList %}
                 <div class="col-md-3 col-sm-3 ">
                   <div class="item-box margin-bottom-20">
                     <div class="panel panel-default" style="margin-bottom: 0">
                       <div class="panel-body padding-10">
-                          <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="">
+                          <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="" style="height: 350px">
                       </div>
                       <div class="panel-footer padding-10 size-14 elipsis" >
                         {{val.title|truncate(16)}}
@@ -248,7 +248,7 @@
                   <div class="item-box margin-bottom-20">
                     <div class="panel panel-default" style="margin-bottom: 0">
                       <div class="panel-body padding-10">
-                          <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="">
+                          <img class="img-responsive" src="{{val.src}}" width="600" height="399" alt="" style="height: 350px">
                       </div>
                       <div class="panel-footer padding-10 size-14 elipsis" >
                         {{val.title|truncate(16)}}

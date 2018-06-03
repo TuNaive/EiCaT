@@ -1,0 +1,32 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/home/css/guide.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section>
+  <div class="container">
+    {% if isZh %}
+    <div class="guide_block">
+      <h2 style="text-align: center; padding-top: 12px;">隐私声明</h2>
+      <hr>
+      <p>本隐私声明适用于所有用户并纳入用户协议。您应当在注册成为助芯通商城用户时阅读并接受隐私声明以使用助芯通商城，且您在作为助芯通商城用户期间将继续受其规定（及助芯通商城对隐私声明作出的任何修订）的约束。</p>
+      <ol>  
+        <li>个人数据资料，真实姓名、地址、电子邮箱和联系电话等用户信息。在未经您同意之前，助芯通商城不会将您的资料用于其它目的。</li>  
+        <li>使用非个人信息。助芯通商城将通过您的IP地址来收集非个人化的信息，包括您的浏览器性质、操作系统种类、给您提供接入服务ISP的域名等，以优化在您计算机屏幕上显示的页面。通过收集上述信息，我们亦进行客流量统计，从而改进网站的管理和服务。</li>  
+        <li>个人数据安全。助芯通商城采用高安全性的服务器，以保护您的个人数据。</li>  
+        <li>个人数据披露和限制利用。当国家机构依照法定程序要求助芯通商城披露个人资料时，助芯通商城将根据执法单位的要求或为公共安全目的提供个人资料。在此情况下披露的任何内容，助芯通商城不承担任何责任。助芯通商城在符合下列条件时，对个人资料进行必要范围的利用：已取得您的同意；相应的法律及程序要求本站提供用户的个人资料。</li>
+      </ol>
+    </div>
+    {% else %}
+    <div class="guide_block">
+      <h2 style="text-align: center; padding-top: 12px;">TSPCBA Data Security</h2>
+      <hr>
+      <p>We use a variety of security technologies to protect a user’s Identifiable Information, including secure servers, firewalls, and encryption of credit card information.  Unfortunately, there is always a potential risk in sending information through any channel or retaining information on any storage device, and we cannot guarantee that communications between user and us or information stored on our resources, including Identifiable Information, will be free from unauthorized access by third parties.  We will not be held responsible (1) for any unauthorized access or illegal or unauthorized use of information, including Identifiable Information, or (2) if user information, including Identifiable Information, is accessed through unauthorized or improper use of user account or login information or due to user failure to secure user username, password, or customer ID.</p>
+      <p>Consent: User consents to have user’s personal data, including user Identifiable Information, used and stored wherever we do business, including countries outside user’s own.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{%block script%}
+{%endblock%}
