@@ -48,7 +48,7 @@ exports.model = {
     port: 3306,
     connectionLimit: 5,
     user: 'ectuser',
-    password: 'ectuser123',
+    password: 'ect123',
     cache: { // 额外的缓存配置
       type: 'file',
       handle: fileCache,

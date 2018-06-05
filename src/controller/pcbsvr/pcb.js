@@ -81,7 +81,7 @@ export default class extends Base {
     })
     customDetail.unshift({
       field: 'boardSize',
-      label: '板子尺寸',
+      label: this.isZh ? '板子尺寸' : 'Board Size',
       value: `${pcbInfo.boardLength} cm x ${pcbInfo.boardWidth} cm`
     })
 
@@ -98,7 +98,8 @@ export default class extends Base {
   }
 
   async calculateFee (params) {
-    const {boardLength, boardWidth, boardLayer, boardMaterial, boardThickness, boardAmount, aluminumOutThickness, aluminumInThickness, makeupNum, surfacing, solderMaskColor, charColor, minLineSpace, minAperture, holeAmount, halfHole, testMethod, urgent, comment} = params
+    // aluminumInThickness
+    const {boardLength, boardWidth, boardLayer, boardMaterial, boardThickness, boardAmount, aluminumOutThickness, makeupNum, surfacing, solderMaskColor, charColor, minLineSpace, minAperture, holeAmount, halfHole, testMethod, urgent, comment} = params
     const boardSize = boardLength * boardWidth
     const projectPrice = await this.model('pcb_price').getPrice({boardLayer, option: 'project'})
     const makeupPrice = await this.model('pcb_price').getPrice({boardLayer, option: 'makeup'})
@@ -123,7 +124,8 @@ export default class extends Base {
     fee.testFee = this.round2(areaAmount * testPrice)
     fee.solderMaskColorFee = this.round2(0)
     fee.charColorFee = this.round2(0)
-    fee.halfHoleFee = this.round2(Math.floor(halfHole / 2) * halfHolePrice)
+    fee.halfHoleFee = halfHole === '0' ? 0 : halfHolePrice;
+    // fee.halfHoleFee = this.round2(Math.floor(halfHole / 2) * halfHolePrice)
     fee.urgentFee = this.round2( urgent * urgentPrice)
     fee.otherFee = this.round2(0)
     fee.totalFee = this.round2(_.sum(_.values(fee)))

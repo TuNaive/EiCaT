@@ -10,7 +10,7 @@ export default class extends think.Model {
       boardMaterial: null,
       boardThickness: null,
       aluminumOutThickness: null,
-      aluminumInThickness: null,
+      // aluminumInThickness: null,
       makeupNum: null,
       surfacing: null,
       solderMaskColor: null,

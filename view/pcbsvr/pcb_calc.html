@@ -27,6 +27,7 @@
     </ol>
 
     <div id="pcb">
+      {% if isZh %}
       <h3>{{__.jed.dgettext('smt', 'pos1')}}</h3>
       <fieldset>
         <form id="enquiryForm" class="form-horizontal">
@@ -135,7 +136,7 @@
           <div class="form-inline form-group">
             <div id="aluminumOutThickness">
               <label for="aluminumOutThickness" class="col-sm-2 control-label">
-                铜箔厚度 外层（oz）：
+                铜厚（oz）：
               </label>
               <div class="col-sm-4">
                 <select class="form-control required" name="aluminumOutThickness" id="aluminumOutThickness">
@@ -148,7 +149,7 @@
                 </select>
               </div>
             </div>
-            <div id="aluminumInThickness">
+            <!-- <div id="aluminumInThickness">
               <label for="aluminumInThickness" class="col-sm-2 control-label">
                 内层（oz）：
               </label>
@@ -159,7 +160,7 @@
                   </option>
                 </select>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="form-inline form-group">
             <div id="makeupNum">
@@ -283,7 +284,7 @@
                   <label class="radio-inline">
                     <input type="radio" name="minLineSpace" class="required" id="minLineSpace0"
                     value="0" checked>
-                    5/5mil以上
+                    3mil/3mil及以上
                   </label>
                 </div>
               </div>
@@ -295,20 +296,30 @@
                   <label class="radio-inline">
                     <input type="radio" name="minAperture" class="required" id="minAperture0"
                     value="0" checked>
-                    0.30mm以上
+                    0.20mm及以上
                   </label>
                 </div>
               </div>
             </div>
-            <span class="col-sm-offset-2 col-sm-4">3mil、4mil可做，请改用人工报价</span>
-            <span class="col-sm-offset-2 col-sm-4">最小0.2mm，请改用人工报价</span>
+            <!-- <span class="col-sm-offset-2 col-sm-4">3mil可做，请改用人工报价</span>
+            <span class="col-sm-offset-2 col-sm-4">最小0.2mm，请改用人工报价</span> -->
           </div>
           <div id="holeAmount" class="form-group">
             <label for="holeAmount" class="col-sm-2 control-label">
-              孔数：
+              孔数:
             </label>
             <div class="col-sm-10">
               <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount0"
+                value="0" checked>
+                无
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount1"
+                value="1">
+                有
+              </label>
+              <!-- <label class="radio-inline">
                 <input type="radio" name="holeAmount" class="required" id="holeAmount0"
                 value="0" checked>
                 10万孔以下/m²
@@ -322,7 +333,7 @@
                 <input type="radio" name="holeAmount" class="required" id="holeAmount2"
                 value="2">
                 20万孔以上/m²
-              </label>
+              </label> -->
             </div>
           </div>
           <div id="halfHole" class="form-group">
@@ -336,6 +347,11 @@
                 无
               </label>
               <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole1" value="1"
+                checked>
+                有
+              </label>
+              <!-- <label class="radio-inline">
                 <input type="radio" name="halfHole" class="required" id="halfHole1" value="1">
                 一边半孔
               </label>
@@ -350,7 +366,7 @@
               <label class="radio-inline">
                 <input type="radio" name="halfHole" class="required" id="halfHole4" value="4">
                 四边半孔
-              </label>
+              </label> -->
             </div>
           </div>
           <div id="testMethod" class="form-group">
@@ -363,21 +379,21 @@
                 value="0" checked>
                 全部飞针测试(样板飞测免费)：光学AOI测试 + 飞针测试，成品直通率100%测试
               </label>
-              <label class="radio-inline">
+              <!-- <label class="radio-inline">
                 <input type="radio" name="testMethod" class="required" id="testMethod1"
                 value="1">
                 抽测免费：成品直通率95%以上测试：全部光学AOI测试 + 飞针测试抽测（如抽测过程中直通率低于95%，此批全部免费飞针测试 ）
-              </label>
+              </label> -->
               <label class="radio-inline">
                 <input type="radio" name="testMethod" class="required" id="testMethod2"
                 value="2">
                 测试架测试：测试免费，测试架工具费为一次性收费，返单免费
               </label>
-              <label class="radio-inline">
+              <!-- <label class="radio-inline">
                 <input type="radio" name="testMethod" class="required" id="testMethod3"
                 value="3">
                 目测：用人工目检，适合单面板及简单的板
-              </label>
+              </label> -->
             </div>
           </div>
           <div class="form-inline form-group">
@@ -405,11 +421,11 @@
                 </select>
               </div>
             </div>
-            <div>
+            <!-- <div>
               <label for="delivery" class="col-sm-2 control-label">交期：</label>
               <div id="deliveryVal" class="col-sm-4"></div>
               <input type="hidden" id="delivery" name="delivery">
-            </div>
+            </div> -->
           </div>
           <div class="form-group">
             <label for="comment" class="col-sm-2 control-label">备注：</label>
@@ -543,78 +559,602 @@
           </div>
         </form>
       </fieldset>
+      {% else %}
+      <h3>{{__.jed.dgettext('smt', 'pos1')}}</h3>
+      <fieldset>
+        <form id="enquiryForm" class="form-horizontal">
+          <div class="form-inline form-group">
+            <div>
+              <label for="boardLength" class="col-sm-2 control-label">Board Length (cm)：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required digits" id="boardLength" name="boardLength" placeholder="0 to 60">
+              </div>
+            </div>
+            <div>
+              <label for="boardWidth" class="col-sm-2 control-label">Board Width (cm)：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required digits" id="boardWidth" name="boardWidth" placeholder="0 to 40">
+              </div>
+            </div>
+          </div>
+          <div id="boardLayer" class="form-group">
+            <label for="boardLayer" class="col-sm-2 control-label">
+              Board Layers:
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer0"
+                value="0">
+                Single
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer1"
+                value="1" checked>
+                2
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer2"
+                value="2">
+                4
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer3"
+                value="3">
+                6
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="boardLayer" class="required" id="boardLayer4"
+                value="4">
+                8
+              </label>
+            </div>
+          </div>
+          <div id="boardMaterial" class="form-group">
+            <label for="boardMaterial" class="col-sm-2 control-label">
+              Material:
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline hide-layer0">
+                <input type="radio" name="boardMaterial" class="required" id="boardMaterial0"
+                value="0" checked>
+                FR4
+              </label>
+              <label class="radio-inline hide-layer1" style="display: none;">
+                <input type="radio" name="boardMaterial" class="required" id="boardMaterial2"
+                value="2">
+                FR1
+              </label>
+            </div>
+          </div>
+          <div id="boardThickness" class="form-group">
+            <label for="boardThickness" class="col-sm-2 control-label">
+              Finished Thickness (mm):
+            </label>
+            <div class="col-sm-4">
+              <select class="form-control required" name="boardThickness" id="boardThickness">
+                <option value="0">
+                  0.4
+                </option>
+                <option value="1">
+                  0.6
+                </option>
+                <option value="2">
+                  0.8
+                </option>
+                <option value="3">
+                  1.0
+                </option>
+                <option value="4">
+                  1.2
+                </option>
+                <option value="5" selected="">
+                  1.6
+                </option>
+                <option value="6">
+                  2.0
+                </option>
+                <option value="7">
+                  2.5
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-inline">
+            <label for="boardAmount" class="col-sm-2 control-label">Quantity:</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control required digits" id="boardAmount" name="boardAmount" placeholder="0 to 3000">
+            </div>
+          </div>
+          <div class="form-inline form-group">
+            <div id="aluminumOutThickness">
+              <label for="aluminumOutThickness" class="col-sm-2 control-label">
+                Copper Thickness:
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="aluminumOutThickness" id="aluminumOutThickness">
+                  <option value="0" selected="">
+                    1
+                  </option>
+                  <option value="1">
+                    2
+                  </option>
+                </select>
+              </div>
+            </div>
+            <!-- <div id="aluminumInThickness">
+              <label for="aluminumInThickness" class="col-sm-2 control-label">
+                内层（oz）：
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="aluminumInThickness" id="aluminumInThickness">
+                  <option value="0" selected="">
+                    0.5
+                  </option>
+                </select>
+              </div>
+            </div> -->
+          </div>
+          <div class="form-inline form-group">
+            <div id="makeupNum">
+              <label for="makeupNum" class="col-sm-2 control-label">
+                Panelization Quantity:
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="makeupNum" id="makeupNum">
+                  <option value="0" selected="">
+                    1
+                  </option>
+                  <option value="1">
+                    2
+                  </option>
+                  <option value="2">
+                    3
+                  </option>
+                  <option value="3">
+                    4
+                  </option>
+                  <option value="4">
+                    5
+                  </option>
+                  <option value="5">
+                    6
+                  </option>
+                  <option value="6">
+                    7
+                  </option>
+                  <option value="7">
+                    8
+                  </option>
+                  <option value="8">
+                    9
+                  </option>
+                  <option value="9">
+                    10
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div id="surfacing">
+              <label for="surfacing" class="col-sm-2 control-label">
+                Surface Finish:
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="surfacing" id="surfacing">
+                  <option value="0" selected="">
+                    HAL
+                  </option>
+                  <option value="1">
+                    HAL(lead-free)
+                  </option>
+                  <option value="2" class="hide-layer0">
+                    Immersion Gold
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-inline form-group">
+            <div id="solderMaskColor">
+              <label for="solderMaskColor" class="col-sm-2 control-label">
+                Solder Mask:
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="solderMaskColor" id="solderMaskColor">
+                  <option value="0" selected="">
+                    Green
+                  </option>
+                  <option value="1">
+                    Red
+                  </option>
+                  <option value="2">
+                    Blue
+                  </option>
+                  <option value="3">
+                    White
+                  </option>
+                  <option value="4">
+                    Black
+                  </option>
+                  <!-- <option value="5">
+                    哑光黑色
+                  </option> -->
+                  <!-- <option value="6">
+                    无
+                  </option> -->
+                </select>
+              </div>
+            </div>
+            <div id="charColor">
+              <label for="charColor" class="col-sm-2 control-label">
+                Silkscreen Color:
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="charColor" id="charColor">
+                  <option value="0" selected="">
+                    White
+                  </option>
+                  <option value="1">
+                    Yellow
+                  </option>
+                  <option value="2">
+                    Black
+                  </option>
+                  <!-- <option value="3">
+                    无
+                  </option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-inline form-group">
+            <div>
+              <div id="minLineSpace">
+                <label for="minLineSpace" class="col-sm-2 control-label">
+                  Min Track/Spacing:
+                </label>
+                <div class="col-sm-4">
+                  <label class="radio-inline">
+                    <input type="radio" name="minLineSpace" class="required" id="minLineSpace0"
+                    value="0" checked>
+                    ≥ 3mil/3mil
+                  </label>
+                </div>
+              </div>
+              <div id="minAperture">
+                <label for="minAperture" class="col-sm-2 control-label">
+                  Min Via Hole Size:
+                </label>
+                <div class="col-sm-4">
+                  <label class="radio-inline">
+                    <input type="radio" name="minAperture" class="required" id="minAperture0"
+                    value="0" checked>
+                    ≥ 0.20mm
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- <span class="col-sm-offset-2 col-sm-4">3mil、4mil可做，请改用人工报价</span>
+            <span class="col-sm-offset-2 col-sm-4">最小0.2mm，请改用人工报价</span> -->
+          </div>
+          <div id="holeAmount" class="form-group">
+            <label for="holeAmount" class="col-sm-2 control-label">
+              Impedance:
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount0"
+                value="0" checked>
+                NO
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount1"
+                value="1">
+                YES
+              </label>
+              <!-- <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount0"
+                value="0" checked>
+                10万孔以下/m²
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount1"
+                value="1">
+                10-20万孔/m²
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="holeAmount" class="required" id="holeAmount2"
+                value="2">
+                20万孔以上/m²
+              </label> -->
+            </div>
+          </div>
+          <div id="halfHole" class="form-group">
+            <label for="halfHole" class="col-sm-2 control-label">
+              Blind hole:
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole0" value="0"
+                checked>
+                NO
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole1" value="1"
+                checked>
+                YES
+              </label>
+              <!-- <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole1" value="1">
+                一边半孔
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole2" value="2">
+                二边半孔
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole3" value="3">
+                三边半孔
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="halfHole" class="required" id="halfHole4" value="4">
+                四边半孔
+              </label> -->
+            </div>
+          </div>
+          <div id="testMethod" class="form-group">
+            <label for="testMethod" class="col-sm-2 control-label">
+              Test Method:
+            </label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <input type="radio" name="testMethod" class="required" id="testMethod0"
+                value="0" checked>
+                Flying Probe Test (Sample Free)
+              </label>
+              <!-- <label class="radio-inline">
+                <input type="radio" name="testMethod" class="required" id="testMethod1"
+                value="1">
+                抽测免费：成品直通率95%以上测试：全部光学AOI测试 + 飞针测试抽测（如抽测过程中直通率低于95%，此批全部免费飞针测试 ）
+              </label> -->
+              <label class="radio-inline">
+                <input type="radio" name="testMethod" class="required" id="testMethod2"
+                value="2">
+                Fixture Test (One-time fees) 
+              </label>
+              <!-- <label class="radio-inline">
+                <input type="radio" name="testMethod" class="required" id="testMethod3"
+                value="3">
+                目测：用人工目检，适合单面板及简单的板
+              </label> -->
+            </div>
+          </div>
+          <div class="form-inline form-group">
+            <div id="urgent">
+              <label for="urgent" class="col-sm-2 control-label">
+                Lead Time:
+              </label>
+              <div class="col-sm-4">
+                <select class="form-control required" name="urgent" id="urgent">
+                  <option value="0" selected="">
+                    Sample 5-7days Normal
+                  </option>
+                  <option value="1">
+                    Sample 48 hours Urgent
+                  </option>
+                  <option value="2">
+                    Sample 24 hours Urgent
+                  </option>
+                  <option value="3">
+                    Sample 12 hours Urgent
+                  </option>
+                  <option value="4">
+                    Sample 8 hours Urgent
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="delivery" class="col-sm-2 control-label">交期：</label>
+              <div id="deliveryVal" class="col-sm-4"></div>
+              <input type="hidden" id="delivery" name="delivery">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="comment" class="col-sm-2 control-label">Remark:</label>
+            <div class="col-sm-10">
+              <textarea id="comment" name="comment" class="form-control"></textarea>
+            </div>
+          </div>
+        </form>
+      </fieldset>
+
+      <h3>{{__.jed.dgettext('smt', 'pos2')}}</h3>
+      <fieldset>
+        <h3>加工详情</h3>
+        <table id="machiningDetail" class="table table-bordered"></table>
+
+        <h3>价格明细</h3>
+        <table id="priceDetail" class="table table-bordered"></table>
+      </fieldset>
+
+      <h3>{{__.jed.dgettext('smt', 'pos3')}}</h3>
+      <fieldset>
+        <form id="pcbFileForm" class="form-horizontal">
+          <div class="form-group form-inline">
+            <label for="pcbFile" class="col-sm-2 control-label">PCB文件：</label>
+            <div class="col-sm-10">
+              <span class="btn btn-default">选择文件</span>
+              <span id="pcbFileName"></span>
+              <input type="file" class="form-control pcbFile" id="pcbFile" name="pcbFile">
+              <p>允许上传文件大小在40M以内，rar、zip、xlsx、xls格式的文件。</p>
+            </div>
+          </div>
+          <div class="form-group form-inline">
+            <label for="contact" class="col-sm-2 control-label">联系人：</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control required" id="contact" name="contact">
+            </div>
+          </div>
+          <div class="form-group form-inline">
+            <label for="mobile" class="col-sm-2 control-label">联系手机：</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control mobileNotRequired" id="mobile" name="mobile">
+              <p id="mobile-not-required" style="display: none;" class="error">请填写手机或邮箱</p>
+            </div>
+          </div>
+          <div class="form-group form-inline">
+            <label for="email" class="col-sm-2 control-label">联系邮箱：</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control email" id="email" name="email">
+            </div>
+          </div>
+
+          <div class="address">
+            <div class="header clearfix">
+              <h3 class="pull-left">收货人信息</h3>
+              <label id="addressErr" class="hide error">请选择收货人信息</label>
+              <div class="btn-wrap">
+                <a class="btn btn-default" href="/account/address" target="_blank">新增收货地址</a>
+                <a id="refreshAddress" class="btn btn-default" href="javascript:;">刷新地址</a>
+              </div>
+            </div>
+
+            <table id="addressList" class="table table-bordered table-striped table-vertical-middle">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>收货人</th>
+                  <th>所在地区</th>
+                  <th>街道地址</th>
+                  <th>邮编</th>
+                  <th>手机</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+
+            <a id="showAllAddress" href="javascript:;"></a>
+          </div>
+
+          <div class="express clearfix">
+            <h3 class="pull-left">快递公司：</h3>
+            <div class="col-sm-10">
+              {%for item in express%}
+              <label class="radio-inline">
+                <input type="radio" name="expressId" id="{{'express' + item.id}}" value="{{item.id}}" {%if item.id == 1%}checked{%endif%}>{{item.name}}
+              </label>
+              {%endfor%}
+            </div>
+          </div>
+
+          <div class="invoice">
+              <div class="header clearfix">
+                <h3 class="pull-left">发票信息</h3>
+                <div class="btn-wrap">
+                  <a id="" href="/account/invoice/index" target="_blank" class="btn btn-default">新增发票信息</a>
+                  <a id="refreshInvoice" class="btn btn-default">刷新发票</a>
+                </div>
+              </div>
+
+              <label class="radio-inline">
+                <input type="radio" name="invoice" id="invoice0" value="1">需要
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="invoice" id="invoice1" value="0" checked>不需要
+              </label>
+
+              <a id="invoiceNotice" class="btn btn-link" href="/pcbsvr/pcba/invoice" data-toggle="ajaxModal">发票须知</a>
+
+              <table id="invoiceList" class="table table-bordered table-striped" style="display: none">
+                <thead>
+                  <tr>
+                    <td></td>
+                    <th>发票抬头</th>
+                    <th>发票人</th>
+                    <th>发票收货地址</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+
+              <a id="showAllInvoice" href="javascript:;" style="display: none">显示全部发票</a>
+            </div>
+
+          <div class="accounts">
+            <span class="col-sm-11 text-right">货款：</span><span id="pcbFee" class="col-sm-1 money">0.00</span>
+            <span class="col-sm-11 text-right">运费：</span><span id="freight" class="col-sm-1 money">56.00</span>
+            <span class="col-sm-11 text-right">税费：</span><span id="tax" class="col-sm-1 money">0.00</span>
+            <span class="col-sm-11 text-right">总费用(含税)：</span><span id="totalCost" class="col-sm-1 money">0.00</span>
+          </div>
+        </form>
+      </fieldset>
+      {% endif %}
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 96px;">
       <div class="col-md-3">
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded"
+              <img class="thumbnail rounded" 
                 src="/static/pcbs/images/key1.png"
                 style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">交期保障</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'delivery')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden">
-            PCB单双面板8小时加急
-            <br>
-            批量72小时加急
-            <br>
-            交期保证95%以上
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'deliveryText')}}
           </p>
         </div>
       </div>
-        <div class="col-md-3">
-          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-            <div class="box-icon-title">
-              <i>
-                <img class="thumbnail rounded"
-                  src="/static/pcbs/images/key2.png"
-                  style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
-              </i>
-              <h4 class="nomargin">品质保障</h4>
-            </div>
-            <p class="nomargin" style="height: 66px; overflow: hidden">
-              批量抽测免费
-              <br>
-              测试直通率95%以上
-              <br>
-              XXKB版A级材料
-            </p>
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key2.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'quality')}}</h4>
           </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;;">
+            {{__.jed.dgettext('smt', 'qualityText')}}
+          </p>
         </div>
+      </div>
 
-        <div class="col-md-3">
-          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-            <div class="box-icon-title">
-              <i>
-                <img class="thumbnail rounded"
-                  src="/static/pcbs/images/key3.png"
-                  style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
-              </i>
-              <h4 class="nomargin">专业团队</h4>
-            </div>
-            <p class="nomargin" style="height: 66px;overflow: hidden">
-              资深工程师团队
-              <br>
-              先进工厂设备及工作环境
-            </p>
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key3.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'professional')}}</h4>
           </div>
+          <p class="nomargin" style="height: 66px;overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'professionalText')}}
+          </p>
         </div>
+      </div>
 
-        <div class="col-md-3">
-          <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
-            <div class="box-icon-title">
-              <i>
-                <img class="thumbnail rounded"
-                  src="/static/pcbs/images/key4.png"
-                  style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
-              </i>
-              <h4 class="nomargin">经济实惠</h4>
-            </div>
-            <p class="nomargin" style="height: 66px; overflow: hidden"></p>
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key4.png" 
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'economy')}}</h4>
           </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'economyText')}}
+          </p>
         </div>
       </div>
     </div>

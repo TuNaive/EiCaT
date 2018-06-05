@@ -1,11 +1,11 @@
 export const pcbEnums = {
   pcbCustomOptions: {
     boardLayer: {
-      label: '板子层数',
-      value: ['单面', '双面', '四层', '六层', '八层']
+      label: 'Board Layers',
+      value: ['Single', '2', '4', '6', '8']
     },
     boardMaterial: {
-      label: '板材',
+      label: 'Material',
       value: ['FR4', 'CEM1', 'FR1', '铝基板']
     },
     boardThickness: {
