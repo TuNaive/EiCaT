@@ -40,6 +40,10 @@
   width: 1%;
 }
 
+.guide_block strong {
+  padding: 0 32px 12px;
+}
+
 .guide_block p > span {
   display: inline-block;
   width: 98%;
