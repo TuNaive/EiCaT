@@ -1406,6 +1406,9 @@ table tr td{
     <input type="text" class="form-control" value="{{data[field.name]|get_price('1')}}" id="present_price">
     </div>  </div>
     <div class="col-md-6">  <input type="text" placeholder="原价：¥99.99"  value="{{data[field.name]|get_price('2')}}"  class="form-control" id="discount_price">  </div>  
+    </div>  
+    <div class="row" style="margin: 10px 0 0; color: #f93d3d;">
+        价格和原价君填0时，商品会被设置为“价格需协商”
     </div>         
     </div>
         {% elif field.type == "pics" %}
