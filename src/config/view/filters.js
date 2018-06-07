@@ -120,6 +120,10 @@ export default env => {
     return get_price_format(price, type);
   })
 
+  env.addFilter("has_price", function (price) {
+    return has_price(price);
+  })
+
   /**
    * 获取模型信息
    * @param model_id 模型id 或 模型名称

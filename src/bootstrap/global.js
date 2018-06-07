@@ -332,6 +332,14 @@ global.get_price_format = function (price, type) {
   return price;
 }
 
+global.has_price = function (price) {
+  let pr = JSON.parse(price);
+  if (pr.present_price == 0 && pr.discount_price == 0) {
+    return false;
+  }
+  return true;
+}
+
 /**
  * 将数值四舍五入(保留2位小数)后格式化成金额形式
  *

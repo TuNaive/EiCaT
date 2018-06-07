@@ -208,11 +208,17 @@ CLASSES:
               <div class="panel-footer padding-3">
                 <div class="shop-item-summary text-center">
 
+                  {% if item.price|has_price %}
                   <!-- price -->
                   <div class="shop-item-price text-danger f-16 nomargin">
                     {% if item.price|get_price_format('2') %}<span class="line-through f-14">¥{{item.price|get_price_format('2')}}</span>{%endif%}
                     ¥{{item.price|get_price_format('1')}}
                   </div>
+                  {% else %}
+                  <div class="shop-item-price text-danger f-16 nomargin">
+                  {% if isZh%} 需协商 {% else %} Need Negotiation {% endif %}
+                </div>
+                  {% endif %}
                   <!-- /price -->
                   <!-- rating -->
                   <div class="shop-item-rating-line">

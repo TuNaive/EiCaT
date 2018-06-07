@@ -140,11 +140,17 @@ CLASSES:
                 <!-- /buttons -->
 
                 <!-- price -->
+                {% if info.price|has_price %}
                 <div class="shop-item-price text-danger">
                   {% if info.price|get_price_format('2') %}<span class="line-through nopadding-left">¥{{info.price|get_price_format('2')}}</span>{%endif%}
                   ¥
                   <price>{{info.price|get_price_format('1')}}</price>
                 </div>
+                {% else %}
+                <div class="shop-item-price text-danger f-16">
+                  {% if isZh%} 该商品采购量和价格需与客服人员沟通 {% else %} This product does not have a price tag {% endif %}
+                </div>
+                {% endif %}
                 <!-- /price -->
 
                 <div class="divider margin-top-10 margin-bottom-10"><!-- divider --></div>
@@ -171,6 +177,7 @@ CLASSES:
                 #}
                 <!-- <div class="divider margin-top-10 margin-bottom-10"></div> -->
 
+                {% if info.price|has_price %}                
                 <!-- FORM -->
                 <form class="clearfix form-inline nomargin ichecks" data-icheck-info="{{info.suk}}">
                   <!--{{info.suk}}-->
@@ -280,6 +287,7 @@ CLASSES:
                 <small class="text-muted">{{info.description}}</small>
                 <div class="divider margin-top-10 margin-bottom-10"><!-- divider --></div>
                 <!-- /short description -->
+                {% endif %}
                 {% endif %}
 
 

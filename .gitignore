@@ -42,6 +42,7 @@ obsoleted/
 # files
 package-lock.json
 database.sql
+src/config/adapter.js
 
 # avatar upload
 www/upload
