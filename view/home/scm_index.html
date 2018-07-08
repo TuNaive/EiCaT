@@ -1,0 +1,37 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/home/css/aboutus.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section>
+  <div class="container">
+    <a class="margin-bottom-20 block thumbnail" href="/" title = "TSPCB" >
+      <img class="img-responsive" src="/static/common/images/aboutus1.png" 
+        alt="TSPCB" style="height:120px;width:100%">
+    </a>
+    <div class="aboutus_block">
+      {% if isZh %}
+      <div class="aboutus_content">
+        <h2>服务内容</h2>
+          <p>助芯通通过整合资源，可以从客户产品开发过程中的不同节点介入并输出，参与到客户的产品上市进程，包括从根据客户的要求和概念制造样品，直至产品批量生产，并按客户指令交付至世界任何一个地方。除了交付产品，我们可以提供客户：产品设计方案，GERBER、BOM、试产备忘录、批量生产文件、检验文件等。</p>
+          <p><strong>-</strong><span>客户轻资产投资，省去厂房投资、设备投资及人工管理。</span></p>
+          <p><strong>-</strong><span>帮助客户集中资源投入到高附加值的产品设计和市场营销。</span></p>
+          <p><strong>-</strong><span>运用专业工厂制造优势，助力客户产品快速上市。</span></p>
+          <p><strong>-</strong><span>协助客户以最小投入产生最大产出, 提升企业核心竞争力。</span></p>
+      </div>
+      {% else %}
+      <div class="aboutus_content">
+        <h2>Outsourcing Service</h2>
+          <p>Through the integration of resources, we can involve into different nodes of product development, then output. We also can participate in the customer's product process, including making samples according to customer's ideas and requirements, until mass-production. Then we can deliver to anywhere in the world based on customer's request. In addition to delivery, we can offer the following data to our customers. For example: product design file, Gerber, BOM, manufacturing file of trial product and mass product, testing and inspection files.</p>
+          <p><strong>-</strong><span>Assist customer to implement “asset-light strategy”, then save fixed assets investment and artificial cost.</span></p>
+          <p><strong>-</strong><span>Make customers to centralized resources into product design and marketing which is high additional value.</span></p>
+          <p><strong>-</strong><span>With the help of professional factory manufacturing advantages, to help customer’s products into market quickly.</span></p>
+          <p><strong>-</strong><span>Produce the maximum output with a minimum input to promote customer’s core competition.</span></p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+{%block script%}
+{%endblock%}

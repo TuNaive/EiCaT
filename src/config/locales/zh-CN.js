@@ -139,6 +139,7 @@ module.exports = {
       aboutus: [ '关于我们' ],
       services: [ '增值服务' ],
       bom: [ 'BOM配单' ],
+      scm: [ '供应链外包服务' ],
       map: [ '网站地图' ],
       address: [ '公司地址: 199 Haichuan Rd., Jiading District, Shanghai, China, 201800' ],
       phone: [ '联系电话: 400-920-5532' ],

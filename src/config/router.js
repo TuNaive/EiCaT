@@ -10,6 +10,7 @@ export default [
   ['/guide/statement', 'guide/index/statement', 'get'],
   ['/guide/security', 'guide/index/security', 'get'],
   ['/guide/operation', 'guide/index/operation', 'get'],
+  ['/scm', 'home/scm/index', 'get'],
   ['/u/avatar',"/account/index/avatar/:1/",'get'],
   ['/u/avatar/:uid',"/account/index/avatar/:1/",'get'],
   ['/p/:id', "/home/detail/index/:1/",'get'],

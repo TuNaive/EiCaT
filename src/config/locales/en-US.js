@@ -49,6 +49,7 @@ module.exports = {
       aboutus: [ 'About Us' ],
       services: [ 'Services' ],
       bom: [ 'BOM RFQ' ],
+      scm: [ 'SCM Outsourcing Service' ],
       map: [ 'Site Map' ],
       address: [ 'Company Address: 199 Haichuan Rd., Jiading District, Shanghai, China, 201800' ],
       phone: [ 'Phone Number: 400-920-5532' ],

@@ -133,6 +133,12 @@
           </li>
           {%endfor%}
         {%endif%}
+        <li class="{% if (controller.active|contains('/pcbsvr')) %}active{% endif %}">
+          <a href="/scm">
+            {{__.jed.dgettext('common', 'scm')}}
+          </a>
+          <span class="aline"></span>
+        </li>
         <!-- <li class="dropdown {% if (controller.active|contains('/aboutus')) %}active{% endif %}">
           <a class="dropdown-toggle" href="/aboutus/profile">{{__.jed.dgettext('common', 'aboutus')}}</a> 
           <ul class="dropdown-menu has-topBar">
