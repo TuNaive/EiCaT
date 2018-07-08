@@ -133,7 +133,7 @@
           </li>
           {%endfor%}
         {%endif%}
-        <li class="{% if (controller.active|contains('/pcbsvr')) %}active{% endif %}">
+        <li class="{% if (controller.active|contains('/scm')) %}active{% endif %}">
           <a href="/scm">
             {{__.jed.dgettext('common', 'scm')}}
           </a>
