@@ -26,17 +26,21 @@
           <li>{{__.jed.dgettext('smt', 'paoh1')}}</li>
           <li>{{__.jed.dgettext('smt', 'paoh2')}}</li>
           <li>{{__.jed.dgettext('smt', 'paoh3')}}</li>
+          {% if not isZh %}
           <li>{{__.jed.dgettext('smt', 'paoh4')}}</li>
+          <li>{{__.jed.dgettext('smt', 'paoh5')}}</li>
+          {% endif %}
         </ul>
       </div>
       <div id="pcba">
+        {% if isZh %}
         <h3>{{__.jed.dgettext('smt', 'paos1')}}</h3>
         <fieldset>
-          <form id="enquiryForm" class="form-horizontal">
+          <form id="enquiryForm" class="form-horizontal" style="width: 530px; display: inline-block;">
             <div class="form-group">
               <div>
-                <label for="pointChip" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paChipPoint')}}：</label>
-                <div class="col-sm-4"> 
+                <label for="pointChip" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paChipPoint')}}：</label>
+                <div class="col-sm-8"> 
                   <input type="text" class="form-control required digits" title="{{__.jed.dgettext('smt', 'paChipPointError')}}" id="pointChip" name="pointChip" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
                   <span style="display:block;font-size:12px;width:330px;">{{__.jed.dgettext('smt', 'paChipPointHint')}}</span>
                 </div>
@@ -44,8 +48,8 @@
             </div>
             <div class="form-group">
               <div>
-                <label for="pointIc" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paIcPoint')}}：</label>
-                <div class="col-sm-4">
+                <label for="pointIc" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paIcPoint')}}：</label>
+                <div class="col-sm-8">
                   <input type="text" class="form-control required digits" title="{{__.jed.dgettext('smt', 'paIcPointError')}}" id="pointIc" name="pointIc" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
                   <span style="display:block;font-size:12px;">{{__.jed.dgettext('smt', 'paicPointHint')}}</span>
                 </div>
@@ -53,8 +57,8 @@
             </div>
             <div class="form-group">
               <div>
-                <label for="pointBga" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paBgaPoint')}}：</label>
-                <div class="col-sm-4">
+                <label for="pointBga" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paBgaPoint')}}：</label>
+                <div class="col-sm-8">
                   <input type="text" class="form-control required digits" title="{{__.jed.dgettext('smt', 'paBgaPointError')}}" id="pointBga" name="pointBga" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
                   <span style="display:block;font-size:12px;">{{__.jed.dgettext('smt', 'paBgaPointHint')}}</span>
                 </div>
@@ -62,16 +66,16 @@
             </div>
             <div class="form-group">
               <div>
-                <label for="pointDip" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paDipPoint')}}</label>
-                <div class="col-sm-4">
+                <label for="pointDip" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paDipPoint')}}</label>
+                <div class="col-sm-8">
                   <input type="text" class="form-control required" title="{{__.jed.dgettext('smt', 'paDipPointError')}}" id="pointDip" name="pointDip" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
                   <span style="display:block;font-size:12px;">{{__.jed.dgettext('smt', 'paDipPointHint')}}</span>
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <label for="plateSize" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paMeshSize')}}：</label>
-              <div class="col-sm-4">
+              <label for="plateSize" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paMeshSize')}}：</label>
+              <div class="col-sm-8">
                 <select name="plateSize" id="plateSize" class="form-control required">
                   <option value="1" selected="selected">300*400mm</option>
                   <option value="2">370*470mm</option>
@@ -89,16 +93,16 @@
             </div>
             <div class="form-group">
               <div>
-                <label for="boardNumber" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paOrderQuantity')}}：</label>
-                <div class="col-sm-4">
+                <label for="boardNumber" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paOrderQuantity')}}：</label>
+                <div class="col-sm-8">
                   <input type="text" title="{{__.jed.dgettext('smt', 'paOrderQuantityError')}}" class="form-control required digits" id="boardNumber" name="boardNumber" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div>
-                <label for="deliveryDate" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paDelivery')}}：</label>
-                <div class="col-sm-4">
+                <label for="deliveryDate" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paDelivery')}}：</label>
+                <div class="col-sm-8">
                   <!-- <input type="text" class="form-control required" id="DeliveryDate" name="DeliveryDate" placeholder="请输入">
                   <span id="spanDeliveryDate"> 0 天 </span> -->
                   <span style="display:block;font-size:12px;width:330px;">
@@ -109,15 +113,15 @@
             </div>
             <div class="form-group">
               <div>
-                <label for="comment" class="col-sm-2 control-label">{{__.jed.dgettext('smt', 'paRemark')}}：</label>
-                <div class="col-sm-4">
+                <label for="comment" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paRemark')}}：</label>
+                <div class="col-sm-8">
                   <textarea type="text" cols="45" rows="7" class="form-control required" id="comment" name="comment" title="{{__.jed.dgettext('smt', 'paRemarkError')}}" placeholder="{{__.jed.dgettext('common', 'placeholder')}}"> </textarea>
                 </div>
               </div>
             </div>
           </form>
           <!-- <div style="position:relative"> -->
-          <ul class="margin-top-30 margin-right-50 right-wrap" style="width:450px;border:1px solid #ddd; !important;">
+          <ul class="right-wrap" style="width: 446px; margin-left: 60px; display: inline-block; vertical-align: top; border: 1px solid #ddd;">
             <li style="margin:0px !important;">
               <span style="color:red;background:#dedede;display:block;padding:5px 10px;">{{__.jed.dgettext('smt', 'pacdTitle')}}</span>
               <ul style="padding:0px 10px;">
@@ -126,14 +130,14 @@
                 <li>3. {{__.jed.dgettext('smt', 'pacd3')}}</li>
                 <li>4. {{__.jed.dgettext('smt', 'pacd4')}}</li>
                 <li>5. {{__.jed.dgettext('smt', 'pacd5')}}</li>
-                <li>6. {{__.jed.dgettext('smt', 'pacd6')}}</li>
+                <!-- <li>6. {{__.jed.dgettext('smt', 'pacd6')}}</li> -->
               </ul>
             </li>
-            <li>
+            <li style="margin-top: 15px; margin-bottom: 15px;">
               <span style="color:red;background:#dedede;display:block;padding:5px 10px;">{{__.jed.dgettext('smt', 'parmcTitle')}}</span>
               <ul style="padding: 0px 10px;">
                 <li>1. {{__.jed.dgettext('smt', 'parmc1')}}</li>
-                <li>
+                <!-- <li>
                   <span style="padding: 0px">2. {{__.jed.dgettext('smt', 'parmc2')}}</span>
                   <ul style="padding: 0px 10px;">
                     <li>2-1. {{__.jed.dgettext('smt', 'parmc2_1')}}</li>
@@ -141,10 +145,10 @@
                     <li>2-3. {{__.jed.dgettext('smt', 'parmc2_3')}}</li>
                     <li>2-4. {{__.jed.dgettext('smt', 'parmc2_4')}}</li>
                   </ul>
-                </li>
+                </li> -->
+                <li>2. {{__.jed.dgettext('smt', 'parmc2')}}</li>
                 <li>3. {{__.jed.dgettext('smt', 'parmc3')}}</li>
                 <li>4. {{__.jed.dgettext('smt', 'parmc4')}}</li>
-                <li>5. {{__.jed.dgettext('smt', 'parmc5')}}</li>
               </ul>
             </li>
           </ul>
@@ -327,6 +331,305 @@
             </div>
           </form>
         </fieldset>
+        {% else %}
+        <h3>{{__.jed.dgettext('smt', 'paos1')}}</h3>
+        <fieldset>
+          <form id="enquiryForm" class="form-horizontal" style="width: 530px; display: inline-block;">
+            <div class="form-group">
+              <div>
+                <label for="pointChip" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paChipPoint')}}：</label>
+                <div class="col-sm-8"> 
+                  <input type="text" class="form-control required digits" title="{{__.jed.dgettext('smt', 'paChipPointError')}}" id="pointChip" name="pointChip" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
+                  <span style="display:block;font-size:12px;width:330px;">{{__.jed.dgettext('smt', 'paChipPointHint')}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="pointIc" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paIcPoint')}}：</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control required digits" title="{{__.jed.dgettext('smt', 'paIcPointError')}}" id="pointIc" name="pointIc" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
+                  <span style="display:block;font-size:12px;">{{__.jed.dgettext('smt', 'paicPointHint')}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="pointBga" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paBgaPoint')}}：</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control required digits" title="{{__.jed.dgettext('smt', 'paBgaPointError')}}" id="pointBga" name="pointBga" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
+                  <span style="display:block;font-size:12px;">{{__.jed.dgettext('smt', 'paBgaPointHint')}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="pointDip" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paDipPoint')}}</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control required" title="{{__.jed.dgettext('smt', 'paDipPointError')}}" id="pointDip" name="pointDip" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
+                  <span style="display:block;font-size:12px;">{{__.jed.dgettext('smt', 'paDipPointHint')}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="plateSize" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paMeshSize')}}：</label>
+              <div class="col-sm-8">
+                <select name="plateSize" id="plateSize" class="form-control required">
+                  <option value="1" selected="selected">300*400mm</option>
+                  <option value="2">370*470mm</option>
+                  <option value="3" selected="selected">420*520mm</option>
+                  <option value="4">550*650mm</option>
+                  <option value="5">400*600mm</option>
+                  <option value="6">400*800mm</option>
+                  <option value="7">400*1200mm</option>
+                  <option value="8">400*1400mm</option>
+                </select>
+                <span style="display:block;font-size:12px;width:330px;">
+                  {{__.jed.dgettext('smt', 'paMeshSizeHint')}}
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="boardNumber" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paOrderQuantity')}}：</label>
+                <div class="col-sm-8">
+                  <input type="text" title="{{__.jed.dgettext('smt', 'paOrderQuantityError')}}" class="form-control required digits" id="boardNumber" name="boardNumber" placeholder="{{__.jed.dgettext('common', 'placeholder')}}">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="deliveryDate" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paDelivery')}}：</label>
+                <div class="col-sm-8">
+                  <!-- <input type="text" class="form-control required" id="DeliveryDate" name="DeliveryDate" placeholder="请输入">
+                  <span id="spanDeliveryDate"> 0 天 </span> -->
+                  <span style="display:block;font-size:12px;width:330px;">
+                    {{__.jed.dgettext('smt', 'paDeliveryHint')}}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <label for="comment" class="col-sm-4 control-label">{{__.jed.dgettext('smt', 'paRemark')}}：</label>
+                <div class="col-sm-8">
+                  <textarea type="text" cols="45" rows="7" class="form-control required" id="comment" name="comment" title="{{__.jed.dgettext('smt', 'paRemarkError')}}" placeholder="{{__.jed.dgettext('common', 'placeholder')}}"> </textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- <div style="position:relative"> -->
+          <ul class="right-wrap" style="width: 446px; margin-left: 60px; display: inline-block; vertical-align: top; border: 1px solid #ddd;">
+            <li style="margin:0px !important;">
+              <span style="color:red;background:#dedede;display:block;padding:5px 10px;">{{__.jed.dgettext('smt', 'pacdTitle')}}</span>
+              <ul style="padding:0px 10px;">
+                <li>1. {{__.jed.dgettext('smt', 'pacd1')}}</li>
+                <li>2. {{__.jed.dgettext('smt', 'pacd2')}}</li>
+                <li>3. {{__.jed.dgettext('smt', 'pacd3')}}</li>
+                <li>4. {{__.jed.dgettext('smt', 'pacd4')}}</li>
+                <li>5. {{__.jed.dgettext('smt', 'pacd5')}}</li>
+                <!-- <li>6. {{__.jed.dgettext('smt', 'pacd6')}}</li> -->
+              </ul>
+            </li>
+            <li style="margin-top: 15px; margin-bottom: 15px;">
+              <span style="color:red;background:#dedede;display:block;padding:5px 10px;">{{__.jed.dgettext('smt', 'parmcTitle')}}</span>
+              <ul style="padding: 0px 10px;">
+                <li>1. {{__.jed.dgettext('smt', 'parmc1')}}</li>
+                <!-- <li>
+                  <span style="padding: 0px">2. {{__.jed.dgettext('smt', 'parmc2')}}</span>
+                  <ul style="padding: 0px 10px;">
+                    <li>2-1. {{__.jed.dgettext('smt', 'parmc2_1')}}</li>
+                    <li>2-2. {{__.jed.dgettext('smt', 'parmc2_2')}}</li>
+                    <li>2-3. {{__.jed.dgettext('smt', 'parmc2_3')}}</li>
+                    <li>2-4. {{__.jed.dgettext('smt', 'parmc2_4')}}</li>
+                  </ul>
+                </li> -->
+                <li>2. {{__.jed.dgettext('smt', 'parmc2')}}</li>
+                <li>3. {{__.jed.dgettext('smt', 'parmc3')}}</li>
+                <li>4. {{__.jed.dgettext('smt', 'parmc4')}}</li>
+              </ul>
+            </li>
+          </ul>
+          <!-- </div> -->
+        </fieldset>
+        <h3>{{__.jed.dgettext('smt', 'paos2')}}</h3>
+        <fieldset>
+          <div class="machining">
+            <div class="machining_top"><h3>Order Detail</h3></div>
+              <div>
+                <table class="table table-bordered" border="0" cellspacing="0" cellpadding="0" style="width:650px;">
+                  <tbody>
+                    <tr>
+                      <td style="text-align: right; color: #999">CHIP Points：</td>
+                      <td id="spointChip"></td>
+                      <td style="text-align: right; color: #999">BGA Points：</td>
+                      <td id="spointBga"></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: right; color: #999">IC Points：</td>
+                      <td id="spointIc"></td>
+                      <td style="text-align: right; color: #999">DIP Feet：</td>
+                      <td id="spointDip"></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: right; color: #999">Mesh Size：</td>
+                      <td id="splateSize"></td>
+                      <td style="text-align: right; color: #999">Order Quantity：</td>
+                      <td id="sboardNumber"></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: right; color: #999">Delivery：</td>
+                      <td id="sdeliveryDate">2 to 3 days</td>
+                      <td style="text-align:right"></td>
+                      <td id=""></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:right;color:#999">Remarks：</td>
+                      <td colspan="3" id="scomment" style="text-align:left"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+          <div class="price_list">
+            <div class="price_list_top"><h3>Price List</h3></div>
+            <div>
+              <table class="table table-bordered" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <th>Assembly Cost</th>                         
+                    <th>Mesh Cost</th>    
+                    <th>Other</th>
+                    <th>Total</th>
+                  </tr>
+                  <tr>
+                    <td id="sprojceFee"></td>              
+                    <td id="splatesizeFee"></td>                
+                    <td id="sotherFee"></td>
+                    <td id="stotalFee"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+        <h3>{{__.jed.dgettext('smt', 'paos3')}}</h3>
+        <fieldset>
+          <form id="pcbaFileForm" class="form-horizontal">
+            <div class="form-group form-inline">
+              <label for="pcbaFile" class="col-sm-2 control-label">PCBA Files：</label>
+              <div class="col-sm-10">
+                <span class="btn btn-default">Select file</span>
+                <span id="pcbaFileName"></span>
+                <input type="file" class="form-control" id="pcbaFile" name="pcbaFile">
+                <p>Please keep the files to be within 40M with rar、zip、xlsx、xls format.</p>
+              </div>
+            </div>
+            <div class="form-group form-inline">
+              <label for="contact" class="col-sm-2 control-label">Contact Person：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required" title="Please provide contact person" id="contact" name="contact">
+              </div>
+            </div>
+            <div class="form-group form-inline">
+              <label for="mobile" class="col-sm-2 control-label">Contact Phone：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required" title="Please provide contact phone number" id="mobile" name="mobile">
+              </div>
+            </div>
+            <div class="form-group form-inline">
+              <label for="email" class="col-sm-2 control-label">Contact Email：</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control required email" title="Please provide contact email address" id="email" name="email">
+              </div>
+            </div>
+
+            <div class="address">
+              <div class="header clearfix">
+                <h3 class="pull-left">Recipient Info</h3>
+                <!-- <input type="hidden" class="required" id="addressId" name="addressId"> -->
+                <div class="btn-wrap">
+                  <a class="btn btn-default" href="/account/address/index" target="_blank">Add New</a>
+                  <a id="refreshAddress" class="btn btn-default" href="javascript:;">Refresh</a>
+                </div>
+              </div>
+
+              <table id="addressList" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Recipient</th>
+                    <th>Area</th>
+                    <th>Street</th>
+                    <th>Zip Code</th>
+                    <th>Phone NO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+              <a id="showAllAddress" href="javascript:;">Show all address</a>
+            </div>
+
+            <div class="express clearfix" style="margin-top: 30px;">
+              <h3>Delivery Company</h3>
+                <!-- <input type="hidden" class="required" id="expressId" name="expressId"> -->
+              <div>
+                <label class="radio-inline">
+                  <input type="radio" name="expressId" id="express0" value="1" checked>联昊通(只送广东省内,免费)
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="expressId" id="express1" value="2">顺丰
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="expressId" id="express2" value="3">德邦物流(适用批量板)
+                </label>
+              </div>
+            </div>
+
+            <div class="invoice" style="margin-top: 30px;">
+              <div class="header clearfix">
+                <h3 class="pull-left">Invoice Info</h3>
+                <div class="btn-wrap">
+                  <a id="" href="/account/invoice/index" target="_blank" class="btn btn-default">Add New</a>
+                  <a id="refreshInvoice" class="btn btn-default">Refresh</a>
+                </div>
+              </div>
+
+              <label class="radio-inline">
+                <input type="radio" name="invoice" id="invoice0" value="1">YES
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="invoice" id="invoice1" value="0" checked>NO
+              </label>
+
+              <a id="invoiceNotice" class="btn btn-link" href="/pcbsvr/pcba/invoice" data-toggle="ajaxModal">Invoice Notice</a>
+
+              <table id="invoiceList" class="table table-bordered table-striped" style="display: none">
+                <thead>
+                  <tr>
+                    <td></td>
+                    <th>Title</th>
+                    <th>Invoicer</th>
+                    <th>Address</th>
+                    <th>Operation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+
+              <a id="showAllInvoice" href="javascript:;" style="display: none">Show All</a>
+            </div>
+
+            <div class="accounts">
+              <span class="col-sm-11 text-right">Payment：</span><span id="pcbaMoney" class="col-sm-1"></span>
+              <span class="col-sm-11 text-right">Freight：</span><span class="col-sm-1">￥0.00</span>
+              <span class="col-sm-11 text-right">Total (includes tax)：</span><span id="pcbaAllmoney" class="col-sm-1"></span>
+            </div>
+          </form>
+        </fieldset>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -280,6 +280,46 @@ function _ajax_get() {
   });
 }
 
+// add url params
+function addUrlParam(name, value) {
+  var currentUrl = window.location.href.split('#')[0];
+
+  if (currentUrl.lastIndexOf('/') == currentUrl.length - 1) {
+    currentUrl = currentUrl.substring(0, currentUrl.length - 1)
+  }
+
+  if (name == 'locale' && currentUrl.indexOf('locale=') > -1) {
+    currentUrl = currentUrl.split('?')[0]
+  }
+
+  console.log('currentUrl', currentUrl)
+
+  if (value == 'zh-cn' && currentUrl.length - 2 == currentUrl.indexOf('EN')) {
+    currentUrl = currentUrl.substring(0, currentUrl.length - 2) + 'ZH'
+  } else if (value == 'en-us' && currentUrl.length - 2 == currentUrl.indexOf('ZH')) {
+    currentUrl = currentUrl.substring(0, currentUrl.length - 2) + 'EN'
+  }
+  
+  console.log('currentUrl', currentUrl)
+
+  if (/\?/g.test(currentUrl)) {
+    if (/name=[-\w]{4,25}/g.test(currentUrl)) {
+      currentUrl = currentUrl.replace(/name=[-\w]{4,25}/g, name + "=" + value);
+    } else {
+      currentUrl += "&" + name + "=" + value;
+    }
+  } else {
+    currentUrl += "?" + name + "=" + value;
+  }
+
+  console.log('currentUrl', currentUrl)
+
+  if (window.location.href.split('#')[1]) {
+    window.location.href = currentUrl + '#' + window.location.href.split('#')[1];
+  } else {
+    window.location.href = currentUrl;
+  }
+}
 
 /**
  * ajax post submit请求

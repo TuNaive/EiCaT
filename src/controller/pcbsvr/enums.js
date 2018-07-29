@@ -23,7 +23,7 @@ export const pcbEnums = {
       label: '板子尺寸宽（CM）'
     },
     aluminumOutThickness: {
-      label: '铜箔厚度 外层（oz）',
+      label: '铜厚（oz）',
       value: ['1', '2']
     },
     // aluminumInThickness: {
@@ -48,11 +48,11 @@ export const pcbEnums = {
     },
     minLineSpace: {
       label: '最小线宽线距',
-      value: ['5/5mil以上']
+      value: ['3/3mil以上']
     },
     minAperture: {
       label: '最小孔径',
-      value: ['0.30mm以上']
+      value: ['0.20mm以上']
     },
     holeAmount: {
       label: '孔数',
@@ -77,7 +77,8 @@ export const pcbEnums = {
     //   label: '交期'
     // },
     comment: {
-      label: '备注'
+      label: '备注',
+      label_en: 'Remark'
     }
   },
   pcbFee: {

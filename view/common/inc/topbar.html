@@ -37,13 +37,13 @@
         <ul class="dropdown-langs dropdown-menu">
           {% if isZh %}
           <li>
-            <a tabindex="-1" href="?locale=en-us">
+            <a id="switch-en" tabindex="-1" href="javascript:void(0);" onclick="addUrlParam('locale', 'en-us')">
               <img class="flag-lang" src="/static/common/images/flags/us.png" width="16" height="11" alt="lang" /> ENGLISH
             </a>
           </li>
           {% else %}
           <li>
-            <a tabindex="-1" href="?locale=zh-cn">
+            <a id="switch-zh" tabindex="-1" href="javascript:void(0);" onclick="addUrlParam('locale', 'zh-cn')">
               <img class="flag-lang" src="/static/common/images/flags/cn.png" width="16" height="11" alt="lang" /> 简体中文
             </a>
           </li>

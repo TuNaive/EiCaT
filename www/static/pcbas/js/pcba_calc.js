@@ -35,12 +35,12 @@ function bindFormEvents () {
     bodyTag: "fieldset",
     transitionEffect: "slideLeft",
     labels: isEn ? {
-      finish: "Submit Order",
-      next: "Calculate Price",
+      finish: "Submit",
+      next: "Next",
       previous: "Back",
     } : {
       finish: "提交订单",
-      next: "计算价格",
+      next: "下一步",
       previous: "返回",
     },
     onInit: function (event, currentIndex) {
@@ -85,7 +85,7 @@ function bindFormEvents () {
     },
     onStepChanged: function (event, currentIndex, priorIndex) {
       if (currentIndex === 1) {
-        $('a[href="#next"]').html('上传PCBA文件')
+        $('a[href="#next"]').html(isEn ? 'Next' : '上传PCBA文件')
       }
 
       if (currentIndex === 0 && priorIndex === 1) {
@@ -115,7 +115,7 @@ function bindFormEvents () {
       // })
       var hasAdd = _.find(paramData, function(o) { return o.name === 'addressId'; });
       if (!hasAdd) {
-        _toastr('请选择收获地址',"top-right","success",false);
+        _toastr(isEn ? 'Please choose address' : '请选择收获地址',"top-right","success",false);
         return false;
       }
       $.ajax({

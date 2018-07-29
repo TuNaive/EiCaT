@@ -1,6 +1,7 @@
 import Base from './base.js'
 import fs from 'mz/fs'
 import { pcbEnums } from './enums.js'
+import { pcbEnums as pcbEnumsEn } from './enums-en.js'
 
 export default class extends Base {
   constructor(ctx) {
@@ -75,8 +76,8 @@ export default class extends Base {
     const customDetail = _.map(_.omit(pcbInfo, omitPcbFields), (val, key) => {
       return {
         field: key,
-        label: pcbEnums.pcbCustomOptions[key].label,
-        value: _.get(pcbEnums.pcbCustomOptions, `${key}.value.${val}`, val)
+        label: this.isZh ? pcbEnums.pcbCustomOptions[key].label : pcbEnumsEn.pcbCustomOptions[key].label,
+        value: _.get(this.isZh ? pcbEnums.pcbCustomOptions : pcbEnumsEn.pcbCustomOptions, `${key}.value.${val}`, val)
       }
     })
     customDetail.unshift({
@@ -87,8 +88,9 @@ export default class extends Base {
 
     const pcbFee = _.map(fee, (val, key) => ({
       field: key,
-      label: pcbEnums.pcbFee[key],
-      value: val
+      label: this.isZh ? pcbEnums.pcbFee[key] : pcbEnumsEn.pcbFee[key],
+      value: val,
+      text: `¥${val}`
     }))
 
     return {

@@ -1,7 +1,7 @@
 import User from './user.js'
 
 export default class Frontend extends User {
-  __before() {
+  __before(needLogin = false, alertLogin = false) {
     this.setLocal()
     return super.__before.apply(this, arguments).then(async data => {
       //关闭站点

@@ -92,9 +92,9 @@ function bindFormEvents () {
     bodyTag: "fieldset",
     transitionEffect: "slideLeft",
     labels: {
-      finish: "提交订单",
-      next: "计算价格",
-      previous: "返回",
+      finish: $('#switch-en').length > 0 ? "提交订单" : "Submit",
+      next: $('#switch-en').length > 0 ? "下一步" : "Next",
+      previous: $('#switch-en').length > 0 ? "返回" : "Back",
     },
     onInit: function (event, currentIndex) {
       initFormValidates()
@@ -147,7 +147,7 @@ function bindFormEvents () {
     },
     onStepChanged: function (event, currentIndex, priorIndex) {
       if (currentIndex === 1) {
-        $('a[href="#next"]').html('上传PCB文件')
+        $('a[href="#next"]').html($('#switch-en').length > 0 ? "下一步" : "Next")
       }
 
       if (currentIndex === 0 && priorIndex === 1) {
@@ -238,8 +238,13 @@ function initPcbStateAndEvents () {
       + ((amount < 100) ? 0 : 1)
       + Math.max(0, (layer - 1)) * 1
 
-    $('#deliveryVal').html(delivery + '天左右')
-    $('#delivery').val(delivery + '天左右')
+    if ($('#switch-en').length > 0) {
+      $('#deliveryVal').html(delivery + '天左右')
+      $('#delivery').val(delivery + '天左右')
+    } else {
+      $('#deliveryVal').html('About' + delivery + 'day(s)')
+      $('#delivery').val('About' + delivery + 'day(s)')
+    }
   })
 
   $('#boardLayer input').change(function () {
@@ -286,10 +291,10 @@ function initAddressStateAndEvents () {
     var $extraTrs = $addressTrs.filter(':gt(' + (ADDRESS_PAGE_SIZE - 1) + ')')
 
     if ($this.data('disabled')) {
-      $this.html('显示全部地址').data('disabled', false)
+      $this.html($('#switch-en').length > 0 ? '显示全部地址' : 'Show all address').data('disabled', false)
       $extraTrs.hide()
     } else {
-      $this.html('收起全部地址').data('disabled', true)
+      $this.html($('#switch-en').length > 0 ? '收起全部地址' : 'Collapse address').data('disabled', true)
      
       if ($addressTrs.length < total) {
         generateAddress(9999)
@@ -324,7 +329,7 @@ function generateFee (data) {
 
   _.forEach(data, function (obj, idx) {
     tableTpl[0] += '<td>' + obj.label +  '</td>'
-    tableTpl[1] += '<td>' + obj.value +  '</td>'
+    tableTpl[1] += '<td>' + obj.text +  '</td>'
   })
 
   tableTpl[0] += '</tr>'
@@ -374,9 +379,9 @@ function generateAddress (pageSize) {
         var total = _.get(data, 'data.count')
 
         if (total > pageSize) {
-          $('#showAllAddress').html('显示全部地址')
+          $('#showAllAddress').html($('#switch-en').length > 0 ? '显示全部地址' : 'Show all address')
         } else {
-          $('#showAllAddress').html('收起全部地址').data('disabled', true)
+          $('#showAllAddress').html($('#switch-en').length > 0 ? '收起全部地址' : 'Collapse address').data('disabled', true)
         }  
 
         $('#addressList tbody').html(addressHtml.join('')).data('total', total)
@@ -413,10 +418,10 @@ function initInvoiceStateAndEvents() {
     var $extraTrs = $invoiceTrs.filter(':gt(' + (INVOICE_PAGE_SIZE - 1) + ')')
 
     if ($this.data('disabled')) {
-      $this.html('显示全部发票').data('disabled', false)
+      $this.html($('#switch-en').length > 0 ? '显示全部发票' : 'Show all invoice info').data('disabled', false)
       $extraTrs.hide()
     } else {
-      $this.html('收起全部发票').data('disabled', true)
+      $this.html($('#switch-en').length > 0 ? '收起全部发票' : 'Collapse invoice info').data('disabled', true)
      
       if ($invoiceTrs.length < total) {
         generateInvoice(9999)
@@ -429,6 +434,8 @@ function initInvoiceStateAndEvents() {
 }
 
 function generateInvoice (pageSize) {
+  var detailBtn =  $('#switch-en').length > 0 ? '查看' : 'Detail'
+  var editBtn = $('#switch-en').length > 0 ? '编辑' : 'Edit'
   var tdTpl = _.template(
     '<tr>' +
       '<td>' +
@@ -438,7 +445,10 @@ function generateInvoice (pageSize) {
       '<td><%- item.receiveName %></td>' +
       '<td><%- item.receiveAddress %></td>' +
       '<td>' +
-        '<a href="/account/invoice/editmodal?id=<%-item.id %>&type=1&check=1" data-toggle="ajaxModal" class="margin-right-10">' + '查看' + '</a>' + '<a href="/account/invoice/editmodal?id=<%-item.id %>&type=1" data-toggle="ajaxModal">' + '编辑' + '</a>' +
+        '<a href="/account/invoice/editmodal?id=<%-item.id %>&type=1&check=1" data-toggle="ajaxModal" class="margin-right-10">' + 
+          detailBtn + '</a>' + 
+        '<a href="/account/invoice/editmodal?id=<%-item.id %>&type=1" data-toggle="ajaxModal">' + 
+          editBtn + '</a>' +
       '</td>' +
     '</tr>'
   )
@@ -459,9 +469,9 @@ function generateInvoice (pageSize) {
         var total = _.get(data, 'data.count')
 
         if (total > pageSize) {
-          $('#showAllInvoice').html('显示全部发票')
+          $('#showAllInvoice').html($('#switch-en').length > 0 ? '显示全部发票' : 'Show all invoice info')
         } else {
-          $('#showAllInvoice').html('收起全部发票').data('disabled', true)
+          $('#showAllInvoice').html($('#switch-en').length > 0 ? '收起全部发票' : 'Collapse invoice info').data('disabled', true)
         }
 
         $('#invoiceList tbody').html(invoiceHtml.join('')).data('total', total)
