@@ -114,9 +114,14 @@
           </a>
           <span class="aline"></span>
         </li>
+        
         <li class="{% if (controller.active|contains('/bom')) %}active{% endif %}">
           <a href="/bom/index">
-            {{__.jed.dgettext('common', 'bom')}}
+            {% if isZh %}
+              BOM配单
+            {% else %}
+              BOM RFQ
+            {% endif %}
           </a>
           <!-- <a href="/pcbsvr/pcb/enquire?type=2">
             {{__.jed.dgettext('common', 'bom')}}
@@ -135,7 +140,11 @@
         {%endif%}
         <li class="{% if (controller.active|contains('/scm')) %}active{% endif %}">
           <a href="/scm">
-            {{__.jed.dgettext('common', 'scm')}}
+            {% if isZh %}
+              供应链外包服务
+            {% else %}
+              SCM Outsourcing Service
+            {% endif %}
           </a>
           <span class="aline"></span>
         </li>
