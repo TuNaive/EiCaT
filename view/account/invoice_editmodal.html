@@ -4,11 +4,18 @@
     <!-- header modal -->
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title " id="myLargeModalLabel">新增发票信息</h4>
+      <h4 class="modal-title " id="myLargeModalLabel">
+      {% if isZh %}
+        新增发票信息
+      {% else %}
+        Add New Invoice Info
+      {% endif %}
+      </h4>
     </div>
     <!-- body modal -->
     <div class="modal-body">
       <form id="invoiceForm" class="add-addr" >
+        {% if isZh %}
         <fieldset>
           <div class="form-horizontal" id="manager-form1">
             <input id="hd_b2c_domain" type="hidden" value="http://e.digiic.com">
@@ -134,6 +141,133 @@
             </p>
           </div>
         </fieldset>
+        {% else %}
+        <fieldset>
+          <div class="form-horizontal" id="manager-form1">
+            <input id="hd_b2c_domain" type="hidden" value="http://e.digiic.com">
+            <div class="form-group">
+                <label class="col-md-4 control-label"><i class="point-mast">*</i> Type: </label>
+                <div class="col-md-8 margin-top-8">
+                    <label class="argin-right-20" style="display: inline">
+                        <input name="invoiceType" checked="checked" class="regular-radio" data-val={{render.invoiceType}} data-val-number="字段 InvoiceType 必须是一个数字。" data-val-required="InvoiceType 字段是必需的。" id="normalInvoice" type="radio" value="0">
+                        <span style="margin-top:-10px;">Normal</span>
+                    </label>
+                    <label class="margin-right-20 margin-left-6" style="display: inline">
+                        <input name="invoiceType" class="regular-radio" id="specialInvoice" type="radio" value="1">
+                        Specified
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" id="raceType" style="display: flex;">
+                <label class="col-md-4 control-label"><i class="point-mast">*</i> Title Type: </label>
+                <label class="margin-top-8 margin-left-10" style="display: inline;">
+                    <input name="raceType" checked="checked" class="regular-radio" data-val={{render.raceType}} data-val-number="字段 RiseInvoiceType 必须是一个数字。" data-val-required="RiseInvoiceType 字段是必需的。" id="personType" type="radio" value="0">
+                    Individual
+                </label>
+                <label class="margin-right-20 margin-left-6 margin-top-8" style="display: inline">
+                    <input name="raceType" class="regular-radio" id="companyType" type="radio" value="1">
+                    Institution
+                </label>
+            </div>
+            <div class="form-group invoice_special" id="invoiceTitle" style="display: none;">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Title: </label>
+                <div class="col-md-6">
+                    <input class="form-control" required title="请输入发票抬头" id="input_InvoiceTitle" name="invoiceTitle" placeholder="发票抬头" type="text" value={{render.invoiceTitle}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Invoicer: </label>
+                <div class="col-md-6">
+                    <input class="form-control" required title="请输入收票人" id="input_ReceiveName" name="receiveName" placeholder="收票人" type="text" value={{render.receiveName}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Phone: </label>
+                <div class="col-md-6">
+                    <input class="form-control " id="input_ContactPhone" name="receivePhone" placeholder="收票人联系电话" type="text" value={{render.receivePhone}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Address: </label>
+                <div class="col-md-6">
+                    <input class="form-control" required title="请输入收票地址" id="input_ReceiveAddress" name="receiveAddress" placeholder="收票地址" type="text" value="{{render.receiveAddress}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast"></i> Zip Code: </label>
+                <div class="col-md-6">
+                    <input class="form-control " id="input_Postcode" name="postcode" placeholder="邮编" type="text" value={{render.postcode}}>
+                </div>
+            </div>
+            <div class="form-group invoice_special" style="display: none;">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Company Name: </label>
+                <div class="col-md-6">
+                    <input class="form-control" required title="请输入公司名称" id="input_CompanyName" name="companyName" placeholder="公司名称" type="text" value={{render.companyName}}>
+                </div>
+            </div>
+            <div class="form-group invoice_special" style="display: none;">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Company Address: </label>
+                <div class="col-md-6">
+                    <input class="form-control" required title="请输入公司注册地址" id="input_CompanyRegisterAddress" name="cRegisterAddress" placeholder="请输入公司注册地址" type="text" value={{render.cRegisterAddress}}>
+                </div>
+            </div>
+            <div class="form-group invoice_special" style="display: none;">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Company Phone：</label>
+                <div class="col-md-6">
+                    <input class="form-control " id="input_CompanyPhone" required title="请输入公司电话" name="companyPhone" placeholder="公司电话" type="text" value={{render.companyPhone}}>
+                </div>
+            </div>
+            <div class="form-group invoice_special" id="invoiceTAXID" style="display: none;">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Tax Registration: </label>
+                <div class="col-md-6">
+                    <input class="form-control " required title="请输入税务登记号" id="input_TAXID" name="taxId" placeholder="税务登记号" type="text" value={{render.taxId}}>
+                </div>
+            </div>
+            <div class="form-group invoice_special" style="display: none;">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Deposit Bank: </label>
+                <div class="col-md-6">
+                    <input class="form-control " required title="请输入开户银行" id="input_DepositBank" name="depositBank" placeholder="开户银行" type="text" value={{render.depositBank}}>
+                </div>
+            </div>
+            <div class="form-group invoice_special" style="display: none;">
+                <label for="name" class="col-md-4 control-label"><i class="point-mast">*</i> Bank Account: </label>
+                <div class="col-md-6">
+                    <input class="form-control digits" required title="请输入正确开户银行账号" id="input_BankAccountNo" name="bankAccountNo" placeholder="开户银行账号" type="text" value={{render.bankAccountNo}}>
+                </div>
+            </div>
+            <div class="form-group invoice_special" style="display: none;">
+                <label class="col-md-4 control-label"><i class="point-mast"></i> Invoice File: </label>
+                <div class="col-md-6">
+                    <label id="lb_input_InvoiceFile" class="btn m-btn-lg btn-info" for="input_InvoiceFile">
+                       Upload
+                        <input type="file" id="input_InvoiceFile" style="display:none" allowtype=".zip|.rar">
+                        <input id="hid_InvoiceFile" name="fileUuid" type="hidden" value={{render.fileUuid}}>
+                    </label>
+                    <label id="file_content" style="display: none;">
+                        <a href="" id="InvoiceFile">Download</a>
+                        <a id="remove_file">Remove</a>
+                    </label>
+                   <label style="font-size:13px;color:#4e4d4d;">
+                        注：开增值税专用发票，需要贵公司具备一般纳税人资格。需要提供一下资料供审核：<br>
+                        1）一般纳税人资格证书或者认定文件复印件（需盖公章，图片形式）<br>
+                        2）税务登记证副本复印件（需盖公章，图片形式）。
+                        【如是三证合一的公司请提供营业执照复印件，正副本均可】请将以上资料压缩后打包上传。（支持rar,zip两种格式）<br>
+                        *如文件不能上传成功，请使用最新的火狐或者google浏览器！
+                    </label>
+                </div>
+            </div>
+            <div id="agreeWrap" class="form-group p-left10" style="text-align: center;" data-val={{check}}>
+                <input id="ckname" class="regular2-checkbox" type="checkbox" checked="checked" onchange="changeReadAgredd();"> Read and agree the
+                <a class="a-blue" href="/pcbsvr/pcba/invoice" data-toggle="ajaxModal" style="line-height:20px;margin-left:5px;">Invoice Notice</a>
+            </div>
+            <p id="btnWrap" class="p10" style="text-align: center;" data-val={{check}}>
+                <input type="hidden" id="hd_invoiceId">
+                <input type="button" id="saveBtn" data-val={{edit}} data-id={{id}} value="Submit" class="btn m-btn-lg btn-primary">
+                <!-- <input type="button" id="clearBtn" value="Clean" class="btn m-btn-lg btn-primary"> -->
+            </p>
+          </div>
+        </fieldset>
+        {% endif %}
       </form>
     </div>
   </div>

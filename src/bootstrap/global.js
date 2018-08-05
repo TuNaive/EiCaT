@@ -681,7 +681,7 @@ global.get_list_field = function(data, grid, controller, module) {
  * @param array arr_id
  * @param string field
  * @return 完整的数据或者 指定的field字段值
- * @author arterli <arterli@qq.com>
+ * @
  */
 /*global get_pics_one */
 global.get_pics_one = async (arr_id, field) => {
@@ -779,7 +779,7 @@ global.formatCurrencyTenThou = function(num) {
  * @param id 数据id
  * @param field 字段
  * @param return 整条数据或字段数据
- * @author arterli <arterli@qq.com>
+ * @
  */
 /* global getmodelfield */
 global.getmodelfield = async(model_id,id,field)=>{

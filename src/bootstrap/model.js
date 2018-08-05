@@ -21,7 +21,7 @@
  * @param id 数据id
  * @param field 字段
  * @param return 整条数据或字段数据
- * @author arterli <arterli@qq.com>
+ * @
  */
 /* global getmodelfield */
 global.getmodelfield = async (model_id, id, field) => {

@@ -237,7 +237,13 @@ CLASSES:
 
                     <!-- buttons -->
                     <div class="shop-item-buttons text-center ">
-                      <span class="out-of-stock">已售罄</span><!-- add .clean to remove css characteres -->
+                      <span class="out-of-stock">
+                      {% if isZh %}
+                        已售罄
+                      {% else %}
+                        SOLD OUT
+                      {% endif %}
+                      </span><!-- add .clean to remove css characteres -->
                     </div>
                     <!-- /buttons -->
                   </div>
@@ -273,7 +279,13 @@ CLASSES:
                     {% if info.total_stock != 0%}
                     <span class=" text-success"><i class="fa fa-check"></i> 有货 <span class="badge badge-aqua btn-xs ">{{info.total_stock}}</span></span>
                     {% else%}
-                    <span class="pull-right text-danger"><i class="glyphicon glyphicon-remove"></i> 无货</span>
+                    <span class="pull-right text-danger">
+                      {% if isZh %}
+                        <i class="glyphicon glyphicon-remove"></i> 无货
+                      {% else %}
+                        <i class="glyphicon glyphicon-remove"></i> NO STOCK
+                      {% endif %}
+                    </span>
                     {% endif %}
                   </div>
 
@@ -345,7 +357,15 @@ CLASSES:
           </div>
           <div class="panel-footer nopadding">
             <ul id="myTab" class="nav nav-tabs " role="tablist" style="margin: -1px">
-              <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab">商品介绍</a></li>
+              <li role="presentation" class="active">
+                <a href="#description" role="tab" data-toggle="tab">
+                  {% if isZh %}
+                    商品介绍
+                  {% else %}
+                    PRODUCT DESCRIPTION
+                  {% endif %}
+                </a>
+              </li>
               {#
               <li role="presentation"><a href="#specs" role="tab" data-toggle="tab">规格参数</a></li>
               <li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">商品评价 (2)</a></li>

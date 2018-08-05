@@ -24,6 +24,7 @@
       {% include "./inc/user_left.html" %}
       <!-- RIGHT -->
       <div class="col-lg-10 col-md-10 col-sm-8">
+        {% if isZh %}
         <div id="normal-invoice">
           <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
           {{controller.meta_title}}<a href="/account/invoice/editmodal/?type=0" class="btn btn-primary btn-sm pull-right" data-toggle="ajaxModal">添加发票信息</a></h4>
@@ -60,6 +61,44 @@
             {{pagination | safe}}
           </div>
         </div>
+        {% else %}
+        <div id="normal-invoice">
+          <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
+          {{controller.meta_title}}<a href="/account/invoice/editmodal/?type=0" class="btn btn-primary btn-sm pull-right" data-toggle="ajaxModal">Add New</a></h4>
+          <div class="table-responsive">
+            <h4>Invoice List</h4>
+            <table class="table table-bordered table-striped table-vertical-middle">
+              <thead>
+              <tr>
+                <th>Title</th>
+                <th>Invoicer</th>
+                <th>Address</th>
+                <th>Default</th>
+                <th>Operation</th>
+              </tr>
+              </thead>
+              <tbody>
+              {%for item in listNormal %}
+              <tr>
+                <td >{{item.invoiceTitle}}</td>
+                <td>{{item.receiveName}}</td>
+                <td>{{item.receiveAddress}}</td>
+                <td>{%if item.isDefault == 1%}<a class="btn btn-default btn-xs ajax-get btn-success btn-set" data-val={{item.id}}>Default</a>{%else%}<a class="btn btn-xs ajax-get btn-default btn-set" data-val={{item.id}}>Set as default </a>{%endif%}
+                </td>
+                <td>
+                  <a class="btn btn-default btn-xs" data-toggle="ajaxModal" href="/account/invoice/editmodal/?id={{item.id}}&type=1"><i class="fa fa-edit white"></i>Edit </a>
+                  <a id="delBtn-{{item.id}}" class="btn btn-default btn-xs btn-del" data-val={{item.id}} data-toggle="modal" data-target=".del-invo-dialog"><i class="fa fa-times white"></i>Remove </a></td>
+              </tr>
+              {%endfor%}
+              </tbody>
+            </table>
+          </div>
+          <!-- PAGINATION -->
+          <div class="text-right">
+            {{pagination | safe}}
+          </div>
+        </div>
+        {% endif %}
        <!--  <div id="special-invoice">
           <h4>增值税专用发票资料</h4>
           <table class="table table-bordered table-striped table-vertical-middle">
@@ -96,6 +135,7 @@
 </section>
 <div class="modal fade del-invo-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
+    {% if isZh %}
     <div class="modal-content">
       <!-- header modal -->
       <div class="modal-header">
@@ -111,6 +151,23 @@
         </p>
       </div>
     </div>
+    {% else %}
+    <div class="modal-content">
+      <!-- header modal -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title " id="myLargeModalLabel">Alert</h4>
+      </div>
+      <!-- body modal -->
+      <div class="modal-body">
+        <span>Are you sure of removing selected row?</span>
+        <p class="p10" style="text-align: center;">
+          <input type="button" id="sureBtn" value="Yes" class="btn m-btn-lg btn-primary">
+          <input type="button" id="cancelBtn" value="Cancel" class="btn m-btn-lg btn-primary">
+        </p>
+      </div>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

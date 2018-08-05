@@ -129,7 +129,7 @@ export default env => {
    * @param model_id 模型id 或 模型名称
    * @param field 字段
    * @param return 整条数据或字段数据
-   * @author arterli <arterli@qq.com>
+   * @
    */
   env.addFilter("getmode", async (model_id, field, callback) => {
     let data = await get_model(model_id, field);

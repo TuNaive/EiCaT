@@ -2984,7 +2984,7 @@ _@media only screen and (max-width: 767px) {
 	*/
 	#topBar {
 		display:block;
-		background-color: #449ae0;
+		background-color: #4a83b1;
 		border-bottom:rgba(0,0,0,0.05) 1px solid;
 	}
 	#topBar>.border-bottom {
@@ -7492,14 +7492,15 @@ _@media only screen and (max-width: 482px) {
 .footer {
     width: 100%;
     overflow: hidden;
-    background: #036;
+    background: #5d80a2;
     color: #fff;
     padding: 35px 0 30px
 }
 
 .footer a {
     color: #fff;
-    font-size: .875em
+    font-size: 1.125em;
+    text-transform: uppercase;
 }
 
 .footer a:active,.footer a:hover {
@@ -7519,7 +7520,7 @@ _@media only screen and (max-width: 482px) {
 }
 
 .footer .footer-list dt {
-    font-size: 1.125em;
+    font-size: 1.25em;
     margin-bottom: 20px
 }
 

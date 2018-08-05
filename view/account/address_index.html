@@ -23,9 +23,10 @@
       <!-- LEFT -->
       {% include "./inc/user_left.html" %}
       <!-- RIGHT -->
+      {% if isZh %}
       <div class="col-lg-10 col-md-10 col-sm-8">
         <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
-          {{controller.meta_title}}
+          收货地址
           <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target=".add-addr-dialog">添加新地址
           </button>
         </h4>
@@ -85,6 +86,70 @@
         </div>
         <!-- /PAGINATION -->
       </div>
+      {% else %}
+      <div class="col-lg-10 col-md-10 col-sm-8">
+        <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
+          ADDRESS LIST
+          <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target=".add-addr-dialog">ADD NEW
+          </button>
+        </h4>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-vertical-middle">
+            <thead>
+            <tr>
+              <th>Recipient</th>
+              <th>Area</th>
+              <th>Street</th>
+              <th>Zip Code</th>
+              <th>Phone NO</th>
+              <th>Default</th>
+              <th>Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for item in list.data %}
+            <tr>
+              <td>{{item.accept_name}}</td>
+              <td>{{item.province}},{{item.city}},{{item.county}}</td>
+              <td>{{item.addr}}</td>
+              <td>
+                {{item.zip}}
+              </td>
+              <td>
+                {{item.mobile}}
+              </td>
+              <td>
+                {%if item.is_default == 1%}
+                <span class="label label-primary">Default address </span>
+                {%else%}
+                <a class="btn btn-default btn-xs ajax-get" href="/account/address/addrisdefault/?id={{item.id}}">
+                  <i class="fa fa-check white"></i>Set as default
+                </a>
+                {%endif%}
+              </td>
+              <td>
+                <a class="btn btn-default btn-xs" data-toggle="ajaxModal" href="/account/address/editaddrmodal/?id={{item.id}}&type=1">
+                  <i class="fa fa-edit white"></i>Edit
+                </a>
+                <a class="btn btn-default btn-xs confirm ajax-get" href="/account/address/deladdr/?id={{item.id}}">
+                  <i class="fa fa-times white"></i>Remove
+                </a>
+              </td>
+            </tr>
+            {%endfor%}
+
+            </tbody>
+          </table>
+        </div>
+        <!-- PAGINATION -->
+        <div class="text-right">
+          <!-- Pagination Default -->
+          {{pagination | safe}}
+          <!-- /Pagination Default -->
+        </div>
+        <!-- /PAGINATION -->
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -92,6 +157,7 @@
 <div class="modal fade add-addr-dialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-lg">
+    {% if isZh %}
     <div class="modal-content">
 
       <!-- header modal -->
@@ -194,6 +260,110 @@
         </form>
       </div>
     </div>
+    {% else %}
+    <div class="modal-content">
+
+      <!-- header modal -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title " id="myLargeModalLabel">Add new recipient</h4>
+      </div>
+
+      <!-- body modal -->
+      <div class="modal-body">
+        <form method="post" class="add-addr">
+          <fieldset>
+            <!-- required [php action request] -->
+            <div class="row">
+              <div class="form-group" id="areas">
+                <div class="col-md-3 col-sm-12">
+                  <label>Area（Province/Municipality） *</label>
+                  <select class="form-control pointer " id="province" name="province" required>
+                    <option value="">--- Province/Municipality ---</option>
+
+                  </select>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <label>（City） *</label>
+                  <select class="form-control pointer " id="city" name="city" required>
+                    <option value="">--- City ---</option>
+
+                  </select>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <label>（County/District） *</label>
+                  <select class="form-control pointer " id="county" name="county" required>
+                    <option value="">--- County/District ---</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <div class="col-md-12 col-sm-12">
+                  <label>Street *</label>
+                  <textarea class="form-control required" name="addr" required></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-6">
+                  <label>Zip Code *</label>
+                  <input type="text" maxlength="6" class="form-control required" value="" name="zip" required>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <label>Phone *</label>
+                  <input type="text" class="form-control required" value="" name="mobile" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <div class="col-md-6 col-sm-6">
+                  <label>Name *</label>
+                  <input type="text" class="form-control required" value="" name="accept_name" required>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                  <label>EMAIL </label>
+                  <input type="text" class="form-control " value="" name="email">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <div class="col-md-12 col-sm-12">
+                  <label>
+                    Set as default
+
+                  </label>
+                  <!-- checkbox -->
+                  <label class="checkbox">
+                    <input type="checkbox" value="1" name="is_default">
+                    <i></i> Default Address
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="row">
+            <div class="col-md-12">
+              <input type="hidden" name="type" value="1">
+              <button class="btn btn-3d btn-teal btn-lg btn-block margin-top-30" type="submit">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

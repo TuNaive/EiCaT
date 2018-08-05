@@ -19,6 +19,7 @@
       <!-- LEFT -->
       {% include "./inc/user_left.html" %}
       <!-- RIGHT -->
+      {% if isZh %}
       <div class="col-lg-10 col-md-10 col-sm-8">
 
         <!-- FLIP BOX -->
@@ -70,8 +71,61 @@
             </ul>
           </div>
         </div>
-
       </div>
+      {% else %}
+      <div class="col-lg-10 col-md-10 col-sm-8">
+
+        <!-- FLIP BOX -->
+        <div class="box-flip box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
+          <div class="front1">
+            <div class="box1 noradius">
+              <div class="box-icon-title text-center">
+                <img src="/u/avatar"  class=" rounded" alt="{{controller.user.username}}" style="width: 65px" />
+                <h2>Dear user <span class="text-danger">{{controller.user.username}}</span>  ，welcome!</h2>
+              </div>
+              <p>Last login: {{controller.user.last_login_time|moment('YYYY-MM-DD HH:mm:ss')}}</p>
+            </div>
+          </div>
+
+          <div class="back hide">
+            <div class="box2 noradius">
+              <h4>WHO AM I?</h4>
+              <hr />
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque.</p>
+            </div>
+          </div>
+        </div>
+        <!-- /FLIP BOX -->
+        <div class="box-light margin-top-20"><!-- .box-light OR .box-dark -->
+          <div class="box-inner">
+            <ul class="row clearfix testimonial-dotted list-unstyled">
+              <li class="col-md-6">
+                <div class="testimonial">
+                  <figure class="pull-left">
+                    <i class="ico-light ico-rounded ico-hover et-calendar"></i>
+                  </figure>
+                  <div class="testimonial-content">
+                    <h5 class="margin-bottom-8">TOTAL ORDERING： </h5>
+                    ￥<span class="text-danger">{%if orderTotal %}{{orderTotal|formatCurrency}}{%else%}0.00{%endif%}</span>
+                  </div>
+                </div>
+              </li>
+              <li class="col-md-6">
+                <div class="testimonial">
+                  <figure class="pull-left">
+                    <i class="ico-light ico-rounded ico-hover fa fa-hourglass-half"></i>
+                  </figure>
+                  <div class="testimonial-content">
+                    <h5 class="margin-bottom-8">ONGOING ORDERS: </h5>
+                    <span class="text-danger">{{onOrder}}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>

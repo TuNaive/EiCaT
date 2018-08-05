@@ -169,9 +169,33 @@
 
     <div class="row margin-top-20">
       <ul class="nav nav-tabs nav-justified" style="position: relative;background-color: #f1f2f7">
-        <li class="active"><a href="#all" data-toggle="tab" class="size-18">FPC软板</a></li>
-        <li><a href="#pcb" data-toggle="tab" class="size-18">软硬结合板</a></li>
-        <li><a href="#fpc" data-toggle="tab" class="size-18">PCB</a></li>
+        <li class="active">
+          <a href="#all" data-toggle="tab" class="size-18">
+          {% if isZh %}
+            FPC软板
+          {% else %}
+            Flex PCB
+          {% endif %}
+          </a>
+        </li>
+        <li>
+          <a href="#pcb" data-toggle="tab" class="size-18">
+          {% if isZh %}
+            软硬结合板
+          {% else %}
+            Flex-Rigid PCB
+          {% endif %}
+          </a>
+        </li>
+        <li>
+          <a href="#fpc" data-toggle="tab" class="size-18">
+          {% if isZh %}
+            PCB
+          {% else %}
+            Rigid PCB
+          {% endif %}
+          </a>
+        </li>
         <li><a href="#pcba" data-toggle="tab" class="size-18">PCBA</a></li>
         {#
         <li class="dropdown">

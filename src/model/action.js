@@ -3,7 +3,7 @@ module.exports = class extends think.Model {
    * 获取行为数据
    * @param string id 行为id
    * @param string field 需要获取的字段
-   * @author arterli <arterli@qq.com>
+   * @
    */
   async get_action(id, field){
     id=id||null,field=field||null;
@@ -25,7 +25,7 @@ module.exports = class extends think.Model {
    * @param int record_id 触发行为的记录id
    * @param int user_id 执行行为的用户id
    * @return boolean
-   * @author arterli <arterli@qq.com>
+   * @
    */
   async log(action, model, record_id, user_id, ip , url, record = ''){
     //action=action||null,model=model||null,record_id=record_id||null,user_id=user_id||null;
@@ -125,7 +125,7 @@ module.exports = class extends think.Model {
    * @param string action 行为id或者name
    * @param int self 替换规则里的变量为执行用户的id
    * @return boolean|array: false解析出错 ， 成功返回规则数组
-   * @author arterli <arterli@qq.com>
+   * @
    */
 
   async parse_action(action,self){
@@ -176,7 +176,7 @@ module.exports = class extends think.Model {
    * @param int $action_id 行为id
    * @param array $user_id 执行的用户id
    * @return boolean false 失败 ， true 成功
-   * @author arterli <arterli@qq.com>
+   * @
    */
   async execute_action(rules, action_id, user_id){
     // console.log(rules + action_id + user_id);
