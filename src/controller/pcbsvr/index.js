@@ -82,7 +82,7 @@ const PCBA_LIST = isZh => {
 
 export default class extends Base {
   indexAction() {
-    let isZh = this.$locale === 'zh-cn';
+    let isZh = !_.isEqual(this.cookie('locale'), 'en-us');
   	this.assign('fpcList', FPC_LIST(isZh));
     this.assign('fsList', FS_LIST(isZh));
     this.assign('pcbList', PCB_LIST(isZh));
