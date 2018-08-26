@@ -23,6 +23,7 @@
       <!-- LEFT -->
       {% include "./inc/user_left.html" %}
       <!-- RIGHT -->
+      {% if isZh %}
       <div class="col-lg-10 col-md-10 col-sm-8">
 
         <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
@@ -138,6 +139,123 @@
         </div>
         <!-- /PAGINATION -->
       </div>
+      {% else %}
+      <div class="col-lg-10 col-md-10 col-sm-8">
+
+        <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
+          PCB Orders</h4>
+
+        <ul class="nav nav-tabs nav-top-border">
+          <li {%if status == null%}class="active"{%endif%}><a href="/account/order/pcb?type={{type}}">ALL</a></li>
+          <li {% if status == 0%}class="active"{%endif%}><a href="/account/order/pcb/?status=0&type={{type}}" ><span class="badge badge-red btn-xs badge-corner">{{nopaid}}</span>UNPAID</a></li>
+          <li {% if status == 1%}class="active"{%endif%}><a href="/account/order/pcb/?status=1&type={{type}}"><span class="badge badge-red btn-xs badge-corner">{{receipt}}</span>PAID</a></li>
+          <li {% if status == -1%}class="active"{%endif%}><a href="/account/order/pcb/?status=-1&type={{type}}">CANCELLED</a></li>
+          <!--<li><a href="#profile_3"><span class="badge badge-red btn-xs badge-corner">8</span>待评价</a></li>-->
+          <!--<li class="dropdown">-->
+            <!--<a data-toggle="dropdown" class="dropdown-toggle" href="#">近三个月 <span class="caret"></span></a>-->
+            <!--<ul class="dropdown-menu">-->
+              <!--<li><a data-toggle="tab" tabindex="-1" href="#dropdown1">@fat</a></li>-->
+              <!--<li><a data-toggle="tab" tabindex="-1" href="#dropdown2">@mdo</a></li>-->
+            <!--</ul>-->
+          <!--</li>-->
+        </ul>
+        <div class="table-responsive">
+          <table class="table table-bordered order-tb">
+            <thead>
+            <tr>
+              <th width="242">Order NO</th>
+              <th>Order Time</th>
+              <th>Order State</th>
+              <th>Order Price</th>
+              <th>Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in list %}
+            <!--<tr class="active">-->
+              <!--<td colspan="5">-->
+                <!--{%if item.status == 4 or item.status== 6%}-->
+                <!--<a href="/center/order/delorder/?id={{item.id}}" class="btn btn-default btn-xs pull-right nomargin confirm ajax-get"><i class="fa fa-trash-o nopadding"></i></a>-->
+                <!--{%endif%}-->
+                <!--{%if item.pay_status ==0 and item.status != 6%}-->
+                <!--<div class=" pull-right">-->
+                  <!--<i class="fa fa-hourglass-half"></i> 剩余 <span class="countdown countdown-inline" data-from="{{item.end_time}}" data-labels="年,月,周,天,小时,分,秒"></span>-->
+                <!--</div>-->
+                <!--{%endif%}-->
+                <!--<h5 class="margin-bottom-0">-->
+                  <!--<small>{{item.create_time|moment('YYYY-MM-DD HH:mm:ss')}}</small>-->
+                  <!--<span class="margin-left-20">订单<a href="#" target="_blank">{{item.order_no}}</a></span></h5>-->
+                <!--</span>-->
+              <!--</td>-->
+            <!--</tr>-->
+            <tr>
+              <td>{{item.order_no}}</td>
+              <td>{{item._create_time}}</td>
+              <td style="border-bottom: none">
+                {%if item.status == 6%}
+                <span class="text-danger">Cancelled</span>
+                {%elif item.status == 4%}
+                <span class="text-default">Completed</span>
+                {%elif item.status == 2%}
+                <span class="text-default">Wait for audit</span>
+                {%elif item.delivery_status == 1%}
+                <span class="text-success">Wait to be received</span>
+                {%elif item.pay_status == 0%}
+                <span class="text-warning">Wait for payment</span>
+                {%elif item.pay_status == 1 or item.status ==3%}
+                <span class="text-warning">Wait for delivery</span>
+                {%endif%}
+              </td>
+              <td style="border-bottom: none">
+                <span class="text-danger">¥{{item.order_amount|formatCurrency}}</span>
+                <!--付款方式-->
+                <!--<span class="ftx-13">{{item.channel}}</span>-->
+              </td>
+              <td style="vertical-align: middle;border-bottom: none">
+                {%if item.is_del == 1%}
+                {%elif item.status == 2%}
+                {%elif (item.status == 4 or item.status == 6) and item.type == 0%}
+                  <a class="btn btn-default btn-xs" href="/pcbsvr/pcb/calc"><i class="fa fa-cart-plus white"></i>Reorder </a>
+                {%elif (item.status == 4 or item.status == 6) and item.type == 1%}
+                  <a class="btn btn-default btn-xs" href="/pcbsvr/pcba/calc"><i class="fa fa-cart-plus white"></i>Reorder </a>
+                {%elif item.delivery_status == 1%}
+                  <a class="btn btn-success btn-xs confirm ajax-get" href="/account/order/confirmreceipt/?id={{item.id}}"><i class="fa fa-cart-plus white"></i>Confirm receipt </a>
+                {%elif item.pay_status == 0%}
+                  <a href="/account/pay/index?order={{item.id}}">Pay now </a>
+                  <a class="confirm ajax-get" href="/account/order/delete/?id={{item.id}}">cancel </a>
+                {%elif item.pay_status == 1 or item.status ==3%}
+                  <!--<a class="btn btn-warning btn-xs" href="#"><i class="fa fa-cart-plus white"></i>提醒发货 </a>-->
+                {%endif%}
+
+                {%if item.type == 0%}
+                  <a href="/account/order/pcbDetail/?id={{item.id}}&type={{item.type}}">Detail</a>
+                {%else%}
+                  <a href="/account/order/pcbaDetail/?id={{item.id}}&type={{item.type}}">Detail</a>
+                {%endif%}
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="5">
+                <div class="alert alert-warning alert-block">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <p>No Order</p>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- PAGINATION -->
+        <div class="text-right">
+          <!-- Pagination Default -->
+          {{pagination | safe}}
+          <!-- /Pagination Default -->
+        </div>
+        <!-- /PAGINATION -->
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>

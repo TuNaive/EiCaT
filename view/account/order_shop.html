@@ -39,6 +39,7 @@
       <!-- LEFT -->
       {% include "./inc/user_left.html" %}
       <!-- RIGHT -->
+      {% if isZh %}
       <div class="col-lg-10 col-md-10 col-sm-8">
 
         <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
@@ -93,7 +94,7 @@
                 {%endif%}
                 <h5 class="margin-bottom-0">
                   <small>{{item.create_time|moment('YYYY-MM-DD HH:mm:ss')}}</small>
-                  <span class="margin-left-20">订单<a href="/account/order/shopDetail/?id={{item.id}}" target="_blank">{{item.order_no}}</a></span></h5>
+                  <span class="margin-left-20">订单 <a href="/account/order/shopDetail/?id={{item.id}}" target="_blank">{{item.order_no}}</a></span></h5>
                 </span>
 
 
@@ -239,6 +240,200 @@
         </div>
         <!-- /PAGINATION -->
       </div>
+      {% else %}
+      <div class="col-lg-10 col-md-10 col-sm-8">
+
+        <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
+          Common Orders</h4>
+
+        <ul class="nav nav-tabs nav-top-border">
+          <li {%if status== null%}class="active" {%endif%}><a href="/account/order/shop">ALL</a></li>
+          <li {% if status== 0%}class="active" {%endif%}><a href="/account/order/shop/?status=0"><span
+              class="badge badge-red btn-xs badge-corner">{{nopaid}}</span>UNPAID</a></li>
+          <li {% if status== 1%}class="active" {%endif%}><a href="/account/order/shop/?status=1"><span
+              class="badge badge-red btn-xs badge-corner">{{receipt}}</span>PAID</a></li>
+        </ul>
+        <div class="table-responsive">
+          <table class="table table-bordered  order-tb">
+            <thead>
+            <tr>
+              <th>Order Info</th>
+              <th>Recipient</th>
+              <th>Price</th>
+              <th>State</th>
+              <th>Operation</th>
+
+            </tr>
+            </thead>
+            {% for item in list %}
+            <tbody>
+            <tr class="sep-row">
+              <td class="height-10" colspan="5"></td>
+
+            </tr>
+            <tr class="active">
+              <td colspan="5">
+                {%if item.status == 4 or item.status== 6%}
+                <a href="/account/order/delete/?id={{item.id}}"
+                   class="btn btn-default btn-xs pull-right nomargin confirm ajax-get"><i
+                    class="fa fa-trash-o nopadding"></i></a>
+                {%endif%}
+                {%if item.pay_status ==0 and item.status != 6%}
+                <div class=" pull-right">
+                  <i class="fa fa-hourglass-half"></i> Remain <span class="countdown countdown-inline"
+                                                                data-from="{{item.end_time}}"
+                                                                data-labels="年,月,周,天,小时,分,秒"></span>
+                </div>
+                {%endif%}
+                <h5 class="margin-bottom-0">
+                  <small>{{item.create_time|moment('YYYY-MM-DD HH:mm:ss')}}</small>
+                  <span class="margin-left-20">Order <a href="/account/order/shopDetail/?id={{item.id}}" target="_blank">{{item.order_no}}</a></span></h5>
+                </span>
+
+
+              </td>
+            </tr>
+            {%set i=0%}
+            {% for v in item.goods%}
+            {% if i==0 %}
+            <tr>
+              <td>
+                <div class="goods-item">
+                  <div class="p-img">
+                    <a href="{{v.url}}" target="_blank">
+                      <img class="" src="{{v.pic}}" title="{{v.title}}" data-lazy-img="done" height="100%" width="60">
+                    </a>
+                  </div>
+                  <div class="p-msg">
+                    <div class="p-name">{%if v.type%}<span class="text-info">[{{v.type}}]</span> {%endif%}<a
+                        href="{{v.url}}" class="a-link" target="_blank" title="{{v.title}}">{{v.title}}</a></div>
+                  </div>
+                </div>
+
+                <div class="goods-number">
+                  x{{v.goods_nums}}
+                </div>
+
+
+                <!--<div class="goods-repair">-->
+                  <!--<a href="#{{item.id}}" target="_blank">返修/退换货</a>-->
+                <!--</div>-->
+
+              </td>
+              <td style="border-bottom: none"><a href="javascript:;" type="button"
+                                                 data-container="body"
+                                                 data-toggle="popover"
+                                                 data-placement="left"
+                                                 data-content=" {{item.accept_name}} {{item.mobile}}<br>{{item.province}}{{item.city}}{{item.county}}{{item.addr}}"
+                                                 data-original-title="" title="">
+                <span aria-hidden="true" class="et-profile-male"></span> {{item.address.accept_name}}</a></td>
+              <td style="border-bottom: none">
+                <div class="amount">
+                  <span class="text-danger">Total ¥{{item.order_amount|formatCurrency}}</span>
+                  <!--<span class="ftx-13">{{item.channel}}</span>-->
+                </div>
+              </td>
+              <td style="border-bottom: none">
+                <div class="status">
+
+                  {%if item.pay_status == 0 and item.delivery_status != 1 and item.status != 6 and item.status != 4%}
+                  <span class="text-warning">Wait for payment</span>
+                  {%elif (item.pay_status == 1 or item.status ==3) and item.delivery_status != 1 and item.status != 6
+                  and item.status != 4%}
+                  <span class="text-warning">Wait for delivery</span>
+                  {%elif item.delivery_status == 1 and item.status != 6 and item.status != 4 %}
+                  <span class="text-success">Wait to be received</span>
+                  {%elif item.status == 6%}
+                  <span class="text-danger">Cancelled</span>
+                  {%elif item.status == 4%}
+                  <span class="text-default">Completed</span>
+                  {%endif%}
+
+                  <br>
+                  <a target="_blank" href="/account/order/shopDetail/?id={{item.id}}">Detail</a>
+                </div>
+              </td>
+              <td style="vertical-align: middle;border-bottom: none">
+                {%if item.pay_status == 0 and item.delivery_status != 1 and item.status != 6 and item.status != 4%}
+                <a class="btn btn-danger btn-xs" href="/account/pay/index?order={{item.id}}" target="_blank"><i
+                    class="fa fa-credit-card white"></i>Pay now </a>
+                {%elif (item.pay_status == 1 or item.status ==3) and item.delivery_status != 1 and item.status != 6 and
+                item.status != 4%}
+                <!--<a class="btn btn-warning btn-xs" href="#"><i class="fa fa-cart-plus white"></i>提醒发货 </a>-->
+                {%elif item.delivery_status == 1 and item.status != 6 and item.status != 4 %}
+                <!-- todo -->
+                <a class="btn btn-success btn-xs confirm ajax-get"
+                   href="/account/order/confirmreceipt/?id={{item.id}}"><i class="fa fa-cart-plus white"></i>Confirm receipt </a>
+                {%elif item.status == 4 or item.status == 6%}
+                <!--todo: 再次购买-->
+                <!--<a class="btn btn-default btn-xs" href="#"><i class="fa fa-cart-plus white"></i>再次购买 </a>-->
+                {%endif%}
+
+              </td>
+
+            </tr>
+            {% else %}
+            <tr>
+              <td>
+                <div class="goods-item">
+                  <div class="p-img">
+                    <a href="{{v.url}}" target="_blank">
+                      <img class="" src="{{v.pic}}" title="{{v.title}}" data-lazy-img="done" height="100%" width="60">
+                    </a>
+                  </div>
+                  <div class="p-msg">
+                    <div class="p-name">{%if v.type%}<span class="text-info">[{{v.type}}]</span> {%endif%} <a
+                        href="{{v.url}}" class="a-link" target="_blank" title="{{v.title}}">{{v.title}}</a></div>
+                  </div>
+                </div>
+
+                <div class="goods-number">
+                  x{{v.goods_nums}}
+                </div>
+
+                <!--<div class="goods-repair">-->
+                  <!--<a href="#{{item.id}}" target="_blank">返修/退换货</a>-->
+                <!--</div>-->
+
+              </td>
+              <td style="border-top: none;border-bottom: none"></td>
+              <td style="border-top: none;border-bottom: none"></td>
+              <td style="border-top: none;border-bottom: none"></td>
+              <td style="border-top: none;border-bottom: none"></td>
+
+
+            </tr>
+            {% endif %}
+            {%set i=i+1%}
+            {%endfor%}
+            </tbody>
+            {% else %}
+            <tbody>
+            <tr class="sep-row">
+              <td class="height-10" colspan="5"></td>
+
+            </tr>
+            <tr>
+              <td colspan="5">
+                <div class="alert alert-warning alert-block">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <p>This would display if the 'item' collection were empty</p>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+        </div>
+        <!-- PAGINATION -->
+        <div class="text-right">
+          <!-- Pagination Default -->
+          {{pagination | safe}}
+          <!-- /Pagination Default -->
+        </div>
+        <!-- /PAGINATION -->
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>

@@ -16,7 +16,7 @@ function addValidateMethods () {
 
   var rules = {
     pcbFile: {
-      errMsg: '请上传文件',
+      errMsg: $('#isZh').val() === 'true' ? '请上传文件' : 'Please upload files',
       handler: function (value, element, params) {
         return $('#pcbFileName').html()
       }

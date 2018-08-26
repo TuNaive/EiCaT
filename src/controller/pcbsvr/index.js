@@ -9,6 +9,14 @@ const FPC_LIST = isZh => {
     "id": 2,
     "title": isZh ? "多层软板" : 'Multi-layers FPC',
     "src": "/static/common/images/products/FPC2.png"
+  }, {
+    "id": 3,
+    "title":'Single-sided FPC',
+    "src": "/static/common/images/products/FPC3.png"
+  }, {
+    "id": 4,
+    "title": 'Double-sided FPC',
+    "src": "/static/common/images/products/FPC4.png"
   }]
 }
 
@@ -21,25 +29,33 @@ const FS_LIST = isZh => {
     "id": 301,
     "title": isZh ? '软硬结合板' : 'Rigid-Flex Product',
     "src": "/static/common/images/products/FS2.png"
+  }, {
+    "id": 302,
+    "title": 'Rigid-Flex',
+    "src": "/static/common/images/products/FS3.png"
+  }, {
+    "id": 303,
+    "title": 'Rigid-Flex',
+    "src": "/static/common/images/products/FS4.png"
   }]
 }
 
 const PCB_LIST = isZh => {
   return [{
     "id": 304,
-    "title": 'HDI PCB',
+    "title": isZh ? '通讯板' : 'Control PCB',
     "src": "/static/common/images/products/PCB1.png"
   }, {
     "id": 305,
-    "title": isZh ? '金手指板' : 'Gold Finger PCB',
+    "title": isZh ? '手机板' : 'OSP + BGA PCB',
     "src": "/static/common/images/products/PCB2.png"
   }, {
     "id": 306,
-    "title": isZh ? '高频线路' : '提供英文',
+    "title": isZh ? '铝基板' : 'Aluminum Substrate',
     "src": "/static/common/images/products/PCB3.png"
   }, {
     "id": 307,
-    "title": isZh ? '高频线路' : '提供英文',
+    "title": isZh ? '高频线路板' : 'HF PCB',
     "src": "/static/common/images/products/PCB4.png"
   }]
 }
@@ -53,6 +69,14 @@ const PCBA_LIST = isZh => {
     "id": 309,
     "title": isZh ? 'BGA主板PCBA半成品' : 'BGA Board PCBA',
     "src": "/static/common/images/products/PCBA2.png"
+  }, {
+    "id": 310,
+    "title": isZh ? '通讯板' : 'COMM Main Board',
+    "src": "/static/common/images/products/PCBA3.png"
+  }, {
+    "id": 311,
+    "title": isZh ? '通讯板' : 'COMM Main Board',
+    "src": "/static/common/images/products/PCBA4.png"
   }]
 }
 

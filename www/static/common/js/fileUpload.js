@@ -14,7 +14,7 @@ _bindUpload = function (selectors) {
       url: 'upload',
       dataType: 'json',
       change: function (e, data) {
-        $(nameSelector).html('加载中……').siblings('label.error').hide()
+        $(nameSelector).html($('#isZh').val() === 'true' ? '加载中……' : 'loading...').siblings('label.error').hide()
       },
       done: function (e, data) {
         var res = data.result

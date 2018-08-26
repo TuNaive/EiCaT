@@ -76,6 +76,7 @@ export default class extends Base {
    * 登录页面
    */
   async loginAction() {
+    console.log('Fuckaaaaaaaaaaaaaaaaaaaa\n\n\n\n' + this.isZh)
     if (this.isPost) {
       const geetest = this.service('external/geetest')
       const captchaRes = await geetest.validate(this.ctx, this.post())

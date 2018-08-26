@@ -255,7 +255,7 @@ CLASSES:
                         数量
                         <small id="product-selected-qty">(<span>1</span>)</small>
                       </button> -->
-                      <input type="number" class="form-control required" placeholder="请输入购买数量" title="请输入数字" id="buy-number" name="number">
+                      <input type="number" class="form-control required" placeholder="{% if isZh %} 请输入购买数量 {% else %} Purchase quantity {% endif %}" title="{% if isZh %} 请输入数字 {% else %} Please type number {% endif %}" id="buy-number" name="number">
                       <!-- <ul id="product-qty-dd" class="dropdown-menu clearfix" role="menu">
                         <li class="active"><a data-val="1" href="#">1</a></li>
                         <li><a data-val="2" href="#">2</a></li>
@@ -272,12 +272,16 @@ CLASSES:
                     </div><!-- /btn-group -->
 
                     <button class="btn btn-danger pull-left product-add-cart noradius "><i class="fa fa-cart-plus "></i>
-                      添加到购物车
+                      {% if isZh %}
+                        添加到购物车
+                      {% else %}
+                        Add to cart
+                      {% endif %}
                     </button>
                   </div>
                   <div class="pull-right" id="stock">
                     {% if info.total_stock != 0%}
-                    <span class=" text-success"><i class="fa fa-check"></i> 有货 <span class="badge badge-aqua btn-xs ">{{info.total_stock}}</span></span>
+                    <span class=" text-success"><i class="fa fa-check"></i> {% if isZh %} 有货 {% else %} AVAILABLE {% endif %} <span class="badge badge-aqua btn-xs ">{{info.total_stock}}</span></span>
                     {% else%}
                     <span class="pull-right text-danger">
                       {% if isZh %}

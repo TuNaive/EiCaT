@@ -25,6 +25,7 @@
       <!-- LEFT -->
       {% include "./inc/user_left.html" %}
       <!-- RIGHT -->
+      {% if isZh %}
       <div class="col-lg-10 col-md-10 col-sm-8">
 
         <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
@@ -81,6 +82,64 @@
         </div>
         <!-- /PAGINATION -->
       </div>
+      {% else %}
+      <div class="col-lg-10 col-md-10 col-sm-8">
+
+        <h4 class="page-header margin-top-0"><i class="fa fa-reorder fa-lg text-default"></i>
+          BOM RFQ</h4>
+
+        <ul class="nav nav-tabs nav-top-border">
+          <li {%if status == null%}class="active"{%endif%}><a href="/account/bom/enquire">ALL</a></li>
+          <li {% if status == -1%}class="active"{%endif%}><a href="/account/bom/enquire/?status=-1">CANCELLED</a></li>
+        </ul>
+
+        <div class="table-responsive">
+          <table class="table table-bordered order-tb">
+            <thead>
+            <tr>
+              <th>Request NO</th>
+              <th>Files</th>
+              <th>Quote Time</th>
+              <th>State</th>
+              <th>Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in list %}
+            <tr>
+              <td>{{item.order_no}}</td>
+              <td>{{item.fileUuid | getFileName}}</td>
+              <td>{{item._create_time}}</td>
+              <td>{{item._status_en}}</td>
+              <td style="vertical-align: middle;border-bottom: none">
+                {%if item.status == 0%}
+                <a class="confirm ajax-get" href="/account/bom/delete/?id={{item.id}}">Cancel </a>
+                {%endif%}
+                <a href="/account/bom/enquireDetail/?id={{item.id}}">Detail</a>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="5">
+                <div class="alert alert-warning alert-block">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <p>NO DATA</p>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- PAGINATION -->
+        <div class="text-right">
+          <!-- Pagination Default -->
+          {{pagination | safe}}
+          <!-- /Pagination Default -->
+        </div>
+        <!-- /PAGINATION -->
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>

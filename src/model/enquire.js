@@ -7,6 +7,11 @@ const enums = {
     '0': '等待回复',
     '1': '已回复',
     '-1': '已取消'
+  },
+  status_en: { // 询价单状态
+    '0': 'Wait for response',
+    '1': 'Replied',
+    '-1': 'Cancelled'
   }
 }
 
@@ -38,6 +43,7 @@ export default class extends think.Model {
   processQueryData (obj) {
     obj._create_time = moment(_.toNumber(obj.create_time)).format('YYYY-MM-DD HH:mm:ss')
     obj._status = _.get(enums, `status.${obj.status}`)
+    obj._status_en = _.get(enums, `status_en.${obj.status}`)
 
     return obj
   }

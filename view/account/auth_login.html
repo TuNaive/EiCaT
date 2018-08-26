@@ -7,26 +7,56 @@
         type="button">
         <span aria-hidden="true">×</span>
       </button>
-      <h4 id="myModalLabel" class="modal-title">用户登录</h4>
+      <h4 id="myModalLabel" class="modal-title">
+      {% if isZh %}
+        用户登录
+      {% else %}
+        Sign in to TSPCBA
+      {% endif %}
+      </h4>
     </div>
     <div class="modal-body wrapper-lg">
       <div class="row">
         <div class="col-sm-7 b-r">
           <form role="form" class="sky-form" id="login" method="post">
             <div class="form-group">
-              <label>账号</label>
-              <input type="text" name="username" class="form-control" placeholder="邮箱/手机号/昵称" required="">
+              <label>
+              {% if isZh %}
+                账号
+              {% else %}
+                Username
+              {% endif %}
+              </label>
+              <input type="text" name="username" class="form-control" placeholder="{% if isZh %} 邮箱/手机号 {% else %} Email/Phone {% endif %}" required="">
             </div>
             <div class="form-group">
-              <label>密码</label>
-              <input type="password" name="password" class="form-control" placeholder="密码" required="">
+              <label>
+              {% if isZh %}
+                密码
+              {% else %}
+                Password
+              {% endif %}
+              </label>
+              <input type="password" name="password" class="form-control" placeholder="{% if isZh %} 密码 {% else %} Password {% endif %}" required="">
               <div class="clearfix note">
-                <a href="#" class="pull-right">忘记密码?</a>
+                <a href="#" class="pull-right">
+                {% if isZh %}
+                  忘记密码?
+                {% else %}
+                  Forgot password?
+                {% endif %}
+                </a>
               </div>
             </div>
             <div class="form-group">
               <div id="captcha">
-                <p id="wait" class="">正在加载验证码......</p>
+                <p id="wait" class="">
+                {% if isZh %}
+                  正在加载验证码......
+                {% else %}
+                  Loading...
+                {% endif %}
+                </p>
               </div>
             </div>
             <div id="alert"></div>
@@ -34,18 +64,39 @@
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <label class="checkbox weight-300 margin-top-10">
                   <input type="checkbox" name="checkbox-inline">
-                  <i></i> 记住我
+                  <i></i> 
+                  {% if isZh %}
+                    记住我
+                  {% else %}
+                    Remember Me
+                  {% endif %}
                 </label>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                <button class="btn btn-primary" id="validate-submit">登录</button>
+                <button class="btn btn-primary" id="validate-submit">
+                  {% if isZh %}
+                    登录
+                  {% else %}
+                    Sign In
+                  {% endif %}
+                </button>
               </div>
             </div>
           </form>
         </div>
         <div class="col-sm-5">
-          <h4>还没有账号?</h4>
-          <p>你可以在<a href="/account/auth/register" class="text-info">这里</a>创建一个帐户 </p>
+          <h4>
+            {% if isZh %}
+              还没有账号?
+            {% else %}
+              Sign up for TSPCBA
+            {% endif %}
+          </h4>
+          {% if isZh %}
+            <p>你可以在<a href="/account/auth/register" class="text-info">这里</a>创建一个帐户 </p>
+          {% else %}
+            <p>You can register <a href="/account/auth/register" class="text-info">here</a> </p>
+          {% endif %}
           <!-- <p>或者</p>
           <a href="/ext/qq/index" class="btn btn-block btn-social btn-twitter margin-bottom-10">
             <i class="fa fa-qq"></i> 使用QQ账号登录
@@ -110,6 +161,7 @@
     success: function (data) {
       initGeetest({
         gt: data.gt,
+        lang: $('#isZh').val() === 'true' ? 'zh-cn' : 'en',
         challenge: data.challenge,
         offline: !data.success, // 表示用户后台检测极验服务器是否宕机
         new_captcha: data.new_captcha, // 用于宕机时表示是新验证码的宕机

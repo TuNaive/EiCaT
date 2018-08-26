@@ -107,7 +107,7 @@ function initFormValidates () {
   
   $.validator.addMethod('receiveName', function (value, element, params) {
     return $('#pcbaFileName').html()
-  }, '请上传文件')
+  }, $('#isZh').val() === 'true' ? '请上传文件' : 'Please upload files')
 
   $.validator.addMethod('pointBga', function (value, element, params) {
     return _.toNumber($('#pointBga').val()) + _.toNumber($('#pointChip').val()) + _.toNumber($('#pointIc').val()) <= 500

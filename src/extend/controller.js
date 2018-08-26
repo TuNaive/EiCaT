@@ -15,9 +15,9 @@ module.exports = {
       url: '', //page url, when not set, it will auto generated
       class: 'nomargin', //pagenation extra class
       text: {
-        next: '下一页',
-        prev: '上一页',
-        total: '总数: __COUNT__ , 页数: __PAGE__'
+        next: _.isEqual(this.cookie('locale'), 'en-us') ? 'Next' : '下一页',
+        prev: _.isEqual(this.cookie('locale'), 'en-us') ? 'Prev' : '上一页',
+        total: _.isEqual(this.cookie('locale'), 'en-us') ? 'Total: __COUNT__ , Current: __PAGE__' : '总数: __COUNT__ , 页数: __PAGE__'
       }
     }, config);
     return pagination(data, this.ctx, ops);
