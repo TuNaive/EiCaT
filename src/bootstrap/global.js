@@ -332,9 +332,47 @@ global.get_price_format = function (price, type) {
   return price;
 }
 
+/**
+ * 获取美元价格格式化
+ */
+global.get_price_format_usd = function (price, type) {
+  let pr = JSON.parse(price);
+
+  if (1 == type) {
+    if (think.isNumber(pr.present_price_usd)) {
+      pr.present_price_usd = pr.present_price_usd.toString();
+    }
+    let prices = pr.present_price_usd.split("-");
+    let present_price_usd;
+    if (prices.length > 1) {
+      present_price_usd = formatCurrency(prices[0]) + "-" + formatCurrency(prices[1]);
+    } else {
+      present_price_usd = formatCurrency(prices[0])
+    }
+    price = present_price_usd;
+  } else {
+
+    if (pr.discount_price_usd == 0) {
+      price = "";
+    } else {
+      price = formatCurrency(pr.discount_price_usd);
+    }
+
+  }
+  return price;
+}
+
 global.has_price = function (price) {
   let pr = JSON.parse(price);
   if (pr.present_price == 0 && pr.discount_price == 0) {
+    return false;
+  }
+  return true;
+}
+
+global.has_price_usd = function (price) {
+  let pr = JSON.parse(price);
+  if (pr.present_price_usd == 0 && pr.discount_price_usd == 0) {
     return false;
   }
   return true;
@@ -749,6 +787,23 @@ global.get_price = function(price, type) {
 
         }
     }
+}
+
+//获取美元价格不格式化
+global.get_price_usd = function(price, type) {
+  if (price) {
+      price = JSON.parse(price);
+      if (1 == type) {
+          return price.present_price_usd;
+      } else {
+          if (price.discount_price_usd == 0) {
+              return "";
+          } else {
+              return price.discount_price_usd;
+          }
+
+      }
+  }
 }
 
 /**

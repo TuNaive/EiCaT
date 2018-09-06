@@ -1,6 +1,13 @@
 import Base from './base'
 
 export default class Cart extends Base {
+  __before() {
+    return super.__before.apply(this, arguments).then(data => {
+      this.$locale = _.get(this.getLocale(), '0')
+      this.isZh = this.$locale === 'zh-cn'
+      return data
+    })
+  }
   /**
    * index action
    * @return {Promise} []
@@ -94,6 +101,7 @@ export default class Cart extends Base {
     if (!this.is_login) {
       return this.fail("请先登录");
     }
+
     let data = this.post();
     data = think.extend({}, data);
     // 添加购物车前判断是否有库存
@@ -110,6 +118,14 @@ export default class Cart extends Base {
     if (think.isEmpty(cart)) {
       arr.push(data);
     } else {
+      var cart_tmp = [];
+      for (let item of cart) {
+        if ((item.currency == 'CNY') == this.isZh) {
+          cart_tmp.push(item);
+        }
+      }
+      cart = cart_tmp;
+
       //cart = JSON.parse(cart);
       console.log(cart);
       let typearr = []
@@ -149,11 +165,16 @@ export default class Cart extends Base {
       let table = await this.model('model').get_table_name(goods.model_id);
       let info = await this.model(table).find(val.product_id);
       goods = think.extend(goods, info);
-      dataobj.title = goods.title;
+      dataobj.title = this.isZh ? goods.title : goods.title_en;
       //console.log(goods);
       if (think.isEmpty(goods.suk)) {
-        dataobj.price = get_price(goods.price, 1) * Number(val.qty);
-        dataobj.unit_price = get_price(goods.price, 1);
+        if (this.isZh) {
+          dataobj.price = get_price(goods.price, 1) * Number(val.qty);
+          dataobj.unit_price = get_price(goods.price, 1);
+        } else {
+          dataobj.price = get_price_usd(goods.price, 1) * Number(val.qty);
+          dataobj.unit_price = get_price_usd(goods.price, 1);
+        }
         dataobj.weight = goods.weight;
         dataobj.pic = await get_pic(goods.pics.split(",")[0], 1, 100, 100);
       } else {
@@ -176,6 +197,7 @@ export default class Cart extends Base {
       dataobj.product_id = val.product_id;
       dataobj.type = val.type;
       dataobj.qty = Number(val.qty);
+      dataobj.currency = this.isZh ? 'CNY' : 'USD';
       dataarr.push(dataobj);
       total.push(dataobj.price);
       num.push(dataobj.qty);

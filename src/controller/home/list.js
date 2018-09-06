@@ -5,6 +5,13 @@ export default class extends Base{
     super(ctx)
     this.active = [ctx.url]
   }
+  __before() {
+    return super.__before.apply(this, arguments).then(data => {
+      this.$locale = _.get(this.getLocale(), '0')
+      this.isZh = this.$locale === 'zh-cn'
+      return data
+    })
+  }
 
   //列表页[核心]
   async indexAction() {
@@ -263,7 +270,7 @@ export default class extends Base{
     let html = this.pagination(data);
     this.assign('pagination', html);
     //seo
-    this.meta_title = cate.meta_title ? cate.meta_title : cate.title; //标题
+    this.meta_title = cate.meta_title ? cate.meta_title : (this.isZh ? cate.title : cate.title_en); //标题
     this.keywords = cate.keywords ? cate.keywords : ''; //seo关键词
     this.description = cate.description ? cate.description : ""; //seo描述
 
