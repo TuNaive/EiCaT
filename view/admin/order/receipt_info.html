@@ -1,0 +1,24 @@
+<section class="panel panel-default m-b-xs">
+  <header class="panel-heading">
+    <span class="label bg-danger pull-right m-t-xs"></span>
+    水单信息
+  </header>
+  <table class="table  m-b-none">
+    <thead>
+    <tr>
+      <th>汇款单编号</th>
+      <th>水单</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        {{order.pay_code}}
+      </td>
+      <td>
+          <a class="text-success" href="/pcbsvr/pcb/download?uuid={{order.receiptUuid}}">水单</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>

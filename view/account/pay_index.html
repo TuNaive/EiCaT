@@ -92,6 +92,7 @@
         <div class="heading-title heading-dotted text-center margin-bottom-20">
           <h4><span>[支付信息]</span></h4>
         </div>
+        <input type="hidden" id="payOnline" value="{{payOnline}}">
         {%if payOnline == true%}
         <div class="alert alert-mini alert-warning "><!-- WARNING -->
           <button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span
@@ -147,11 +148,22 @@
                 </div>
               </td>
               {%else%}
-              <td class="text-right">汇款单编号：</td>
-              <td>
-                <input type="text" id="payment-no" class=" input-sm form-control" style="width: 300px"
-                       name="payment-no">
-              </td>
+              <tr>
+                <td class="text-right">汇款单编号：</td>
+                <td>
+                  <input type="text" id="payment-no" class=" input-sm form-control" style="width: 300px"
+                        name="payment-no">
+                </td>
+              </tr>
+              <tr>
+                <td class="text-right">上传水单：</td>
+                <td>
+                    <input type="hidden" id="receiptUuid">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                      <input type="file" id="receiptFile" name="receiptFile">
+                    </form>
+                </td>
+              </tr>
               {%endif%}
             </tr>
 
@@ -164,8 +176,13 @@
     <div class="callout alert alert-default  noborder">
       <input type="hidden" value="{{order.id}}" name="order_id">
       <div class="text-center">
-        <a id="pay-btn" class="btn btn-3d btn-reveal btn-green{%if payOnline == true%} pingpp_pay{%endif%}"
+        {% if payOnline %}
+        <a id="pay-btn-pingpp" class="btn btn-3d btn-reveal btn-green{%if payOnline == true%} pingpp_pay{%endif%}"
            href="javascript:;">
+        {% else %}
+        <a id="pay-btn" class="btn btn-3d btn-reveal btn-green"
+           href="javascript:;">
+        {% endif %}
           <i class="fa fa-credit-card"></i>
           <span>立即支付</span>
         </a>

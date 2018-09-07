@@ -91,7 +91,7 @@
               <a href="/account/cart" class="btn btn-primary btn-xs pull-right">{{__.jed.dgettext('common', 'settle')}}</a>
               <span class="pull-left">
                 <strong>{{__.jed.dgettext('common', 'sum')}}: </strong>
-                <total>￥{% if controller.cart.total %}{{controller.cart.total|formatCurrency}}{%else%}0{%endif%}</total>
+                <total>{% if controller.cart.total %}{% if controller.cart.data[0].currency == 'CNY' %}￥{% else %}${% endif %}{{controller.cart.total|formatCurrency}}{%else%}0{%endif%}</total>
               </span>
             </div>
             <!-- /quick cart footer -->

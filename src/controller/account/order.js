@@ -1,6 +1,12 @@
 import Base from './base.js'
+import fs from 'mz/fs'
 
 export default class extends Base {
+  constructor(ctx) {
+    super(ctx)
+    this.uploadPath = think.ROOT_PATH + '/uploadFiles'
+  }
+
   __before() {
     return super.__before(true).then(data => {
       this.active = ['/pcb']
@@ -318,6 +324,55 @@ export default class extends Base {
     } else {
       return this.fail("删除失败!");
     }
+  }
+
+  async updateAction() {
+    // 用户上传水单
+
+    let pay_code = this.post("payment");
+    let receiptUuid = this.post("receipt_uuid");
+
+    let map = {
+      id: this.post("order_id"),
+    }
+    var res = await this.model("order").where(map).update({
+      pay_code: pay_code,
+      receiptUuid: receiptUuid,
+      pay_status: 1
+    });
+
+    return this.success({name: "更新成功，请等待管理员审核后发货！"});
+  }
+
+  async uploadReceiptAction() {
+    const receiptFile = this.file('receiptFile')
+    const {path, name, size} = receiptFile
+    const suffix = _.last(_.split(name,  '.'))
+
+    if (size > 1024 * 1024 * 40) {
+      return this.fail(-1, '允许上传文件大小在40M以内')
+    }
+
+    if (!_.includes(['jpg', 'jpeg', 'png', 'gif', 'bmp'], suffix)) {
+      return this.fail(-1, '不合法的文件后缀，仅支持jpg、png、gif、bmp格式文件')
+    }
+
+    // todo: add user info
+    let uuid = think.uuid(`userUuid_${Date.now()}`)
+    uuid = `${uuid}_${name}`
+
+    think.mkdir(this.uploadPath)
+
+    var readStream = fs.createReadStream(path)
+    var writeStream = fs.createWriteStream(`${this.uploadPath}/${uuid}`)
+    readStream.pipe(writeStream)
+
+    // await fs.rename(path, `${this.uploadPath}/${uuid}`)
+
+    return this.success({
+      ..._.pick(receiptFile, ['name', 'size']),
+      uuid
+    })
   }
 
   //确认收货

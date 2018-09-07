@@ -5,7 +5,7 @@
 
 jQuery(document).ready(function () {
   _shop();
-  // bindEvents()
+  bindEvents();
 });
 
 
@@ -627,10 +627,11 @@ function bindEvents() {
   $('#pay-btn').click(function (e) {
     var order_id = $("input[name='order_id']").val()
     var payment = $('#payment-no').val()
+    var receipt_uuid = $('#receiptUuid').val()
     $.ajax({
       type: "post",
-      url: "/account/pay/index",
-      data: {order_id: order_id, payment: payment},
+      url: "/account/order/update",
+      data: {order_id: order_id, payment: payment, receipt_uuid: receipt_uuid},
       success: function (res) {
         console.log(res);
         if (res.errno == 1000) {
@@ -638,10 +639,30 @@ function bindEvents() {
           return false;
         } else if (res.data.url) {
           window.location.href = res.data.url;
-        } else if (res.data.data) {
+        } else if (res.data.name) {
           _toastr(res.data.name, "top-right", "success", false);
         }
       }
     })
+  })
+
+  $('#receiptFile').change(function (e) {
+    console.log('change');
+    $.ajax({
+      url: '/account/order/uploadReceipt',
+      type: 'POST',
+      cache: false,
+      data: new FormData($('#uploadForm')[0]),
+      processData: false,
+      contentType: false
+    }).done(function(res) {
+      if (res.errno != 0) {
+        _toastr(res.errmsg, "top-right", "error", false);
+        $('#receiptFile').val('');
+      } else {
+        _toastr(res.errmsg, "top-right", "error", false);
+        $('#receiptUuid').val(res.data.uuid)
+      }
+    }).fail(function(res) {});
   })
 }
