@@ -65,7 +65,7 @@ CLASSES:
       <div class="col-lg-10 col-md-10 col-sm-10">
         <div class="panel panel-default tabs">
           <div class="panel-heading panel-heading-transparent">
-            <h2 class="panel-title">{{info.title}}</h2>
+            <h2 class="panel-title">{% if isZh %}{{info.title}}{% else %}{{info.title_en}}{% endif %}</h2>
           </div>
 
           <div class="panel-body">
@@ -140,16 +140,36 @@ CLASSES:
                 <!-- /buttons -->
 
                 <!-- price -->
-                {% if info.price|has_price %}
-                <div class="shop-item-price text-danger">
-                  {% if info.price|get_price_format('2') %}<span class="line-through nopadding-left">¥{{info.price|get_price_format('2')}}</span>{%endif%}
-                  ¥
-                  <price>{{info.price|get_price_format('1')}}</price>
-                </div>
+                {% if isZh %}
+                  {% if info.price|has_price %}
+                  <div class="shop-item-price text-danger">
+                    {% if info.price|get_price_format('2') %}<span class="line-through nopadding-left">¥{{info.price|get_price_format('2')}}</span>{%endif%}
+                    ¥
+                    <price>{{info.price|get_price_format('1')}}</price>
+                  </div>
+                  {% else %}
+                  <div class="shop-item-price text-danger f-16">
+                    该商品采购量和价格需与客服人员沟通
+                  </div>
+                  <a class="btn btn-primary pull-left noradius" role="button" href="/nonstandard/index?goods_id={{goods_id}}">
+                    上传材料
+                  </a>
+                  {% endif %}
                 {% else %}
-                <div class="shop-item-price text-danger f-16">
-                  {% if isZh%} 该商品采购量和价格需与客服人员沟通 {% else %} This product does not have a price tag {% endif %}
-                </div>
+                  {% if info.price|has_price_usd %}
+                  <div class="shop-item-price text-danger">
+                    {% if info.price|get_price_format_usd('2') %}<span class="line-through nopadding-left">${{info.price|get_price_format_usd('2')}}</span>{%endif%}
+                    $
+                    <price>{{info.price|get_price_format_usd('1')}}</price>
+                  </div>
+                  {% else %}
+                  <div class="shop-item-price text-danger f-16">
+                    This product does not have a price tag
+                  </div>
+                  <button class="btn btn-primary pull-left noradius">
+                    Upload materials
+                  </button>
+                  {% endif %}
                 {% endif %}
                 <!-- /price -->
 
@@ -298,11 +318,20 @@ CLASSES:
 
 
                 <div class="divider margin-top-10 margin-bottom-10"><!-- divider --></div>
-                {% if info.description %}
-                <!-- short description -->
-                <small class="text-muted">{{info.description}}</small>
-                <div class="divider margin-top-10 margin-bottom-10"><!-- divider --></div>
-                <!-- /short description -->
+                {% if isZh %}
+                  {% if info.description %}
+                  <!-- short description -->
+                  <small class="text-muted">{{info.description}}</small>
+                  <div class="divider margin-top-10 margin-bottom-10"><!-- divider --></div>
+                  <!-- /short description -->
+                  {% endif %}
+                {% else %}
+                  {% if info.description_en %}
+                  <!-- short description -->
+                  <small class="text-muted">{{info.description_en}}</small>
+                  <div class="divider margin-top-10 margin-bottom-10"><!-- divider --></div>
+                  <!-- /short description -->
+                  {% endif %}
                 {% endif %}
                 {% endif %}
 

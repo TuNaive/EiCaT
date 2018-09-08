@@ -136,7 +136,8 @@ module.exports = class extends think.Model {
             }
             //更新关键词
             await this.model("keyword").updatekey(data.keyname,data.id,data.userid,data.model_id,0);
-            let status =await this.update(data);
+
+            let status = await this.update(data);
             if(!status){
                 this.error = '更新基础内容出错！';
                 return false;

@@ -114,11 +114,11 @@ export default class extends Base {
 
     const fee = {}
 
-    const boardAreaAmount = Math.ceil(boardAmount / ((102 / boardWidth + 5) * (102 / boardLength + 5)))
-    const areaAmount = boardAmount * boardWidth * boardLength / 100
+    // const boardAreaAmount = Math.ceil(boardAmount / ((102 / boardWidth + 5) * (102 / boardLength + 5)))
+    const areaAmount = boardAmount * boardWidth * boardLength / 10000
 
     fee.projectFee = this.round2(projectPrice)
-    fee.boardFee = this.round2(boardAreaAmount * boardPrice)
+    fee.boardFee = this.round2(areaAmount * boardPrice)
     fee.makeupFee = this.round2(areaAmount * makeupPrice)
     fee.specialBoardFee = this.round2(0)
     fee.filmFee = this.round2(areaAmount * filmPrice)

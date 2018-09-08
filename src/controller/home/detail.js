@@ -1,10 +1,18 @@
 import Base from './base'
 
 export default class extends Base{
+  __before() {
+    return super.__before.apply(this, arguments).then(data => {
+      this.$locale = _.get(this.getLocale(), '0')
+      this.isZh = this.$locale === 'zh-cn'
+      return data
+    })
+  }
   //详情页[核心]
   async indexAction() {
     /* 标识正确性检测*/
     let id = this.get('id') || 0;
+    this.assign('goods_id', id);
     //if(!(id && think.isString(id))){
     //    this.fail('文档ID错误！');
     //} //if(!(id && think.isString(id))){
@@ -43,7 +51,7 @@ export default class extends Base{
     let cate = await this.category(info.category_id);
     cate = think.extend({}, cate);
     //seo
-    this.meta_title = info.title; //标题
+    this.meta_title = this.isZh ? info.title : info.title_en; //标题
     this.keywords = info.keyname ? info.keyname : ''; //seo关键词
     this.description = info.description ? info.description : ""; //seo描述
     //keywords

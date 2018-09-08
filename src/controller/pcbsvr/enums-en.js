@@ -97,9 +97,9 @@ export const pcbEnums = {
   },
   pcbFeeRule: {
     boardAreaAmount: '下单数量 / ((102 / 板子尺寸宽（CM） + 5) * (102 / 板子尺寸长（CM） + 5))，并向上取整',
-    areaAmount: '下单数量 * 板子尺寸宽（CM） * 板子尺寸长（CM） / 100',
+    areaAmount: '下单数量 * 板子尺寸宽（CM） * 板子尺寸长（CM） / 10000',
     projectFee: '板子层数对应的价格',
-    boardFee: '整板数量 * 对应的板价格',
+    boardFee: '单层总面积 * 对应的板价格',
     makeupFee: '单层总面积 * 对应的拼版价格',
     specialBoardFee: '0',
     filmFee: '单层总面积 * 对应的菲林价格',

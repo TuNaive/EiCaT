@@ -1,8 +1,4 @@
-{% if isZh %}
 {%column data="column",cid="136"%}
-{% else %}
-{%column data="column",cid="139"%}
-{% endif %}
 
 <div id="header" class="sticky clearfix">  
   <header id="topNav" class="clearfix">
@@ -76,7 +72,7 @@
               <a href="{{val.url}}">
                 <img src="{{val.pic}}" width="45" height="45" alt="" />
                 <h6><span>{{val.qty}}x</span> {{val.title}}</h6>
-                <small>￥{{val.price|formatCurrency}}
+                <small>{% if val.currency == 'CNY' %}￥{% else %}${% endif %}{{val.price|formatCurrency}}
                   {% if val.type %}
                   <span class="size-11 text-muted">[{{val.type}}]</span>
                   {% endif %}
@@ -95,7 +91,7 @@
               <a href="/account/cart" class="btn btn-primary btn-xs pull-right">{{__.jed.dgettext('common', 'settle')}}</a>
               <span class="pull-left">
                 <strong>{{__.jed.dgettext('common', 'sum')}}: </strong>
-                <total>￥{% if controller.cart.total %}{{controller.cart.total|formatCurrency}}{%else%}0{%endif%}</total>
+                <total>{% if controller.cart.total %}{% if controller.cart.data[0].currency == 'CNY' %}￥{% else %}${% endif %}{{controller.cart.total|formatCurrency}}{%else%}0{%endif%}</total>
               </span>
             </div>
             <!-- /quick cart footer -->
@@ -132,7 +128,11 @@
           {%for val in column%}
           <li class="{% if (controller.active == val.url) %}active{% endif %}">
             <a href="{{val.url}}">
-              {{val.name}}
+              {% if isZh %}
+                {{val.name}}
+              {% else %}
+                {{val.name_en}}
+              {% endif %}
             </a>
             <span class="aline"></span>
           </li>

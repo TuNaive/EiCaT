@@ -1,0 +1,265 @@
+{% extends "../common/inc/base.html" %}
+{% block style %}
+<link href="/static/pcbs/css/index.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<section class="page-header page-header-xs " >
+  <div class="container">
+    {#
+    <h1>{{category.title}}</h1>
+    #}
+
+    <!-- breadcrumbs -->
+<!--     <ol class="breadcrumb breadcrumb-inverse">
+      <li><a href="/">{{__.jed.dgettext('common', 'home')}}</a></li>
+      <li class="active">{{controller.sub_channel}}</li>
+    </ol> -->
+    <!-- /breadcrumbs -->
+  </div>
+</section>
+<section>
+  {% if isZh %}
+  <div class="container">
+    <p>只需上传资料生成询价单，报价工程师将一对一为您提供报价服务。</p>
+
+    <form id="nonstandardForm" class="form-horizontal">
+      <input type="hidden" value={{goods_id}} id="goods_id" name="goods_id">
+      <div class="form-group form-inline">
+        <label for="boardAmount" class="col-sm-2 control-label">数量：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required digits" title="请输入正确的BOM数量" id="boardAmount" name="boardAmount">
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="delivery" class="col-sm-2 control-label">交期（天）：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required digits" title="请输入正确的交期" id="delivery" name="delivery">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="comment" class="col-sm-2 control-label not-required">备注：</label>
+        <div class="col-sm-6">
+          <textarea id="comment" name="comment" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="contact" class="col-sm-2 control-label">联系人：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required" title="请输入联系人" id="contact" name="contact">
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="mobile" class="col-sm-2 control-label">联系手机：</label>
+        <div class="col-sm-10">
+          <input type="text" value="{{user.mobile}}" class="form-control required mobile" title="请输入正确的手机号" id="mobile" name="mobile">
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="email" class="col-sm-2 control-label">联系邮箱：</label>
+        <div class="col-sm-10">
+          <input type="text" value="{{user.email}}" class="form-control required email" title="请输入正确的邮箱" id="email" name="email">
+        </div>
+      </div>
+    </form>
+
+    <button id="generateOrder" class="btn btn-default center-block" data-type={{type}}>生成询价单</button>
+
+
+    <div class="row" style="margin-top: 96px;">
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key1.png"
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'delivery')}}</h4>
+          </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'deliveryText')}}
+          </p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key2.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'quality')}}</h4>
+          </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;;">
+            {{__.jed.dgettext('smt', 'qualityText')}}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key3.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'professional')}}</h4>
+          </div>
+          <p class="nomargin" style="height: 66px;overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'professionalText')}}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key4.png" 
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'economy')}}</h4>
+          </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'economyText')}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="container">
+    <p>Our engineer will offer quotation to you once get your BOM files.</p>
+    <p>We promise that we’ll keep your private information 100% safe.</p>
+
+    <form id="bomFileForm" class="form-horizontal">
+      <div class="form-group">
+        <label for="bomFile" class="col-sm-2 control-label">BOM Files: </label>
+        <div class="col-sm-10">
+          <span class="btn btn-default">Choose file</span>
+          <span id="bomFileName"></span>
+          <input type="file" class="form-control bomFile" id="bomFile" name="bomFile">
+          <p>Please keep the files to be within 40M with rar、zip、xlsx、xls format.</p>
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="boardAmount" class="col-sm-2 control-label">Quantity(pcs): </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required digits" title="Plsease type correct number for quantity" id="boardAmount" name="boardAmount">
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="delivery" class="col-sm-2 control-label">Expected Delivery date(days): </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required digits" title="Please type a correct date for delivery" id="delivery" name="delivery">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="comment" class="col-sm-2 control-label not-required">Remark: </label>
+        <div class="col-sm-6">
+          <textarea id="comment" name="comment" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="contact" class="col-sm-2 control-label">Contact Person: </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required" title="Please provide contact person." id="contact" name="contact">
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="mobile" class="col-sm-2 control-label">Contact Phone: </label>
+        <div class="col-sm-10">
+          <input type="text" value="{{user.mobile}}" class="form-control required mobile" title="Plsease provide correct phone number" id="mobile" name="mobile">
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="email" class="col-sm-2 control-label">Contact Email: </label>
+        <div class="col-sm-10">
+          <input type="text" value="{{user.email}}" class="form-control required email" title="Please provide correct email address" id="email" name="email">
+        </div>
+      </div>
+    </form>
+
+    <button id="generateOrder" class="btn btn-default center-block" data-type={{type}}>Quote Now</button>
+
+
+    <div class="row" style="margin-top: 96px;">
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key1.png"
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'delivery')}}</h4>
+          </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'deliveryText')}}
+          </p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key2.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'quality')}}</h4>
+          </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;;">
+            {{__.jed.dgettext('smt', 'qualityText')}}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key3.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'professional')}}</h4>
+          </div>
+          <p class="nomargin" style="height: 66px;overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'professionalText')}}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
+          <div class="box-icon-title">
+            <i>
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key4.png" 
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+            </i>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'economy')}}</h4>
+          </div>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'economyText')}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}
+{%block script%}
+<script src="/static/common/plugins/jquery.fileupload/vendor/jquery.ui.widget.js"></script>
+<script src="/static/common/plugins/jquery.fileupload/jquery.fileupload.js"></script>
+<script src="/static/common/plugins/form.validate/jquery.validation.min.js"></script>
+<script src="/static/common/js/validate.js"></script>
+<script src="/static/common/plugins/form.validate/localization/messages_zh.min.js"></script>
+<script src="/static/common/js/fileUpload.js"></script>
+<script src="/static/nonstandard/js/index.js"></script>
+{%endblock%}

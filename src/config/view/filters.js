@@ -120,8 +120,19 @@ export default env => {
     return get_price_format(price, type);
   })
 
+  /**
+   * 美元价格格式化
+   */
+  env.addFilter("get_price_format_usd", function (price, type) {
+    return get_price_format_usd(price, type);
+  })
+
   env.addFilter("has_price", function (price) {
     return has_price(price);
+  })
+
+  env.addFilter("has_price_usd", function (price) {
+    return has_price_usd(price);
   })
 
   /**
@@ -176,6 +187,13 @@ export default env => {
    */
   env.addFilter('get_price', function (price, type) {
     return get_price(price, type);
+  })
+
+  /**
+   * 获取商品美元价格不格式
+   */
+  env.addFilter('get_price_usd', function (price, type) {
+    return get_price_usd(price, type);
   })
 
   /**

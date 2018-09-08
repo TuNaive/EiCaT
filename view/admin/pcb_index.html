@@ -5,8 +5,7 @@
     <p>{{controller.meta_title}} = 工程费 + 板费 + 菲林费 + 表面处理费 + 测试费 + 加急费 + 半孔加工费 + 拼版费</p>
   </header>
   <section class="scrollable wrapper">
-    <p>整板数量 = 下单数量 / ((102 / 板子尺寸宽（CM） + 5) * (102 / 板子尺寸长（CM） + 5))，并向上取整</p>
-    <p>单层总面积 = 下单数量 * 板子尺寸宽（CM） * 板子尺寸长（CM） / 100</p>
+    <p>单层总面积 = 下单数量 * 板子尺寸宽（CM） * 板子尺寸长（CM） / 10000</p>
     <section class="panel panel-default">
       <form method="post" action="/admin/pcb/update" class="pcb-price-form">
         {% for key, groups in list %}

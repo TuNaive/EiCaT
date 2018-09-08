@@ -30,12 +30,21 @@
         {% for val in clist %}
         <!--{%if breadcrumb[1].id == val.id%} active {%endif%}-->
         <li class="list-group-item {%if breadcrumb[1].id == val.id%}active {%endif%} ">
-          <a {% if val.children %}class="dropdown-toggle " {%endif%} href="{{val.url}}">{{val.name}}</a>
+          {% if isZh %}
+            <a {% if val.children %}class="dropdown-toggle " {%endif%} href="{{val.url}}">{{val.name}}</a>
+          {% else %}
+            <a {% if val.children %}class="dropdown-toggle " {%endif%} href="{{val.url}}">{{val.name_en}}</a>
+          {% endif %}
           {% if val.children %}
           <ul>
             {% for _val in val.children %}
-            <li class="{%if breadcrumb[2].id == _val.id%}active {%endif%}"><a href="{{_val.url}}"><span
-                class="size-11 text-muted pull-right">(123)</span> {{_val.name}}</a></li>
+              {% if isZh %}
+                <li class="{%if breadcrumb[2].id == _val.id%}active {%endif%}"><a href="{{_val.url}}"><span
+                    class="size-11 text-muted pull-right">(123)</span> {{_val.name}}</a></li>
+              {% else %}
+                <li class="{%if breadcrumb[2].id == _val.id%}active {%endif%}"><a href="{{_val.url}}"><span
+                  class="size-11 text-muted pull-right">(123)</span> {{_val.name_en}}</a></li>
+              {% endif %}
             {%endfor%}
 
           </ul>
@@ -73,11 +82,18 @@
                 </a>
               </div>
               <div class="size-16 text-left text-danger">
-                ¥{{item.price|get_price_format('1')}}
+                {% if isZh %}
+                  ¥{{item.price|get_price_format('1')}}
+                {% else %}
+                  ${{item.price|get_price_format_usd('1')}}
+                {% endif %}
               </div>
               <div class="rating rating-5 size-13 width-100 text-left"><!-- rating-0 ... rating-5 --></div>
-              <a class="block size-12 elipsis" href="{{item.name|get_url(item.id)}}" target="_blank">{{item.title}}</a>
-
+              {% if isZh %}
+                <a class="block size-12 elipsis" href="{{item.name|get_url(item.id)}}" target="_blank">{{item.title}}</a>
+              {% else %}
+                <a class="block size-12 elipsis" href="{{item.name|get_url(item.id)}}" target="_blank">{{item.title_en}}</a>
+              {% endif %}
 
             </li><!-- /item -->
             {% if not loop.last%}

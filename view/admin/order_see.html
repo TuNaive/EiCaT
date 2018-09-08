@@ -11,11 +11,14 @@
         {% else %}
           <div class="modal-body">
             {% include "./order/custom_fee.html" %}
+            {% if order.pay_status == 1 %}
+              {% include "./order/receipt_info.html" %}
+            {% endif %}
             {% include "./order/buyer_info.html" %}
             {% include "./order/order_info.html" %}
             {% include "./order/consignee_info.html" %}
           </div>
-        {% endif%}
+        {% endif %}
       <div class="modal-footer">
         <input type="hidden" value="{{order.id}}" name="id">
         <a href="javascript:;" class="btn btn-default" data-dismiss="modal">关闭</a>
