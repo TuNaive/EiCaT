@@ -12,6 +12,7 @@ export default class extends Base{
   async indexAction() {
     /* 标识正确性检测*/
     let id = this.get('id') || 0;
+    this.assign('goods_id', id);
     //if(!(id && think.isString(id))){
     //    this.fail('文档ID错误！');
     //} //if(!(id && think.isString(id))){
