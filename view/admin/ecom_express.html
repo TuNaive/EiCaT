@@ -40,6 +40,7 @@
 
             <th>物流公司</th>
             <th>别名</th>
+            <th>快递区域</th>
             <th>快递100Code</th>
             <th>公司网址</th>
             <th style="width:130px;">操作</th>
@@ -53,6 +54,8 @@
             <td style="width: 80px">{{item.id}}</td>
             <td>{{item.name}}</td>
             <td>{{item.alias}}</td>
+
+            <td>{% if item.locale == 1 %}国际{% else %}国内{% endif %}</td>
             <td>{{item.code}}</td>
             <td><a data-id="{{item.id}}" href="{{item.url}}" class="text-info" target="_blank">{{item.url}}</a></td>
             <td>

@@ -276,17 +276,7 @@
             <div class="express clearfix">
               <h3 class="pull-left">快递公司：</h3>
                 <!-- <input type="hidden" class="required" id="expressId" name="expressId"> -->
-              <div class="col-sm-10">
-                <label class="radio-inline">
-                  <input type="radio" name="expressId" id="express0" value="1" checked>联昊通(只送广东省内,免费)
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="expressId" id="express1" value="2">顺丰
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="expressId" id="express2" value="3">德邦物流(适用批量板)
-                </label>
-              </div>
+              {% include "./pcb/express_list.html" %}
             </div>
 
             <div class="invoice">
@@ -574,17 +564,7 @@
             <div class="express clearfix" style="margin-top: 30px;">
               <h3>Delivery Company</h3>
                 <!-- <input type="hidden" class="required" id="expressId" name="expressId"> -->
-              <div>
-                <label class="radio-inline">
-                  <input type="radio" name="expressId" id="express0" value="1" checked>联昊通(只送广东省内,免费)
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="expressId" id="express1" value="2">顺丰
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="expressId" id="express2" value="3">德邦物流(适用批量板)
-                </label>
-              </div>
+              {% include "./pcb/express_list.html" %}
             </div>
 
             <div class="invoice" style="margin-top: 30px;">

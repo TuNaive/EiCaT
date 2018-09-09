@@ -507,13 +507,7 @@
 
           <div class="express clearfix">
             <h3 class="pull-left">快递公司：</h3>
-            <div class="col-sm-10">
-              {%for item in express%}
-              <label class="radio-inline">
-                <input type="radio" name="expressId" id="{{'express' + item.id}}" value="{{item.id}}" {%if item.id == 1%}checked{%endif%}>{{item.name}}
-              </label>
-              {%endfor%}
-            </div>
+            {% include "./pcb/express_list.html" %}
           </div>
 
           <div class="invoice">
@@ -1039,13 +1033,7 @@
 
           <div class="express clearfix" style="margin-top: 30px;">
             <h3>Delivery Company</h3>
-            <div>
-              {%for item in express%}
-              <label class="radio-inline">
-                <input type="radio" name="expressId" id="{{'express' + item.id}}" value="{{item.id}}" {%if item.id == 1%}checked{%endif%}>{{item.name}}
-              </label>
-              {%endfor%}
-            </div>
+            {% include "./pcb/express_list.html" %}
           </div>
 
           <div class="invoice" style="margin-top: 30px;">

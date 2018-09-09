@@ -230,6 +230,16 @@ export default env => {
      callback(null, isp);
    }, true);
 
+  // 快递locale过滤
+  env.addFilter("filterLocale", function (locale, isZh) {
+    const localeEnums = {
+      'zh-cn': 0,
+      'en-us': 1
+    }
+    const filter = isZh ? 'zh-cn' : 'en-us'
+    return locale == localeEnums[filter]
+  })
+
   // todo: test
   env.addFilter("JSON", function (int) {
     return JSON.stringify(int);

@@ -110,6 +110,11 @@ export default class extends think.Model {
       }
     ])
 
+    /**
+     * 订单原价 = 商品真实价格 + 真实运费
+     */
+    data.olde_order_amount = data.order_amount - data.adjust_amount
+
     data.pcbInfo._testMethod = testMethod.value
   }
 

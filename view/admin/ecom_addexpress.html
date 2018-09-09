@@ -8,7 +8,7 @@
             <div class="modal-body">
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">用户名称</label>
+                    <label class="col-sm-2 control-label">公司名称</label>
                     <div class="col-sm-10">
                         <div class="row">
                             <div class="col-md-8 ">
@@ -30,6 +30,23 @@
 
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">快递区域</label>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-md-8 ">
+                                <label style="padding: 4px 5px 0 0;">
+                                    <input type="radio" name="locale" value="0" {% if info.locale != 1 %}checked{% endif %}>
+                                    <span style="margin-top:-10px;">国内</span>
+                                </label>
+                                <label style="padding: 4px 5px 0 0;">
+                                    <input type="radio" name="locale" value="1" {% if info.locale == 1 %}checked{% endif %}>
+                                    <span style="margin-top:-10px;">国际</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>

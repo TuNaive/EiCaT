@@ -34,5 +34,8 @@
       {% endfor %}
     </tr>
   </table>
-  <p class="extra-info">总价格：{{data.order_amount|formatCurrency}}</p>
+  <p class="extra-info">原订单总金额：{{data.olde_order_amount|formatCurrency}}</p>
+  <p class="extra-info">调整后订单总金额：{{data.order_amount|formatCurrency}}</p>
+  <p class="extra-info">调价原因：{{data.adjust_note}}</p>
+  
 </div>

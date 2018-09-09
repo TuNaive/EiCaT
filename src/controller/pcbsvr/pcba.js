@@ -12,7 +12,9 @@ export default class extends Base {
       return data
     })
   }
-  calcAction() {
+  async calcAction() {
+    let express = await this.model("express_company").select();
+    this.assign('express', express);
     this.sub_channel = `PCBA ${this.__.jed.dgettext('smt', 'order')}`;
     // this.assign({
     //   sub_channel: 'PCBA自助询价'
