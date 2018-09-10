@@ -8,7 +8,7 @@ export default class extends Base{
   __before() {
     return super.__before.apply(this, arguments).then(data => {
       this.$locale = _.get(this.getLocale(), '0')
-      this.isZh = this.$locale === 'zh-cn'
+      this.isZh = !(this.$locale === 'en-us')
       return data
     })
   }
