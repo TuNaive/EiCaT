@@ -7,7 +7,7 @@ export default class Base extends Frontend {
       this.active = ['/pcbsvr', '/pcbsvr.html']
       this.channel = 'PCB/PCBA'
       this.$locale = _.get(this.getLocale(), '0')
-      this.isZh = this.$locale === 'zh-cn'
+      this.isZh = !(this.$locale === 'en-us')
       return data
     })
   }
