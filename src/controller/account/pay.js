@@ -6,6 +6,8 @@ export default class extends Base {
   __before() {
     return super.__before().then(data => {
       this.channel = '支付'
+      this.$locale = _.get(this.getLocale(), '0')
+      this.isZh = !(this.$locale === 'en-us')
       return data
     })
   }
@@ -157,7 +159,12 @@ export default class extends Base {
       if (payOnline) {
         // 根据不同的客户端调用不同的支付方式
         let map;
-        if (this.isMobile) {
+        if (!this.isZh) {
+          map = {
+            type: 4,
+            status: 1
+          };
+        } else if (this.isMobile) {
           map = {
             type: 2,
             status: 1
