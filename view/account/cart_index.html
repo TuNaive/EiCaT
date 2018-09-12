@@ -178,10 +178,10 @@
 
           <div class="col-md-4 col-sm-4 text-right">
             <p class="font-lato size-14 "><span class="text-default">总价（不含运费）：</span><strong
-                class="text-danger size-16">¥<span id="total"
+                class="text-danger size-16">{{currency}}<span id="total"
                                                    data-total="{{controller.cart.total|formatCurrency}}">0.00</span></strong>
             </p>
-            <p class="font-lato size-14 margin-top-6"><span class="text-default">优惠：</span><span class="">¥0.00</span>
+            <p class="font-lato size-14 margin-top-6"><span class="text-default">优惠：</span><span class="">{{currency}}0.00</span>
             </p>
           </div>
           <div class="col-md-2 col-sm-2 text-right"><!-- right btn -->

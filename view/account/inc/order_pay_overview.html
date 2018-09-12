@@ -7,22 +7,22 @@
         <tbody>
         <tr>
           <td class="text-right"><span class="text-danger">{{nums}}</span> 件商品，总商品金额：</td>
-          <td>¥ <span
+          <td>{{currency}} <span
               class="text-danger">{% if real_amount %}{{real_amount|formatCurrency}}{%else%}0.00{%endif%}</span>
           </td>
         </tr>
         <tr>
           <td class="text-right">优惠：</td>
-          <td><span class="text-success">- </span> ¥<span class="text-success">0.00</span></td>
+          <td><span class="text-success">- </span> {{currency}}<span class="text-success">0.00</span></td>
         </tr>
         <tr>
           <td class="text-right">运费：</td>
-          <td id="real_freight">¥ <span class="text-danger">{%if real_freight%}{{real_freight|formatCurrency}}{%else%}0.00{%endif%}</span>
+          <td id="real_freight">{{currency}} <span class="text-danger">{%if real_freight%}{{real_freight|formatCurrency}}{%else%}0.00{%endif%}</span>
           </td>
         </tr>
         <tr class="danger">
           <td class="text-right text-danger size-18">应付总额：</td>
-          <td class="text-danger size-18" id="order_amount">¥{{order_amount|formatCurrency}}</td>
+          <td class="text-danger size-18" id="order_amount">{{currency}}{{order_amount|formatCurrency}}</td>
         </tr>
         </tbody>
       </table>
