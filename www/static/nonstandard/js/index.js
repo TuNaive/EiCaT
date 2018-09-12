@@ -1,6 +1,7 @@
 $(function ($) {
   initFormValidate()
   bindEvents()
+  _bindUpload('#bomFile')
 })
 
 function initFormValidate () {
@@ -17,12 +18,19 @@ function bindEvents () {
   var form = $("#nonstandardForm")
   $('#generateOrder').click(function () {
     var valid = form.valid()
-    var param = [{
-      name: 'goods_id',
-      value: $('#goods_id').val()},
-      {name: 'type',
-      value: $('#generateOrder').data('type')
-    }]
+    var param = [
+      {
+        name: 'goods_id',
+        value: $('#goods_id').val()
+      },
+      {
+        name: 'type',
+        value: $('#generateOrder').data('type')
+      },
+      {
+        name: 'fileUuid',
+        value: $('#bomFile').data('uuid')
+      }]
     if (valid) {
       // todo: add loading
       $.ajax({

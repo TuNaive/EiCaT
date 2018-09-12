@@ -14,6 +14,13 @@
       <a class="text-primary" href="/p/{{data.goods_id}}.html" target="_blank">前往商店页面</a>
     </div>
   </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">规格书或厂商型号：</label>
+    <div class="col-sm-9 control-label text-left">
+      <span>{{data.fileUuid | getFileName}}</span>
+      <a class="text-primary" href="/pcbsvr/pcb/download?uuid={{data.fileUuid}}">点击下载</a>
+    </div>
+  </div>
   <div class="form-group form-inline">
     <label class="col-sm-3 control-label">数量：</label>
     <div class="col-sm-9 control-label text-left">{{data.boardAmount}}</div>

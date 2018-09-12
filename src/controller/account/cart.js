@@ -19,6 +19,7 @@ export default class Cart extends Base {
     this.keywords = this.config('setup.WEB_SITE_KEYWORD') ? this.config('setup.WEB_SITE_KEYWORD') : '';//seo关键词
     this.description = this.config('setup.WEB_SITE_DESCRIPTION') ? this.config('setup.WEB_SITE_DESCRIPTION') : "";//seo描述
     this.active = this.ctx.controller + "/" + this.ctx.action;
+    this.assign('currency', this.isZh ? '¥' : '$');
     //console.log(checkMobile(this.userAgent()));
     //编辑购物车// todou
     //判断浏览客户端
@@ -329,13 +330,16 @@ export default class Cart extends Base {
       //ping++ 支付渠道 pc网页
       //根据不同的客户端调用不同的支付方式
     let type;
-    if (this.isMobile) {
+    if (!this.isZh) {
+      type = 4;
+    } else if (this.isMobile) {
       type = 2;
     } else {
       type = 1;
     }
     let paylist = await this.model("pingxx").where({type: type, status: 1}).order("sort ASC").select();
     this.assign("paylist", paylist);
+    this.assign('currency', this.isZh ? '¥' : '$');
 
     //运费计算
     //    1、如果店铺只使用统一运费，那么顾客下单计算时按最低运费收取。
