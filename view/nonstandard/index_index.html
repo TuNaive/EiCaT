@@ -20,9 +20,18 @@
 <section>
   {% if isZh %}
   <div class="container">
-    <p>只需上传资料生成询价单，报价工程师将一对一为您提供报价服务。</p>
+    <p>任何非标器件需要定制或替代，只需上传规格书或原厂商型号规格，报价工程师将一对一为您提供报价服务。</p>
 
     <form id="nonstandardForm" class="form-horizontal">
+      <div class="form-group">
+        <label for="bomFile" class="col-sm-2 control-label">规格书或厂商型号：</label>
+        <div class="col-sm-10">
+          <span class="btn btn-default">选择文件</span>
+          <span id="bomFileName"></span>
+          <input type="file" class="form-control bomFile" id="bomFile" name="bomFile">
+          <p>允许上传文件大小在40M以内，rar、zip、xlsx、xls格式的文件。</p>
+        </div>
+      </div>
       <input type="hidden" value={{goods_id}} id="goods_id" name="goods_id">
       <div class="form-group form-inline">
         <label for="boardAmount" class="col-sm-2 control-label">数量：</label>
