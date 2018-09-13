@@ -141,12 +141,12 @@
   </div>
   {% else %}
   <div class="container">
-    <p>Our engineer will offer quotation to you once get your BOM files.</p>
+    <p>Please provide your specification or manufacturer model.</p>
     <p>We promise that we’ll keep your private information 100% safe.</p>
 
     <form id="bomFileForm" class="form-horizontal">
       <div class="form-group">
-        <label for="bomFile" class="col-sm-2 control-label">BOM Files: </label>
+        <label for="bomFile" class="col-sm-2 control-label">Specification or manufacturer model: </label>
         <div class="col-sm-10">
           <span class="btn btn-default">Choose file</span>
           <span id="bomFileName"></span>
@@ -154,6 +154,7 @@
           <p>Please keep the files to be within 40M with rar、zip、xlsx、xls format.</p>
         </div>
       </div>
+      <input type="hidden" value={{goods_id}} id="goods_id" name="goods_id">
       <div class="form-group form-inline">
         <label for="boardAmount" class="col-sm-2 control-label">Quantity(pcs): </label>
         <div class="col-sm-10">

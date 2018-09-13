@@ -114,7 +114,7 @@
             </tr>
             <tr class="danger ">
               <td class="text-right">订单金额：</td>
-              <td class="text-danger size-18">￥{{order.order_amount|formatCurrency}}</td>
+              <td class="text-danger size-18">{{currency}}{{order.order_amount|formatCurrency}}</td>
             </tr>
             <tr class="">
               {%if payOnline == true%}

@@ -128,13 +128,13 @@
                 <small>{{val.type}}</small>
                 {%endif%}
               </td>
-              <td>{{val.unit_price|formatCurrency}}</td>
+              <td>{{currency}}{{val.unit_price|formatCurrency}}</td>
               <td>
                 <input type="text" value="{{val.qty}}" {%if val.stock> 0%}min="1"{%else%}min="0" disabled {%endif%}
                 max="{{val.stock}}" class="form-control stepper" >
                 {%if val.stock > 0%}<span class="text-default">有货</span>{%else%}<span class="text-danger">无货</span>{%endif%}
               </td>
-              <td data-price="{{val.price}}"><strong class="price">{{val.price|formatCurrency}}</strong></td>
+              <td data-price="{{val.price}}"><strong class="price">{{currency}}{{val.price|formatCurrency}}</strong></td>
               <td>{% if controller.is_login %}
                 <div class="del"><a class="btn btn-default btn-xs margin-bottom-6 lightbox"
                                     href="/account/cart/delcart/?ids={{val.product_id}}{%if val.type%}||{{val.type|urlencode}}{%endif%}"
