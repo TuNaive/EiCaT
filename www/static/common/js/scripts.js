@@ -1110,10 +1110,10 @@ function _cart() {
               url: "/account/cart/addcart",
               data: str
             }).success(function (msg) {
-
+              var currency = ($('#isZh').val() === 'true' ? '￥' : '$');
               if (msg.data) {
                 _toastr("添加购物车成功!", "top-right", "success", false);
-                $("total").html("￥" + formatCurrency(msg.total));
+                $("total").html(currency + formatCurrency(msg.total));
                 $("#badge-corner").html(msg.num);
                 var html = '';
                 var htmlarr = [];
@@ -1121,7 +1121,7 @@ function _cart() {
                   html = '<a href="' + v.url + '">' +
                     '<img src="' + v.pic + '" width="45" height="45" alt="" />' +
                     '<h6><span>' + v.qty + 'x</span> ' + v.title + '</h6>' +
-                    '<small>￥' + formatCurrency(v.price) + ' <span class="size-11 text-muted">[' + v.type + ']</span></small>' +
+                    '<small>' + currency + formatCurrency(v.price) + ' <span class="size-11 text-muted">[' + v.type + ']</span></small>' +
                     '</a>';
                   htmlarr.push(html);
                 })

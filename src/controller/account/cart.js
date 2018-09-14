@@ -239,6 +239,8 @@ export default class Cart extends Base {
       return error.noAction('木有宝贝提交啥订单呢!');
     }
 
+    this.assign("currency", this.isZh ? '¥' : '$');
+
     //手机端接收
     if (!think.isEmpty(addrid) && this.isMobile) {
       post = JSON.parse(post);

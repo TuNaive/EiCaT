@@ -114,7 +114,7 @@
             </tr>
             <tr class="danger ">
               <td class="text-right">订单金额：</td>
-              <td class="text-danger size-18">￥{{order.order_amount|formatCurrency}}</td>
+              <td class="text-danger size-18">{{currency}}{{order.order_amount|formatCurrency}}</td>
             </tr>
             <tr class="">
               {%if payOnline == true%}
@@ -147,6 +147,20 @@
                   </div>
                 </div>
               </td>
+              {%if order.payment == 17%}
+              <tr>
+                  <td class="text-right">名称：</td>
+                  <td>上海融尔电子科技有限公司</td>
+                </tr>
+                <tr>
+                  <td class="text-right">开户行：</td>
+                  <td>中国建设银行上海江桥支行</td>
+                </tr>
+                <tr>
+                  <td class="text-right">银行账号：</td>
+                  <td>3105 0179 4200 0000 1087</td>
+                </tr>
+              {%endif%}
               {%else%}
               <tr>
                 <td class="text-right">名称：</td>
@@ -185,21 +199,23 @@
       </div>
     </div>
 
-    <div class="callout alert alert-default  noborder">
-      <input type="hidden" value="{{order.id}}" name="order_id">
-      <div class="text-center">
-        {% if payOnline %}
-        <a id="pay-btn-pingpp" class="btn btn-3d btn-reveal btn-green{%if payOnline == true%} pingpp_pay{%endif%}"
-           href="javascript:;">
-        {% else %}
-        <a id="pay-btn" class="btn btn-3d btn-reveal btn-green"
-           href="javascript:;">
-        {% endif %}
-          <i class="fa fa-credit-card"></i>
-          <span>立即支付</span>
-        </a>
+    {%if order.payment != 17%}
+      <div class="callout alert alert-default  noborder">
+        <input type="hidden" value="{{order.id}}" name="order_id">
+        <div class="text-center">
+          {% if payOnline %}
+          <a id="pay-btn-pingpp" class="btn btn-3d btn-reveal btn-green{%if payOnline == true%} pingpp_pay{%endif%}"
+             href="javascript:;">
+          {% else %}
+          <a id="pay-btn" class="btn btn-3d btn-reveal btn-green"
+             href="javascript:;">
+          {% endif %}
+            <i class="fa fa-credit-card"></i>
+            <span>立即支付</span>
+          </a>
+        </div>
       </div>
-    </div>
+    {%endif%}
   </div>
 </section>
 

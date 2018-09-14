@@ -17,10 +17,10 @@
       <td><img src="{{val.pic}}" alt="" width="45" class="img-responsive img-thumbnail"/></td>
       <td>{{val.title}}</td>
       <td>{% if val.type%}{{val.type}}{%endif%}</td>
-      <td>¥{{val.unit_price|formatCurrency}}</td>
+      <td>{{currency}}{{val.unit_price|formatCurrency}}</td>
       <td>{{val.qty}}</td>
       <td>无</td>
-      <td>¥{{val.price|formatCurrency}}</td>
+      <td>{{currency}}{{val.price|formatCurrency}}</td>
     </tr>
     {% endfor %}
     </tbody>

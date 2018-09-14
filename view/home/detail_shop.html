@@ -58,6 +58,7 @@ CLASSES:
 <!-- -->
 <section>
   <div class="container">
+    <input type="hidden" value="{{isZh}}" id="isZh">
 
     <div class="row">
 
@@ -147,13 +148,17 @@ CLASSES:
                     ¥
                     <price>{{info.price|get_price_format('1')}}</price>
                   </div>
+                  <div class="divider margin-top-10 margin-bottom-10"><!-- divider --></div>
                   {% else %}
                   <div class="shop-item-price text-danger f-16">
                     该商品采购量和价格需与客服人员沟通
+                    <div class="upload-button">
+                      <a class="btn btn-primary pull-left noradius" role="button" href="/nonstandard/index?goods_id={{goods_id}}">
+                        上传材料
+                      </a>
+                    </div>
                   </div>
-                  <a class="btn btn-primary pull-left noradius" role="button" href="/nonstandard/index?goods_id={{goods_id}}">
-                    上传材料
-                  </a>
+                  <div class="divider margin-top-40 margin-bottom-10"><!-- divider --></div>
                   {% endif %}
                 {% else %}
                   {% if info.price|has_price_usd %}
@@ -162,18 +167,21 @@ CLASSES:
                     $
                     <price>{{info.price|get_price_format_usd('1')}}</price>
                   </div>
+                  <div class="divider margin-top-10 margin-bottom-10"><!-- divider --></div>
                   {% else %}
                   <div class="shop-item-price text-danger f-16">
                     This product does not have a price tag
+                    <div class="upload-button">
+                      <a class="btn btn-primary pull-left noradius" role="button" href="/nonstandard/index?goods_id={{goods_id}}">
+                        Upload materials
+                      </a>
+                    </div>
                   </div>
-                  <button class="btn btn-primary pull-left noradius">
-                    Upload materials
-                  </button>
+                  <div class="divider margin-top-40 margin-bottom-10"><!-- divider --></div>
                   {% endif %}
                 {% endif %}
-                <!-- /price -->
 
-                <div class="divider margin-top-10 margin-bottom-10"><!-- divider --></div>
+                <!-- /price -->
 
                 <!-- <div class="clearfix margin-bottom-30">
                   <div class="pull-right" id="stock">

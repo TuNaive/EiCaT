@@ -14,6 +14,7 @@ export default class extends Base {
   // 支付
   async indexAction() {
     let payOnline = await this.model('setting').getPayOnline() == 1
+    this.assign('currency', this.isZh ? '￥' : '$')
     if (this.isAjax('post')) {
       let payment;
       let pay;
