@@ -6,6 +6,19 @@
 jQuery(document).ready(function () {
   _shop();
   bindEvents();
+
+  $('.offline_true').on('ifChecked', function(event){
+    $('.offline-pay').show()
+    $('.button-online').hide()
+    $('.button-offline').show()
+  });
+
+  $('.offline_false').on('ifChecked', function(event){
+    $('.offline-pay').hide()
+    $('.button-online').show()
+    $('.button-offline').hide()
+  });
+
 });
 
 

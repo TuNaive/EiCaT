@@ -106,8 +106,8 @@ export default class extends Base {
     const projectPrice = await this.model('pcb_price').getPrice({boardLayer, option: 'project'})
     const makeupPrice = await this.model('pcb_price').getPrice({boardLayer, option: 'makeup'})
     const filmPrice = await this.model('pcb_price').getPrice({option: 'film'})
-    const boardPrice = await this.model('pcb_price').getPrice({boardLayer, boardMaterial})
-    const surfacePrice = await this.model('pcb_price').getPrice({boardLayer: Math.min(boardLayer, 1), surfacing, boardThickness})
+    const boardPrice = await this.model('pcb_price').getPrice({boardLayer, boardMaterial, option: 'board'})
+    const surfacePrice = await this.model('pcb_price').getPrice({boardLayer: Math.min(boardLayer, 1), surfacing, boardThickness, option: 'surface'})
     const testPrice = await this.model('pcb_price').getPrice({option: 'test'}) // 单位/平方米
     const urgentPrice = await this.model('pcb_price').getPrice({option: 'urgent'}) // 100 线性递增
     const halfHolePrice = await this.model('pcb_price').getPrice({option: 'halfHole'}) // 双数递增
