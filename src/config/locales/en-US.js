@@ -64,7 +64,22 @@ module.exports = {
       placeholder: [ 'Please input' ],
       companyProfile: [ 'Company Profile' ],
       coreBusiness: [ 'Core Business' ],
-      contactInfo: [ 'Contact Info' ]
+      contactInfo: [ 'Contact Info' ],
+      step1: [ 'Step 1' ],
+      step2: [ 'Step 2' ],
+      step3: [ 'Step 3' ],
+      step4: [ 'Step 4' ],
+      step1_text: [ 'Cart' ],
+      step2_text: [ 'Confirm Order' ],
+      step3_text: [ 'Payment' ],
+      step4_text: [ 'Finished' ],
+      all_cart: [ 'All goods' ],
+      col1: [ 'Product' ],
+      col2: [ 'Specification' ],
+      col3: [ 'Unit price (USD)' ],
+      col4: [ 'Quantity' ],
+      col5: [ 'Sum (USD)' ],
+      col6: [ 'Operation' ]
     },
     "messages": {
       "": {

@@ -130,7 +130,7 @@ module.exports = {
       login: [ '登录' ],
       register: [ '注册' ],
       logout: [ '注销' ],
-      home: [ '首页'],
+      home: [ '首页' ],
       guide: [ '新手入门' ],
       terms: [ '使用条款和订购条件' ],
       statements: [ '免责说明' ],
@@ -154,7 +154,22 @@ module.exports = {
       placeholder: [ '请输入' ],
       companyProfile: [ '公司介绍' ],
       coreBusiness: [ '核心业务' ],
-      contactInfo: [ '联系方式' ]
+      contactInfo: [ '联系方式' ],
+      step1: [ '第一步' ],
+      step2: [ '第二步' ],
+      step3: [ '第三步' ],
+      step4: [ '第四步' ],
+      step1_text: [ '购物车' ],
+      step2_text: [ '确认订单信息' ],
+      step3_text: [ '选择支付' ],
+      step4_text: [ '订购完成' ],
+      all_cart: [ '全部商品' ],
+      col1: [ '商品' ],
+      col2: [ '规格' ],
+      col3: [ '单价(元)' ],
+      col4: [ '数量' ],
+      col5: [ '小计(元)' ],
+      col6: [ '操作' ]
     },
     "messages": {
       "": {

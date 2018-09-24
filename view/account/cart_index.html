@@ -43,39 +43,39 @@
     <div class="row process-wizard process-wizard-primary">
 
       <div class="col-xs-3 process-wizard-step active">
-        <div class="text-center process-wizard-stepnum">第一步</div>
+        <div class="text-center process-wizard-stepnum">{{__.jed.dgettext('common', 'step1')}}</div>
         <div class="progress">
           <div class="progress-bar"></div>
         </div>
         <a href="#" class="process-wizard-dot"></a>
-        <div class="process-wizard-info text-center">购物车</div>
+        <div class="process-wizard-info text-center">{{__.jed.dgettext('common', 'step1_text')}}</div>
       </div>
 
       <div class="col-xs-3 process-wizard-step disabled"><!-- complete -->
-        <div class="text-center process-wizard-stepnum">第二步</div>
+        <div class="text-center process-wizard-stepnum">{{__.jed.dgettext('common', 'step2')}}</div>
         <div class="progress">
           <div class="progress-bar"></div>
         </div>
         <a href="#" class="process-wizard-dot"></a>
-        <div class="process-wizard-info text-center">确认订单信息</div>
+        <div class="process-wizard-info text-center">{{__.jed.dgettext('common', 'step2_text')}}</div>
       </div>
 
       <div class="col-xs-3 process-wizard-step disabled"><!-- complete -->
-        <div class="text-center process-wizard-stepnum">第三步</div>
+        <div class="text-center process-wizard-stepnum">{{__.jed.dgettext('common', 'step3')}}</div>
         <div class="progress">
           <div class="progress-bar"></div>
         </div>
         <a href="#" class="process-wizard-dot"></a>
-        <div class="process-wizard-info text-center">选择支付</div>
+        <div class="process-wizard-info text-center">{{__.jed.dgettext('common', 'step3_text')}}</div>
       </div>
 
       <div class="col-xs-3 process-wizard-step disabled"><!-- active -->
-        <div class="text-center process-wizard-stepnum">第四步</div>
+        <div class="text-center process-wizard-stepnum">{{__.jed.dgettext('common', 'step4')}}</div>
         <div class="progress">
           <div class="progress-bar"></div>
         </div>
         <a href="#" class="process-wizard-dot"></a>
-        <div class="process-wizard-info text-center">订购完成</div>
+        <div class="process-wizard-info text-center">{{__.jed.dgettext('common', 'step4_text')}}</div>
       </div>
 
     </div>
@@ -84,18 +84,18 @@
     <form action="/account/cart/getorderinfo" method="post" class="form-cart">
       <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading panel-heading-transparent">全部商品 <strong class="text-danger nums">0</strong></div>
+        <div class="panel-heading panel-heading-transparent">{{__.jed.dgettext('common', 'all_cart')}} <strong class="text-danger nums">0</strong></div>
         <div class="table-responsive">
           <table class="table cart-tbody">
             <thead>
             <tr class="active">
               <th class="table-checkbox"><input type="checkbox" value="1" id="checkAll"></th>
-              <th style="width:400px">商品</th>
-              <th>规格</th>
-              <th>单价(元)</th>
-              <th style="width: 120px">数量</th>
-              <th>小计(元)</th>
-              <th>操作</th>
+              <th style="width:400px">{{__.jed.dgettext('common', 'col1')}}</th>
+              <th>{{__.jed.dgettext('common', 'col2')}}</th>
+              <th>{{__.jed.dgettext('common', 'col3')}}</th>
+              <th style="width: 120px">{{__.jed.dgettext('common', 'col4')}}</th>
+              <th>{{__.jed.dgettext('common', 'col5')}}</th>
+              <th>{{__.jed.dgettext('common', 'col6')}}</th>
             </tr>
             </thead>
             <tbody>
