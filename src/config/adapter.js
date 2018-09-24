@@ -47,8 +47,8 @@ exports.model = {
     host: '127.0.0.1',
     port: 3306,
     connectionLimit: 5,
-    user: 'root',
-    password: 'He19980130',
+    user: 'ectuser',
+    password: 'ectuser123',
     cache: { // 额外的缓存配置
       type: 'file',
       handle: fileCache,
