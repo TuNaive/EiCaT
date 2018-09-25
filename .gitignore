@@ -46,3 +46,5 @@ src/config/adapter.js
 
 # avatar upload
 www/upload
+
+src/config/adapter.js
