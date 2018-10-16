@@ -803,7 +803,7 @@ global.formatprice = price => {
 
 //获取价格不格式化
 global.get_price = function(price, type) {
-  let price = _parsePrice(price)
+  price = _parsePrice(price)
 
   if (price === null) {
     return 'N/A'
@@ -822,7 +822,7 @@ global.get_price = function(price, type) {
 
 //获取美元价格不格式化
 global.get_price_usd = function(price, type) {
-  let price = _parsePrice(price)
+  price = _parsePrice(price)
 
   if (price === null) {
     return 'N/A'
