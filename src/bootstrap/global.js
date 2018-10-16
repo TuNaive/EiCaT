@@ -5,6 +5,15 @@ import accounting from 'accounting'
 
 moment.locale('zh-cn')
 
+const _parsePrice = priceObj => {
+  try {
+    return JSON.parse(priceObj)
+  } catch (e) {
+    console.error('Error during parse price object', e)
+    return null
+  }
+}
+
 global._ = _
 
 global.moment = moment
@@ -306,7 +315,11 @@ global.get_pic = async (id, m = null, w = null, h = null) => {
  * 获取价格格式化
  */
 global.get_price_format = function (price, type) {
-  let pr = JSON.parse(price);
+  let pr = _parsePrice(price);
+
+  if (pr === null) {
+    return 'N/A'
+  }
 
   if (1 == type) {
     if (think.isNumber(pr.present_price)) {
@@ -329,6 +342,7 @@ global.get_price_format = function (price, type) {
     }
 
   }
+
   return price;
 }
 
@@ -336,7 +350,11 @@ global.get_price_format = function (price, type) {
  * 获取美元价格格式化
  */
 global.get_price_format_usd = function (price, type) {
-  let pr = JSON.parse(price);
+  let pr = _parsePrice(price);
+
+  if (pr === null) {
+    return 'N/A'
+  }
 
   if (1 == type) {
     if (think.isNumber(pr.present_price_usd)) {
@@ -363,16 +381,22 @@ global.get_price_format_usd = function (price, type) {
 }
 
 global.has_price = function (price) {
-  let pr = JSON.parse(price);
-  if (pr.present_price == 0 && pr.discount_price == 0) {
+  let pr = _parsePrice(price);
+
+  if (pr === null) {
+    return false;
+  } else if (pr.present_price == 0 && pr.discount_price == 0) {
     return false;
   }
   return true;
 }
 
 global.has_price_usd = function (price) {
-  let pr = JSON.parse(price);
-  if (pr.present_price_usd == 0 && pr.discount_price_usd == 0) {
+  let pr = _parsePrice(price);
+
+  if (pr === null) {
+    return false;
+  } else if (pr.present_price_usd == 0 && pr.discount_price_usd == 0) {
     return false;
   }
   return true;
@@ -751,9 +775,14 @@ global.sort_url = (id,val,arr,http)=>{
 }
 
 //{present_price:100,discount_price:80}
-global.formatprice = function(price) {
-    let pr = JSON.parse(price);
-    var present_price;
+global.formatprice = price => {
+    let pr = _parsePrice(price)
+
+    let present_price;
+
+    if (pr === null) {
+      return '<span class="text-xs"><span class="text-danger">现价: N/A</span></span>'
+    }
     //console.log(pr);
     if (think.isNumber(pr.present_price)) {
         pr.present_price = pr.present_price.toString();
@@ -774,34 +803,38 @@ global.formatprice = function(price) {
 
 //获取价格不格式化
 global.get_price = function(price, type) {
-    if (price) {
-        price = JSON.parse(price);
-        if (1 == type) {
-            return price.present_price;
-        } else {
-            if (price.discount_price == 0) {
-                return "";
-            } else {
-                return price.discount_price;
-            }
+  let price = _parsePrice(price)
 
-        }
-    }
+  if (price === null) {
+    return 'N/A'
+  }
+
+  if (1 == type) {
+      return price.present_price;
+  } else {
+      if (price.discount_price == 0) {
+          return "";
+      } else {
+          return price.discount_price;
+      }
+  }
 }
 
 //获取美元价格不格式化
 global.get_price_usd = function(price, type) {
-  if (price) {
-      price = JSON.parse(price);
-      if (1 == type) {
-          return price.present_price_usd;
-      } else {
-          if (price.discount_price_usd == 0) {
-              return "";
-          } else {
-              return price.discount_price_usd;
-          }
+  let price = _parsePrice(price)
 
+  if (price === null) {
+    return 'N/A'
+  }
+
+  if (1 == type) {
+      return price.present_price_usd;
+  } else {
+      if (price.discount_price_usd == 0) {
+          return "";
+      } else {
+          return price.discount_price_usd;
       }
   }
 }
