@@ -67,13 +67,12 @@ export default class extends Base{
       return this.redirect(info.link_id);
     }
     //获取面包屑信息
-    console.log('==========cate', cate);
     let breadcrumb = await this.model('category').get_parent_category(cate.id, true);
     this.assign('breadcrumb', breadcrumb);
 
     // 上一篇
     let previous = await document.where({
-      id: ['>', info.id],
+      id: ['<', info.id],
       category_id: info.category_id,
       'pid': 0,
       'status': 1
@@ -81,11 +80,11 @@ export default class extends Base{
     this.assign('previous', previous)
     // 下一篇
     let next = await document.where({
-      id: ['<', info.id],
+      id: ['>', info.id],
       category_id: info.category_id,
       'pid': 0,
       'status': 1
-    }).order('id DESC').find();
+    }).order('id ASC').find();
     this.assign('next', next)
 
     //获取模板
@@ -167,6 +166,9 @@ export default class extends Base{
       if (!think.isEmpty(info.content)) {
         info.content = info.content.split("_ueditor_page_break_tag_");
       }
+      if (!think.isEmpty(info.content_en)) {
+        info.content_en = info.content_en.split("_ueditor_page_break_tag_");
+      }
       return this.display(this.mtpl(temp))
     } else {
       if (!think.isEmpty(info.template) && info.template != 0) {
@@ -181,6 +183,9 @@ export default class extends Base{
       //内容分页
       if (!think.isEmpty(info.content)) {
         info.content = info.content.split("_ueditor_page_break_tag_");
+      }
+      if (!think.isEmpty(info.content_en)) {
+        info.content_en = info.content_en.split("_ueditor_page_break_tag_");
       }
       return this.display(`home/detail_${temp}`);
     }

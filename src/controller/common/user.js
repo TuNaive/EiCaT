@@ -1,6 +1,5 @@
 export default class extends think.Controller {
   async __before(needLogin = false, alertLogin = false) {
-    console.log(needLogin, alertLogin, this.ctx)
     // 当前登录状态
     this.is_login = this.isLoggedIn = await this.isLogin();
     if (needLogin && !this.isLoggedIn && _.indexOf(['/', '/index', '/account/auth/login', '/account/auth/register'], this.ctx.path) === -1) {

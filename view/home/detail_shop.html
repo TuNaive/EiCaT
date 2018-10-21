@@ -387,12 +387,30 @@ CLASSES:
           <div class="panel-footer">
             <ul class="pager nomargin">
               {%if previous.id%}
-              <li class="previous"><a class="noborder" href="{{previous.name|get_url(previous.id)}}"
-                                      title="{{previous.title}}">&larr; 上一个:{{previous.title|truncate(30)}}</a></li>
+              <li class="previous">
+                {% if isZh %}
+                <a class="noborder" href="{{previous.name|get_url(previous.id)}}" title="{{previous.title}}">
+                  &larr; 上一个: {{previous.title|truncate(30)}}
+                </a>
+                {% else %}
+                  <a class="noborder" href="{{previous.name|get_url(previous.id)}}" title="{{previous.title_en}}">
+                    &larr; Prev: {{previous.title_en|truncate(30)}}
+                  </a>
+                {% endif %}
+              </li>
               {%endif%}
               {%if next.id%}
-              <li class="next"><a class="noborder" href="{{next.name|get_url(next.id)}}" title="{{next.title}}">下一个:{{next.title|truncate(30)}}
-                &rarr;</a></li>
+              <li class="next">
+                {% if isZh %}
+                <a class="noborder" href="{{next.name|get_url(next.id)}}" title="{{next.title}}">
+                  下一个: {{next.title|truncate(30)}} &rarr;
+                </a>
+                {% else %}
+                <a class="noborder" href="{{next.name|get_url(next.id)}}" title="{{next.title_en}}">
+                  Next: {{next.title_en|truncate(30)}} &rarr;
+                </a>
+                {% endif %}
+              </li>
               {%endif%}
             </ul>
           </div>
@@ -416,7 +434,11 @@ CLASSES:
           <div class="tab-content panel-body padding-15">
             <!-- DESCRIPTION -->
             <div role="tabpanel" class="tab-pane fade in active" id="description">
-              {{info.content[0]|safe}}
+              {% if isZh %}
+                {{info.content[0]|safe}}
+              {% else %}
+                {{info.content_en[0]|safe}}
+              {% endif %}
             </div>
             {#
             <!-- SPECIFICATIONS -->

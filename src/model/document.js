@@ -80,9 +80,8 @@ module.exports = class extends think.Model {
             }
             data.update_time=new Date().getTime();
             data.status= await this.getStatus(data.id,data.category_id);
-            console.log(data);
-             id = await this.add(data);//添加基础数据
-            console.log(id);
+             
+            id = await this.add(data);//添加基础数据
             //let id = 100;
             if(!id){
                 this.error = '新增基础内容出错！';
@@ -191,7 +190,9 @@ module.exports = class extends think.Model {
         }else {
             model = modelinfo.name;
         }
-        console.log(model);
+
+        console.log('updating', data);
+
         if (think.isEmpty(data.id)) {//新增数据
             data.id=id;
             let ids = await this.model(model).add(data);
