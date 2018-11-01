@@ -18,7 +18,10 @@
 </section> #}
 <section>
   <div class="container">
-    <p>任何{{title}}加工需求，只需上传资料生成询价单，报价工程师将一对一为您提供报价服务。</p>
+    {% if isZh %}
+    <p style="font-size: 12px; margin: 6px 0 18px 12px; color: #7d7d7d;">
+      任何{{title}}加工需求，只需上传资料生成询价单，报价工程师将一对一为您提供报价服务。
+    </p>
 
     <form id="pcbFileForm" class="form-horizontal">
       <div class="form-group">
@@ -27,7 +30,7 @@
           <span class="btn btn-default">选择文件</span>
           <span id="pcbFileName"></span>
           <input type="file" class="form-control pcbFile" id="pcbFile" name="pcbFile">
-          <p>许上传文件大小在40M以内，rar、zip、xlsx、xls格式的文件。</p>
+          <p>允许许上传文件大小在40M以内，rar、zip、xlsx、xls格式的文件。</p>
         </div>
       </div>
       <div class="form-group form-inline">
@@ -69,24 +72,77 @@
     </form>
 
     <button id="generateOrder" class="btn btn-default center-block" data-type={{type}}>生成询价单</button>
+    {% else %}
+    <p style="font-size: 12px; margin: 6px 0 18px 12px; color: #7d7d7d;">
+      Our engineer will offer quickquote to you once get your gerber files.
+      <br>
+      We promises that we’ll keep your private information 100% safe.
+    </p>
 
-    <div class="row">
+    <form id="pcbFileForm" class="form-horizontal">
+      <div class="form-group">
+        <label for="pcbFile" class="col-sm-2 control-label">{{title}} Files：</label>
+        <div class="col-sm-10">
+          <span class="btn btn-default">Choose File</span>
+          <span id="pcbFileName"></span>
+          <input type="file" class="form-control pcbFile" id="pcbFile" name="pcbFile">
+          <p>Please keep the files to be within 40M with rar、zip、xlsx、xls format.</p>
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="boardAmount" class="col-sm-2 control-label">{{accountLabel}}：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required digits" title="Please input quantity" id="boardAmount" name="boardAmount">
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="delivery" class="col-sm-2 control-label">Expected Delivery date (days)：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required digits" title="Please input expected delivery days" id="delivery" name="delivery">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="comment" class="col-sm-2 control-label not-required">Remark：</label>
+        <div class="col-sm-6">
+          <textarea id="comment" name="comment" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="contact" class="col-sm-2 control-label">Contact Person：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required" title="Please provide contact person" id="contact" name="contact">
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="mobile" class="col-sm-2 control-label">Contact Phone：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required mobile" title="Please provide contact phone" id="mobile" name="mobile">
+        </div>
+      </div>
+      <div class="form-group form-inline">
+        <label for="email" class="col-sm-2 control-label">Contact Email：</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control required email" title="Please provide an email address" id="email" name="email">
+        </div>
+      </div>
+    </form>
+
+    <button id="generateOrder" class="btn btn-default center-block" data-type={{type}}>Submit</button>
+    {% endif %}
+
+    <div class="row" style="margin-top: 96px;">
       <div class="col-md-3">
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded"
-                   src="/static/pcbs/images/key1.png"
-                   style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key1.png"
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">交期保障</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'delivery')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden">
-            PCB单双面板8小时加急
-            <br>
-            批量72小时加急
-            <br>
-            交期保证95%以上
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'deliveryText')}}
           </p>
         </div>
       </div>
@@ -94,18 +150,14 @@
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded"
-                   src="/static/pcbs/images/key2.png"
-                   style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key2.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">品质保障</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'quality')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden">
-            批量抽测免费
-            <br>
-            测试直通率95%以上
-            <br>
-            XXKB版A级材料
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;;">
+            {{__.jed.dgettext('smt', 'qualityText')}}
           </p>
         </div>
       </div>
@@ -114,16 +166,14 @@
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded"
-                   src="/static/pcbs/images/key3.png"
-                   style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key3.png" 
+                style="width: 65px;height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">专业团队</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'professional')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px;overflow: hidden">
-            资深工程师团队
-            <br>
-            先进工厂设备及工作环境
+          <p class="nomargin" style="height: 66px;overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'professionalText')}}
           </p>
         </div>
       </div>
@@ -132,13 +182,15 @@
         <div class="box-icon box-icon-center box-icon-round box-icon-transparent box-icon-large box-icon-content" style="padding-top: 35px">
           <div class="box-icon-title">
             <i>
-              <img class="thumbnail rounded"
-                   src="/static/pcbs/images/key4.png"
-                   style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
+              <img class="thumbnail rounded" 
+                src="/static/pcbs/images/key4.png" 
+                style="width: 65px; height: 65px; margin-top: -1px; margin-left: -1px">
             </i>
-            <h4 class="nomargin">经济实惠</h4>
+            <h4 class="nomargin">{{__.jed.dgettext('smt', 'economy')}}</h4>
           </div>
-          <p class="nomargin" style="height: 66px; overflow: hidden"></p>
+          <p class="nomargin" style="height: 66px; overflow: hidden; padding: 6px 0;">
+            {{__.jed.dgettext('smt', 'economyText')}}
+          </p>
         </div>
       </div>
     </div>

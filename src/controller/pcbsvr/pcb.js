@@ -24,7 +24,7 @@ export default class extends Base {
 
   enquireAction() {
     const type = this.get('type')
-    let title = '', accountLabel = '板子数量（PCS）'
+    let title = '', accountLabel = this.isZh ? '板子数量（PCS）' : 'Quantity (pcs)'
     this.assign('type', type)
     if (type === '0') {
       title = 'PCB'

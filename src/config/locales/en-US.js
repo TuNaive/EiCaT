@@ -56,7 +56,7 @@ module.exports = {
       bom: [ 'BOM RFQ' ],
       scm: [ 'SCM Outsourcing Service' ],
       map: [ 'Site Map' ],
-      address: [ 'Company Address: 199 Haichuan Rd., Jiading District, Shanghai, China, 201800' ],
+      address: [ 'Company Address: 1220 TONGPU RD, PUTUO DISTRICT, SHANGHAI, CHINA 200333' ],
       phone: [ 'Phone Number: 400-920-5532' ],
       email: [ 'Email Address: sales09@tspcba.com' ],
       copyright: [ 'Copyright' ],

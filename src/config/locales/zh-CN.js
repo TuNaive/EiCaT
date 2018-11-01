@@ -146,7 +146,7 @@ module.exports = {
       bom: [ 'BOM配单' ],
       scm: [ '供应链外包服务' ],
       map: [ '网站地图' ],
-      address: [ '公司地址: 199 Haichuan Rd., Jiading District, Shanghai, China, 201800' ],
+      address: [ '公司地址: 1220 TONGPU RD, PUTUO DISTRICT, SHANGHAI, CHINA 200333' ],
       phone: [ '联系电话: 400-920-5532' ],
       email: [ '邮箱地址: sales09@tspcba.com' ],
       copyright: [ '版权所有' ],
