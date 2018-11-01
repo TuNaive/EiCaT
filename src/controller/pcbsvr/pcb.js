@@ -24,7 +24,7 @@ export default class extends Base {
 
   enquireAction() {
     const type = this.get('type')
-    let title = '', accountLabel = this.isZh ? '板子数量（PCS）' : 'Quantity (pcs)'
+    let title = ''
     this.assign('type', type)
     if (type === '0') {
       title = 'PCB'
@@ -34,12 +34,10 @@ export default class extends Base {
       this.sub_channel = 'PCBA工程师人工询价'
     } else if (type === '2') {
       title = 'BOM'
-      accountLabel = '件数'
       this.sub_channel = 'BOM工程师人工询价'
       this.channel = 'BOM'
     }
     this.assign('title', title)
-    this.assign('accountLabel', accountLabel)
     // this.assign('title', title = type === '0' ? 'PCB' : 'PCBA')
     // this.sub_channel = type === '0' ? 'PCB工程师人工询价' : 'PCBA工程师人工询价'
     return this.display()
