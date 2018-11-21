@@ -67,7 +67,7 @@ module.exports = class extends Admin {
     if (this.isPost) {
       let id = this.post("id");
       let admin_remark = this.post("admin_remark");
-      const modelName = RFQ_TYPES.indexOf(map.type) > -1 ? 'bom_enquire' : 'enquire'
+      const modelName = RFQ_TYPES.indexOf(type) > -1 ? 'bom_enquire' : 'enquire'
       let finish = await this.model(modelName).where({id: id}).update({status: oprConf.status, admin_remark: admin_remark});
       if (finish) {
         return this.success({name: "操作成功！", url: this.referer()})
@@ -93,7 +93,7 @@ module.exports = class extends Admin {
     let id = this.get("id");
     let type = this.get("type")
     this.meta_title = "查看询价单";
-    const modelName = RFQ_TYPES.indexOf(map.type) > -1 ? 'bom_enquire' : 'enquire'
+    const modelName = RFQ_TYPES.indexOf(type) > -1 ? 'bom_enquire' : 'enquire'
     //获取询价单信息
     let order = await this.model(modelName).find(id);
     this.assign("data", order);
