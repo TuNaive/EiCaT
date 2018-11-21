@@ -124,6 +124,16 @@
           </a> -->
           <span class="aline"></span>
         </li>
+        <li class="{% if (controller.active|contains('/fpc')) %}active{% endif %}">
+          <a href="/fpc/index">
+            {% if isZh %}
+              FPC配单
+            {% else %}
+              FPC RFQ
+            {% endif %}
+          </a>
+          <span class="aline"></span>
+        </li>
         {%if column|length>0%}
           {%for val in column%}
           <li class="{% if (controller.active == val.url) %}active{% endif %}">

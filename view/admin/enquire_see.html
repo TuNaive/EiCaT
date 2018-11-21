@@ -11,6 +11,8 @@
           {% include "../bom/enquire_detail.html" %}
         {%elseif type == 3%}
           {% include "../nonstandard/enquire_detail.html" %}
+        {%elseif type == 4%}
+          {% include "../fpc/enquire_detail.html" %}
         {%else%}
           {% include "../pcbsvr/pcb/enquire_detail.html" %}
         {%endif%}
