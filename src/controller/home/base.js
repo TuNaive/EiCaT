@@ -10,6 +10,5 @@ export default class extends Frontend {
 
   constructor (ctx) {
     super(ctx)
-    this.active = ['/servicesZH', '/servicesEN']
   }
 }

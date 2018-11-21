@@ -5,9 +5,11 @@ import accounting from 'accounting'
 
 moment.locale('zh-cn')
 
+const emptyObject = Object.freeze({})
+
 const _parsePrice = priceObj => {
   try {
-    return JSON.parse(priceObj)
+    return _.isEmpty(priceObj) ? null : JSON.parse(priceObj)
   } catch (e) {
     console.error('Error during parse price object', e)
     return null

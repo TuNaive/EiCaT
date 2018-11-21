@@ -1,6 +1,6 @@
 import Base from './base'
 
-export default class extends Base{
+export default class extends Base {
   __before() {
     return super.__before.apply(this, arguments).then(data => {
       this.$locale = _.get(this.getLocale(), '0')
@@ -8,6 +8,12 @@ export default class extends Base{
       return data
     })
   }
+
+  constructor (ctx) {
+    super(ctx)
+    this.active = ['/services']
+  }
+
   //详情页[核心]
   async indexAction() {
     /* 标识正确性检测*/
@@ -51,6 +57,7 @@ export default class extends Base{
     let cate = await this.category(info.category_id);
     cate = think.extend({}, cate);
     //seo
+    this.active = [`/${cate && cate.name}`]; //选中的增值分类
     this.meta_title = this.isZh ? info.title : info.title_en; //标题
     this.keywords = info.keyname ? info.keyname : ''; //seo关键词
     this.description = info.description ? info.description : ""; //seo描述
