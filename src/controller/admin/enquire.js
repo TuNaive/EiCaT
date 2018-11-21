@@ -1,5 +1,7 @@
 import Admin from '../inc/admin'
 
+const RFQ_TYPES = ['2', '3', '4']
+
 module.exports = class extends Admin {
   constructor(ctx) {
     super(ctx); // 调用父级的 constructor 方法，并把 ctx 传递进去
@@ -34,7 +36,7 @@ module.exports = class extends Admin {
   async listAction() {
     let status = this.get("status");
     let map = {}, amountLabel = '板子数量（PCS）';
-    if (this.get("type") === '2') {
+    if (this.get("type") === '2' || this.get("type") === '4') {
       amountLabel = '件数'
     }
     this.assign('amountLabel', amountLabel)
@@ -44,7 +46,7 @@ module.exports = class extends Admin {
     }
     map.type = this.get("type") || 0;
     this.assign('type', map.type);
-    const modelName = map.type === '2' ? 'bom_enquire' : (map.type === '3' ? 'nonstandard_enquire' : 'enquire')
+    const modelName = RFQ_TYPES.indexOf(map.type) > -1 ? 'bom_enquire' : 'enquire'
     let data = await this.model(modelName).where(map).page(this.get('page') || 1, 20).order("create_time DESC").countSelect();
     let html = this.pagination(data);
     this.assign('pagerData', html); //分页展示使用
@@ -65,7 +67,7 @@ module.exports = class extends Admin {
     if (this.isPost) {
       let id = this.post("id");
       let admin_remark = this.post("admin_remark");
-      const modelName = type === '2' ? 'bom_enquire' : (type === '3' ? 'nonstandard_enquire' : 'enquire')
+      const modelName = RFQ_TYPES.indexOf(map.type) > -1 ? 'bom_enquire' : 'enquire'
       let finish = await this.model(modelName).where({id: id}).update({status: oprConf.status, admin_remark: admin_remark});
       if (finish) {
         return this.success({name: "操作成功！", url: this.referer()})
@@ -91,7 +93,7 @@ module.exports = class extends Admin {
     let id = this.get("id");
     let type = this.get("type")
     this.meta_title = "查看询价单";
-    const modelName = type === '2' ? 'bom_enquire' : (type === '3' ? 'nonstandard_enquire' : 'enquire')
+    const modelName = RFQ_TYPES.indexOf(map.type) > -1 ? 'bom_enquire' : 'enquire'
     //获取询价单信息
     let order = await this.model(modelName).find(id);
     this.assign("data", order);
