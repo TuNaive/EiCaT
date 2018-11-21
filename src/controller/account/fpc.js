@@ -36,7 +36,7 @@ export default class extends Base {
       map.status = -1
     }
 
-    let data = await this.model("fpc_enquire").where(map).page(this.para('page')).order("create_time DESC").countSelect();
+    let data = await this.model("bom_enquire").where(map).page(this.para('page')).order("create_time DESC").countSelect();
     let html = this.pagination(data);
 
     this.assign('pagination', html);
@@ -53,7 +53,7 @@ export default class extends Base {
    * @returns {PreventPromise}
    */
   async enquireDetailAction() {
-    let data = await this.model("fpc_enquire").where({
+    let data = await this.model("bom_enquire").where({
       id: this.para('id')
     }).find();
 
@@ -70,7 +70,7 @@ export default class extends Base {
       id: this.get("id"),
       user_id: this.user.uid
     }
-    const res = await this.model("fpc_enquire").where(map).update({status: -1});
+    const res = await this.model("bom_enquire").where(map).update({status: -1});
 
     if (res) {
       return this.success({name: "删除成功！"});
