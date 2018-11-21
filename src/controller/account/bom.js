@@ -22,6 +22,7 @@ export default class extends Base {
 
     let map = {
       user_id: this.user.uid,
+      type: 2,
       status: ["!=", -1]
 
     }
