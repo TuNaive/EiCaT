@@ -142,6 +142,15 @@
           {% endif %}
           </a>
         </li>
+        <li>
+          <a href="/account/fpc/enquire" class="{% if ctx.originalUrl | test('/account/fpc/enquire') %}text-danger{%endif%}">
+          {% if isZh %}
+            <i class="fa fa-angle-right"></i> FPC询价单
+          {% else %}
+            <i class="fa fa-angle-right"></i> FPC RFQ
+          {% endif %}
+          </a>
+        </li>
         <!-- <li>
           <a href="/account/enquire/pcb?type=2" class="{% if ctx.originalUrl | test('/account/enquire/pcb.*type=2') %}text-danger{%endif%}"><i
               class="fa fa-angle-right"></i> BOM询价单</a>
@@ -152,15 +161,6 @@
             <i class="fa fa-angle-right"></i> BOM询价单
           {% else %}
             <i class="fa fa-angle-right"></i> BOM RFQ
-          {% endif %}
-          </a>
-        </li>
-        <li>
-          <a href="/account/fpc/enquire" class="{% if ctx.originalUrl | test('/account/fpc/enquire') %}text-danger{%endif%}">
-          {% if isZh %}
-            <i class="fa fa-angle-right"></i> FPC询价单
-          {% else %}
-            <i class="fa fa-angle-right"></i> FPC RFQ
           {% endif %}
           </a>
         </li>

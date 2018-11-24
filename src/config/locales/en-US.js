@@ -54,7 +54,7 @@ module.exports = {
       aboutus: [ 'About Us' ],
       services: [ 'Services' ],
       bom: [ 'BOM RFQ' ],
-      fpc: [ 'FPC RFQ' ],
+      fpc: [ 'FPC' ],
       scm: [ 'SCM Outsourcing Service' ],
       map: [ 'Site Map' ],
       address: [ 'Company Address: 1220 TONGPU RD, PUTUO DISTRICT, SHANGHAI, CHINA 200333' ],

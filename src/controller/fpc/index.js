@@ -9,7 +9,7 @@ export default class extends Base {
   }
 
   async indexAction() {
-    this.sub_channel = 'FPC定制'
+    this.sub_channel = 'FPC'
     const user = await this.session('webuser')
     this.assign('type', '4')
     this.assign('user', user)

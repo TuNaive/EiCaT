@@ -144,7 +144,7 @@ module.exports = {
       aboutus: [ '关于我们' ],
       services: [ '增值服务' ],
       bom: [ 'BOM配单' ],
-      fpc: [ 'FPC定制' ],
+      fpc: [ 'FPC' ],
       scm: [ '供应链外包服务' ],
       map: [ '网站地图' ],
       address: [ '公司地址: 上海同普路1220号同普大厦512室' ],
