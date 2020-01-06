@@ -7543,9 +7543,22 @@ _@media only screen and (max-width: 482px) {
     margin-top: 50px;
     line-height: 20px;
     text-align: center;
-    font-size: .75em
+    font-size: 1em
 }
-	
+
+.footer .footer-icp-info {
+		margin-top: 5px;
+		line-height: 20px;
+		text-align: center;
+		font-size: .75em
+}
+
+.footer .footer-icp-info img {
+		width: 1.5em;
+    height: 1.5em;
+    margin-top: -5px;
+    margin-left: -5px;
+}
 
 /** Footer Light
  ** ************************ **/
