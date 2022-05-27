@@ -57,7 +57,7 @@ module.exports = {
       fpc: [ 'FPC' ],
       scm: [ 'SCM Outsourcing Service' ],
       map: [ 'Site Map' ],
-      address: [ 'Company Address: 1220 TONGPU RD, PUTUO DISTRICT, SHANGHAI, CHINA 200333' ],
+      address: [ 'Company Address: Room612B, Building5, NO.1628, JinShaJiang Road，ShangHai.' ],
       phone: [ 'Phone Number: 400-920-5532' ],
       email: [ 'Email Address: sales09@tspcba.com' ],
       copyright: [ 'Copyright' ],

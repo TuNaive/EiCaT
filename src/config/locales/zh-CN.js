@@ -147,7 +147,7 @@ module.exports = {
       fpc: [ 'FPC' ],
       scm: [ '供应链外包服务' ],
       map: [ '网站地图' ],
-      address: [ '公司地址: 上海同普路1220号同普大厦512室' ],
+      address: [ '公司地址: 上海金沙江路1628弄绿洲中环中心5号楼612B' ],
       phone: [ '联系电话: 400-920-5532' ],
       email: [ '邮箱地址: sales09@tspcba.com' ],
       copyright: [ '版权所有' ],
